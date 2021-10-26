@@ -16,13 +16,13 @@ class DetailService {
   public static async getTVShowDetailPage(
     id: string
   ): Promise<DetailPageProps> {
-    const movie = await TMDB.tvShow.getDetails(+id);
+    const tv = await TMDB.tvShow.getDetails(+id);
     return {
-      detail: DetailService.getTVShowDetail(movie)
+      detail: DetailService.getTVShowDetail(tv)
     };
   }
 
-  public static getMovieDetail(movie: MovieResponse): DetailProps {
+  static getMovieDetail(movie: MovieResponse): DetailProps {
     return {
       image: getImage(movie.poster_path, movie.title),
       header: {
@@ -48,7 +48,7 @@ class DetailService {
     };
   }
 
-  public static getTVShowDetail(tv: TVShowResponse): DetailProps {
+  static getTVShowDetail(tv: TVShowResponse): DetailProps {
     return {
       image: getImage(tv.poster_path, tv.original_name),
       header: {
