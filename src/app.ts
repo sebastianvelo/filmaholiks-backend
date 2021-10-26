@@ -1,16 +1,6 @@
-import express, { Request, Response } from 'express';
-import MovieRequest from './api/imdb/request/film/movie/MovieRequest';
+import Application from './common/app/Application';
 
-const PORT = process.env.PORT || 3000;
-const app = express();
-
-app.get('/hello', (req: Request, res: Response) => {
-    MovieRequest.upcoming({ page_size: 20 }).then(data => {
-        res.send(data);
-        console.log(data);
-    });
-});
-
-
-app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+const PORT = process.env.PORT || 5000;
+const application = new Application(PORT);
+application.init();
 
