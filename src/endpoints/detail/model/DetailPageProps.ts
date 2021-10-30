@@ -1,5 +1,6 @@
 import { ActionProps } from "../../common/model/ActionProps";
 import { ImageProps } from "../../common/model/ImageProps";
+import { MediaSectionProps } from "../../common/model/MediaSectionProps";
 
 interface DataItemProps {
   title: string;
@@ -31,4 +32,5 @@ export interface DetailProps {
 
 export interface DetailPageProps {
   detail: DetailProps;
+  sections?: MediaSectionProps[];
 }

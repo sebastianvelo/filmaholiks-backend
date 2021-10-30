@@ -4,7 +4,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailProps } from "../endpoints/detail/model/DetailPageProps";
 import getDataItem from "./GetDataItem";
 import getImage from "./GetImage";
-import getYoutubeLink from "./GetYoutubeLink";
+import getTrailer from "./GetTrailer";
 
 const getTVShowDetail = (
   tv: TVShowResponse,
@@ -23,10 +23,7 @@ const getTVShowDetail = (
     ]
   },
   actions: [],
-  video: {
-    title: "Trailer",
-    src: getYoutubeLink(videos?.results![0].key)
-  }
+  video: getTrailer(videos)
 });
 
 const getMovieDetail = (
@@ -50,10 +47,7 @@ const getMovieDetail = (
     ]
   },
   actions: [],
-  video: {
-    title: "Trailer",
-    src: getYoutubeLink(videos?.results![0].key)
-  }
+  video: getTrailer(videos)
 });
 
 export { getMovieDetail, getTVShowDetail };

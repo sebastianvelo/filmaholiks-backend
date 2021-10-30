@@ -19,6 +19,13 @@ class ExploreController extends Controller {
         res.send(film);
       });
     });
+
+    this.setEndpoint("/person").get((req: Request, res: Response) => {
+      ExploreService.getPeopleExplorePage().then((person) => {
+        res.send(person);
+      });
+    });
+    
     return this.app;
   }
 }
