@@ -3,7 +3,6 @@ import Controller from "../../../common/controller/Controller";
 import DetailService from "../service/DetailService";
 
 class DetailController extends Controller {
-
   constructor(app: express.Application) {
     super(app, "/detail");
   }
