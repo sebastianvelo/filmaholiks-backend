@@ -1,21 +1,21 @@
 import express, { Request, Response } from "express";
 import Controller from "../../../common/controller/Controller";
-import SearchResultService from "../service/SearchResultService";
+import SearchResultPageService from "../service/SearchResultPageService";
 
-class SearchResultController extends Controller {
+class SearchResultPageController extends Controller {
   constructor(app: express.Application) {
     super(app, "/search");
   }
 
   setEndpoints() {
     this.setEndpoint("/movie/:query").get((req: Request, res: Response) => {
-      SearchResultService.getMovieExplorePage(req.params.query).then((film) => {
+      SearchResultPageService.getMovieExplorePage(req.params.query).then((film) => {
         res.send(film);
       });
     });
 
     this.setEndpoint("/show/:query").get((req: Request, res: Response) => {
-      SearchResultService.getShowExplorePage(req.params.query).then((film) => {
+      SearchResultPageService.getShowExplorePage(req.params.query).then((film) => {
         res.send(film);
       });
     });
@@ -23,4 +23,4 @@ class SearchResultController extends Controller {
   }
 }
 
-export default SearchResultController;
+export default SearchResultPageController;

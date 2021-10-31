@@ -1,5 +1,5 @@
-import { MediaSectionProps } from "../../common/model/MediaSectionProps";
+import { CarouselSectionProps } from "../../common/model/CarouselSectionProps";
 
 export interface SearchResultProps {
-    results: MediaSectionProps;
+    results: CarouselSectionProps;
 }

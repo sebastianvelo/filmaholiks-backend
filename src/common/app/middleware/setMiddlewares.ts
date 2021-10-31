@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import Logger from "../../../common/log/Logger";
+import Logger from "../../log/Logger";
 
 const setMiddlewares = (app: express.Application) => {
     app.use(express.json());

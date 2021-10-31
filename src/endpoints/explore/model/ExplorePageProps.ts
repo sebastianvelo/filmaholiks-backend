@@ -1,7 +1,7 @@
-import { MediaSectionProps } from "../../common/model/MediaSectionProps";
+import { CarouselSectionProps } from "../../common/model/CarouselSectionProps";
 import { SearchBarProps } from "../../common/model/SearchBarProps";
 
 export interface ExplorePageProps {
     searchbar: SearchBarProps;
-    sections: MediaSectionProps[];
+    sections: CarouselSectionProps[];
 }

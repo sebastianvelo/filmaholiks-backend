@@ -1,27 +1,27 @@
 import express, { Request, Response } from "express";
 import Controller from "../../../common/controller/Controller";
-import ExploreService from "../service/ExploreService";
+import ExplorePageService from "../service/ExplorePageService";
 
-class ExploreController extends Controller {
+class ExplorePageController extends Controller {
   constructor(app: express.Application) {
     super(app, "/explore");
   }
 
   setEndpoints() {
     this.setEndpoint("/movie").get((req: Request, res: Response) => {
-      ExploreService.getMovieExplorePage().then((film) => {
+      ExplorePageService.getMovieExplorePage().then((film) => {
         res.send(film);
       });
     });
 
     this.setEndpoint("/show").get((req: Request, res: Response) => {
-      ExploreService.getShowExplorePage().then((film) => {
+      ExplorePageService.getShowExplorePage().then((film) => {
         res.send(film);
       });
     });
 
     this.setEndpoint("/person").get((req: Request, res: Response) => {
-      ExploreService.getPeopleExplorePage().then((person) => {
+      ExplorePageService.getPeopleExplorePage().then((person) => {
         res.send(person);
       });
     });
@@ -30,4 +30,4 @@ class ExploreController extends Controller {
   }
 }
 
-export default ExploreController;
+export default ExplorePageController;

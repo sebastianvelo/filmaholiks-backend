@@ -1,6 +1,6 @@
 import { CardProps } from "./CardProps";
 
-export interface MediaSectionProps  {
+export interface CarouselSectionProps  {
     id?: string;
     title?: string;
     cards?: CardProps[];

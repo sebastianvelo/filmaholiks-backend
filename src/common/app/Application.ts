@@ -1,7 +1,7 @@
 import express from "express";
-import setControllers from "../../endpoints/common/controller/Controllers";
-import setMiddlewares from "../../endpoints/common/middleware/middlewares";
-import setServer from "../../endpoints/common/server/server";
+import setMiddlewares from "./middleware/setMiddlewares";
+import setControllers from "./controller/setControllers";
+import setServer from "./server/setServer";
 
 class Application {
     app: express.Application;

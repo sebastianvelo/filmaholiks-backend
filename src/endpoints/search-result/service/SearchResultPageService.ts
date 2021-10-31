@@ -3,10 +3,10 @@ import {
   TVShowsResponse
 } from "tmdb-js/lib/api/common/response/CommonResponse";
 import TMDB from "../../../tmdb/TMDB";
-import { getMovieCard, getTVCard } from "../../../usecases/GetCard";
+import CardService from "../../common/service/card/CardService";
 import { SearchResultProps } from "../model/SearchResultProps";
 
-class SearchResultService {
+class SearchResultPageService {
   public static async getMovieExplorePage(
     query: string
   ): Promise<SearchResultProps> {
@@ -15,7 +15,7 @@ class SearchResultService {
       results: {
         id: "results",
         title: `Results of "${query}"`,
-        cards: movies.results.map(getMovieCard)
+        cards: movies.results.map(CardService.getMovieCard)
       }
     };
   }
@@ -28,10 +28,10 @@ class SearchResultService {
       results: {
         id: "results",
         title: `Results of "${query}"`,
-        cards: shows.results.map(getTVCard)
+        cards: shows.results.map(CardService.getShowCard)
       }
     };
   }
 }
 
-export default SearchResultService;
+export default SearchResultPageService;
