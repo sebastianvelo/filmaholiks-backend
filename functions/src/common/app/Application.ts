@@ -1,7 +1,6 @@
 import express from "express";
 import setMiddlewares from "./middleware/setMiddlewares";
 import setControllers from "./controller/setControllers";
-import setServer from "./server/setServer";
 
 class Application {
     app: express.Application;
@@ -14,7 +13,6 @@ class Application {
     }
 
     init() {
-        setServer(this.app, this.port);
         setMiddlewares(this.app);
         setControllers(this.app);
         return this.app;
