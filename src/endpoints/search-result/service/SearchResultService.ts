@@ -20,7 +20,7 @@ class SearchResultService {
     };
   }
 
-  public static async getTVShowExplorePage(
+  public static async getShowExplorePage(
     query: string
   ): Promise<SearchResultProps> {
     const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });

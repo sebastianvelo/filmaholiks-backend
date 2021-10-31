@@ -7,12 +7,12 @@ import TMDB from "../../../tmdb/TMDB";
 import {
   getMovieSearchbar,
   getPeopleSearchbar,
-  getTVShowSearchbar
+  getShowSearchbar
 } from "../../../usecases/GetSearchbar";
 import {
   getMovieExploreSections,
   getPeopleExploreSections,
-  getTVShowExploreSections
+  getShowExploreSections
 } from "../../../usecases/GetSections";
 import { ExplorePageProps } from "../model/ExplorePageProps";
 
@@ -27,12 +27,12 @@ class ExploreService {
     };
   }
 
-  public static async getTVShowExplorePage(): Promise<ExplorePageProps> {
+  public static async getShowExplorePage(): Promise<ExplorePageProps> {
     const onTheAir: TVShowsResponse = await TMDB.tvShow.getOnTheAir();
     const topRated: TVShowsResponse = await TMDB.tvShow.getTopRatedShows();
     return {
-      searchbar: getTVShowSearchbar(),
-      sections: getTVShowExploreSections({ onTheAir, topRated })
+      searchbar: getShowSearchbar(),
+      sections: getShowExploreSections({ onTheAir, topRated })
     };
   }
 

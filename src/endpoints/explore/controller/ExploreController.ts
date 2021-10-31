@@ -14,8 +14,8 @@ class ExploreController extends Controller {
       });
     });
 
-    this.setEndpoint("/tv").get((req: Request, res: Response) => {
-      ExploreService.getTVShowExplorePage().then((film) => {
+    this.setEndpoint("/show").get((req: Request, res: Response) => {
+      ExploreService.getShowExplorePage().then((film) => {
         res.send(film);
       });
     });

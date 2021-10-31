@@ -1,6 +1,6 @@
 import TMDB from "../../../tmdb/TMDB";
-import { getMovieDetail, getTVShowDetail } from "../../../usecases/GetDetail";
-import { getMovieDetailSections, getTVShowDetailSections } from "../../../usecases/GetSections";
+import { getMovieDetail, getSeasonDetail, getShowDetail } from "../../../usecases/GetDetail";
+import { getMovieDetailSections, getSeasonExploreSections, getShowDetailSections } from "../../../usecases/GetSections";
 import { DetailPageProps } from "../model/DetailPageProps";
 
 class DetailService {
@@ -14,7 +14,7 @@ class DetailService {
     };
   }
 
-  public static async getTVShowDetailPage(
+  public static async getShowDetailPage(
     id: string
   ): Promise<DetailPageProps> {
     const show = await TMDB.tvShow.getDetails(+id);
@@ -22,8 +22,20 @@ class DetailService {
     const moreLikeThis = await TMDB.tvShow.getTVRecommendations(+id);
 
     return {
-      detail: getTVShowDetail(show, video),
-      sections: getTVShowDetailSections(show, moreLikeThis)
+      detail: getShowDetail(show, video),
+      sections: getShowDetailSections(show, moreLikeThis)
+    };
+  }
+
+  public static async getSeasonDetailPage(
+    id: string,
+    seasonNumber: string
+  ): Promise<DetailPageProps> {
+    const season = await TMDB.season.getDetails(+id, +seasonNumber);
+    const videos = await TMDB.season.getVideos(+id, +seasonNumber);
+    return {
+      detail: getSeasonDetail(season, videos),
+      sections: getSeasonExploreSections(season, id)
     };
   }
 }

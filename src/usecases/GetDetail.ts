@@ -1,12 +1,13 @@
 import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
+import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailProps } from "../endpoints/detail/model/DetailPageProps";
 import getDataItem from "./GetDataItem";
 import getImage from "./GetImage";
 import getTrailer from "./GetTrailer";
 
-const getTVShowDetail = (
+const getShowDetail = (
   tv: TVShowResponse,
   videos: VideosResponse
 ): DetailProps => ({
@@ -50,4 +51,18 @@ const getMovieDetail = (
   video: getTrailer(videos)
 });
 
-export { getMovieDetail, getTVShowDetail };
+const getSeasonDetail = (
+  season: SeasonWithEpisodesResponse,
+  videos: VideosResponse
+): DetailProps => ({
+  image: getImage(season.poster_path, season.name),
+  header: {
+    title: `${season.name}`,
+    subtitle: `(${season.air_date})`
+  },
+  description: season.overview ? getDataItem(`Description`, `${season.overview}`) : undefined,
+  actions: [],
+  video: getTrailer(videos),
+});
+
+export { getMovieDetail, getShowDetail, getSeasonDetail };

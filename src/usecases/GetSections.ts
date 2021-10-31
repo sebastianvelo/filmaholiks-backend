@@ -4,18 +4,25 @@ import {
   TVShowsResponse
 } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
+import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { MediaSectionProps } from "../endpoints/common/model/MediaSectionProps";
-import { getMovieCard, getPersonCard, getSeasonCard, getTVCard } from "./GetCard";
+import {
+  getEpisodeCard,
+  getMovieCard,
+  getPersonCard,
+  getSeasonCard,
+  getTVCard
+} from "./GetCard";
 
-const getTVShowDetailSections = (
+const getShowDetailSections = (
   show: TVShowResponse,
   moreLikeThis: TVShowsResponse
 ): MediaSectionProps[] => [
   {
     id: "seasons",
     title: "Seasons",
-    cards: show.seasons.map(getSeasonCard)
+    cards: show.seasons?.map((season) => getSeasonCard(season, show.id))
   },
   {
     id: "moreLikeThis",
@@ -57,7 +64,7 @@ const getMovieExploreSections = (data: {
   }
 ];
 
-const getTVShowExploreSections = (data: {
+const getShowExploreSections = (data: {
   topRated: TVShowsResponse;
   onTheAir: TVShowsResponse;
 }) => [
@@ -73,20 +80,30 @@ const getTVShowExploreSections = (data: {
   }
 ];
 
-const getPeopleExploreSections = (data: {
-  popular: PeopleResponse
-}) =>  [
+const getPeopleExploreSections = (data: { popular: PeopleResponse }) => [
   {
     id: "popular",
     title: "Popular",
     cards: data.popular.results.map(getPersonCard)
   }
-]
+];
+
+const getSeasonExploreSections = (
+  season: SeasonWithEpisodesResponse,
+  show: string
+) => [
+  {
+    id: "episodes",
+    title: "Episodes",
+    cards: season.episodes?.map((episode) => getEpisodeCard(episode, season, show))
+  }
+];
 
 export {
-  getTVShowDetailSections,
-  getTVShowExploreSections,
+  getShowDetailSections,
+  getShowExploreSections,
   getMovieDetailSections,
   getMovieExploreSections,
   getPeopleExploreSections,
+  getSeasonExploreSections
 };

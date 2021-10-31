@@ -14,9 +14,15 @@ class DetailController extends Controller {
       });
     });
 
-    this.setEndpoint("/tv/:id").get((req: Request, res: Response) => {
-      DetailService.getTVShowDetailPage(req.params.id).then((film) => {
+    this.setEndpoint("/show/:id").get((req: Request, res: Response) => {
+      DetailService.getShowDetailPage(req.params.id).then((film) => {
         res.send(film);
+      });
+    });
+
+    this.setEndpoint("/show/:id/s/:season").get((req: Request, res: Response) => {
+      DetailService.getSeasonDetailPage(req.params.id, req.params.season).then((season) => {
+        res.send(season);
       });
     });
     return this.app;

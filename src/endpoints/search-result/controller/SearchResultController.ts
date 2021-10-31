@@ -14,8 +14,8 @@ class SearchResultController extends Controller {
       });
     });
 
-    this.setEndpoint("/tv/:query").get((req: Request, res: Response) => {
-      SearchResultService.getTVShowExplorePage(req.params.query).then((film) => {
+    this.setEndpoint("/show/:query").get((req: Request, res: Response) => {
+      SearchResultService.getShowExplorePage(req.params.query).then((film) => {
         res.send(film);
       });
     });

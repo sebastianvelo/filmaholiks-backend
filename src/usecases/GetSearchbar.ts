@@ -3,9 +3,9 @@ const getMovieSearchbar = () => ({
   path: `/movie/search/:query`
 });
 
-const getTVShowSearchbar = () => ({
+const getShowSearchbar = () => ({
   placeholder: `Search shows...`,
-  path: `/tv/search/:query`
+  path: `/show/search/:query`
 });
 
 const getPeopleSearchbar = () => ({
@@ -13,4 +13,4 @@ const getPeopleSearchbar = () => ({
   path: `/person/search/:query`
 });
 
-export { getMovieSearchbar, getTVShowSearchbar, getPeopleSearchbar };
+export { getMovieSearchbar, getShowSearchbar, getPeopleSearchbar };
