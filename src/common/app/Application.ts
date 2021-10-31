@@ -17,7 +17,7 @@ class Application {
         setServer(this.app, this.port);
         setMiddlewares(this.app);
         setControllers(this.app);
-        return this;
+        return this.app;
     }
 }
 
