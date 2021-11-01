@@ -14,6 +14,12 @@ class DetailPageController extends Controller {
       });
     });
 
+    this.setEndpoint("/person/:id").get((req: Request, res: Response) => {
+      DetailPageService.getPersonDetailPage(req.params.id).then((film) => {
+        res.send(film);
+      });
+    });
+
     this.setEndpoint("/show/:id").get((req: Request, res: Response) => {
       DetailPageService.getShowDetailPage(req.params.id).then((film) => {
         res.send(film);

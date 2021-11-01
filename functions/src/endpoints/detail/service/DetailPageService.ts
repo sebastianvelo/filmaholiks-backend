@@ -1,6 +1,6 @@
 import TMDB from "../../../tmdb/TMDB";
-import SectionService from "../../common/service/section/SectionService";
 import DetailService from "../../common/service/detail/DetailService";
+import SectionService from "../../common/service/section/SectionService";
 import { DetailPageProps } from "../model/DetailPageProps";
 
 class DetailPageService {
@@ -12,6 +12,13 @@ class DetailPageService {
     return {
       detail: DetailService.getMovieDetail(movie, video),
       sections: SectionService.getMovieDetailSections({ credits, moreLikeThis })
+    };
+  }
+
+  public static async getPersonDetailPage(id: string): Promise<DetailPageProps> {
+    const person = await TMDB.person.getDetails(+id);
+    return {
+      detail: DetailService.getPersonDetail(person),
     };
   }
 

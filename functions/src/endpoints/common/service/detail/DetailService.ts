@@ -1,6 +1,7 @@
 import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Response";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
+import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import getDataItem from "../../../../usecases/GetDataItem";
@@ -50,6 +51,23 @@ class DetailService {
     },
     actions: [],
     video: MediaService.getTrailer(videos)
+  });
+
+  public static getPersonDetail = (
+    person: PersonDetailsResponse
+  ): DetailProps => ({
+    image: MediaService.getImage(person.profile_path, person.name),
+    header: {
+      title: `${person.name}`,
+      subtitle: `(${person.birthday})`
+    },
+    description: getDataItem(`Biography`, `${person.biography}`),
+    info: {
+      data: [
+        getDataItem(`Place of birth`, person.place_of_birth)
+      ]
+    },
+    actions: [],
   });
 
   public static getSeasonDetail = (
