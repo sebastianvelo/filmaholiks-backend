@@ -1,6 +1,7 @@
 import { ActionProps } from "../../common/model/ActionProps";
 import { ImageProps } from "../../common/model/ImageProps";
 import { CarouselSectionProps } from "../../common/model/CarouselSectionProps";
+import ChartProps from "../../common/model/ChartProps";
 
 interface DataItemProps {
   title: string;
@@ -8,7 +9,7 @@ interface DataItemProps {
 }
 
 interface DetailInfoProps {
-  data: DataItemProps[];
+  data: (DataItemProps | undefined)[];
 }
 
 interface DetailHeaderProps {
@@ -32,5 +33,9 @@ export interface DetailProps {
 
 export interface DetailPageProps {
   detail: DetailProps;
+  charts?: {
+    title: string;
+    chart: ChartProps;
+  }[];
   sections?: CarouselSectionProps[];
 }

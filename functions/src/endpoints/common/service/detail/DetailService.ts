@@ -4,8 +4,8 @@ import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import getDataItem from "../../../../usecases/GetDataItem";
 import { DetailProps } from "../../../detail/model/DetailPageProps";
+import DataItemService from "../data-item/DataItemService";
 import MediaService from "../media/MediaService";
 
 class DetailService {
@@ -18,11 +18,14 @@ class DetailService {
       title: `${tv.original_name}`,
       subtitle: `(${tv.vote_average})`
     },
-    description: getDataItem(`Description`, `${tv.overview}`),
+    description: DataItemService.getDataItem(`Description`, `${tv.overview}`),
     info: {
       data: [
-        getDataItem(`Genres`, tv.genres?.map((genre) => genre.name).join(", ")),
-        getDataItem(`Language`, tv.original_language)
+        DataItemService.getDataItem(
+          `Genres`,
+          tv.genres?.map((genre) => genre.name).join(", ")
+        ),
+        DataItemService.getDataItem(`Language`, tv.original_language)
       ]
     },
     actions: [],
@@ -38,15 +41,18 @@ class DetailService {
       title: `${movie.title}`,
       subtitle: `(${movie.vote_average})`
     },
-    description: getDataItem(`Description`, `${movie.overview}`),
+    description: DataItemService.getDataItem(
+      `Description`,
+      `${movie.overview}`
+    ),
     info: {
       data: [
-        getDataItem(
+        DataItemService.getDataItem(
           `Genres`,
           movie.genres?.map((genre) => genre.name).join(", ")
         ),
-        getDataItem(`Duration`, `${movie.runtime}m`),
-        getDataItem(`Language`, movie.original_language)
+        DataItemService.getDataItem(`Duration`, `${movie.runtime}m`),
+        DataItemService.getDataItem(`Language`, movie.original_language)
       ]
     },
     actions: [],
@@ -61,13 +67,16 @@ class DetailService {
       title: `${person.name}`,
       subtitle: `(${person.birthday})`
     },
-    description: getDataItem(`Biography`, `${person.biography}`),
+    description: DataItemService.getDataItem(
+      `Biography`,
+      `${person.biography}`
+    ),
     info: {
       data: [
-        getDataItem(`Place of birth`, person.place_of_birth)
+        DataItemService.getDataItem(`Place of birth`, person.place_of_birth)
       ]
     },
-    actions: [],
+    actions: []
   });
 
   public static getSeasonDetail = (
@@ -79,9 +88,10 @@ class DetailService {
       title: `${season.name}`,
       subtitle: `(${season.air_date})`
     },
-    description: season.overview
-      ? getDataItem(`Description`, `${season.overview}`)
-      : undefined,
+    description: DataItemService.getDataItem(
+      `Description`,
+      `${season.overview}`
+    ),
     actions: [],
     video: MediaService.getTrailer(videos)
   });
@@ -95,9 +105,10 @@ class DetailService {
       title: `${episode.name}`,
       subtitle: `(${episode.air_date})`
     },
-    description: episode.overview
-      ? getDataItem(`Description`, `${episode.overview}`)
-      : undefined,
+    description: DataItemService.getDataItem(
+      `Description`,
+      `${episode.overview}`
+    ),
     actions: [],
     video: MediaService.getTrailer(videos)
   });

@@ -1,4 +1,5 @@
 import TMDB from "../../../tmdb/TMDB";
+import ChartService from "../../common/service/chart/ChartService";
 import DetailService from "../../common/service/detail/DetailService";
 import SectionService from "../../common/service/section/SectionService";
 import { DetailPageProps } from "../model/DetailPageProps";
@@ -27,8 +28,12 @@ class DetailPageService {
     const video = await TMDB.tvShow.getVideos(+id);
     const moreLikeThis = await TMDB.tvShow.getTVRecommendations(+id);
     const credits = await TMDB.tvShow.getCredits(+id);
+    const chartSeasons = await ChartService.getShowEpisodesChart(show.id, show.seasons)
     return {
       detail: DetailService.getShowDetail(show, video),
+      charts: [
+        chartSeasons
+      ],
       sections: SectionService.getShowDetailSections({
         show,
         moreLikeThis,
