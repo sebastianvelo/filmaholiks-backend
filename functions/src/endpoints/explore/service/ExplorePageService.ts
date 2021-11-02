@@ -1,3 +1,4 @@
+import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
 import {
   MoviesResponse,
   PeopleResponse,
@@ -9,11 +10,11 @@ import SectionService from "../../common/service/section/SectionService";
 import { ExplorePageProps } from "../model/ExplorePageProps";
 
 class ExplorePageService {
-  public static async getMovieExplorePage(): Promise<ExplorePageProps> {
-    const upcoming: MoviesResponse = await TMDB.movie.getUpcoming();
-    const topRated: MoviesResponse = await TMDB.movie.getTopRatedMovies();
-    const nowPlaying: MoviesResponse = await TMDB.movie.getNowPlaying();
-    const popular: MoviesResponse = await TMDB.movie.getPopularMovies();
+  public static async getMovieExplorePage(query?: LanguageParams): Promise<ExplorePageProps> {
+    const upcoming: MoviesResponse = await TMDB.movie.getUpcoming(query);
+    const topRated: MoviesResponse = await TMDB.movie.getTopRatedMovies(query);
+    const nowPlaying: MoviesResponse = await TMDB.movie.getNowPlaying(query);
+    const popular: MoviesResponse = await TMDB.movie.getPopularMovies(query);
     return {
       searchbar: SearchBarService.getMovieSearchbar(),
       sections: SectionService.getMovieExploreSections({
@@ -25,11 +26,11 @@ class ExplorePageService {
     };
   }
 
-  public static async getShowExplorePage(): Promise<ExplorePageProps> {
-    const onTheAir: TVShowsResponse = await TMDB.tvShow.getOnTheAir();
-    const topRated: TVShowsResponse = await TMDB.tvShow.getTopRatedShows();
-    const popular: TVShowsResponse = await TMDB.tvShow.getPopularShows();
-    const airingToday: TVShowsResponse = await TMDB.tvShow.getAiringToday();
+  public static async getShowExplorePage(query?: LanguageParams): Promise<ExplorePageProps> {
+    const onTheAir: TVShowsResponse = await TMDB.tvShow.getOnTheAir(query);
+    const topRated: TVShowsResponse = await TMDB.tvShow.getTopRatedShows(query);
+    const popular: TVShowsResponse = await TMDB.tvShow.getPopularShows(query);
+    const airingToday: TVShowsResponse = await TMDB.tvShow.getAiringToday(query);
     return {
       searchbar: SearchBarService.getShowSearchbar(),
       sections: SectionService.getShowExploreSections({
