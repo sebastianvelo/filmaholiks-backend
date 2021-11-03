@@ -1,6 +1,7 @@
 import TMDB from "../../../tmdb/TMDB";
 import ChartService from "../../common/service/chart/ChartService";
 import DetailService from "../../common/service/detail/DetailService";
+import SearchBarService from "../../common/service/searchbar/SearchBarService";
 import SectionService from "../../common/service/section/SectionService";
 import { DetailPageProps } from "../model/DetailPageProps";
 
@@ -11,6 +12,7 @@ class DetailPageService {
     const moreLikeThis = await TMDB.movie.getMovieRecommendations(+id);
     const credits = await TMDB.movie.getCredits(+id);
     return {
+      searchbar: SearchBarService.getMovieSearchbar(),
       detail: DetailService.getMovieDetail(movie, video),
       sections: SectionService.getMovieDetailSections({ credits, moreLikeThis })
     };
@@ -19,6 +21,7 @@ class DetailPageService {
   public static async getPersonDetailPage(id: string): Promise<DetailPageProps> {
     const person = await TMDB.person.getDetails(+id);
     return {
+      searchbar: SearchBarService.getPeopleSearchbar(),
       detail: DetailService.getPersonDetail(person),
     };
   }
@@ -30,6 +33,7 @@ class DetailPageService {
     const credits = await TMDB.tvShow.getCredits(+id);
     const chartSeasons = await ChartService.getShowEpisodesChart(show.id, show.seasons)
     return {
+      searchbar: SearchBarService.getShowSearchbar(),
       detail: DetailService.getShowDetail(show, video),
       charts: [
         chartSeasons

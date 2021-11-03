@@ -4,6 +4,7 @@ import {
 } from "tmdb-js/lib/api/common/response/CommonResponse";
 import TMDB from "../../../tmdb/TMDB";
 import CardService from "../../common/service/card/CardService";
+import SearchBarService from "../../common/service/searchbar/SearchBarService";
 import { SearchResultProps } from "../model/SearchResultProps";
 
 class SearchResultPageService {
@@ -12,6 +13,7 @@ class SearchResultPageService {
   ): Promise<SearchResultProps> {
     const movies: MoviesResponse = await TMDB.search.getMovies({ query });
     return {
+      searchbar: SearchBarService.getMovieSearchbar(),
       results: {
         id: "results",
         title: `Results of "${query}"`,
@@ -25,6 +27,7 @@ class SearchResultPageService {
   ): Promise<SearchResultProps> {
     const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
     return {
+      searchbar: SearchBarService.getShowSearchbar(),
       results: {
         id: "results",
         title: `Results of "${query}"`,

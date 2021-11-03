@@ -2,6 +2,7 @@ import { ActionProps } from "../../common/model/ActionProps";
 import { ImageProps } from "../../common/model/ImageProps";
 import { CarouselSectionProps } from "../../common/model/CarouselSectionProps";
 import ChartProps from "../../common/model/ChartProps";
+import { SearchBarProps } from "../../common/model/SearchBarProps";
 
 interface DataItemProps {
   title: string;
@@ -33,6 +34,7 @@ export interface DetailProps {
 
 export interface DetailPageProps {
   detail: DetailProps;
+  searchbar?: SearchBarProps;
   charts?: {
     title: string;
     chart: ChartProps;
