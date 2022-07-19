@@ -3,6 +3,7 @@ import ChartService from "../../common/service/chart/ChartService";
 import DetailService from "../../common/service/detail/DetailService";
 import SearchBarService from "../../common/service/searchbar/SearchBarService";
 import SectionService from "../../common/service/section/SectionService";
+import TitleService from "../../common/service/title/TitleService";
 import { DetailPageProps } from "../model/DetailPageProps";
 
 class DetailPageService {
@@ -11,18 +12,23 @@ class DetailPageService {
     const video = await TMDB.movie.getVideos(+id);
     const moreLikeThis = await TMDB.movie.getMovieRecommendations(+id);
     const credits = await TMDB.movie.getCredits(+id);
+    const images = await TMDB.movie.getImages(+id);
     return {
+      title: TitleService.detail.getMovieTitle(movie),
       searchbar: SearchBarService.getMovieSearchbar(),
       detail: DetailService.getMovieDetail(movie, video),
-      sections: SectionService.getMovieDetailSections({ credits, moreLikeThis })
+      sections: SectionService.getMovieDetailSections({ credits, moreLikeThis, images })
     };
   }
 
   public static async getPersonDetailPage(id: string): Promise<DetailPageProps> {
     const person = await TMDB.person.getDetails(+id);
+    const shows = await TMDB.person.getTVShowCredits(+id);
+    const movies = await TMDB.person.getMovieCredits(+id);
     return {
-      searchbar: SearchBarService.getPeopleSearchbar(),
+      title: TitleService.detail.getPersonTitle(person),
       detail: DetailService.getPersonDetail(person),
+      sections: SectionService.getPersonDetailSections({ shows, movies, })
     };
   }
 
@@ -31,8 +37,10 @@ class DetailPageService {
     const video = await TMDB.tvShow.getVideos(+id);
     const moreLikeThis = await TMDB.tvShow.getTVRecommendations(+id);
     const credits = await TMDB.tvShow.getCredits(+id);
-    const chartSeasons = await ChartService.getShowEpisodesChart(show.id, show.seasons)
+    const chartSeasons = await ChartService.getShowEpisodesChart(show.id, show.seasons);
+    const images = await TMDB.tvShow.getImages(+id);
     return {
+      title: TitleService.detail.getShowTitle(show),
       searchbar: SearchBarService.getShowSearchbar(),
       detail: DetailService.getShowDetail(show, video),
       charts: [
@@ -41,7 +49,8 @@ class DetailPageService {
       sections: SectionService.getShowDetailSections({
         show,
         moreLikeThis,
-        credits
+        credits,
+        images
       })
     };
   }
@@ -54,24 +63,35 @@ class DetailPageService {
     const videos = await TMDB.season.getVideos(+showId, +seasonNumber);
     const credits = await TMDB.season.getCredits(+showId, +seasonNumber);
     return {
+      title: TitleService.detail.getSeasonTitle(season),
       detail: DetailService.getSeasonDetail(season, videos),
       sections: SectionService.getSeasonDetailSections({
         season,
         showId,
-        credits
+        credits,
       })
     };
   }
 
   public static async getEpisodeDetailPage(
-    id: string,
+    showId: string,
     seasonNumber: string,
-    episode: string
+    episodeNumber: string
   ): Promise<DetailPageProps> {
-    const details = await TMDB.episode.getDetails(+id, +seasonNumber, +episode);
-    const videos = await TMDB.episode.getVideos(+id, +seasonNumber, +episode);
+    const episode = await TMDB.episode.getDetails(+showId, +seasonNumber, +episodeNumber);
+    const videos = await TMDB.episode.getVideos(+showId, +seasonNumber, +episodeNumber);
+    const credits = await TMDB.season.getCredits(+showId, +seasonNumber);
+    const season = await TMDB.season.getDetails(+showId, +seasonNumber);
     return {
-      detail: DetailService.getEpisodeDetail(details, videos)
+      title: TitleService.detail.getEpisodeTitle(episode),
+      detail: DetailService.getEpisodeDetail(episode, videos),
+      sections: SectionService.getEpisodeDetailSections({
+        season,
+        showId,
+        credits,
+        guestStars: episode.guest_stars ?? [],
+        crew: episode.crew ?? [],
+      })
     };
   }
 }

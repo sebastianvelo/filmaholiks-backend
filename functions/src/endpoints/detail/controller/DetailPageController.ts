@@ -9,20 +9,20 @@ class DetailPageController extends Controller {
 
   setEndpoints() {
     this.setEndpoint("/movie/:id").get((req: Request, res: Response) => {
-      DetailPageService.getMovieDetailPage(req.params.id).then((film) => {
-        res.send(film);
+      DetailPageService.getMovieDetailPage(req.params.id).then((movie) => {
+        res.send(movie);
       });
     });
 
     this.setEndpoint("/person/:id").get((req: Request, res: Response) => {
-      DetailPageService.getPersonDetailPage(req.params.id).then((film) => {
-        res.send(film);
+      DetailPageService.getPersonDetailPage(req.params.id).then((person) => {
+        res.send(person);
       });
     });
 
     this.setEndpoint("/show/:id").get((req: Request, res: Response) => {
-      DetailPageService.getShowDetailPage(req.params.id).then((film) => {
-        res.send(film);
+      DetailPageService.getShowDetailPage(req.params.id).then((show) => {
+        res.send(show);
       });
     });
 

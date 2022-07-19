@@ -15,7 +15,6 @@ class ExplorePageController extends Controller {
     });
 
     this.setEndpoint("/show").get((req: Request, res: Response) => {
-      console.log(req.query)
       ExplorePageService.getShowExplorePage(req.query).then((film) => {
         res.send(film);
       });

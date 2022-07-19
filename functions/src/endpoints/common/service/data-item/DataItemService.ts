@@ -1,10 +1,10 @@
 class DataItemService {
-  public static getDataItem = (title: string, description?: string) =>
-    description
+  public static getDataItem = (title: string, description?: string | null) =>
+    description && !description.includes("undefined") && !description.includes("null")
       ? {
-          title,
-          description: description ?? ""
-        }
+        title,
+        description
+      }
       : undefined;
 }
 

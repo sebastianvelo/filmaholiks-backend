@@ -3,7 +3,7 @@ import { ImageProps } from "../../model/ImageProps";
 
 class MediaService {
   public static getImage = (src?: string | null, alt?: string): ImageProps => ({
-    src: `https://image.tmdb.org/t/p/w200${src}`,
+    src: src ? `https://image.tmdb.org/t/p/w200${src}` : `https://www.linguaa.com/assets/dummy.gif`,
     alt: `${alt}`
   });
 

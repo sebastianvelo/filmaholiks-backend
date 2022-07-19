@@ -25,7 +25,9 @@ class DetailService {
           `Genres`,
           tv.genres?.map((genre) => genre.name).join(", ")
         ),
-        DataItemService.getDataItem(`Language`, tv.original_language)
+        DataItemService.getDataItem(`Language`, tv.original_language),
+        DataItemService.getDataItem(`Release`, tv.first_air_date),
+        DataItemService.getDataItem(`Status`, tv.status),
       ]
     },
     actions: [],
@@ -38,8 +40,7 @@ class DetailService {
   ): DetailProps => ({
     image: MediaService.getImage(movie.poster_path, movie.title),
     header: {
-      title: `${movie.title}`,
-      subtitle: `(${movie.vote_average})`
+      title: `${movie.title}`
     },
     description: DataItemService.getDataItem(
       `Description`,
@@ -52,7 +53,11 @@ class DetailService {
           movie.genres?.map((genre) => genre.name).join(", ")
         ),
         DataItemService.getDataItem(`Duration`, `${movie.runtime}m`),
-        DataItemService.getDataItem(`Language`, movie.original_language)
+        DataItemService.getDataItem(`Language`, movie.original_language),
+        DataItemService.getDataItem(`Release`, movie.release_date),
+        DataItemService.getDataItem(`Budget`, `$${movie.budget}`),
+        DataItemService.getDataItem(`Revenue`, `$${movie.revenue}`),
+        DataItemService.getDataItem(`Status`, movie.status),
       ]
     },
     actions: [],
@@ -67,13 +72,13 @@ class DetailService {
       title: `${person.name}`,
       subtitle: `(${person.birthday})`
     },
-    description: DataItemService.getDataItem(
-      `Biography`,
-      `${person.biography}`
-    ),
+    description: DataItemService.getDataItem(`Biography`, person.biography),
     info: {
       data: [
-        DataItemService.getDataItem(`Place of birth`, person.place_of_birth)
+        DataItemService.getDataItem(`Birthday`, person.birthday),
+        DataItemService.getDataItem(`Deathday`, person.deathday),
+        DataItemService.getDataItem(`Place of birth`, person.place_of_birth),
+        DataItemService.getDataItem(`Known for`, person.known_for_department),
       ]
     },
     actions: []
@@ -86,13 +91,17 @@ class DetailService {
     image: MediaService.getImage(season.poster_path, season.name),
     header: {
       title: `${season.name}`,
-      subtitle: `(${season.air_date})`
+    },
+    info: {
+      data: [
+        DataItemService.getDataItem(`Air date`, `${season.air_date}`),
+        DataItemService.getDataItem(`Episodes`, `${season.episodes?.length}`),
+      ]
     },
     description: DataItemService.getDataItem(
       `Description`,
       `${season.overview}`
     ),
-    actions: [],
     video: MediaService.getTrailer(videos)
   });
 
@@ -102,8 +111,12 @@ class DetailService {
   ): DetailProps => ({
     image: MediaService.getImage(episode.still_path, episode.name),
     header: {
-      title: `${episode.name}`,
-      subtitle: `(${episode.air_date})`
+      title: `${episode.name} (${episode.season_number}x${episode.episode_number})`,
+    },
+    info: {
+      data: [
+        DataItemService.getDataItem(`Air date`, `${episode.air_date}`),
+      ]
     },
     description: DataItemService.getDataItem(
       `Description`,

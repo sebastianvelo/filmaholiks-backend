@@ -33,6 +33,7 @@ export interface DetailProps {
 }
 
 export interface DetailPageProps {
+  title?: string;
   detail: DetailProps;
   searchbar?: SearchBarProps;
   charts?: {

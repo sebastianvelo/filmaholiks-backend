@@ -1,6 +1,6 @@
-# IFDb
+# Filmaholiks
 
-_Express backend application for IFDB site, fetching data for TMDB API. It was made with Typescript, express, and deployed with Firebase Functions._
+_Express backend application for Filmaholiks site, fetching data for TMDB API. It was made with Typescript, express, and deployed with Firebase Functions._
 
 ## :link:
 https://internetfilmdb.web.app/#/show
