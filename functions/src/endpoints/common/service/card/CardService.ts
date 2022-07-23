@@ -89,8 +89,8 @@ class CardService {
   public static getShowSuggestionCard = (show: TVShow): ItemProps => ({
     title: show.original_name ?? "",
     poster: MediaService.getImage(show.poster_path, show.title),
-    info: "ss",
-    category: "ss",
+    info: "",
+    category: "",
     path: `/show/${show.id}`
   });
 }

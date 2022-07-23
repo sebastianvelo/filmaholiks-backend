@@ -1,7 +1,8 @@
 import { CardProps } from "./CardProps";
 
-export interface CarouselSectionProps  {
+export interface CardsSectionProps  {
     id?: string;
     title?: string;
+    isGrid?: boolean;
     cards?: CardProps[];
 }

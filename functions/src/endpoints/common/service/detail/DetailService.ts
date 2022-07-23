@@ -5,125 +5,57 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailProps } from "../../../detail/model/DetailPageProps";
-import DataItemService from "../data-item/DataItemService";
 import MediaService from "../media/MediaService";
+import DetailDescriptionService from "./description/DetailDescriptionService";
+import DetailHeaderService from "./header/DetailHeaderService";
+import DetailInfoService from "./info/DetailInfoService";
 
 class DetailService {
-  public static getShowDetail = (
-    tv: TVShowResponse,
-    videos: VideosResponse
-  ): DetailProps => ({
+  public static getShowDetail = (tv: TVShowResponse, videos: VideosResponse): DetailProps => ({
     image: MediaService.getImage(tv.poster_path, tv.original_name),
-    header: {
-      title: `${tv.original_name}`,
-      subtitle: `(${tv.vote_average})`
-    },
-    description: DataItemService.getDataItem(`Description`, `${tv.overview}`),
-    info: {
-      data: [
-        DataItemService.getDataItem(
-          `Genres`,
-          tv.genres?.map((genre) => genre.name).join(", ")
-        ),
-        DataItemService.getDataItem(`Language`, tv.original_language),
-        DataItemService.getDataItem(`Release`, tv.first_air_date),
-        DataItemService.getDataItem(`Status`, tv.status),
-      ]
-    },
+    backdrop: MediaService.getImage(tv.backdrop_path, tv.original_name),
+    header: DetailHeaderService.getShowHeader(tv),
+    description: DetailDescriptionService.getShowDescription(tv),
+    info: DetailInfoService.getShowInfo(tv),
+    video: MediaService.getTrailer(videos),
     actions: [],
-    video: MediaService.getTrailer(videos)
   });
 
-  public static getMovieDetail = (
-    movie: MovieResponse,
-    videos: VideosResponse
-  ): DetailProps => ({
+  public static getMovieDetail = (movie: MovieResponse, videos: VideosResponse): DetailProps => ({
     image: MediaService.getImage(movie.poster_path, movie.title),
-    header: {
-      title: `${movie.title}`
-    },
-    description: DataItemService.getDataItem(
-      `Description`,
-      `${movie.overview}`
-    ),
-    info: {
-      data: [
-        DataItemService.getDataItem(
-          `Genres`,
-          movie.genres?.map((genre) => genre.name).join(", ")
-        ),
-        DataItemService.getDataItem(`Duration`, `${movie.runtime}m`),
-        DataItemService.getDataItem(`Language`, movie.original_language),
-        DataItemService.getDataItem(`Release`, movie.release_date),
-        DataItemService.getDataItem(`Budget`, `$${movie.budget}`),
-        DataItemService.getDataItem(`Revenue`, `$${movie.revenue}`),
-        DataItemService.getDataItem(`Status`, movie.status),
-      ]
-    },
+    backdrop: MediaService.getImage(movie.backdrop_path, movie.title),
+    header: DetailHeaderService.getMovieHeader(movie),
+    description: DetailDescriptionService.getMovieDescription(movie),
+    info: DetailInfoService.getMovieInfo(movie),
+    video: MediaService.getTrailer(videos),
     actions: [],
-    video: MediaService.getTrailer(videos)
   });
 
-  public static getPersonDetail = (
-    person: PersonDetailsResponse
-  ): DetailProps => ({
+  public static getPersonDetail = (person: PersonDetailsResponse): DetailProps => ({
     image: MediaService.getImage(person.profile_path, person.name),
-    header: {
-      title: `${person.name}`,
-      subtitle: `(${person.birthday})`
-    },
-    description: DataItemService.getDataItem(`Biography`, person.biography),
-    info: {
-      data: [
-        DataItemService.getDataItem(`Birthday`, person.birthday),
-        DataItemService.getDataItem(`Deathday`, person.deathday),
-        DataItemService.getDataItem(`Place of birth`, person.place_of_birth),
-        DataItemService.getDataItem(`Known for`, person.known_for_department),
-      ]
-    },
-    actions: []
-  });
-
-  public static getSeasonDetail = (
-    season: SeasonWithEpisodesResponse,
-    videos: VideosResponse
-  ): DetailProps => ({
-    image: MediaService.getImage(season.poster_path, season.name),
-    header: {
-      title: `${season.name}`,
-    },
-    info: {
-      data: [
-        DataItemService.getDataItem(`Air date`, `${season.air_date}`),
-        DataItemService.getDataItem(`Episodes`, `${season.episodes?.length}`),
-      ]
-    },
-    description: DataItemService.getDataItem(
-      `Description`,
-      `${season.overview}`
-    ),
-    video: MediaService.getTrailer(videos)
-  });
-
-  public static getEpisodeDetail = (
-    episode: EpisodeResponse,
-    videos: VideosResponse
-  ): DetailProps => ({
-    image: MediaService.getImage(episode.still_path, episode.name),
-    header: {
-      title: `${episode.name} (${episode.season_number}x${episode.episode_number})`,
-    },
-    info: {
-      data: [
-        DataItemService.getDataItem(`Air date`, `${episode.air_date}`),
-      ]
-    },
-    description: DataItemService.getDataItem(
-      `Description`,
-      `${episode.overview}`
-    ),
+    backdrop: MediaService.getImage(person.profile_path, person.name),
+    header: DetailHeaderService.getPersonHeader(person),
+    description: DetailDescriptionService.getPersonDescription(person),
+    info: DetailInfoService.getPersonInfo(person),
     actions: [],
-    video: MediaService.getTrailer(videos)
+  });
+
+  public static getSeasonDetail = (season: SeasonWithEpisodesResponse, videos: VideosResponse): DetailProps => ({
+    image: MediaService.getImage(season.poster_path, season.name),
+    backdrop: MediaService.getImage(season.poster_path, season.name),
+    header: DetailHeaderService.getSeasonHeader(season),
+    info: DetailInfoService.getSeasonInfo(season),
+    description: DetailDescriptionService.getSeasonDescription(season),
+    video: MediaService.getTrailer(videos),
+  });
+
+  public static getEpisodeDetail = (episode: EpisodeResponse, videos: VideosResponse): DetailProps => ({
+    image: MediaService.getImage(episode.still_path, episode.name),
+    backdrop: MediaService.getImage(episode.still_path, episode.name),
+    header: DetailHeaderService.getEpisodeHeader(episode),
+    info: DetailInfoService.getEpisodeInfo(episode),
+    description: DetailDescriptionService.getEpisodeDescription(episode),
+    video: MediaService.getTrailer(videos),
   });
 }
 

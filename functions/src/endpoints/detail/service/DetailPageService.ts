@@ -27,6 +27,7 @@ class DetailPageService {
     const movies = await TMDB.person.getMovieCredits(+id);
     return {
       title: TitleService.detail.getPersonTitle(person),
+      searchbar: SearchBarService.getPeopleSearchbar(),
       detail: DetailService.getPersonDetail(person),
       sections: SectionService.getPersonDetailSections({ shows, movies, })
     };
@@ -64,6 +65,7 @@ class DetailPageService {
     const credits = await TMDB.season.getCredits(+showId, +seasonNumber);
     return {
       title: TitleService.detail.getSeasonTitle(season),
+      searchbar: SearchBarService.getShowSearchbar(),
       detail: DetailService.getSeasonDetail(season, videos),
       sections: SectionService.getSeasonDetailSections({
         season,
@@ -84,6 +86,7 @@ class DetailPageService {
     const season = await TMDB.season.getDetails(+showId, +seasonNumber);
     return {
       title: TitleService.detail.getEpisodeTitle(episode),
+      searchbar: SearchBarService.getShowSearchbar(),
       detail: DetailService.getEpisodeDetail(episode, videos),
       sections: SectionService.getEpisodeDetailSections({
         season,

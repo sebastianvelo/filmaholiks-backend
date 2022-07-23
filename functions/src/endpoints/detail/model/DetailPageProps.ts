@@ -1,19 +1,19 @@
 import { ActionProps } from "../../common/model/ActionProps";
 import { ImageProps } from "../../common/model/ImageProps";
-import { CarouselSectionProps } from "../../common/model/CarouselSectionProps";
+import { CardsSectionProps } from "../../common/model/CarouselSectionProps";
 import ChartProps from "../../common/model/ChartProps";
 import { SearchBarProps } from "../../common/model/SearchBarProps";
 
-interface DataItemProps {
+export interface DataItemProps {
   title: string;
   description: string;
 }
 
-interface DetailInfoProps {
+export interface DetailInfoProps {
   data: (DataItemProps | undefined)[];
 }
 
-interface DetailHeaderProps {
+export interface DetailHeaderProps {
   title: string;
   subtitle?: string;
 }
@@ -25,6 +25,7 @@ interface DetailVideoProps {
 
 export interface DetailProps {
   image?: ImageProps;
+  backdrop?: ImageProps;
   header?: DetailHeaderProps;
   description?: DataItemProps;
   info?: DetailInfoProps;
@@ -40,5 +41,5 @@ export interface DetailPageProps {
     title: string;
     chart: ChartProps;
   }[];
-  sections?: CarouselSectionProps[];
+  sections?: CardsSectionProps[];
 }

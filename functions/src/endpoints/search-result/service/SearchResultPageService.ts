@@ -20,7 +20,8 @@ class SearchResultPageService {
       results: {
         id: "results",
         title: `Results of "${query}"`,
-        cards: movies.results.map(CardService.getMovieCard)
+        cards: movies.results.map(CardService.getMovieCard),
+        isGrid: true
       }
     };
   }
@@ -35,7 +36,8 @@ class SearchResultPageService {
       results: {
         id: "results",
         title: `Results of "${query}"`,
-        cards: shows.results.map(CardService.getShowCard)
+        cards: shows.results.map(CardService.getShowCard),
+        isGrid: true
       }
     };
   }
@@ -50,7 +52,8 @@ class SearchResultPageService {
       results: {
         id: "results",
         title: `Results of "${query}"`,
-        cards: person.results.map(CardService.getPersonCard)
+        cards: person.results.map(CardService.getPersonCard),
+        isGrid: true
       }
     };
   }

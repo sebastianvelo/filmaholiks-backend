@@ -8,7 +8,7 @@ import {
 import { Character, GuestStar } from "tmdb-js/lib/api/model/episode/Episode";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import { CarouselSectionProps } from "../../model/CarouselSectionProps";
+import { CardsSectionProps } from "../../model/CarouselSectionProps";
 import CardService from "../card/CardService";
 
 class SectionService {
@@ -17,7 +17,7 @@ class SectionService {
     moreLikeThis: TVShowsResponse;
     credits: CreditsResponse;
     images: ImagesResponse;
-  }): CarouselSectionProps[] => [
+  }): CardsSectionProps[] => [
       {
         id: "cast",
         title: "Cast",
@@ -46,7 +46,7 @@ class SectionService {
     credits: CreditsResponse;
     moreLikeThis: MoviesResponse;
     images: ImagesResponse;
-  }): CarouselSectionProps[] => [
+  }): CardsSectionProps[] => [
       {
         id: "cast",
         title: "Cast",
@@ -67,7 +67,7 @@ class SectionService {
   public static getPersonDetailSections = (data: {
     shows: CreditsResponse;
     movies: CreditsResponse;
-  }): CarouselSectionProps[] => [
+  }): CardsSectionProps[] => [
       {
         id: "tv-shows",
         title: "TV Shows",
@@ -85,7 +85,7 @@ class SectionService {
     nowPlaying: MoviesResponse;
     upcoming: MoviesResponse;
     popular: MoviesResponse;
-  }): CarouselSectionProps[] => [
+  }): CardsSectionProps[] => [
       {
         id: "popular",
         title: "Popular movies",
@@ -113,7 +113,7 @@ class SectionService {
     onTheAir: TVShowsResponse;
     popular: TVShowsResponse;
     airingToday: TVShowsResponse;
-  }): CarouselSectionProps[] => [
+  }): CardsSectionProps[] => [
       {
         id: "topRated",
         title: "Top rated",
@@ -138,7 +138,7 @@ class SectionService {
 
   public static getPeopleExploreSections = (data: {
     popular: PeopleResponse;
-  }): CarouselSectionProps[] => [
+  }): CardsSectionProps[] => [
       {
         id: "popular",
         title: "Popular",
@@ -151,7 +151,7 @@ class SectionService {
     showId: string;
     credits: CreditsResponse;
 
-  }): CarouselSectionProps[] => [
+  }): CardsSectionProps[] => [
       {
         id: "cast",
         title: "Cast",
@@ -172,7 +172,7 @@ class SectionService {
     credits: CreditsResponse;
     guestStars: GuestStar[];
     crew: Character[];
-  }): CarouselSectionProps[] => [
+  }): CardsSectionProps[] => [
       {
         id: "cast",
         title: "Cast",
