@@ -4,24 +4,24 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DataItemProps } from "../../../../detail/model/DetailPageProps";
-import DataItemService from "../../data-item/DataItemService";
+import DataItemHelper from "../../data-item/DataItemHelper";
 
-class DetailDescriptionService {
+class DetailDescriptionHelper {
 
     public static getShowDescription = (tv: TVShowResponse): DataItemProps | undefined =>
-        DataItemService.getDataItem(`Description`, `${tv.overview}`);
+        DataItemHelper.getDataItem(`Description`, `${tv.overview}`);
 
     public static getMovieDescription = (movie: MovieResponse): DataItemProps | undefined =>
-        DataItemService.getDataItem(`Description`, `${movie.overview}`);
+        DataItemHelper.getDataItem(`Description`, `${movie.overview}`);
 
     public static getPersonDescription = (person: PersonDetailsResponse): DataItemProps | undefined =>
-        DataItemService.getDataItem(`Biography`, person.biography);
+        DataItemHelper.getDataItem(`Biography`, person.biography);
 
     public static getSeasonDescription = (season: SeasonWithEpisodesResponse): DataItemProps | undefined =>
-        DataItemService.getDataItem(`Description`, season.overview);
+        DataItemHelper.getDataItem(`Description`, season.overview);
 
     public static getEpisodeDescription = (episode: EpisodeResponse): DataItemProps | undefined =>
-        DataItemService.getDataItem(`Description`, episode.overview);
+        DataItemHelper.getDataItem(`Description`, episode.overview);
 }
 
-export default DetailDescriptionService;
+export default DetailDescriptionHelper;

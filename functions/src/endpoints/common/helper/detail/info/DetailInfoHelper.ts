@@ -4,62 +4,62 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailInfoProps } from "../../../../detail/model/DetailPageProps";
-import DataItemService from "../../data-item/DataItemService";
+import DataItemHelper from "../../data-item/DataItemHelper";
 
-//TODO Hacer dateservice
+// TODO Hacer dateservice
 const getDate = (date?: string | null, locale?: string) =>
     date && Intl.DateTimeFormat(locale ?? 'en-US', { year: 'numeric', day: 'numeric', month: 'long' }).format(new Date(date));
 
-class DetailInfoService {
+class DetailInfoHelper {
 
     public static getShowInfo = (tv: TVShowResponse): DetailInfoProps => ({
         data: [
-            DataItemService.getDataItem(
+            DataItemHelper.getDataItem(
                 `Genres`,
                 tv.genres?.map((genre) => genre.name).join(", ")
             ),
-            DataItemService.getDataItem(`Language`, tv.original_language),
-            DataItemService.getDataItem(`Release`, getDate(tv.first_air_date)),
-            DataItemService.getDataItem(`Status`, tv.status),
+            DataItemHelper.getDataItem(`Language`, tv.original_language),
+            DataItemHelper.getDataItem(`Release`, getDate(tv.first_air_date)),
+            DataItemHelper.getDataItem(`Status`, tv.status),
         ]
     });
-    ;
+
     public static getMovieInfo = (movie: MovieResponse): DetailInfoProps => ({
         data: [
-            DataItemService.getDataItem(
+            DataItemHelper.getDataItem(
                 `Genres`,
                 movie.genres?.map((genre) => genre.name).join(", ")
             ),
-            DataItemService.getDataItem(`Duration`, `${movie.runtime}m`),
-            DataItemService.getDataItem(`Language`, movie.original_language),
-            DataItemService.getDataItem(`Release`, getDate(movie.release_date)),
-            DataItemService.getDataItem(`Budget`, `$${movie.budget}`),
-            DataItemService.getDataItem(`Revenue`, `$${movie.revenue}`),
-            DataItemService.getDataItem(`Status`, movie.status),
+            DataItemHelper.getDataItem(`Duration`, `${movie.runtime}m`),
+            DataItemHelper.getDataItem(`Language`, movie.original_language),
+            DataItemHelper.getDataItem(`Release`, getDate(movie.release_date)),
+            DataItemHelper.getDataItem(`Budget`, `$${movie.budget}`),
+            DataItemHelper.getDataItem(`Revenue`, `$${movie.revenue}`),
+            DataItemHelper.getDataItem(`Status`, movie.status),
         ]
     });
 
     public static getPersonInfo = (person: PersonDetailsResponse): DetailInfoProps => ({
         data: [
-            DataItemService.getDataItem(`Birthday`, getDate(person.birthday)),
-            DataItemService.getDataItem(`Deathday`, getDate(person.deathday)),
-            DataItemService.getDataItem(`Place of birth`, person.place_of_birth),
-            DataItemService.getDataItem(`Known for`, person.known_for_department),
+            DataItemHelper.getDataItem(`Birthday`, getDate(person.birthday)),
+            DataItemHelper.getDataItem(`Deathday`, getDate(person.deathday)),
+            DataItemHelper.getDataItem(`Place of birth`, person.place_of_birth),
+            DataItemHelper.getDataItem(`Known for`, person.known_for_department),
         ]
     });
 
     public static getSeasonInfo = (season: SeasonWithEpisodesResponse): DetailInfoProps => ({
         data: [
-            DataItemService.getDataItem(`Air date`, getDate(season.air_date)),
-            DataItemService.getDataItem(`Episodes`, `${season.episodes?.length}`),
+            DataItemHelper.getDataItem(`Air date`, getDate(season.air_date)),
+            DataItemHelper.getDataItem(`Episodes`, `${season.episodes?.length}`),
         ]
     });
 
     public static getEpisodeInfo = (episode: EpisodeResponse): DetailInfoProps => ({
         data: [
-            DataItemService.getDataItem(`Air date`, getDate(episode.air_date)),
+            DataItemHelper.getDataItem(`Air date`, getDate(episode.air_date)),
         ]
     });
 }
 
-export default DetailInfoService;
+export default DetailInfoHelper;

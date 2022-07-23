@@ -4,33 +4,33 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 
-class TitleService {
+class TitleHelper {
 
     public static getTitle = (title?: string): string => `${title} | Filmaholiks`;
 
     public static explore = {
-        getMovieTitle: () => TitleService.getTitle(`Movies`),
-        getShowTitle: () => TitleService.getTitle(`TV Shows`),
-        getPersonTitle: () => TitleService.getTitle(`People`),
+        getMovieTitle: () => TitleHelper.getTitle(`Movies`),
+        getShowTitle: () => TitleHelper.getTitle(`TV Shows`),
+        getPersonTitle: () => TitleHelper.getTitle(`People`),
     };
 
     public static detail = {
         getMovieTitle: (movie: MovieResponse) =>
-            TitleService.getTitle(movie?.title),
+            TitleHelper.getTitle(movie?.title),
         getPersonTitle: (person: PersonDetailsResponse) =>
-            TitleService.getTitle(person.name),
+            TitleHelper.getTitle(person.name),
         getShowTitle: (show: TVShowResponse) =>
-            TitleService.getTitle(show.name),
+            TitleHelper.getTitle(show.name),
         getSeasonTitle: (season: SeasonWithEpisodesResponse) =>
-            TitleService.getTitle(season.name),
+            TitleHelper.getTitle(season.name),
         getEpisodeTitle: (episode: EpisodeResponse) =>
-            TitleService.getTitle(episode.name),
+            TitleHelper.getTitle(episode.name),
     };
 
     public static search = {
         getTitle: (query: string) =>
-            TitleService.getTitle(`Results of "${query}"`)
+            TitleHelper.getTitle(`Results of "${query}"`)
     };
 }
 
-export default TitleService;
+export default TitleHelper;

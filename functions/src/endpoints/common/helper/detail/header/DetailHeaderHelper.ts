@@ -5,7 +5,7 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailHeaderProps } from "../../../../detail/model/DetailPageProps";
 
-class DetailHeaderService {
+class DetailHeaderHelper {
     public static getMovieHeader = (movie: MovieResponse): DetailHeaderProps => ({
         title: `${movie.title}`
     });
@@ -28,4 +28,4 @@ class DetailHeaderService {
     })
 }
 
-export default DetailHeaderService;
+export default DetailHeaderHelper;

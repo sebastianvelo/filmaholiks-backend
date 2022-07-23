@@ -1,4 +1,4 @@
-class DataItemService {
+class DataItemHelper {
   public static getDataItem = (title: string, description?: string | null) =>
     description && !description.includes("undefined") && !description.includes("null")
       ? {
@@ -8,4 +8,4 @@ class DataItemService {
       : undefined;
 }
 
-export default DataItemService;
+export default DataItemHelper;

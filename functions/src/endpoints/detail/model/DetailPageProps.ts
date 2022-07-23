@@ -24,7 +24,7 @@ interface DetailVideoProps {
 }
 
 export interface DetailProps {
-  image?: ImageProps;
+  poster?: ImageProps;
   backdrop?: ImageProps;
   header?: DetailHeaderProps;
   description?: DataItemProps;

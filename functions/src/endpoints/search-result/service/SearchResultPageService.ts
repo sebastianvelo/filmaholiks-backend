@@ -4,57 +4,37 @@ import {
   TVShowsResponse
 } from "tmdb-js/lib/api/common/response/CommonResponse";
 import TMDB from "../../../tmdb/TMDB";
-import CardService from "../../common/service/card/CardService";
-import SearchBarService from "../../common/service/searchbar/SearchBarService";
-import TitleService from "../../common/service/title/TitleService";
+import CardHelper from "../../common/helper/card/CardHelper";
+import ResultsHelper from "../../common/helper/results/ResultsHelper";
+import SearchBarHelper from "../../common/helper/searchbar/SearchBarHelper";
+import TitleHelper from "../../common/helper/title/TitleHelper";
 import { SearchResultProps } from "../model/SearchResultProps";
 
 class SearchResultPageService {
-  public static async getMovieSearch(
-    query: string
-  ): Promise<SearchResultProps> {
+  public static async getMovieSearch(query: string): Promise<SearchResultProps> {
     const movies: MoviesResponse = await TMDB.search.getMovies({ query });
     return {
-      title: TitleService.search.getTitle(query),
-      searchbar: SearchBarService.getMovieSearchbar(),
-      results: {
-        id: "results",
-        title: `Results of "${query}"`,
-        cards: movies.results.map(CardService.getMovieCard),
-        isGrid: true
-      }
+      title: TitleHelper.search.getTitle(query),
+      searchbar: SearchBarHelper.movie.getSearchbar(),
+      results: ResultsHelper.getResults(movies.results, CardHelper.getMovieCard, query)
     };
   }
 
-  public static async getShowSearch(
-    query: string
-  ): Promise<SearchResultProps> {
+  public static async getShowSearch(query: string): Promise<SearchResultProps> {
     const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
     return {
-      title: TitleService.search.getTitle(query),
-      searchbar: SearchBarService.getShowSearchbar(),
-      results: {
-        id: "results",
-        title: `Results of "${query}"`,
-        cards: shows.results.map(CardService.getShowCard),
-        isGrid: true
-      }
+      title: TitleHelper.search.getTitle(query),
+      searchbar: SearchBarHelper.show.getSearchbar(),
+      results: ResultsHelper.getResults(shows.results, CardHelper.getShowCard, query)
     };
   }
 
-  public static async getPersonSearch(
-    query: string
-  ): Promise<SearchResultProps> {
-    const person: PeopleResponse = await TMDB.search.getPeople({ query });
+  public static async getPersonSearch(query: string): Promise<SearchResultProps> {
+    const people: PeopleResponse = await TMDB.search.getPeople({ query });
     return {
-      title: TitleService.search.getTitle(query),
-      searchbar: SearchBarService.getPeopleSearchbar(),
-      results: {
-        id: "results",
-        title: `Results of "${query}"`,
-        cards: person.results.map(CardService.getPersonCard),
-        isGrid: true
-      }
+      title: TitleHelper.search.getTitle(query),
+      searchbar: SearchBarHelper.people.getSearchbar(),
+      results: ResultsHelper.getResults(people.results, CardHelper.getPersonCard, query)
     };
   }
 
