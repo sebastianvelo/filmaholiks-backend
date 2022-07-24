@@ -5,6 +5,7 @@ import { Image } from "tmdb-js/lib/api/model/image/Image";
 import { PersonDetail } from "tmdb-js/lib/api/model/person/Person";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response";
+import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { ItemProps } from "../../../watch-list/model/WatchListPageProps";
 import { CardProps } from "../../model/CardProps";
 import MediaHelper from "../media/MediaHelper";
@@ -86,11 +87,11 @@ class CardHelper {
     image: MediaHelper.getImage(image.file_path, image.id)
   });
 
-  public static getShowSuggestionCard = (show: TVShow): ItemProps => ({
+  public static getShowSuggestionCard = (show: TVShowResponse): ItemProps => ({
     title: show.original_name ?? "",
     poster: MediaHelper.getImage(show.poster_path, show.title),
-    info: "",
-    category: "",
+    info: `${show.seasons?.length} seasons`,
+    category: show.genres?.map((genre) => genre.name).join(", "),
     path: `/show/${show.id}`
   });
 }

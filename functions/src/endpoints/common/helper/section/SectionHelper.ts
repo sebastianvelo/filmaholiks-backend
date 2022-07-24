@@ -108,9 +108,9 @@ class SectionHelper {
   public static show = {
     getExplore: (data: ShowExplore): CardsSectionProps[] => [
       {
-        id: "topRated",
-        title: "Top rated",
-        cards: data.topRated.results?.map(CardHelper.getShowCard)
+        id: "popular",
+        title: "Popular shows",
+        cards: data.popular.results?.map(CardHelper.getShowCard)
       },
       {
         id: "airingToday",
@@ -118,15 +118,14 @@ class SectionHelper {
         cards: data.airingToday.results?.map(CardHelper.getShowCard)
       },
       {
-        id: "popular",
-        title: "Popular shows",
-        cards: data.popular.results?.map(CardHelper.getShowCard)
-      },
-      {
         id: "onTheAir",
         title: "On the air",
         cards: data.onTheAir.results?.map(CardHelper.getShowCard)
-      }
+      }, {
+        id: "topRated",
+        title: "Top rated",
+        cards: data.topRated.results?.map(CardHelper.getShowCard)
+      },
     ],
     getDetail: (data: ShowDetail): CardsSectionProps[] => [
       {

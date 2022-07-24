@@ -5,22 +5,19 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailInfoProps } from "../../../../detail/model/DetailPageProps";
 import DataItemHelper from "../../data-item/DataItemHelper";
-
-// TODO Hacer dateservice
-const getDate = (date?: string | null, locale?: string) =>
-    date && Intl.DateTimeFormat(locale ?? 'en-US', { year: 'numeric', day: 'numeric', month: 'long' }).format(new Date(date));
+import DateHelper from "../../date/DateHelper";
 
 class DetailInfoHelper {
 
-    public static getShowInfo = (tv: TVShowResponse): DetailInfoProps => ({
+    public static getShowInfo = (show: TVShowResponse): DetailInfoProps => ({
         data: [
             DataItemHelper.getDataItem(
                 `Genres`,
-                tv.genres?.map((genre) => genre.name).join(", ")
+                show.genres?.map((genre) => genre.name).join(", ")
             ),
-            DataItemHelper.getDataItem(`Language`, tv.original_language),
-            DataItemHelper.getDataItem(`Release`, getDate(tv.first_air_date)),
-            DataItemHelper.getDataItem(`Status`, tv.status),
+            DataItemHelper.getDataItem(`Language`, show.original_language),
+            DataItemHelper.getDataItem(`Release`, DateHelper.getFullMessage(show.first_air_date)),
+            DataItemHelper.getDataItem(`Status`, show.status),
         ]
     });
 
@@ -32,7 +29,7 @@ class DetailInfoHelper {
             ),
             DataItemHelper.getDataItem(`Duration`, `${movie.runtime}m`),
             DataItemHelper.getDataItem(`Language`, movie.original_language),
-            DataItemHelper.getDataItem(`Release`, getDate(movie.release_date)),
+            DataItemHelper.getDataItem(`Release`, DateHelper.getFullMessage(movie.release_date)),
             DataItemHelper.getDataItem(`Budget`, `$${movie.budget}`),
             DataItemHelper.getDataItem(`Revenue`, `$${movie.revenue}`),
             DataItemHelper.getDataItem(`Status`, movie.status),
@@ -41,8 +38,8 @@ class DetailInfoHelper {
 
     public static getPersonInfo = (person: PersonDetailsResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Birthday`, getDate(person.birthday)),
-            DataItemHelper.getDataItem(`Deathday`, getDate(person.deathday)),
+            DataItemHelper.getDataItem(`Birthday`, person.deathday ? DateHelper.getFullMessage(person.birthday, person.deathday) : DateHelper.getFullMessage(person.birthday)),
+            DataItemHelper.getDataItem(`Deathday`, person.deathday ? DateHelper.getFullMessage(person.deathday) : undefined),
             DataItemHelper.getDataItem(`Place of birth`, person.place_of_birth),
             DataItemHelper.getDataItem(`Known for`, person.known_for_department),
         ]
@@ -50,14 +47,14 @@ class DetailInfoHelper {
 
     public static getSeasonInfo = (season: SeasonWithEpisodesResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Air date`, getDate(season.air_date)),
+            DataItemHelper.getDataItem(`Air date`, DateHelper.getFullMessage(season.air_date)),
             DataItemHelper.getDataItem(`Episodes`, `${season.episodes?.length}`),
         ]
     });
 
     public static getEpisodeInfo = (episode: EpisodeResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Air date`, getDate(episode.air_date)),
+            DataItemHelper.getDataItem(`Air date`, DateHelper.getFullMessage(episode.air_date)),
         ]
     });
 }

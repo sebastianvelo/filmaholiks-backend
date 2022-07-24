@@ -1,4 +1,5 @@
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
+import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import TMDB from "../../../tmdb/TMDB";
 import CardHelper from "../../common/helper/card/CardHelper";
 import { ItemProps, WatchListPageProps } from "../model/WatchListPageProps";
@@ -33,8 +34,9 @@ class WatchListPageService {
 
   public static async showsSuggestions(query: string): Promise<ItemProps[]> {
     const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
+    const detailedShows = await Promise.all(shows.results.map(async (show) => TMDB.tvShow.getDetails(show.id ?? 0)));
 
-    return shows.results.map(CardHelper.getShowSuggestionCard);
+    return detailedShows.map(CardHelper.getShowSuggestionCard);
   }
 }
 
