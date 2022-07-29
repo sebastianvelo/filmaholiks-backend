@@ -11,10 +11,8 @@ class DetailInfoHelper {
 
     public static getShowInfo = (show: TVShowResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(
-                `Genres`,
-                show.genres?.map((genre) => genre.name).join(", ")
-            ),
+            DataItemHelper.getDataItem(`Rating`, `${show.vote_average?.toFixed(2)} ⭐️`),
+            DataItemHelper.getDataItem(`Genres`, show.genres?.map((genre) => genre.name).join(", ")),
             DataItemHelper.getDataItem(`Language`, show.original_language),
             DataItemHelper.getDataItem(`Release`, DateHelper.getFullMessage(show.first_air_date)),
             DataItemHelper.getDataItem(`Status`, show.status),
@@ -23,10 +21,8 @@ class DetailInfoHelper {
 
     public static getMovieInfo = (movie: MovieResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(
-                `Genres`,
-                movie.genres?.map((genre) => genre.name).join(", ")
-            ),
+            DataItemHelper.getDataItem(`Rating`, `${movie.vote_average?.toFixed(2)} ⭐️`),
+            DataItemHelper.getDataItem(`Genres`, movie.genres?.map((genre) => genre.name).join(", ")),
             DataItemHelper.getDataItem(`Duration`, `${movie.runtime}m`),
             DataItemHelper.getDataItem(`Language`, movie.original_language),
             DataItemHelper.getDataItem(`Release`, DateHelper.getFullMessage(movie.release_date)),

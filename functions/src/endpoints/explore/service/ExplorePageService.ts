@@ -1,56 +1,35 @@
 import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
-import {
-  MoviesResponse,
-  PeopleResponse,
-  TVShowsResponse
-} from "tmdb-js/lib/api/common/response/CommonResponse";
-import TMDB from "../../../tmdb/TMDB";
+import BodyPageHelper from "../../common/helper/body-page/BodyPageHelper";
 import SearchBarHelper from "../../common/helper/searchbar/SearchBarHelper";
-import SectionHelper from "../../common/helper/section/SectionHelper";
 import TitleHelper from "../../common/helper/title/TitleHelper";
+import { DetailPageBodyProps } from "../../detail/model/DetailPageProps";
 import { ExplorePageProps } from "../model/ExplorePageProps";
 
 class ExplorePageService {
   public static async getMovieExplorePage(query?: LanguageParams): Promise<ExplorePageProps> {
-    const upcoming: MoviesResponse = await TMDB.movie.getUpcoming(query);
-    const topRated: MoviesResponse = await TMDB.movie.getTopRatedMovies(query);
-    const nowPlaying: MoviesResponse = await TMDB.movie.getNowPlaying(query);
-    const popular: MoviesResponse = await TMDB.movie.getPopularMovies(query);
+    const body: DetailPageBodyProps = await BodyPageHelper.movie.getExplore(query);
     return {
-      title: TitleHelper.explore.getMovieTitle(),
+      title: TitleHelper.movie.getExplore(),
       searchbar: SearchBarHelper.movie.getSearchbar(),
-      sections: SectionHelper.movie.getExplore({
-        upcoming,
-        topRated,
-        nowPlaying,
-        popular
-      })
+      body
     };
   }
 
   public static async getShowExplorePage(query?: LanguageParams): Promise<ExplorePageProps> {
-    const onTheAir: TVShowsResponse = await TMDB.tvShow.getOnTheAir(query);
-    const topRated: TVShowsResponse = await TMDB.tvShow.getTopRatedShows(query);
-    const popular: TVShowsResponse = await TMDB.tvShow.getPopularShows(query);
-    const airingToday: TVShowsResponse = await TMDB.tvShow.getAiringToday(query);
+    const body: DetailPageBodyProps = await BodyPageHelper.show.getExplore(query);
     return {
-      title: TitleHelper.explore.getShowTitle(),
+      title: TitleHelper.show.getExplore(),
       searchbar: SearchBarHelper.show.getSearchbar(),
-      sections: SectionHelper.show.getExplore({
-        onTheAir,
-        topRated,
-        popular,
-        airingToday
-      })
+      body
     };
   }
 
   public static async getPeopleExplorePage(): Promise<ExplorePageProps> {
-    const popular: PeopleResponse = await TMDB.person.getPopular();
+    const body: DetailPageBodyProps = await BodyPageHelper.people.getExplore();
     return {
-      title: TitleHelper.explore.getPersonTitle(),
+      title: TitleHelper.people.getExplore(),
       searchbar: SearchBarHelper.people.getSearchbar(),
-      sections: SectionHelper.people.getExplore({ popular })
+      body
     };
   }
 }

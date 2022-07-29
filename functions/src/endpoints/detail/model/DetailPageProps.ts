@@ -33,13 +33,23 @@ export interface DetailProps {
   video?: DetailVideoProps;
 }
 
-export interface DetailPageProps {
-  title?: string;
-  detail: DetailProps;
-  searchbar?: SearchBarProps;
+interface DetailSectionsProps {
+  sections?: CardsSectionProps[],
+}
+
+interface DetailChartProps {
   charts?: {
     title: string;
     chart: ChartProps;
   }[];
-  sections?: CardsSectionProps[];
+}
+
+export interface DetailPageBodyProps extends DetailSectionsProps, DetailChartProps {
+  detail?: DetailProps,
+}
+
+export interface DetailPageProps {
+  title: string;
+  searchbar: SearchBarProps;
+  body: DetailPageBodyProps;
 }

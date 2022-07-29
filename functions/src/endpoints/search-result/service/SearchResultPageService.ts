@@ -4,6 +4,7 @@ import {
   TVShowsResponse
 } from "tmdb-js/lib/api/common/response/CommonResponse";
 import TMDB from "../../../tmdb/TMDB";
+import BodyPageHelper from "../../common/helper/body-page/BodyPageHelper";
 import CardHelper from "../../common/helper/card/CardHelper";
 import ResultsHelper from "../../common/helper/results/ResultsHelper";
 import SearchBarHelper from "../../common/helper/searchbar/SearchBarHelper";
@@ -16,7 +17,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.movie.getSearchbar(),
-      results: ResultsHelper.getResults(movies.results, CardHelper.getMovieCard, query)
+      body: BodyPageHelper.movie.getSearch(movies, query)
     };
   }
 
@@ -25,7 +26,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.show.getSearchbar(),
-      results: ResultsHelper.getResults(shows.results, CardHelper.getShowCard, query)
+      body: BodyPageHelper.show.getSearch(shows, query)
     };
   }
 
@@ -34,7 +35,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.people.getSearchbar(),
-      results: ResultsHelper.getResults(people.results, CardHelper.getPersonCard, query)
+      body: BodyPageHelper.people.getSearch(people, query)
     };
   }
 

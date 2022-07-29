@@ -1,27 +1,17 @@
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import TMDB from "../../../tmdb/TMDB";
 import CardHelper from "../../common/helper/card/CardHelper";
 import { ItemProps, WatchListPageProps } from "../model/WatchListPageProps";
 
 const resp = (user: string) => ({
   columns: [
-    {
-      title: user || "Category 1",
-      items: [
-        {
-          title: "Item 1",
-          poster: {
-            alt: "",
-            src: "https://picsum.photos/200/300"
-          },
-          info: "1/4 seasons",
-          path: ""
-        }
-      ]
-    }
+    { "title": "Plan to watch", "items": [] },
+    { "title": "On hold", "items": [] },
+    { "title": "Currently watching", "items": [] },
+    { "title": "Completed", "items": [] },
+    { "title": "Dropped", "items": [] }
   ]
-})
+});
 
 class WatchListPageService {
   public static async shows(user: string): Promise<WatchListPageProps> {

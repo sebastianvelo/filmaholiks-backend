@@ -16,7 +16,6 @@ class DetailHeaderHelper {
 
     public static getShowHeader = (tv: TVShowResponse): DetailHeaderProps => ({
         title: `${tv.original_name}`,
-        subtitle: `(${tv.vote_average})`
     });
 
     public static getSeasonHeader = (season: SeasonWithEpisodesResponse): DetailHeaderProps => ({

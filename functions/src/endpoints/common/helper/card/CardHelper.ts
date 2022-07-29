@@ -50,14 +50,14 @@ class CardHelper {
     title: castMember.name,
     subtitle: `as ${castMember.character}`,
     path: `/show/${castMember.id}`,
-    image: MediaHelper.getImage(castMember.backdrop_path, castMember.name),
+    image: MediaHelper.getImage(castMember.poster_path, castMember.name),
   });
 
   public static getMovieAppareances = (castMember: any): CardProps => ({
     title: castMember.original_title,
     subtitle: `as ${castMember.character}`,
     path: `/movie/${castMember.id}`,
-    image: MediaHelper.getImage(castMember.backdrop_path, castMember.original_title),
+    image: MediaHelper.getImage(castMember.poster_path, castMember.original_title),
   });
 
   public static getSeasonCard = (
@@ -77,7 +77,7 @@ class CardHelper {
   ): CardProps => ({
     title: `${episode.name}`,
     subtitle: `${episode.vote_average}/10`,
-    image: MediaHelper.getImage(season.poster_path, episode.name),
+    image: MediaHelper.getImage(episode.still_path, episode.name),
     path: `/show/${show}/s/${episode.season_number}/e/${episode.episode_number}`
   });
 
@@ -90,7 +90,7 @@ class CardHelper {
   public static getShowSuggestionCard = (show: TVShowResponse): ItemProps => ({
     title: show.original_name ?? "",
     poster: MediaHelper.getImage(show.poster_path, show.title),
-    info: `${show.seasons?.length} seasons`,
+    info: `${show.seasons?.filter(season => season.season_number).length} seasons`,
     category: show.genres?.map((genre) => genre.name).join(", "),
     path: `/show/${show.id}`
   });

@@ -1,6 +1,5 @@
 import {
-  CreditsResponse,
-  ImagesResponse,
+  CreditsResponse, ImagesResponse,
   MoviesResponse,
   PeopleResponse,
   TVShowsResponse
@@ -171,7 +170,7 @@ class SectionHelper {
         id: "movies",
         title: "Movies",
         cards: data.movies.cast.map(CardHelper.getMovieAppareances)
-      }
+      },
     ]
   }
 

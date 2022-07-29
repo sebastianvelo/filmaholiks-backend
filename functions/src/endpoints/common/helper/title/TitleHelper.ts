@@ -8,23 +8,27 @@ class TitleHelper {
 
     public static getTitle = (title?: string): string => `${title} | Filmaholiks`;
 
-    public static explore = {
-        getMovieTitle: () => TitleHelper.getTitle(`Movies`),
-        getShowTitle: () => TitleHelper.getTitle(`TV Shows`),
-        getPersonTitle: () => TitleHelper.getTitle(`People`),
+    public static movie = {
+        getExplore: () => TitleHelper.getTitle(`Movies`),
+        getDetail: (movie: MovieResponse) => TitleHelper.getTitle(movie?.title),
     };
 
-    public static detail = {
-        getMovieTitle: (movie: MovieResponse) =>
-            TitleHelper.getTitle(movie?.title),
-        getPersonTitle: (person: PersonDetailsResponse) =>
-            TitleHelper.getTitle(person.name),
-        getShowTitle: (show: TVShowResponse) =>
-            TitleHelper.getTitle(show.name),
-        getSeasonTitle: (season: SeasonWithEpisodesResponse) =>
-            TitleHelper.getTitle(season.name),
-        getEpisodeTitle: (episode: EpisodeResponse) =>
-            TitleHelper.getTitle(episode.name),
+    public static people = {
+        getExplore: () => TitleHelper.getTitle(`People`),
+        getDetail: (person: PersonDetailsResponse) => TitleHelper.getTitle(person.name),
+    };
+
+    public static show = {
+        getExplore: () => TitleHelper.getTitle(`TV Shows`),
+        getDetail: (show: TVShowResponse) => TitleHelper.getTitle(show.name),
+    };
+
+    public static season = {
+        getDetail: (season: SeasonWithEpisodesResponse) => TitleHelper.getTitle(season.name),
+    };
+
+    public static episode = {
+        getDetail: (episode: EpisodeResponse) => TitleHelper.getTitle(episode.name),
     };
 
     public static search = {

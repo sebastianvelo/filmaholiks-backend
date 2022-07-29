@@ -2,6 +2,7 @@ import { Episode } from "tmdb-js/lib/api/model/episode/Episode";
 import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import TMDB from "../../../../tmdb/TMDB";
 import { ChartBodyCellProps } from "../../model/ChartProps";
+import MediaHelper from "../media/MediaHelper";
 
 class ChartHelper {
 
@@ -33,6 +34,7 @@ class ChartHelper {
             rating,
             value: rating === -1 ? "-" : rating,
             href: `/s/${episode.season_number}/e/${episode.episode_number}`,
+            image: MediaHelper.getImage(episode.still_path, episode?.name),
             title: episode.name ?? ""
         };
     }
