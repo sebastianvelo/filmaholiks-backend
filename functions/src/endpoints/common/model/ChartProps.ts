@@ -1,8 +1,11 @@
+import { ImageProps } from "./ImageProps";
+
 export interface ChartBodyCellProps {
   rating: number;
   value: string | number;
   href: string;
-  title: string;
+  title?: string;
+  image?: ImageProps;
 };
 
 export interface ChartBodyProps {

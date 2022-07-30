@@ -32,9 +32,12 @@ class TitleHelper {
     };
 
     public static search = {
-        getTitle: (query: string) =>
-            TitleHelper.getTitle(`Results of "${query}"`)
+        getTitle: (query: string) => TitleHelper.getTitle(`Results of "${query}"`)
     };
+
+    public static chart = {
+        getTitle: () => TitleHelper.getTitle(`Episode rating`)
+    }
 }
 
 export default TitleHelper;

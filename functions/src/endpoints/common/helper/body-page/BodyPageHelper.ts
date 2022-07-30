@@ -1,5 +1,5 @@
 import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
-import { MoviesResponse, PeopleResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
+import { CreditsResponse, ImagesResponse, MoviesResponse, PeopleResponse, TVShowsResponse, VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Response";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
@@ -70,11 +70,11 @@ class BodyPageHelper {
 
     public static show = {
         getDetail: async (show: TVShowResponse): Promise<DetailPageBodyProps> => {
-            const video = await TMDB.tvShow.getVideos(Number(show.id));
-            const moreLikeThis = await TMDB.tvShow.getTVRecommendations(Number(show.id));
-            const credits = await TMDB.tvShow.getCredits(Number(show.id));
-            const images = await TMDB.tvShow.getImages(Number(show.id));
-            const chartSeasons = await ChartHelper.getShowEpisodesChart(show.id, show.seasons);
+            const video: VideosResponse = await TMDB.tvShow.getVideos(Number(show.id));
+            const moreLikeThis: TVShowsResponse = await TMDB.tvShow.getTVRecommendations(Number(show.id));
+            const credits: CreditsResponse = await TMDB.tvShow.getCredits(Number(show.id));
+            const images: ImagesResponse = await TMDB.tvShow.getImages(Number(show.id));
+            const chartSeasons = await ChartHelper.showEpisodes.getChartSection(show.id, show.seasons);
             return {
                 detail: DetailHelper.getShowDetail(show, video),
                 charts: [
@@ -109,8 +109,8 @@ class BodyPageHelper {
 
     public static season = {
         getDetail: async (season: SeasonWithEpisodesResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyProps> => {
-            const videos = await TMDB.season.getVideos(+showId, +seasonNumber);
-            const credits = await TMDB.season.getCredits(+showId, +seasonNumber);
+            const videos: VideosResponse = await TMDB.season.getVideos(+showId, +seasonNumber);
+            const credits: CreditsResponse = await TMDB.season.getCredits(+showId, +seasonNumber);
             return {
                 detail: DetailHelper.getSeasonDetail(season, videos),
                 sections: SectionHelper.season.getDetail({
@@ -124,9 +124,9 @@ class BodyPageHelper {
 
     public static episode = {
         getDetail: async (episode: EpisodeResponse, showId: string, seasonNumber: string, episodeNumber: string): Promise<DetailPageBodyProps> => {
-            const videos = await TMDB.episode.getVideos(+showId, +seasonNumber, +episodeNumber);
-            const credits = await TMDB.season.getCredits(+showId, +seasonNumber);
-            const season = await TMDB.season.getDetails(+showId, +seasonNumber);
+            const videos: VideosResponse = await TMDB.episode.getVideos(+showId, +seasonNumber, +episodeNumber);
+            const credits: CreditsResponse = await TMDB.season.getCredits(+showId, +seasonNumber);
+            const season: SeasonWithEpisodesResponse = await TMDB.season.getDetails(+showId, +seasonNumber);
             return {
                 detail: DetailHelper.getEpisodeDetail(episode, videos),
                 sections: SectionHelper.episode.getDetail({
