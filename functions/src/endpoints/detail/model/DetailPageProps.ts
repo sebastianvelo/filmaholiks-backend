@@ -3,6 +3,7 @@ import { ImageProps } from "../../common/model/ImageProps";
 import { CardsSectionProps } from "../../common/model/CarouselSectionProps";
 import ChartProps from "../../common/model/ChartProps";
 import { SearchBarProps } from "../../common/model/SearchBarProps";
+import { ItemProps } from "../../watch-list/model/WatchListPageProps";
 
 export interface DataItemProps {
   title: string;
@@ -22,6 +23,9 @@ interface DetailVideoProps {
   title?: string;
   src?: string;
 }
+export interface DetailActionsProps {
+  addToWatchlist?: ItemProps;
+}
 
 export interface DetailProps {
   poster?: ImageProps;
@@ -29,7 +33,7 @@ export interface DetailProps {
   header?: DetailHeaderProps;
   description?: DataItemProps;
   info?: DetailInfoProps;
-  actions?: ActionProps[];
+  actions?: DetailActionsProps;
   video?: DetailVideoProps;
 }
 
@@ -43,6 +47,7 @@ interface DetailChartProps {
     chart: ChartProps;
   }[];
 }
+
 
 export interface DetailPageBodyProps extends DetailSectionsProps, DetailChartProps {
   detail?: DetailProps,

@@ -3,7 +3,6 @@ import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response
 import TMDB from "../../../../tmdb/TMDB";
 import ChartProps, { ChartBodyCellProps } from "../../model/ChartProps";
 import MediaHelper from "../media/MediaHelper";
-import TitleHelper from "../title/TitleHelper";
 
 class ChartHelper {
 
@@ -11,7 +10,7 @@ class ChartHelper {
         getChartSection: async (showId?: number, seasons?: SeasonResponse[]) => {
             const chart = await ChartHelper.showEpisodes.getChart(showId, seasons);
             return {
-                title: TitleHelper.chart.getTitle(),
+                title: `Episode rating`,
                 chart
             };
         },
@@ -32,7 +31,7 @@ class ChartHelper {
             Promise.all(seasons.map(async (season) => ChartHelper.showEpisodes.getSeasonColumn(showId, season.season_number))),
         getSeasonColumn: async (showId: number, seasonNumber: number): Promise<ChartBodyCellProps[]> => {
             const season = await TMDB.season.getDetails(showId, seasonNumber);
-            return season.episodes ? season.episodes.map(ChartHelper.showEpisodes.getEpisodeCell) : [];
+            return season.episodes && season.season_number ? season.episodes.map(ChartHelper.showEpisodes.getEpisodeCell) : [];
         },
         getEpisodeCell: (episode: Episode): ChartBodyCellProps => {
             const rating = ChartHelper.showEpisodes.getRating(episode?.vote_average);

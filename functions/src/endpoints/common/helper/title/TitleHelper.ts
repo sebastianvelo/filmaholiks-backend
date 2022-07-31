@@ -35,9 +35,6 @@ class TitleHelper {
         getTitle: (query: string) => TitleHelper.getTitle(`Results of "${query}"`)
     };
 
-    public static chart = {
-        getTitle: () => TitleHelper.getTitle(`Episode rating`)
-    }
 }
 
 export default TitleHelper;

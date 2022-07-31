@@ -8,8 +8,8 @@ import DataItemHelper from "../../data-item/DataItemHelper";
 
 class DetailDescriptionHelper {
 
-    public static getShowDescription = (tv: TVShowResponse): DataItemProps | undefined =>
-        DataItemHelper.getDataItem(`Description`, `${tv.overview}`);
+    public static getShowDescription = (show: TVShowResponse): DataItemProps | undefined =>
+        DataItemHelper.getDataItem(`Description`, `${show.overview}`);
 
     public static getMovieDescription = (movie: MovieResponse): DataItemProps | undefined =>
         DataItemHelper.getDataItem(`Description`, `${movie.overview}`);

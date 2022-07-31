@@ -11,14 +11,21 @@ import DetailHeaderHelper from "./header/DetailHeaderHelper";
 import DetailInfoHelper from "./info/DetailInfoHelper";
 
 class DetailHelper {
-  public static getShowDetail = (tv: TVShowResponse, videos: VideosResponse): DetailProps => ({
-    poster: MediaHelper.getImage(tv.poster_path, tv.original_name),
-    backdrop: MediaHelper.getImage(tv.backdrop_path, tv.original_name),
-    header: DetailHeaderHelper.getShowHeader(tv),
-    description: DetailDescriptionHelper.getShowDescription(tv),
-    info: DetailInfoHelper.getShowInfo(tv),
-    video: MediaHelper.getTrailer(videos),
-    actions: [],
+  public static getShowDetail = (show: TVShowResponse, videos: VideosResponse): DetailProps => ({
+    poster: MediaHelper.getImage(show.poster_path, show.original_name),
+    backdrop: MediaHelper.getImage(show.backdrop_path, show.original_name),
+    header: DetailHeaderHelper.getShowHeader(show),
+    description: DetailDescriptionHelper.getShowDescription(show),
+    info: DetailInfoHelper.getShowInfo(show),
+    video: MediaHelper.getTrailer(videos), 
+    actions: {
+      addToWatchlist: {
+        title: show.original_name,
+        info: `${show.seasons?.filter(season => season.season_number).length} seasons`,
+        path: "",
+        poster: MediaHelper.getImage(show.poster_path, show.original_name)
+      }
+    },
   });
 
   public static getMovieDetail = (movie: MovieResponse, videos: VideosResponse): DetailProps => ({
@@ -28,7 +35,6 @@ class DetailHelper {
     description: DetailDescriptionHelper.getMovieDescription(movie),
     info: DetailInfoHelper.getMovieInfo(movie),
     video: MediaHelper.getTrailer(videos),
-    actions: [],
   });
 
   public static getPersonDetail = (person: PersonDetailsResponse): DetailProps => ({
@@ -37,7 +43,6 @@ class DetailHelper {
     header: DetailHeaderHelper.getPersonHeader(person),
     description: DetailDescriptionHelper.getPersonDescription(person),
     info: DetailInfoHelper.getPersonInfo(person),
-    actions: [],
   });
 
   public static getSeasonDetail = (season: SeasonWithEpisodesResponse, videos: VideosResponse): DetailProps => ({

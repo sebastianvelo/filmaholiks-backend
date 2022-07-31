@@ -14,8 +14,8 @@ class DetailHeaderHelper {
         title: `${person.name}`,
     });
 
-    public static getShowHeader = (tv: TVShowResponse): DetailHeaderProps => ({
-        title: `${tv.original_name}`,
+    public static getShowHeader = (shpw: TVShowResponse): DetailHeaderProps => ({
+        title: `${shpw.original_name}`,
     });
 
     public static getSeasonHeader = (season: SeasonWithEpisodesResponse): DetailHeaderProps => ({

@@ -60,30 +60,21 @@ class CardHelper {
     image: MediaHelper.getImage(castMember.poster_path, castMember.original_title),
   });
 
-  public static getSeasonCard = (
-    season: SeasonResponse,
-    show?: string | number
-  ): CardProps => ({
+  public static getSeasonCard = (season: SeasonResponse, show?: string | number): CardProps => ({
     title: `${season.name}`,
     subtitle: `${season.episode_count} episodes`,
     image: MediaHelper.getImage(season.poster_path, season.name),
     path: `/show/${show}/s/${season.season_number}`
   });
 
-  public static getEpisodeCard = (
-    episode: Episode,
-    season: SeasonResponse,
-    show: string
-  ): CardProps => ({
+  public static getEpisodeCard = (episode: Episode, show: string): CardProps => ({
     title: `${episode.name}`,
     subtitle: `${episode.vote_average}/10`,
     image: MediaHelper.getImage(episode.still_path, episode.name),
     path: `/show/${show}/s/${episode.season_number}/e/${episode.episode_number}`
   });
 
-  public static getGalleryImage = (
-    image: Image
-  ): CardProps => ({
+  public static getGalleryImage = (image: Image): CardProps => ({
     image: MediaHelper.getImage(image.file_path, image.id)
   });
 
