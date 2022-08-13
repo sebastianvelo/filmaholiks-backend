@@ -1,9 +1,8 @@
-import { ActionProps } from "../../common/model/ActionProps";
-import { ImageProps } from "../../common/model/ImageProps";
-import { CardsSectionProps } from "../../common/model/CarouselSectionProps";
-import ChartProps from "../../common/model/ChartProps";
-import { SearchBarProps } from "../../common/model/SearchBarProps";
-import { ItemProps } from "../../watch-list/model/WatchListPageProps";
+import { CardsSectionProps } from "../../../model/cards/CardsSectionProps";
+import ChartProps from "../../../model/chart/ChartProps";
+import { ImageProps } from "../../../model/image/ImageProps";
+import { SearchBarProps } from "../../../model/searchbar/SearchBarProps";
+import { ItemProps, WatchlistProps } from "../../../model/watchlist/WatchListPageProps";
 
 export interface DataItemProps {
   title: string;
@@ -24,7 +23,7 @@ interface DetailVideoProps {
   src?: string;
 }
 export interface DetailActionsProps {
-  addToWatchlist?: ItemProps;
+  watchlistButton?: ItemProps;
 }
 
 export interface DetailProps {
@@ -48,9 +47,15 @@ interface DetailChartProps {
   }[];
 }
 
+interface DetailWatchlistProps {
+  watchlists?: {
+      title: string;
+      lists: WatchlistProps; 
+  }[];
+}
 
-export interface DetailPageBodyProps extends DetailSectionsProps, DetailChartProps {
-  detail?: DetailProps,
+export interface DetailPageBodyProps extends DetailSectionsProps, DetailChartProps, DetailWatchlistProps {
+  detail?: DetailProps;
 }
 
 export interface DetailPageProps {

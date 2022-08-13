@@ -1,5 +1,5 @@
-import { CardsSectionProps } from "../../common/model/CarouselSectionProps";
-import { SearchBarProps } from "../../common/model/SearchBarProps";
+import { CardsSectionProps } from "../../../model/cards/CardsSectionProps";
+import { SearchBarProps } from "../../../model/searchbar/SearchBarProps";
 
 export interface SearchResultPageBodyProps {
   results?: CardsSectionProps;

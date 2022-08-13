@@ -1,11 +1,22 @@
 import TMDB from "../../../tmdb/TMDB";
-import BodyPageHelper from "../../common/helper/body-page/BodyPageHelper";
-import SearchBarHelper from "../../common/helper/searchbar/SearchBarHelper";
-import TitleHelper from "../../common/helper/title/TitleHelper";
+import BodyPageHelper from "../../../helper/body-page/BodyPageHelper";
+import SearchBarHelper from "../../../helper/searchbar/SearchBarHelper";
+import TitleHelper from "../../../helper/title/TitleHelper";
 import { DetailPageProps } from "../model/DetailPageProps";
+import UserRepository from "../../../repository/user/UserRepository";
 
 class DetailPageService {
-  public static async getMovieDetailPage(id: string): Promise<DetailPageProps> {
+  public static async getUser(id: string): Promise<DetailPageProps> {
+    const user = await UserRepository.getUser(id);
+    const body = await BodyPageHelper.user.getDetail(user);
+    return {
+      title: TitleHelper.user.getDetail(user.userName),
+      searchbar: SearchBarHelper.user.getSearchbar(),
+      body
+    };
+  }
+
+  public static async getMovie(id: string): Promise<DetailPageProps> {
     const movie = await TMDB.movie.getDetails(+id);
     const body = await BodyPageHelper.movie.getDetail(movie);
     return {
@@ -15,7 +26,7 @@ class DetailPageService {
     };
   }
 
-  public static async getPersonDetailPage(id: string): Promise<DetailPageProps> {
+  public static async getPerson(id: string): Promise<DetailPageProps> {
     const person = await TMDB.person.getDetails(+id);
     const body = await BodyPageHelper.people.getDetail(person);
     return {
@@ -25,7 +36,7 @@ class DetailPageService {
     };
   }
 
-  public static async getShowDetailPage(id: string): Promise<DetailPageProps> {
+  public static async getShow(id: string): Promise<DetailPageProps> {
     const show = await TMDB.tvShow.getDetails(+id);
     const body = await BodyPageHelper.show.getDetail(show);
     return {
@@ -35,7 +46,7 @@ class DetailPageService {
     };
   }
 
-  public static async getSeasonDetailPage(showId: string, seasonNumber: string): Promise<DetailPageProps> {
+  public static async getSeason(showId: string, seasonNumber: string): Promise<DetailPageProps> {
     const season = await TMDB.season.getDetails(+showId, +seasonNumber);
     const body = await BodyPageHelper.season.getDetail(season, showId, seasonNumber);
     return {
@@ -45,9 +56,9 @@ class DetailPageService {
     };
   }
 
-  public static async getEpisodeDetailPage(showId: string, seasonNumber: string, episodeNumber: string): Promise<DetailPageProps> {
+  public static async getEpisode(showId: string, seasonNumber: string, episodeNumber: string): Promise<DetailPageProps> {
     const episode = await TMDB.episode.getDetails(+showId, +seasonNumber, +episodeNumber);
-    const body = await BodyPageHelper.episode.getDetail(episode, showId, seasonNumber, episodeNumber);
+    const body = await BodyPageHelper.episode.getDetail(episode, showId, seasonNumber);
     return {
       title: TitleHelper.episode.getDetail(episode),
       searchbar: SearchBarHelper.show.getSearchbar(),

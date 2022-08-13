@@ -3,12 +3,10 @@ import {
   PeopleResponse,
   TVShowsResponse
 } from "tmdb-js/lib/api/common/response/CommonResponse";
+import BodyPageHelper from "../../../helper/body-page/BodyPageHelper";
+import SearchBarHelper from "../../../helper/searchbar/SearchBarHelper";
+import TitleHelper from "../../../helper/title/TitleHelper";
 import TMDB from "../../../tmdb/TMDB";
-import BodyPageHelper from "../../common/helper/body-page/BodyPageHelper";
-import CardHelper from "../../common/helper/card/CardHelper";
-import ResultsHelper from "../../common/helper/results/ResultsHelper";
-import SearchBarHelper from "../../common/helper/searchbar/SearchBarHelper";
-import TitleHelper from "../../common/helper/title/TitleHelper";
 import { SearchResultProps } from "../model/SearchResultProps";
 
 class SearchResultPageService {
