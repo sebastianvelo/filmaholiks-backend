@@ -14,7 +14,7 @@ class WatchListRepository {
             if (idx !== -1) {
                 dbShowWatchlistMock[idx].watchlist = lists;
             }
-        }
+        },
     };
 
     public static movies = {

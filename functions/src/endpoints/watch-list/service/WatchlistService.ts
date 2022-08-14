@@ -7,7 +7,7 @@ import TMDB from "../../../tmdb/TMDB";
 
 class WatchlistService {
   public static saveShowsWatchlist = (userName: string, lists: ListProps[]): void => {
-    WatchListRepository.shows.save(userName, WatchlistHelper.transformToModel(lists));
+    WatchListRepository.shows.save(userName, WatchlistHelper.transformToWatchlistModel(lists));
   }
 
   public static showsSuggestions = async (query: string): Promise<ItemProps[]> => {
