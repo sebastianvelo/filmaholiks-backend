@@ -4,41 +4,36 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 
-class TitleHelper {
+const getTitle = (title?: string): string => `${title} | Filmaholiks`;
 
-    public static getTitle = (title?: string): string => `${title} | Filmaholiks`;
+export const user = {
+    getDetail: (userName: string) => getTitle(userName),
+};
 
-    public static user = {
-        getDetail: (userName: string) => TitleHelper.getTitle(userName),
-    };
+export const movie = {
+    getExplore: () => getTitle(`Movies`),
+    getDetail: (movie: MovieResponse) => getTitle(movie?.title),
+};
 
-    public static movie = {
-        getExplore: () => TitleHelper.getTitle(`Movies`),
-        getDetail: (movie: MovieResponse) => TitleHelper.getTitle(movie?.title),
-    };
+export const people = {
+    getExplore: () => getTitle(`People`),
+    getDetail: (person: PersonDetailsResponse) => getTitle(person.name),
+};
 
-    public static people = {
-        getExplore: () => TitleHelper.getTitle(`People`),
-        getDetail: (person: PersonDetailsResponse) => TitleHelper.getTitle(person.name),
-    };
+export const show = {
+    getExplore: () => getTitle(`TV Shows`),
+    getDetail: (show: TVShowResponse) => getTitle(show.name),
+};
 
-    public static show = {
-        getExplore: () => TitleHelper.getTitle(`TV Shows`),
-        getDetail: (show: TVShowResponse) => TitleHelper.getTitle(show.name),
-    };
+export const season = {
+    getDetail: (season: SeasonWithEpisodesResponse) => getTitle(season.name),
+};
 
-    public static season = {
-        getDetail: (season: SeasonWithEpisodesResponse) => TitleHelper.getTitle(season.name),
-    };
+export const episode = {
+    getDetail: (episode: EpisodeResponse) => getTitle(episode.name),
+};
 
-    public static episode = {
-        getDetail: (episode: EpisodeResponse) => TitleHelper.getTitle(episode.name),
-    };
+export const search = {
+    getTitle: (query: string) => getTitle(`Results of "${query}"`)
+};
 
-    public static search = {
-        getTitle: (query: string) => TitleHelper.getTitle(`Results of "${query}"`)
-    };
-
-}
-
-export default TitleHelper;

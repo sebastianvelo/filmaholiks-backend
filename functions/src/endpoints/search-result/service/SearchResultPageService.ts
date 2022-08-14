@@ -5,7 +5,7 @@ import {
 } from "tmdb-js/lib/api/common/response/CommonResponse";
 import BodyPageHelper from "../../../helper/body-page/BodyPageHelper";
 import SearchBarHelper from "../../../helper/searchbar/SearchBarHelper";
-import TitleHelper from "../../../helper/title/TitleHelper";
+import * as TitleHelper from "../../../helper/title/TitleHelper";
 import TMDB from "../../../tmdb/TMDB";
 import { SearchResultProps } from "../model/SearchResultProps";
 

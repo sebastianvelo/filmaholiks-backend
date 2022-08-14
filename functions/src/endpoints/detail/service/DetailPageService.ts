@@ -1,7 +1,7 @@
 import TMDB from "../../../tmdb/TMDB";
 import BodyPageHelper from "../../../helper/body-page/BodyPageHelper";
 import SearchBarHelper from "../../../helper/searchbar/SearchBarHelper";
-import TitleHelper from "../../../helper/title/TitleHelper";
+import * as TitleHelper from "../../../helper/title/TitleHelper";
 import { DetailPageProps } from "../model/DetailPageProps";
 import UserRepository from "../../../repository/user/UserRepository";
 

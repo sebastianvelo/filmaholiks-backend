@@ -1,7 +1,7 @@
 import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
 import BodyPageHelper from "../../../helper/body-page/BodyPageHelper";
 import SearchBarHelper from "../../../helper/searchbar/SearchBarHelper";
-import TitleHelper from "../../../helper/title/TitleHelper";
+import * as TitleHelper from "../../../helper/title/TitleHelper";
 import { DetailPageBodyProps } from "../../detail/model/DetailPageProps";
 import { ExplorePageProps } from "../model/ExplorePageProps";
 
