@@ -8,40 +8,40 @@ import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { CardProps } from "../../model/card/CardProps";
 import { ItemProps } from "../../model/watchlist/WatchListPageProps";
-import MediaHelper from "../media/MediaHelper";
+import { getTMDBImage } from "../media/MediaHelper";
 
 export const getMovieCard = (movie: MovieResponse): CardProps => ({
   title: movie.title,
   subtitle: `${movie.release_date?.substring(0, 4)}`,
-  image: MediaHelper.getTMDBImage(movie.poster_path, movie.title),
+  image: getTMDBImage(movie.poster_path, movie.title),
   path: `/movie/${movie.id}`
 });
 
 export const getShowCard = (show: TVShow): CardProps => ({
   title: show.original_name,
   subtitle: `${show.first_air_date?.substring(0, 4)}`,
-  image: MediaHelper.getTMDBImage(show.poster_path, show.title),
+  image: getTMDBImage(show.poster_path, show.title),
   path: `/show/${show.id}`
 });
 
 export const getPersonCard = (person: PersonDetail): CardProps => ({
   title: person.name,
   subtitle: person.birthday,
-  image: MediaHelper.getTMDBImage(person.profile_path, person.name),
+  image: getTMDBImage(person.profile_path, person.name),
   path: `/person/${person.id}`
 });
 
 export const getCastMemberCard = (castMember: CreditPerson): CardProps => ({
   title: castMember.name,
   subtitle: `as ${castMember.character}`,
-  image: MediaHelper.getTMDBImage(castMember.profile_path, castMember.name),
+  image: getTMDBImage(castMember.profile_path, castMember.name),
   path: `/person/${castMember.id}`
 });
 
 export const getCrewCard = (crew: Character): CardProps => ({
   title: crew.name,
   subtitle: `as ${crew.job}`,
-  image: MediaHelper.getTMDBImage(crew.profile_path, crew.name),
+  image: getTMDBImage(crew.profile_path, crew.name),
   path: `/person/${crew.id}`
 });
 
@@ -49,45 +49,45 @@ export const getShowAppareances = (castMember: any): CardProps => ({
   title: castMember.name,
   subtitle: `as ${castMember.character}`,
   path: `/show/${castMember.id}`,
-  image: MediaHelper.getTMDBImage(castMember.poster_path, castMember.name),
+  image: getTMDBImage(castMember.poster_path, castMember.name),
 });
 
 export const getMovieAppareances = (castMember: any): CardProps => ({
   title: castMember.original_title,
   subtitle: `as ${castMember.character}`,
   path: `/movie/${castMember.id}`,
-  image: MediaHelper.getTMDBImage(castMember.poster_path, castMember.original_title),
+  image: getTMDBImage(castMember.poster_path, castMember.original_title),
 });
 
 export const getSeasonCard = (season: SeasonResponse, show?: string | number): CardProps => ({
   title: `${season.name}`,
   subtitle: `${season.episode_count} episodes`,
-  image: MediaHelper.getTMDBImage(season.poster_path, season.name),
+  image: getTMDBImage(season.poster_path, season.name),
   path: `/show/${show}/s/${season.season_number}`
 });
 
 export const getEpisodeCard = (episode: Episode, show?: string | number): CardProps => ({
   title: `${episode.name}`,
   subtitle: `${episode.vote_average}/10`,
-  image: MediaHelper.getTMDBImage(episode.still_path, episode.name),
+  image: getTMDBImage(episode.still_path, episode.name),
   path: `/show/${show}/s/${episode.season_number}/e/${episode.episode_number}`
 });
 
 export const getTopRatedEpisodeCard = (episode: Episode, show?: string | number): CardProps => ({
   title: `${episode.name} (${episode.season_number}x${episode.episode_number})`,
   subtitle: `${episode.vote_average}/10`,
-  image: MediaHelper.getTMDBImage(episode.still_path, episode.name),
+  image: getTMDBImage(episode.still_path, episode.name),
   path: `/show/${show}/s/${episode.season_number}/e/${episode.episode_number}`
 });
 
 export const getGalleryImage = (image: Image): CardProps => ({
-  image: MediaHelper.getTMDBImage(image.file_path, image.id)
+  image: getTMDBImage(image.file_path, image.id)
 });
 
 export const getShowSuggestionCard = (show: TVShowResponse): ItemProps => ({
   id: show.id,
   title: show.original_name ?? "",
-  poster: MediaHelper.getTMDBImage(show.poster_path, show.title),
+  poster: getTMDBImage(show.poster_path, show.title),
   info: `${show.seasons?.filter(season => season.season_number).length} seasons`,
   category: show.genres?.map((genre) => genre.name).join(", "),
   path: `/show/${show.id}`

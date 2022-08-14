@@ -6,7 +6,7 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailProps } from "../../endpoints/detail/model/DetailPageProps";
 import UserModel from "../../repository/model/user/UserModel";
-import MediaHelper from "../media/MediaHelper";
+import * as MediaHelper from "../media/MediaHelper";
 import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper";
 import * as DetailHeaderHelper from "./header/DetailHeaderHelper";
 import * as DetailInfoHelper from "./info/DetailInfoHelper";
