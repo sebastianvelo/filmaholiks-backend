@@ -1,5 +1,5 @@
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import CardHelper from "../../../helper/card/CardHelper";
+import { getShowSuggestionCard } from "../../../helper/card/CardHelper";
 import WatchlistHelper from "../../../helper/watch-list/WatchlistHelper";
 import { ItemProps, ListProps } from "../../../model/watchlist/WatchListPageProps";
 import WatchListRepository from "../../../repository/watch-list/WatchListRepository";
@@ -14,7 +14,7 @@ class WatchlistService {
     const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
     const detailedShows = await Promise.all(shows.results.map(async (show) => TMDB.tvShow.getDetails(show.id ?? 0)));
 
-    return detailedShows.map(CardHelper.getShowSuggestionCard);
+    return detailedShows.map(getShowSuggestionCard);
   }
 
 }

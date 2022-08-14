@@ -5,10 +5,10 @@ import UserModel from "../../repository/model/user/UserModel";
 import WatchlistModel, { ListModel } from "../../repository/model/watch-list/WatchlistModel";
 import WatchListRepository from "../../repository/watch-list/WatchListRepository";
 import TMDB from "../../tmdb/TMDB";
-import CardHelper from "../card/CardHelper";
+import { getShowSuggestionCard } from "../card/CardHelper";
 
 class WatchlistHelper {
-    
+
     public static getByUser = async (user: UserModel): Promise<DetailWatchlistProps> => {
         const tvShowWatchlist = await WatchListRepository.shows.getByUser(user.userName);
         const movieWatchlist = await WatchListRepository.movies.getByUser(user.userName);
@@ -29,7 +29,7 @@ class WatchlistHelper {
         const items: TVShowResponse[] = await Promise.all(list.items.map(async (item) => TMDB.tvShow.getDetails(Number(item))));
         return {
             title: list.title,
-            items: items.map(CardHelper.getShowSuggestionCard),
+            items: items.map(getShowSuggestionCard),
         };
     }
 

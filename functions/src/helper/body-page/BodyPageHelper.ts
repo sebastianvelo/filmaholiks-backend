@@ -11,7 +11,7 @@ import { ExplorePageBodyProps } from "../../endpoints/explore/model/ExplorePageP
 import { SearchResultPageBodyProps } from "../../endpoints/search-result/model/SearchResultProps";
 import UserModel from "../../repository/model/user/UserModel";
 import TMDB from "../../tmdb/TMDB";
-import CardHelper from "../card/CardHelper";
+import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";
 import ChartHelper from "../chart/ChartHelper";
 import DetailHelper from "../detail/DetailHelper";
 import ResultsHelper from "../results/ResultsHelper";
@@ -64,7 +64,7 @@ class BodyPageHelper {
             };
         },
         getSearch: (movies: MoviesResponse, query: string): SearchResultPageBodyProps => ({
-            results: ResultsHelper.getResults(movies.results, CardHelper.getMovieCard, query)
+            results: ResultsHelper.getResults(movies.results, getMovieCard, query)
         })
     };
 
@@ -87,7 +87,7 @@ class BodyPageHelper {
             };
         },
         getSearch: (people: PeopleResponse, query: string): SearchResultPageBodyProps => ({
-            results: ResultsHelper.getResults(people.results, CardHelper.getPersonCard, query)
+            results: ResultsHelper.getResults(people.results, getPersonCard, query)
         })
     };
 
@@ -145,7 +145,7 @@ class BodyPageHelper {
             };
         },
         getSearch: (shows: TVShowsResponse, query: string): SearchResultPageBodyProps => ({
-            results: ResultsHelper.getResults(shows.results, CardHelper.getShowCard, query)
+            results: ResultsHelper.getResults(shows.results, getShowCard, query)
         })
     };
 
