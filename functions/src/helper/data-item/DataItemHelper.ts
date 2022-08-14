@@ -1,11 +1,6 @@
-class DataItemHelper {
-  public static getDataItem = (title: string, description?: string | null) =>
-    description && !description.includes("undefined") && !description.includes("null")
-      ? {
-        title,
-        description
-      }
-      : undefined;
-}
+import { DataItemProps } from "../../endpoints/detail/model/DetailPageProps";
 
-export default DataItemHelper;
+export const getDataItem = (title: string, description?: string | null): DataItemProps | undefined =>
+  description && !description.includes("undefined") && !description.includes("null") ?
+    { title, description } :
+    undefined;

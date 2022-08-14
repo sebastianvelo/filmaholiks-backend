@@ -5,61 +5,61 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailInfoProps } from "../../../endpoints/detail/model/DetailPageProps";
 import UserModel from "../../../repository/model/user/UserModel";
-import DataItemHelper from "../../data-item/DataItemHelper";
+import { getDataItem } from "../../data-item/DataItemHelper";
 import DateHelper from "../../date/DateHelper";
 
 class DetailInfoHelper {
 
     public static getUser = (user: UserModel): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Name`, user.name),
-            DataItemHelper.getDataItem(`E-Mail`, user.email),
-            DataItemHelper.getDataItem(`Filmaholik since`, DateHelper.toString(user.registered)),
+            getDataItem(`Name`, user.name),
+            getDataItem(`E-Mail`, user.email),
+            getDataItem(`Filmaholik since`, DateHelper.toString(user.registered)),
         ]
     });
 
     public static getMovie = (movie: MovieResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Rating`, `${movie.vote_average?.toFixed(2)} ⭐️`),
-            DataItemHelper.getDataItem(`Genres`, movie.genres?.map((genre) => genre.name).join(", ")),
-            DataItemHelper.getDataItem(`Duration`, `${movie.runtime}m`),
-            DataItemHelper.getDataItem(`Language`, movie.original_language),
-            DataItemHelper.getDataItem(`Release`, DateHelper.getFullMessage(movie.release_date)),
-            DataItemHelper.getDataItem(`Budget`, `$${movie.budget}`),
-            DataItemHelper.getDataItem(`Revenue`, `$${movie.revenue}`),
-            DataItemHelper.getDataItem(`Status`, movie.status),
+            getDataItem(`Rating`, `${movie.vote_average?.toFixed(2)} ⭐️`),
+            getDataItem(`Genres`, movie.genres?.map((genre) => genre.name).join(", ")),
+            getDataItem(`Duration`, `${movie.runtime}m`),
+            getDataItem(`Language`, movie.original_language),
+            getDataItem(`Release`, DateHelper.getFullMessage(movie.release_date)),
+            getDataItem(`Budget`, `$${movie.budget}`),
+            getDataItem(`Revenue`, `$${movie.revenue}`),
+            getDataItem(`Status`, movie.status),
         ]
     });
 
     public static getPerson = (person: PersonDetailsResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Birthday`, person.deathday ? DateHelper.getFullMessage(person.birthday, person.deathday) : DateHelper.getFullMessage(person.birthday)),
-            DataItemHelper.getDataItem(`Deathday`, person.deathday ? DateHelper.getFullMessage(person.deathday) : undefined),
-            DataItemHelper.getDataItem(`Place of birth`, person.place_of_birth),
-            DataItemHelper.getDataItem(`Known for`, person.known_for_department),
+            getDataItem(`Birthday`, person.deathday ? DateHelper.getFullMessage(person.birthday, person.deathday) : DateHelper.getFullMessage(person.birthday)),
+            getDataItem(`Deathday`, person.deathday ? DateHelper.getFullMessage(person.deathday) : undefined),
+            getDataItem(`Place of birth`, person.place_of_birth),
+            getDataItem(`Known for`, person.known_for_department),
         ]
     });
 
     public static getShow = (show: TVShowResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Rating`, `${show.vote_average?.toFixed(2)} ⭐️`),
-            DataItemHelper.getDataItem(`Genres`, show.genres?.map((genre) => genre.name).join(", ")),
-            DataItemHelper.getDataItem(`Language`, show.original_language),
-            DataItemHelper.getDataItem(`Release`, DateHelper.getFullMessage(show.first_air_date)),
-            DataItemHelper.getDataItem(`Status`, show.status),
+            getDataItem(`Rating`, `${show.vote_average?.toFixed(2)} ⭐️`),
+            getDataItem(`Genres`, show.genres?.map((genre) => genre.name).join(", ")),
+            getDataItem(`Language`, show.original_language),
+            getDataItem(`Release`, DateHelper.getFullMessage(show.first_air_date)),
+            getDataItem(`Status`, show.status),
         ]
     });
 
     public static getSeason = (season: SeasonWithEpisodesResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Air date`, DateHelper.getFullMessage(season.air_date)),
-            DataItemHelper.getDataItem(`Episodes`, `${season.episodes?.length}`),
+            getDataItem(`Air date`, DateHelper.getFullMessage(season.air_date)),
+            getDataItem(`Episodes`, `${season.episodes?.length}`),
         ]
     });
 
     public static getEpisode = (episode: EpisodeResponse): DetailInfoProps => ({
         data: [
-            DataItemHelper.getDataItem(`Air date`, DateHelper.getFullMessage(episode.air_date)),
+            getDataItem(`Air date`, DateHelper.getFullMessage(episode.air_date)),
         ]
     });
 }
