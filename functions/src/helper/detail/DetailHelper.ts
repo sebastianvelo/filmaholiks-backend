@@ -7,7 +7,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailProps } from "../../endpoints/detail/model/DetailPageProps";
 import UserModel from "../../repository/model/user/UserModel";
 import MediaHelper from "../media/MediaHelper";
-import DetailDescriptionHelper from "./description/DetailDescriptionHelper";
+import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper";
 import DetailHeaderHelper from "./header/DetailHeaderHelper";
 import DetailInfoHelper from "./info/DetailInfoHelper";
 

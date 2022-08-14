@@ -7,26 +7,20 @@ import { DataItemProps } from "../../../endpoints/detail/model/DetailPageProps";
 import UserModel from "../../../repository/model/user/UserModel";
 import { getDataItem } from "../../data-item/DataItemHelper";
 
-class DetailDescriptionHelper {
+export const getUser = (user: UserModel): DataItemProps | undefined =>
+    getDataItem(`About`, `${user.about}`);
 
-    public static getUser = (user: UserModel): DataItemProps | undefined =>
-        getDataItem(`About`, `${user.about}`);
+export const getMovie = (movie: MovieResponse): DataItemProps | undefined =>
+    getDataItem(`Description`, `${movie.overview}`);
 
-    public static getMovie = (movie: MovieResponse): DataItemProps | undefined =>
-        getDataItem(`Description`, `${movie.overview}`);
+export const getPerson = (person: PersonDetailsResponse): DataItemProps | undefined =>
+    getDataItem(`Biography`, person.biography);
 
-    public static getPerson = (person: PersonDetailsResponse): DataItemProps | undefined =>
-        getDataItem(`Biography`, person.biography);
+export const getShow = (show: TVShowResponse): DataItemProps | undefined =>
+    getDataItem(`Description`, `${show.overview}`);
 
-    public static getShow = (show: TVShowResponse): DataItemProps | undefined =>
-        getDataItem(`Description`, `${show.overview}`);
+export const getSeason = (season: SeasonWithEpisodesResponse): DataItemProps | undefined =>
+    getDataItem(`Description`, season.overview);
 
-
-    public static getSeason = (season: SeasonWithEpisodesResponse): DataItemProps | undefined =>
-        getDataItem(`Description`, season.overview);
-
-    public static getEpisode = (episode: EpisodeResponse): DataItemProps | undefined =>
-        getDataItem(`Description`, episode.overview);
-}
-
-export default DetailDescriptionHelper;
+export const getEpisode = (episode: EpisodeResponse): DataItemProps | undefined =>
+    getDataItem(`Description`, episode.overview);
