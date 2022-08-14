@@ -1,13 +1,13 @@
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { getShowSuggestionCard } from "../../../helper/card/CardHelper";
-import WatchlistHelper from "../../../helper/watch-list/WatchlistHelper";
+import { transformToWatchlistModel } from "../../../helper/watch-list/WatchlistHelper";
 import { ItemProps, ListProps } from "../../../model/watchlist/WatchListPageProps";
 import WatchListRepository from "../../../repository/watch-list/WatchListRepository";
 import TMDB from "../../../tmdb/TMDB";
 
 class WatchlistService {
   public static saveShowsWatchlist = (userName: string, lists: ListProps[]): void => {
-    WatchListRepository.shows.save(userName, WatchlistHelper.transformToWatchlistModel(lists));
+    WatchListRepository.shows.save(userName, transformToWatchlistModel(lists));
   }
 
   public static showsSuggestions = async (query: string): Promise<ItemProps[]> => {

@@ -16,13 +16,13 @@ import ChartHelper from "../chart/ChartHelper";
 import * as DetailHelper from "../detail/DetailHelper";
 import { getResults } from "../results/ResultsHelper";
 import SectionHelper from "../section/SectionHelper";
-import WatchlistHelper from "../watch-list/WatchlistHelper";
+import { getWatchlistByUser } from "../watch-list/WatchlistHelper";
 
 class BodyPageHelper {
 
     public static user = {
         getDetail: async (user: UserModel): Promise<DetailPageBodyProps> => {
-            const watchlists = await WatchlistHelper.getByUser(user);
+            const watchlists = await getWatchlistByUser(user);
             return {
                 detail: DetailHelper.getUser(user),
                 sections: SectionHelper.user.getDetail({}),
