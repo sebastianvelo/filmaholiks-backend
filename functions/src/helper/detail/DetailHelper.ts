@@ -8,7 +8,7 @@ import { DetailProps } from "../../endpoints/detail/model/DetailPageProps";
 import UserModel from "../../repository/model/user/UserModel";
 import MediaHelper from "../media/MediaHelper";
 import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper";
-import DetailHeaderHelper from "./header/DetailHeaderHelper";
+import * as DetailHeaderHelper from "./header/DetailHeaderHelper";
 import DetailInfoHelper from "./info/DetailInfoHelper";
 
 class DetailHelper {

@@ -6,31 +6,26 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailHeaderProps } from "../../../endpoints/detail/model/DetailPageProps";
 import UserModel from "../../../repository/model/user/UserModel";
 
-class DetailHeaderHelper {
-    
-    public static getUser = (user: UserModel): DetailHeaderProps => ({
-        title: `${user.userName}`
-    });
+export const getUser = (user: UserModel): DetailHeaderProps => ({
+    title: `${user.userName}`
+});
 
-    public static getMovie = (movie: MovieResponse): DetailHeaderProps => ({
-        title: `${movie.title}`
-    });
+export const getMovie = (movie: MovieResponse): DetailHeaderProps => ({
+    title: `${movie.title}`
+});
 
-    public static getPerson = (person: PersonDetailsResponse): DetailHeaderProps => ({
-        title: `${person.name}`,
-    });
+export const getPerson = (person: PersonDetailsResponse): DetailHeaderProps => ({
+    title: `${person.name}`,
+});
 
-    public static getShow = (shpw: TVShowResponse): DetailHeaderProps => ({
-        title: `${shpw.original_name}`,
-    });
+export const getShow = (shpw: TVShowResponse): DetailHeaderProps => ({
+    title: `${shpw.original_name}`,
+});
 
-    public static getSeason = (season: SeasonWithEpisodesResponse): DetailHeaderProps => ({
-        title: `${season.name}`,
-    });
+export const getSeason = (season: SeasonWithEpisodesResponse): DetailHeaderProps => ({
+    title: `${season.name}`,
+});
 
-    public static getEpisode = (episode: EpisodeResponse): DetailHeaderProps => ({
-        title: `${episode.name} (${episode.season_number}x${episode.episode_number})`,
-    })
-}
-
-export default DetailHeaderHelper;
+export const getEpisode = (episode: EpisodeResponse): DetailHeaderProps => ({
+    title: `${episode.name} (${episode.season_number}x${episode.episode_number})`,
+})
