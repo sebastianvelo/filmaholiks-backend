@@ -6,37 +6,27 @@ import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import TMDB from "../../tmdb/TMDB";
 import { DetailPageBodyProps } from "../../endpoints/detail/model/DetailPageProps";
 import { ExplorePageBodyProps } from "../../endpoints/explore/model/ExplorePageProps";
 import { SearchResultPageBodyProps } from "../../endpoints/search-result/model/SearchResultProps";
+import UserModel from "../../repository/model/user/UserModel";
+import TMDB from "../../tmdb/TMDB";
 import CardHelper from "../card/CardHelper";
 import ChartHelper from "../chart/ChartHelper";
 import DetailHelper from "../detail/DetailHelper";
 import ResultsHelper from "../results/ResultsHelper";
 import SectionHelper from "../section/SectionHelper";
-import User from "../../model/user/User";
-import WatchListRepository from "../../repository/watch-list/WatchListRepository";
+import WatchlistHelper from "../watch-list/WatchlistHelper";
 
 class BodyPageHelper {
 
     public static user = {
-        getDetail: async (user: User): Promise<DetailPageBodyProps> => {
-            const tvShowWatchlist = await WatchListRepository.getShowsWatchlistByUser(user.userName);
-            const movieWatchlist = await WatchListRepository.getMovieWatchlistByUser(user.userName);
+        getDetail: async (user: UserModel): Promise<DetailPageBodyProps> => {
+            const watchlists = await WatchlistHelper.getByUser(user);
             return {
                 detail: DetailHelper.getUser(user),
                 sections: SectionHelper.user.getDetail({}),
-                watchlists: [
-                    {
-                        title: "TV Shows",
-                        lists: tvShowWatchlist
-                    },
-                    {
-                        title: "Movies",
-                        lists: movieWatchlist
-                    },
-                ],
+                ...watchlists,
             };
         },
     };
@@ -48,6 +38,7 @@ class BodyPageHelper {
             const moreLikeThis = await TMDB.movie.getMovieRecommendations(id);
             const credits = await TMDB.movie.getCredits(id);
             const images = await TMDB.movie.getImages(id);
+
             return {
                 detail: DetailHelper.getMovie(movie, video),
                 sections: SectionHelper.movie.getDetail({ credits, moreLikeThis, images })
@@ -82,6 +73,7 @@ class BodyPageHelper {
             const id = Number(person.id);
             const shows = await TMDB.person.getTVShowCredits(id);
             const movies = await TMDB.person.getMovieCredits(id);
+
             return {
                 detail: DetailHelper.getPerson(person),
                 sections: SectionHelper.people.getDetail({ shows, movies })
@@ -89,6 +81,7 @@ class BodyPageHelper {
         },
         getExplore: async (query?: LanguageParams): Promise<ExplorePageBodyProps> => {
             const popular: PeopleResponse = await TMDB.person.getPopular();
+
             return {
                 sections: SectionHelper.people.getExplore({ popular })
             };
@@ -111,8 +104,12 @@ class BodyPageHelper {
                 const s = await TMDB.season.getDetails(show.id ?? 0, season);
                 return s.episodes as Episode[];
             };
-            const allEpisodes = await Promise.all(show.seasons?.filter(season => season.season_number).map(async (season) => seasonEpisodes(season.season_number)) ?? []);
-            const topRatedEpisodes = allEpisodes.flat().sort((episodeA, episodeB) => Number(episodeB.vote_average?.toFixed(1)) - Number(episodeA.vote_average?.toFixed(1))).slice(0, 30);
+            const allEpisodes = await Promise.all(
+                show.seasons?.filter(season => season.season_number).map(async (season) => seasonEpisodes(season.season_number)) ?? []
+            );
+            const getRating = (episode: Episode) => Number(episode.vote_average?.toFixed(1));
+            const sortByRating = (episodeA: Episode, episodeB: Episode) => getRating(episodeB) - getRating(episodeA);
+            const topRatedEpisodes = allEpisodes.flat().sort(sortByRating).slice(0, 30);
 
             return {
                 detail: DetailHelper.getShow(show, video),

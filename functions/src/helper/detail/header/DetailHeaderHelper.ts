@@ -4,11 +4,11 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailHeaderProps } from "../../../endpoints/detail/model/DetailPageProps";
-import User from "../../../model/user/User";
+import UserModel from "../../../repository/model/user/UserModel";
 
 class DetailHeaderHelper {
     
-    public static getUser = (user: User): DetailHeaderProps => ({
+    public static getUser = (user: UserModel): DetailHeaderProps => ({
         title: `${user.userName}`
     });
 

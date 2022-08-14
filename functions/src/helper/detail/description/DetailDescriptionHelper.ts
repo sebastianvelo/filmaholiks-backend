@@ -4,13 +4,13 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DataItemProps } from "../../../endpoints/detail/model/DetailPageProps";
-import User from "../../../model/user/User";
+import UserModel from "../../../repository/model/user/UserModel";
 import DataItemHelper from "../../data-item/DataItemHelper";
 
 class DetailDescriptionHelper {
 
-    public static getUser = (user: User): DataItemProps | undefined =>
-        DataItemHelper.getDataItem(`Name`, `${user.displayName}`);
+    public static getUser = (user: UserModel): DataItemProps | undefined =>
+        DataItemHelper.getDataItem(`About`, `${user.about}`);
 
     public static getMovie = (movie: MovieResponse): DataItemProps | undefined =>
         DataItemHelper.getDataItem(`Description`, `${movie.overview}`);

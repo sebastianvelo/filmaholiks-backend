@@ -1,6 +1,7 @@
 import { ImageProps } from "../image/ImageProps";
 
 export interface ItemProps {
+    id?: number;
     category?: string;
     title: string;
     info?: string;

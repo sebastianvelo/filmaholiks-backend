@@ -1,20 +1,12 @@
-import User from "../../model/user/User";
-
-const userMocked = {
-    id: "2412441",
-    userName: "sebastianvelo",
-    email: "bostjan@gmail.com",
-    photoURL: "https://avatars.dicebear.com/api/personas/sebastianvelo.svg",
-    displayName: "Sebastian Velo",
-    phoneNumber: "2345232352323",
-    createdAt: "2020-12-12T12:12:12.000Z",
-};
+import mock from "../../mock/users-mocked";
+import UserModel from "../model/user/UserModel";
 
 class UserRepository {
 
-    public static async getUser(id: string): Promise<User> {
-        return await userMocked;
+    public static getUser(id: string): UserModel | undefined {
+        return mock.find(user => user.userName === id);
     }
+
 }
 
 export default UserRepository;

@@ -4,15 +4,17 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailInfoProps } from "../../../endpoints/detail/model/DetailPageProps";
-import User from "../../../model/user/User";
+import UserModel from "../../../repository/model/user/UserModel";
 import DataItemHelper from "../../data-item/DataItemHelper";
 import DateHelper from "../../date/DateHelper";
 
 class DetailInfoHelper {
 
-    public static getUser = (user: User): DetailInfoProps => ({
+    public static getUser = (user: UserModel): DetailInfoProps => ({
         data: [
+            DataItemHelper.getDataItem(`Name`, user.name),
             DataItemHelper.getDataItem(`E-Mail`, user.email),
+            DataItemHelper.getDataItem(`Filmaholik since`, DateHelper.toString(user.registered)),
         ]
     });
 

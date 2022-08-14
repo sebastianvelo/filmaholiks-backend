@@ -47,11 +47,12 @@ interface DetailChartProps {
   }[];
 }
 
-interface DetailWatchlistProps {
-  watchlists?: {
-      title: string;
-      lists: WatchlistProps; 
-  }[];
+export interface WatchlistTabProps extends WatchlistProps {
+  title: string;
+}
+
+export interface DetailWatchlistProps {
+  watchlists?: WatchlistTabProps[];
 }
 
 export interface DetailPageBodyProps extends DetailSectionsProps, DetailChartProps, DetailWatchlistProps {

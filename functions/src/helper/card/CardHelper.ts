@@ -86,6 +86,7 @@ class CardHelper {
   });
 
   public static getShowSuggestionCard = (show: TVShowResponse): ItemProps => ({
+    id: show.id,
     title: show.original_name ?? "",
     poster: MediaHelper.getTMDBImage(show.poster_path, show.title),
     info: `${show.seasons?.filter(season => season.season_number).length} seasons`,

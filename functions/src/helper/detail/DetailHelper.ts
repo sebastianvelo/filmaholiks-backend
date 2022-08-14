@@ -5,7 +5,7 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailProps } from "../../endpoints/detail/model/DetailPageProps";
-import User from "../../model/user/User";
+import UserModel from "../../repository/model/user/UserModel";
 import MediaHelper from "../media/MediaHelper";
 import DetailDescriptionHelper from "./description/DetailDescriptionHelper";
 import DetailHeaderHelper from "./header/DetailHeaderHelper";
@@ -13,10 +13,10 @@ import DetailInfoHelper from "./info/DetailInfoHelper";
 
 class DetailHelper {
 
-  public static getUser = (user: User): DetailProps => ({
+  public static getUser = (user: UserModel): DetailProps => ({
     poster: {
-      src: user.photoURL,
-      alt: user.displayName,
+      src: user.avatar,
+      alt: user.name,
     },
     header: DetailHeaderHelper.getUser(user),
     description: DetailDescriptionHelper.getUser(user),

@@ -8,6 +8,9 @@ import UserRepository from "../../../repository/user/UserRepository";
 class DetailPageService {
   public static async getUser(id: string): Promise<DetailPageProps> {
     const user = await UserRepository.getUser(id);
+    if (!user) {
+      throw new Error("User not found");
+    }
     const body = await BodyPageHelper.user.getDetail(user);
     return {
       title: TitleHelper.user.getDetail(user.userName),
