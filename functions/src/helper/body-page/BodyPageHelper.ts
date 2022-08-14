@@ -13,8 +13,8 @@ import UserModel from "../../repository/model/user/UserModel";
 import TMDB from "../../tmdb/TMDB";
 import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";
 import ChartHelper from "../chart/ChartHelper";
-import DetailHelper from "../detail/DetailHelper";
-import ResultsHelper from "../results/ResultsHelper";
+import * as DetailHelper from "../detail/DetailHelper";
+import { getResults } from "../results/ResultsHelper";
 import SectionHelper from "../section/SectionHelper";
 import WatchlistHelper from "../watch-list/WatchlistHelper";
 
@@ -64,7 +64,7 @@ class BodyPageHelper {
             };
         },
         getSearch: (movies: MoviesResponse, query: string): SearchResultPageBodyProps => ({
-            results: ResultsHelper.getResults(movies.results, getMovieCard, query)
+            results: getResults(movies.results, getMovieCard, query)
         })
     };
 
@@ -87,7 +87,7 @@ class BodyPageHelper {
             };
         },
         getSearch: (people: PeopleResponse, query: string): SearchResultPageBodyProps => ({
-            results: ResultsHelper.getResults(people.results, getPersonCard, query)
+            results: getResults(people.results, getPersonCard, query)
         })
     };
 
@@ -145,7 +145,7 @@ class BodyPageHelper {
             };
         },
         getSearch: (shows: TVShowsResponse, query: string): SearchResultPageBodyProps => ({
-            results: ResultsHelper.getResults(shows.results, getShowCard, query)
+            results: getResults(shows.results, getShowCard, query)
         })
     };
 

@@ -11,70 +11,65 @@ import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper"
 import * as DetailHeaderHelper from "./header/DetailHeaderHelper";
 import * as DetailInfoHelper from "./info/DetailInfoHelper";
 
-class DetailHelper {
+export const getUser = (user: UserModel): DetailProps => ({
+  poster: {
+    src: user.avatar,
+    alt: user.name,
+  },
+  header: DetailHeaderHelper.getUser(user),
+  description: DetailDescriptionHelper.getUser(user),
+  info: DetailInfoHelper.getUser(user),
+});
 
-  public static getUser = (user: UserModel): DetailProps => ({
-    poster: {
-      src: user.avatar,
-      alt: user.name,
-    },
-    header: DetailHeaderHelper.getUser(user),
-    description: DetailDescriptionHelper.getUser(user),
-    info: DetailInfoHelper.getUser(user),
-  });
+export const getMovie = (movie: MovieResponse, videos: VideosResponse): DetailProps => ({
+  poster: MediaHelper.getTMDBImage(movie.poster_path, movie.title),
+  backdrop: MediaHelper.getTMDBImage(movie.backdrop_path, movie.title),
+  header: DetailHeaderHelper.getMovie(movie),
+  description: DetailDescriptionHelper.getMovie(movie),
+  info: DetailInfoHelper.getMovie(movie),
+  video: MediaHelper.getTrailer(videos),
+});
 
-  public static getMovie = (movie: MovieResponse, videos: VideosResponse): DetailProps => ({
-    poster: MediaHelper.getTMDBImage(movie.poster_path, movie.title),
-    backdrop: MediaHelper.getTMDBImage(movie.backdrop_path, movie.title),
-    header: DetailHeaderHelper.getMovie(movie),
-    description: DetailDescriptionHelper.getMovie(movie),
-    info: DetailInfoHelper.getMovie(movie),
-    video: MediaHelper.getTrailer(videos),
-  });
+export const getPerson = (person: PersonDetailsResponse): DetailProps => ({
+  poster: MediaHelper.getTMDBImage(person.profile_path, person.name),
+  backdrop: MediaHelper.getTMDBImage(person.profile_path, person.name),
+  header: DetailHeaderHelper.getPerson(person),
+  description: DetailDescriptionHelper.getPerson(person),
+  info: DetailInfoHelper.getPerson(person),
+});
 
-  public static getPerson = (person: PersonDetailsResponse): DetailProps => ({
-    poster: MediaHelper.getTMDBImage(person.profile_path, person.name),
-    backdrop: MediaHelper.getTMDBImage(person.profile_path, person.name),
-    header: DetailHeaderHelper.getPerson(person),
-    description: DetailDescriptionHelper.getPerson(person),
-    info: DetailInfoHelper.getPerson(person),
-  });
+export const getShow = (show: TVShowResponse, videos: VideosResponse): DetailProps => ({
+  poster: MediaHelper.getTMDBImage(show.poster_path, show.original_name),
+  backdrop: MediaHelper.getTMDBImage(show.backdrop_path, show.original_name),
+  header: DetailHeaderHelper.getShow(show),
+  description: DetailDescriptionHelper.getShow(show),
+  info: DetailInfoHelper.getShow(show),
+  video: MediaHelper.getTrailer(videos),
+  actions: {
+    watchlistButton: {
+      title: show.original_name,
+      info: `${show.seasons?.filter(season => season.season_number).length} seasons`,
+      path: `/show/${show.id}`,
+      poster: MediaHelper.getTMDBImage(show.poster_path, show.original_name),
+      category: show.genres?.map((genre) => genre.name).join(", "),
+    }
+  },
+});
 
-  public static getShow = (show: TVShowResponse, videos: VideosResponse): DetailProps => ({
-    poster: MediaHelper.getTMDBImage(show.poster_path, show.original_name),
-    backdrop: MediaHelper.getTMDBImage(show.backdrop_path, show.original_name),
-    header: DetailHeaderHelper.getShow(show),
-    description: DetailDescriptionHelper.getShow(show),
-    info: DetailInfoHelper.getShow(show),
-    video: MediaHelper.getTrailer(videos),
-    actions: {
-      watchlistButton: {
-        title: show.original_name,
-        info: `${show.seasons?.filter(season => season.season_number).length} seasons`,
-        path: `/show/${show.id}`,
-        poster: MediaHelper.getTMDBImage(show.poster_path, show.original_name),
-        category: show.genres?.map((genre) => genre.name).join(", "),
-      }
-    },
-  });
+export const getSeason = (season: SeasonWithEpisodesResponse, videos: VideosResponse): DetailProps => ({
+  poster: MediaHelper.getTMDBImage(season.poster_path, season.name),
+  backdrop: MediaHelper.getTMDBImage(season.poster_path, season.name),
+  header: DetailHeaderHelper.getSeason(season),
+  info: DetailInfoHelper.getSeason(season),
+  description: DetailDescriptionHelper.getSeason(season),
+  video: MediaHelper.getTrailer(videos),
+});
 
-  public static getSeason = (season: SeasonWithEpisodesResponse, videos: VideosResponse): DetailProps => ({
-    poster: MediaHelper.getTMDBImage(season.poster_path, season.name),
-    backdrop: MediaHelper.getTMDBImage(season.poster_path, season.name),
-    header: DetailHeaderHelper.getSeason(season),
-    info: DetailInfoHelper.getSeason(season),
-    description: DetailDescriptionHelper.getSeason(season),
-    video: MediaHelper.getTrailer(videos),
-  });
-
-  public static getEpisode = (episode: EpisodeResponse, videos: VideosResponse): DetailProps => ({
-    poster: MediaHelper.getTMDBImage(episode.still_path, episode.name),
-    backdrop: MediaHelper.getTMDBImage(episode.still_path, episode.name),
-    header: DetailHeaderHelper.getEpisode(episode),
-    info: DetailInfoHelper.getEpisode(episode),
-    description: DetailDescriptionHelper.getEpisode(episode),
-    video: MediaHelper.getTrailer(videos),
-  });
-}
-
-export default DetailHelper;
+export const getEpisode = (episode: EpisodeResponse, videos: VideosResponse): DetailProps => ({
+  poster: MediaHelper.getTMDBImage(episode.still_path, episode.name),
+  backdrop: MediaHelper.getTMDBImage(episode.still_path, episode.name),
+  header: DetailHeaderHelper.getEpisode(episode),
+  info: DetailInfoHelper.getEpisode(episode),
+  description: DetailDescriptionHelper.getEpisode(episode),
+  video: MediaHelper.getTrailer(videos),
+});
