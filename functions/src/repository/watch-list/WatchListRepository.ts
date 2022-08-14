@@ -1,8 +1,8 @@
 import WatchlistModel, { WatchlistModelEmpty } from "../model/watch-list/WatchlistModel";
 import { movieWatchlistMock, showWatchlistMock } from "../../mock/watchlist-mocked";
 
-let dbShowWatchlistMock = showWatchlistMock;
-let dbMovieWatchlistMock = movieWatchlistMock;
+const dbShowWatchlistMock = showWatchlistMock;
+const dbMovieWatchlistMock = movieWatchlistMock;
 
 class WatchListRepository {
 

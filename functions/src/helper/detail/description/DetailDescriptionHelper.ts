@@ -5,7 +5,7 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DataItemProps } from "../../../endpoints/detail/model/DetailPageProps";
 import UserModel from "../../../repository/model/user/UserModel";
-import { getDataItem } from "../../data-item/DataItemHelper";
+import getDataItem  from "../../data-item/DataItemHelper";
 
 export const getUser = (user: UserModel): DataItemProps | undefined =>
     getDataItem(`About`, `${user.about}`);

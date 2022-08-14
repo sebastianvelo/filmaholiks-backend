@@ -14,7 +14,7 @@ import TMDB from "../../tmdb/TMDB";
 import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";
 import ChartHelper from "../chart/ChartHelper";
 import * as DetailHelper from "../detail/DetailHelper";
-import { getResults } from "../results/ResultsHelper";
+import getResults from "../results/ResultsHelper";
 import SectionHelper from "../section/SectionHelper";
 import { getWatchlistByUser } from "../watch-list/WatchlistHelper";
 

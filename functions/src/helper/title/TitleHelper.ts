@@ -12,25 +12,25 @@ export const user = {
 
 export const movie = {
     getExplore: () => getTitle(`Movies`),
-    getDetail: (movie: MovieResponse) => getTitle(movie?.title),
+    getDetail: (movieModel: MovieResponse) => getTitle(movieModel?.title),
 };
 
 export const people = {
     getExplore: () => getTitle(`People`),
-    getDetail: (person: PersonDetailsResponse) => getTitle(person.name),
+    getDetail: (personModel: PersonDetailsResponse) => getTitle(personModel.name),
 };
 
 export const show = {
     getExplore: () => getTitle(`TV Shows`),
-    getDetail: (show: TVShowResponse) => getTitle(show.name),
+    getDetail: (showModel: TVShowResponse) => getTitle(showModel.name),
 };
 
 export const season = {
-    getDetail: (season: SeasonWithEpisodesResponse) => getTitle(season.name),
+    getDetail: (seasonModel: SeasonWithEpisodesResponse) => getTitle(seasonModel.name),
 };
 
 export const episode = {
-    getDetail: (episode: EpisodeResponse) => getTitle(episode.name),
+    getDetail: (episodeModel: EpisodeResponse) => getTitle(episodeModel.name),
 };
 
 export const search = {
