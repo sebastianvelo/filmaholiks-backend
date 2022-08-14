@@ -6,7 +6,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailInfoProps } from "../../../endpoints/detail/model/DetailPageProps";
 import UserModel from "../../../repository/model/user/UserModel";
 import { getDataItem } from "../../data-item/DataItemHelper";
-import DateHelper from "../../date/DateHelper";
+import * as DateHelper from "../../date/DateHelper";
 
 class DetailInfoHelper {
 
