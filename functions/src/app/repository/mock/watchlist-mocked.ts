@@ -1,4 +1,4 @@
-import WatchlistEntity from "../repository/entity/watch-list/WatchlistEntity";
+import WatchlistEntity from "../entity/watch-list/WatchlistEntity";
 
 export const showWatchlistMock: {
   userName: string,

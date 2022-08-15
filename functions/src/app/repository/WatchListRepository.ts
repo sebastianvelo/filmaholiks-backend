@@ -1,5 +1,5 @@
 import WatchlistEntity, { WatchlistEntityEmpty } from "./entity/watch-list/WatchlistEntity";
-import { movieWatchlistMock, showWatchlistMock } from "../mock/watchlist-mocked";
+import { movieWatchlistMock, showWatchlistMock } from "./mock/watchlist-mocked";
 
 const dbShowWatchlistMock = showWatchlistMock;
 const dbMovieWatchlistMock = movieWatchlistMock;

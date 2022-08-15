@@ -8,7 +8,7 @@ import WatchListRepository from "../../repository/WatchListRepository";
 import TMDB from "../../../tmdb/TMDB";
 import { getShowSuggestionCard } from "../card/CardHelper";
 
-const transformToListModel = async (list: ListEntity): Promise<ListModel> => {
+const transformListEntityToListModel = async (list: ListEntity): Promise<ListModel> => {
     const items: TVShowResponse[] = await Promise.all(list.items.map(async (item) => TMDB.tvShow.getDetails(Number(item))));
     return {
         title: list.title,
@@ -17,15 +17,15 @@ const transformToListModel = async (list: ListEntity): Promise<ListModel> => {
     };
 };
 
-const transformToWatchlistTabModel = async (title: string, model: WatchlistEntity): Promise<WatchlistTabModel> => {
-    const lists = await Promise.all(model.lists.map(transformToListModel));
+const transformEntityToTabModel = async (title: string, model: WatchlistEntity): Promise<WatchlistTabModel> => {
+    const lists = await Promise.all(model.lists.map(transformListEntityToListModel));
     return {
         title,
         lists,
     }
 };
 
-export const transformToWatchlistModel = (lists: ListModel[]): WatchlistEntity => ({
+export const transformModelToEntity = (lists: ListModel[]): WatchlistEntity => ({
     lists: lists.map(list => ({
         title: list.title,
         items: list.items.map(item => item.path.split("/")[2])
@@ -36,8 +36,8 @@ export const getWatchlistByUser = async (user: UserEntity): Promise<DetailWatchl
     const tvShowWatchlist = await WatchListRepository.shows.getByUser(user.userName);
     const movieWatchlist = await WatchListRepository.movies.getByUser(user.userName);
 
-    const tvShowWatchlistModel = await transformToWatchlistTabModel("TV Shows", tvShowWatchlist);
-    const movieWatchlistModel = await transformToWatchlistTabModel("Movies", movieWatchlist);
+    const tvShowWatchlistModel = await transformEntityToTabModel("TV Shows", tvShowWatchlist);
+    const movieWatchlistModel = await transformEntityToTabModel("Movies", movieWatchlist);
 
     return {
         watchlists: [

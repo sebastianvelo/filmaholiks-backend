@@ -1,6 +1,6 @@
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { getShowSuggestionCard } from "../helper/card/CardHelper";
-import { transformToWatchlistModel } from "../helper/watch-list/WatchlistHelper";
+import { transformModelToEntity } from "../helper/watch-list/WatchlistHelper";
 import WatchListRepository from "../repository/WatchListRepository";
 import TMDB from "../../tmdb/TMDB";
 import CardHorizontalModel from "../model/components/CardHorizontalModel";
@@ -8,7 +8,7 @@ import { ListModel } from "../model/components/WatchlistModel";
 
 class WatchlistService {
   public static saveShowsWatchlist = (userName: string, lists: ListModel[]): void => {
-    WatchListRepository.shows.save(userName, transformToWatchlistModel(lists));
+    WatchListRepository.shows.save(userName, transformModelToEntity(lists));
   }
 
   public static showsSuggestions = async (query: string): Promise<CardHorizontalModel[]> => {

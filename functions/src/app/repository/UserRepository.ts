@@ -1,4 +1,4 @@
-import mock from "../mock/users-mocked";
+import mock from "./mock/users-mocked";
 import UserEntity from "./entity/user/UserEntity";
 
 class UserRepository {

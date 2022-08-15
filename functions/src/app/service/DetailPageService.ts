@@ -2,8 +2,8 @@ import TMDB from "../../tmdb/TMDB";
 import BodyPageHelper from "../helper/body-page/BodyPageHelper";
 import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
-import UserRepository from "../repository/user/UserRepository";
 import DetailPageModel from "../model/pages/detail/DetailPageModel";
+import UserRepository from "../repository/UserRepository";
 
 class DetailPageService {
   public static async getUser(id: string): Promise<DetailPageModel> {
