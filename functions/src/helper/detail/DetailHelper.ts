@@ -48,10 +48,10 @@ export const getShow = (show: TVShowResponse, videos: VideosResponse): DetailPro
   actions: {
     watchlistButton: {
       title: show.original_name,
-      info: `${show.seasons?.filter(season => season.season_number).length} seasons`,
+      subtitle: `${show.seasons?.filter(season => season.season_number).length} seasons`,
       path: `/show/${show.id}`,
-      poster: MediaHelper.getTMDBImage(show.poster_path, show.original_name),
-      category: show.genres?.map((genre) => genre.name).join(", "),
+      image: MediaHelper.getTMDBImage(show.poster_path, show.original_name),
+      tags: show.genres?.map((genre) => genre.name).join(", "),
     }
   },
 });

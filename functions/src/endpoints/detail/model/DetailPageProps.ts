@@ -1,8 +1,9 @@
+import { CardHorizontalProps } from "../../../model/card-horizontal/CardHorizontalProps";
 import { CardsSectionProps } from "../../../model/cards/CardsSectionProps";
 import ChartProps from "../../../model/chart/ChartProps";
 import { ImageProps } from "../../../model/image/ImageProps";
 import { SearchBarProps } from "../../../model/searchbar/SearchBarProps";
-import { ItemProps, WatchlistProps } from "../../../model/watchlist/WatchListPageProps";
+import { WatchlistProps } from "../../../model/watchlist/WatchListPageProps";
 
 export interface DataItemProps {
   title: string;
@@ -23,7 +24,7 @@ interface DetailVideoProps {
   src?: string;
 }
 export interface DetailActionsProps {
-  watchlistButton?: ItemProps;
+  watchlistButton?: CardHorizontalProps;
 }
 
 export interface DetailProps {

@@ -1,17 +1,8 @@
-import { ImageProps } from "../image/ImageProps";
-
-export interface ItemProps {
-    id?: number;
-    category?: string;
-    title: string;
-    info?: string;
-    poster: ImageProps;
-    path: string;
-}
+import { CardHorizontalProps } from "../card-horizontal/CardHorizontalProps";
 
 export interface ListProps {
     title?: string;
-    items: ItemProps[];
+    items: CardHorizontalProps[];
 }
 
 export interface WatchlistProps {

@@ -1,9 +1,8 @@
 import { ImageProps } from "../image/ImageProps";
 
-export interface CardProps {
+export interface CardVerticalProps {
     title?: string;
     subtitle?: string;
     image?: ImageProps;
     path?: string;
-    loading?: boolean;
 }
