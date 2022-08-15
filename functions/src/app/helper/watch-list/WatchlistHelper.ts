@@ -2,9 +2,9 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { WatchlistTabModel } from "../../model/components/section/Section";
 import { ListModel } from "../../model/components/WatchlistModel";
 import { DetailWatchlistModel } from "../../model/pages/detail/DetailPageModel";
-import UserEntity from "../../../repository/model/user/UserEntity";
-import WatchlistEntity, { ListEntity } from "../../../repository/model/watch-list/WatchlistEntity";
-import WatchListRepository from "../../../repository/watch-list/WatchListRepository";
+import UserEntity from "../../repository/entity/user/UserEntity";
+import WatchlistEntity, { ListEntity } from "../../repository/entity/watch-list/WatchlistEntity";
+import WatchListRepository from "../../repository/WatchListRepository";
 import TMDB from "../../../tmdb/TMDB";
 import { getShowSuggestionCard } from "../card/CardHelper";
 

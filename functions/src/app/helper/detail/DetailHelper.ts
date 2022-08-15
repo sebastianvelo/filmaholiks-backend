@@ -5,7 +5,7 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailHeaderModel } from "../../model/pages/detail/header/DetailHeaderModel";
-import UserEntity from "../../../repository/model/user/UserEntity";
+import UserEntity from "../../repository/entity/user/UserEntity";
 import * as MediaHelper from "../media/MediaHelper";
 import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper";
 import * as DetailHeaderHelper from "./header/DetailHeaderHelper";

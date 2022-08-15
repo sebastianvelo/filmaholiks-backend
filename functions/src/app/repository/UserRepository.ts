@@ -1,5 +1,5 @@
-import mock from "../../mock/users-mocked";
-import UserEntity from "../model/user/UserEntity";
+import mock from "../mock/users-mocked";
+import UserEntity from "./entity/user/UserEntity";
 
 class UserRepository {
 

@@ -1,7 +1,7 @@
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { getShowSuggestionCard } from "../helper/card/CardHelper";
 import { transformToWatchlistModel } from "../helper/watch-list/WatchlistHelper";
-import WatchListRepository from "../../repository/watch-list/WatchListRepository";
+import WatchListRepository from "../repository/WatchListRepository";
 import TMDB from "../../tmdb/TMDB";
 import CardHorizontalModel from "../model/components/CardHorizontalModel";
 import { ListModel } from "../model/components/WatchlistModel";

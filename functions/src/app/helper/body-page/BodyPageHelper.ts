@@ -9,7 +9,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailPageBodyModel } from "../../model/pages/detail/DetailPageModel";
 import { ExplorePageBodyModel } from "../../model/pages/explore/ExplorePageModel";
 import { SearchResultPageBodyModel } from "../../model/pages/search-result/SearchResultPageModel";
-import UserEntity from "../../../repository/model/user/UserEntity";
+import UserEntity from "../../repository/entity/user/UserEntity";
 import TMDB from "../../../tmdb/TMDB";
 import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";
 import ChartHelper from "../chart/ChartHelper";
