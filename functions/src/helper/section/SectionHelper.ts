@@ -7,7 +7,7 @@ import {
 import { Character, Episode, GuestStar } from "tmdb-js/lib/api/model/episode/Episode";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import { CardsSectionProps } from "../../model/cards/CardsSectionProps";
+import { CardsSectionModel } from "../../endpoints/model/components/section/Section";
 import * as CardHelper from "../card/CardHelper";
 
 interface MovieDetail {
@@ -72,12 +72,12 @@ interface UserDetail {
 class SectionHelper {
 
   public static user = {
-    getDetail: (data: UserDetail): CardsSectionProps[] => [
+    getDetail: (data: UserDetail): CardsSectionModel[] => [
     ],
   };
 
   public static movie = {
-    getDetail: (data: MovieDetail): CardsSectionProps[] => [
+    getDetail: (data: MovieDetail): CardsSectionModel[] => [
       {
         id: "cast",
         title: "Cast",
@@ -94,7 +94,7 @@ class SectionHelper {
         cards: data.images?.posters?.map(CardHelper.getGalleryImage)
       },
     ],
-    getExplore: (data: MovieExplore): CardsSectionProps[] => [
+    getExplore: (data: MovieExplore): CardsSectionModel[] => [
       {
         id: "daily-trending",
         title: "Trending today",
@@ -129,7 +129,7 @@ class SectionHelper {
   };
 
   public static show = {
-    getExplore: (data: ShowExplore): CardsSectionProps[] => [
+    getExplore: (data: ShowExplore): CardsSectionModel[] => [
       {
         id: "daily-trending",
         title: "Trending today",
@@ -161,7 +161,7 @@ class SectionHelper {
         cards: data.onTheAir.results?.map(CardHelper.getShowCard)
       },
     ],
-    getDetail: (data: ShowDetail): CardsSectionProps[] => [
+    getDetail: (data: ShowDetail): CardsSectionModel[] => [
       {
         id: "cast",
         title: "Cast",
@@ -195,14 +195,14 @@ class SectionHelper {
   };
 
   public static people = {
-    getExplore: (data: PersonExplore): CardsSectionProps[] => [
+    getExplore: (data: PersonExplore): CardsSectionModel[] => [
       {
         id: "popular",
         title: "Popular",
         cards: data.popular.results?.map(CardHelper.getPersonCard)
       }
     ],
-    getDetail: (data: PersonDetail): CardsSectionProps[] => [
+    getDetail: (data: PersonDetail): CardsSectionModel[] => [
       {
         id: "tv-shows",
         title: "TV Shows",
@@ -217,7 +217,7 @@ class SectionHelper {
   }
 
   public static season = {
-    getDetail: (data: SeasonDetail): CardsSectionProps[] => [
+    getDetail: (data: SeasonDetail): CardsSectionModel[] => [
       {
         id: "cast",
         title: "Cast",
@@ -234,7 +234,7 @@ class SectionHelper {
   };
 
   public static episode = {
-    getDetail: (data: EpisodeDetail): CardsSectionProps[] => [
+    getDetail: (data: EpisodeDetail): CardsSectionModel[] => [
       {
         id: "cast",
         title: "Cast",

@@ -6,10 +6,10 @@ import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import { DetailPageBodyProps } from "../../endpoints/detail/model/DetailPageProps";
-import { ExplorePageBodyProps } from "../../endpoints/explore/model/ExplorePageProps";
-import { SearchResultPageBodyProps } from "../../endpoints/search-result/model/SearchResultProps";
-import UserModel from "../../repository/model/user/UserModel";
+import { DetailPageBodyModel } from "../../endpoints/model/pages/detail/DetailPageModel";
+import { ExplorePageBodyModel } from "../../endpoints/model/pages/explore/ExplorePageModel";
+import { SearchResultPageBodyModel } from "../../endpoints/model/pages/search-result/SearchResultPageModel";
+import UserEntity from "../../repository/model/user/UserEntity";
 import TMDB from "../../tmdb/TMDB";
 import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";
 import ChartHelper from "../chart/ChartHelper";
@@ -21,7 +21,7 @@ import { getWatchlistByUser } from "../watch-list/WatchlistHelper";
 class BodyPageHelper {
 
     public static user = {
-        getDetail: async (user: UserModel): Promise<DetailPageBodyProps> => {
+        getDetail: async (user: UserEntity): Promise<DetailPageBodyModel> => {
             const watchlists = await getWatchlistByUser(user);
             return {
                 detail: DetailHelper.getUser(user),
@@ -32,7 +32,7 @@ class BodyPageHelper {
     };
 
     public static movie = {
-        getDetail: async (movie: MovieResponse): Promise<DetailPageBodyProps> => {
+        getDetail: async (movie: MovieResponse): Promise<DetailPageBodyModel> => {
             const id = Number(movie.id);
             const video = await TMDB.movie.getVideos(id);
             const moreLikeThis = await TMDB.movie.getMovieRecommendations(id);
@@ -44,7 +44,7 @@ class BodyPageHelper {
                 sections: SectionHelper.movie.getDetail({ credits, moreLikeThis, images })
             };
         },
-        getExplore: async (query?: LanguageParams): Promise<ExplorePageBodyProps> => {
+        getExplore: async (query?: LanguageParams): Promise<ExplorePageBodyModel> => {
             const upcoming: MoviesResponse = await TMDB.movie.getUpcoming(query);
             const topRated: MoviesResponse = await TMDB.movie.getTopRatedMovies(query);
             const nowPlaying: MoviesResponse = await TMDB.movie.getNowPlaying(query);
@@ -63,13 +63,13 @@ class BodyPageHelper {
                 })
             };
         },
-        getSearch: (movies: MoviesResponse, query: string): SearchResultPageBodyProps => ({
+        getSearch: (movies: MoviesResponse, query: string): SearchResultPageBodyModel => ({
             results: getResults(movies.results, getMovieCard, query)
         })
     };
 
     public static people = {
-        getDetail: async (person: PersonDetailsResponse): Promise<DetailPageBodyProps> => {
+        getDetail: async (person: PersonDetailsResponse): Promise<DetailPageBodyModel> => {
             const id = Number(person.id);
             const shows = await TMDB.person.getTVShowCredits(id);
             const movies = await TMDB.person.getMovieCredits(id);
@@ -79,20 +79,20 @@ class BodyPageHelper {
                 sections: SectionHelper.people.getDetail({ shows, movies })
             };
         },
-        getExplore: async (query?: LanguageParams): Promise<ExplorePageBodyProps> => {
+        getExplore: async (query?: LanguageParams): Promise<ExplorePageBodyModel> => {
             const popular: PeopleResponse = await TMDB.person.getPopular();
 
             return {
                 sections: SectionHelper.people.getExplore({ popular })
             };
         },
-        getSearch: (people: PeopleResponse, query: string): SearchResultPageBodyProps => ({
+        getSearch: (people: PeopleResponse, query: string): SearchResultPageBodyModel => ({
             results: getResults(people.results, getPersonCard, query)
         })
     };
 
     public static show = {
-        getDetail: async (show: TVShowResponse): Promise<DetailPageBodyProps> => {
+        getDetail: async (show: TVShowResponse): Promise<DetailPageBodyModel> => {
             const id = Number(show.id);
             const video: VideosResponse = await TMDB.tvShow.getVideos(id);
             const moreLikeThis: TVShowsResponse = await TMDB.tvShow.getTVRecommendations(id);
@@ -125,7 +125,7 @@ class BodyPageHelper {
                 })
             };
         },
-        getExplore: async (query?: LanguageParams): Promise<ExplorePageBodyProps> => {
+        getExplore: async (query?: LanguageParams): Promise<ExplorePageBodyModel> => {
             const onTheAir: TVShowsResponse = await TMDB.tvShow.getOnTheAir(query);
             const topRated: TVShowsResponse = await TMDB.tvShow.getTopRatedShows(query);
             const popular: TVShowsResponse = await TMDB.tvShow.getPopularShows(query);
@@ -144,13 +144,13 @@ class BodyPageHelper {
                 })
             };
         },
-        getSearch: (shows: TVShowsResponse, query: string): SearchResultPageBodyProps => ({
+        getSearch: (shows: TVShowsResponse, query: string): SearchResultPageBodyModel => ({
             results: getResults(shows.results, getShowCard, query)
         })
     };
 
     public static season = {
-        getDetail: async (season: SeasonWithEpisodesResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyProps> => {
+        getDetail: async (season: SeasonWithEpisodesResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyModel> => {
             const videos: VideosResponse = await TMDB.season.getVideos(+showId, +seasonNumber);
             const credits: CreditsResponse = await TMDB.season.getCredits(+showId, +seasonNumber);
             return {
@@ -165,7 +165,7 @@ class BodyPageHelper {
     };
 
     public static episode = {
-        getDetail: async (episode: EpisodeResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyProps> => {
+        getDetail: async (episode: EpisodeResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyModel> => {
             const episodeNumber = Number(episode.episode_number);
             const videos: VideosResponse = await TMDB.episode.getVideos(+showId, +seasonNumber, episodeNumber);
             const credits: CreditsResponse = await TMDB.season.getCredits(+showId, +seasonNumber);

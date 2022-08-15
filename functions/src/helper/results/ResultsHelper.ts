@@ -1,6 +1,6 @@
-import { CardVerticalProps } from "../../model/card-vertical/CardVerticalProps";
+import CardVerticalModel from "../../endpoints/model/components/CardVerticalModel";
 
-const getResults = <T>(items: T[], mapper: (i: T) => CardVerticalProps, query: string) => ({
+const getResults = <T>(items: T[], mapper: (i: T) => CardVerticalModel, query: string) => ({
     id: "results",
     title: `Results of "${query}"`,
     cards: items.map(mapper),

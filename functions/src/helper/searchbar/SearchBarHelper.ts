@@ -1,30 +1,30 @@
-import { SearchBarProps } from "../../model/searchbar/SearchBarProps";
+import SearchBarModel from "../../endpoints/model/components/SearchBarModel";
 
 class SearchBarHelper {
 
   public static user = {
-    getSearchbar: (): SearchBarProps => ({
+    getSearchbar: (): SearchBarModel => ({
       placeholder: `Search users...`,
       path: `/user/search/:query`
     })
   }
 
   public static movie = {
-    getSearchbar: (): SearchBarProps => ({
+    getSearchbar: (): SearchBarModel => ({
       placeholder: `Search movies...`,
       path: `/movie/search/:query`
     })
   }
 
   public static show = {
-    getSearchbar: (): SearchBarProps => ({
+    getSearchbar: (): SearchBarModel => ({
       placeholder: `Search shows...`,
       path: `/show/search/:query`
     })
   }
 
   public static people = {
-    getSearchbar: (): SearchBarProps => ({
+    getSearchbar: (): SearchBarModel => ({
       placeholder: `Search people...`,
       path: `/person/search/:query`
     })

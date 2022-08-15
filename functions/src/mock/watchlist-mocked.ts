@@ -1,8 +1,8 @@
-import WatchlistModel from "../repository/model/watch-list/WatchlistModel";
+import WatchlistEntity from "../repository/model/watch-list/WatchlistEntity";
 
 export const showWatchlistMock: {
   userName: string,
-  watchlist: WatchlistModel,
+  watchlist: WatchlistEntity,
 }[] = [
     {
       userName: "sebastianvelo",
@@ -58,7 +58,7 @@ export const showWatchlistMock: {
 
 export const movieWatchlistMock: {
   userName: string,
-  watchlist: WatchlistModel,
+  watchlist: WatchlistEntity,
 }[] = [
     {
       userName: "sebastianvelo",

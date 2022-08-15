@@ -7,10 +7,10 @@ import BodyPageHelper from "../../../helper/body-page/BodyPageHelper";
 import SearchBarHelper from "../../../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../../../helper/title/TitleHelper";
 import TMDB from "../../../tmdb/TMDB";
-import { SearchResultProps } from "../model/SearchResultProps";
+import SearchResultPageModel from "../../model/pages/search-result/SearchResultPageModel";
 
 class SearchResultPageService {
-  public static async getMovieSearch(query: string): Promise<SearchResultProps> {
+  public static async getMovieSearch(query: string): Promise<SearchResultPageModel> {
     const movies: MoviesResponse = await TMDB.search.getMovies({ query });
     return {
       title: TitleHelper.search.getTitle(query),
@@ -19,7 +19,7 @@ class SearchResultPageService {
     };
   }
 
-  public static async getShowSearch(query: string): Promise<SearchResultProps> {
+  public static async getShowSearch(query: string): Promise<SearchResultPageModel> {
     const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
     return {
       title: TitleHelper.search.getTitle(query),
@@ -28,7 +28,7 @@ class SearchResultPageService {
     };
   }
 
-  public static async getPersonSearch(query: string): Promise<SearchResultProps> {
+  public static async getPersonSearch(query: string): Promise<SearchResultPageModel> {
     const people: PeopleResponse = await TMDB.search.getPeople({ query });
     return {
       title: TitleHelper.search.getTitle(query),

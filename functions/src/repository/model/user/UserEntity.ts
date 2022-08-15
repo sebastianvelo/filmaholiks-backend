@@ -1,4 +1,4 @@
-interface UserModel {
+interface UserEntity {
     _id: string;
     userName: string;
     email: string;
@@ -11,4 +11,4 @@ interface UserModel {
     index: number;
 }
 
-export default UserModel;
+export default UserEntity;

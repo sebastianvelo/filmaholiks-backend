@@ -3,12 +3,12 @@ import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import { DetailInfoProps } from "../../../endpoints/detail/model/DetailPageProps";
-import UserModel from "../../../repository/model/user/UserModel";
-import getDataItem  from "../../data-item/DataItemHelper";
+import { DetailContentInfoModel } from "../../../endpoints/model/pages/detail/header/DetailContentModel";
+import UserEntity from "../../../repository/model/user/UserEntity";
+import getDataItem from "../../data-item/DataItemHelper";
 import * as DateHelper from "../../date/DateHelper";
 
-export const getUser = (user: UserModel): DetailInfoProps => ({
+export const getUser = (user: UserEntity): DetailContentInfoModel => ({
     data: [
         getDataItem(`Name`, user.name),
         getDataItem(`E-Mail`, user.email),
@@ -16,7 +16,7 @@ export const getUser = (user: UserModel): DetailInfoProps => ({
     ]
 });
 
-export const getMovie = (movie: MovieResponse): DetailInfoProps => ({
+export const getMovie = (movie: MovieResponse): DetailContentInfoModel => ({
     data: [
         getDataItem(`Rating`, `${movie.vote_average?.toFixed(2)} ⭐️`),
         getDataItem(`Genres`, movie.genres?.map((genre) => genre.name).join(", ")),
@@ -29,7 +29,7 @@ export const getMovie = (movie: MovieResponse): DetailInfoProps => ({
     ]
 });
 
-export const getPerson = (person: PersonDetailsResponse): DetailInfoProps => ({
+export const getPerson = (person: PersonDetailsResponse): DetailContentInfoModel => ({
     data: [
         getDataItem(`Birthday`, person.deathday ? DateHelper.getFullMessage(person.birthday, person.deathday) : DateHelper.getFullMessage(person.birthday)),
         getDataItem(`Deathday`, person.deathday ? DateHelper.getFullMessage(person.deathday) : undefined),
@@ -38,7 +38,7 @@ export const getPerson = (person: PersonDetailsResponse): DetailInfoProps => ({
     ]
 });
 
-export const getShow = (show: TVShowResponse): DetailInfoProps => ({
+export const getShow = (show: TVShowResponse): DetailContentInfoModel => ({
     data: [
         getDataItem(`Rating`, `${show.vote_average?.toFixed(2)} ⭐️`),
         getDataItem(`Genres`, show.genres?.map((genre) => genre.name).join(", ")),
@@ -48,14 +48,14 @@ export const getShow = (show: TVShowResponse): DetailInfoProps => ({
     ]
 });
 
-export const getSeason = (season: SeasonWithEpisodesResponse): DetailInfoProps => ({
+export const getSeason = (season: SeasonWithEpisodesResponse): DetailContentInfoModel => ({
     data: [
         getDataItem(`Air date`, DateHelper.getFullMessage(season.air_date)),
         getDataItem(`Episodes`, `${season.episodes?.length}`),
     ]
 });
 
-export const getEpisode = (episode: EpisodeResponse): DetailInfoProps => ({
+export const getEpisode = (episode: EpisodeResponse): DetailContentInfoModel => ({
     data: [
         getDataItem(`Air date`, DateHelper.getFullMessage(episode.air_date)),
     ]

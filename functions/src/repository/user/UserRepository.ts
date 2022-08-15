@@ -1,9 +1,9 @@
 import mock from "../../mock/users-mocked";
-import UserModel from "../model/user/UserModel";
+import UserEntity from "../model/user/UserEntity";
 
 class UserRepository {
 
-    public static getUser(id: string): UserModel | undefined {
+    public static getUser(id: string): UserEntity | undefined {
         return mock.find(user => user.userName === id);
     }
 

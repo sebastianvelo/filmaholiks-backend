@@ -1,6 +1,6 @@
-import { DataItemProps } from "../../endpoints/detail/model/DetailPageProps";
+import { DataItemSectionModel } from "../../endpoints/model/components/section/Section";
 
-const getDataItem = (title: string, description?: string | null): DataItemProps | undefined =>
+const getDataItem = (title: string, description?: string | null): DataItemSectionModel | undefined =>
   description && !description.includes("undefined") && !description.includes("null") ?
     { title, description } :
     undefined;
