@@ -1,10 +1,12 @@
-const mock = [
+import UserEntity from "../entity/user/UserEntity";
+
+const mock: UserEntity[] = [
   {
-    "_id": "62f8f61bd574911094eac282",
+    "id": "62f8f61bd574911094eac282",
     "userName": "sebastianvelo",
     "index": 0,
     "guid": "4a658af4-5ec6-4e45-93e6-65f087f8ed7e",
-    "isActive": false,
+    "status": "ACTIVE",
     "avatar": "https://avatars.dicebear.com/api/personas/sebastianvelo.svg",
     "name": "Hawkins Morton",
     "email": "hawkinsmorton@accel.com",
@@ -12,11 +14,11 @@ const mock = [
     "registered": "2022-06-27"
   },
   {
-    "_id": "62f8f61b61281d5f9ea986b5",
+    "id": "62f8f61b61281d5f9ea986b5",
     "userName": "HeathBurns",
     "index": 1,
     "guid": "748d8b1b-9b1b-4c95-a318-11673b24bf8a",
-    "isActive": false,
+    "status": "ACTIVE",
     "avatar": "https://avatars.dicebear.com/api/personas/HeathBurns.svg",
     "name": "Krista Crosby",
     "email": "kristacrosby@accel.com",
@@ -24,11 +26,11 @@ const mock = [
     "registered": "2021-09-14"
   },
   {
-    "_id": "62f8f61b83c9a494a3c309f1",
+    "id": "62f8f61b83c9a494a3c309f1",
     "userName": "JeanieBradford",
     "index": 2,
     "guid": "d40eb301-3995-4445-879f-ec95ffacf896",
-    "isActive": false,
+    "status": "ACTIVE",
     "avatar": "https://avatars.dicebear.com/api/personas/JeanieBradford.svg",
     "name": "White Richards",
     "email": "whiterichards@accel.com",
@@ -36,11 +38,11 @@ const mock = [
     "registered": "2020-06-18"
   },
   {
-    "_id": "62f8f61b7a49da5062a3d775",
+    "id": "62f8f61b7a49da5062a3d775",
     "userName": "AlvarezHarvey",
     "index": 3,
     "guid": "4169ab01-97e1-41c2-b365-d13957fcc73e",
-    "isActive": true,
+    "status": "ACTIVE",
     "avatar": "https://avatars.dicebear.com/api/personas/AlvarezHarvey.svg",
     "name": "Cruz Faulkner",
     "email": "cruzfaulkner@accel.com",
@@ -48,11 +50,11 @@ const mock = [
     "registered": "2015-07-14"
   },
   {
-    "_id": "62f8f61bcc19d4924d3f0c15",
+    "id": "62f8f61bcc19d4924d3f0c15",
     "userName": "LucilleFrazier",
     "index": 4,
     "guid": "d9274e1b-b1cf-446b-aff0-e6e0a94c28da",
-    "isActive": true,
+    "status": "ACTIVE",
     "avatar": "https://avatars.dicebear.com/api/personas/LucilleFrazier.svg",
     "name": "Gross Leblanc",
     "email": "grossleblanc@accel.com",

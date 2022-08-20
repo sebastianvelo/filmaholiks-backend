@@ -1,33 +1,63 @@
-import WatchlistEntity, { WatchlistEntityEmpty } from "./entity/watch-list/WatchlistEntity";
-import { movieWatchlistMock, showWatchlistMock } from "./mock/watchlist-mocked";
+import MediaType from "../common/MediaType";
+import WatchlistsDatabase from "../database/WatchlistsDatabase";
+import WatchlistEntity from "./entity/watch-list/WatchlistEntity";
 
-const dbShowWatchlistMock = showWatchlistMock;
-const dbMovieWatchlistMock = movieWatchlistMock;
+type ItemId = string | number;
 
-class WatchListRepository {
+class WatchlistMediaRepository {
+    private database: WatchlistsDatabase;
 
-    public static shows = {
-        getByUser: (userName: string): WatchlistEntity =>
-            dbShowWatchlistMock.find((item) => item.userName === userName)?.watchlist ?? WatchlistEntityEmpty,
-        save: (userName: string, lists: WatchlistEntity): void => {
-            const idx = dbShowWatchlistMock.findIndex((item) => item.userName === userName);
-            if (idx !== -1) {
-                dbShowWatchlistMock[idx].watchlist = lists;
-            }
+    constructor(mediaType: MediaType) {
+        this.database = new WatchlistsDatabase(mediaType);
+    }
+
+    public list = {
+        getByUser: async (userId: string): Promise<WatchlistEntity> => {
+            const lists = await this.database.list.getAll(userId);
+            return { lists };
+        },
+        saveAll: async (userId: string, lists: WatchlistEntity): Promise<WatchlistEntity> => {
+            this.database.list.addAll(userId, lists.lists);
+            return this.list.getByUser(userId);
+        },
+        add: async (userId: string, listTitle: string): Promise<WatchlistEntity> => {
+            const watchlist = await this.list.getByUser(userId);
+            await this.database.list.add(userId, { title: listTitle, items: [], order: watchlist.lists.length });
+            return this.list.getByUser(userId);
+        },
+        delete: async (userId: string, listIdx: number): Promise<WatchlistEntity> => {
+            await this.database.list.deleteByOrder(userId, listIdx);
+            return this.list.getByUser(userId);
+        },
+        swap: async (userId: string, listIdx1: number, listIdx2: number): Promise<WatchlistEntity> => {
+            await this.database.list.swap(userId, listIdx1, listIdx2);
+            return this.list.getByUser(userId);
         },
     };
 
-    public static movies = {
-        getByUser: (userName: string): WatchlistEntity =>
-            dbMovieWatchlistMock.find((item) => item.userName === userName)?.watchlist ?? WatchlistEntityEmpty,
-        save: (userName: string, lists: WatchlistEntity): void => {
-            const idx = dbMovieWatchlistMock.findIndex((item) => item.userName === userName);
-            if (idx !== -1) {
-                dbMovieWatchlistMock[idx].watchlist = lists;
-            }
+    public item = {
+        save: async (userId: string, listIdx: number, item: ItemId): Promise<WatchlistEntity> => {
+            await this.database.item.add(userId, listIdx, item);
+            return this.list.getByUser(userId);
+        },
+        swap: async (userId: string, listIdx: number, itemIdx1: number, itemIdx2: number): Promise<WatchlistEntity> => {
+            await this.database.item.swap(userId, listIdx, itemIdx1, itemIdx2);
+            return this.list.getByUser(userId);
+        },
+        move: async (userId: string, sourceListIdx: number, targetListIdx: number, itemIdx: number): Promise<WatchlistEntity> => {
+            await this.database.item.move(userId, sourceListIdx, targetListIdx, itemIdx);
+            return this.list.getByUser(userId);
+        },
+        delete: async (userId: string, listIdx: number, itemId: string): Promise<WatchlistEntity> => {
+            await this.database.item.delete(userId, listIdx, itemId);
+            return this.list.getByUser(userId);
         }
-    }
-
+    };
 }
 
-export default WatchListRepository;
+const WatchlistRepository = {
+    show: new WatchlistMediaRepository("show"),
+    movie: new WatchlistMediaRepository("movie"),
+};
+
+export default WatchlistRepository;

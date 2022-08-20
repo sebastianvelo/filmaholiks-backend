@@ -1,11 +1,11 @@
 interface UserEntity {
-    _id: string;
+    id: string;
     userName: string;
     email: string;
     avatar: string;
     name: string;
     registered: string;
-    isActive: boolean;
+    status: "ACTIVE" | "INACTIVE" | "PENDING" | "BLOCKED" | "DELETED" | "BANNED";
     about: string;
     guid: string;
     index: number;

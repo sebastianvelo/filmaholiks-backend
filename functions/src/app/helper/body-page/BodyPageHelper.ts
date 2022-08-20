@@ -6,23 +6,23 @@ import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
+import TMDB from "../../../tmdb/TMDB";
 import { DetailPageBodyModel } from "../../model/pages/detail/DetailPageModel";
 import { ExplorePageBodyModel } from "../../model/pages/explore/ExplorePageModel";
 import { SearchResultPageBodyModel } from "../../model/pages/search-result/SearchResultPageModel";
 import UserEntity from "../../repository/entity/user/UserEntity";
-import TMDB from "../../../tmdb/TMDB";
+import WatchlistService from "../../service/WatchlistService";
 import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";
 import ChartHelper from "../chart/ChartHelper";
 import * as DetailHelper from "../detail/DetailHelper";
 import getResults from "../results/ResultsHelper";
 import SectionHelper from "../section/SectionHelper";
-import { getWatchlistByUser } from "../watch-list/WatchlistHelper";
 
 class BodyPageHelper {
 
     public static user = {
         getDetail: async (user: UserEntity): Promise<DetailPageBodyModel> => {
-            const watchlists = await getWatchlistByUser(user);
+            const watchlists = await WatchlistService.getViewByUser(user.userName);
             return {
                 detail: DetailHelper.getUser(user),
                 sections: SectionHelper.user.getDetail({}),

@@ -1,6 +1,6 @@
 import { CreditPerson } from "tmdb-js/lib/api/model/credit/Credit";
 import { Character, Episode } from "tmdb-js/lib/api/model/episode/Episode";
-import { TVShow } from "tmdb-js/lib/api/model/film/Film";
+import { Movie, TVShow } from "tmdb-js/lib/api/model/film/Film";
 import { Image } from "tmdb-js/lib/api/model/image/Image";
 import { PersonDetail } from "tmdb-js/lib/api/model/person/Person";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
@@ -84,10 +84,20 @@ export const getGalleryImage = (image: Image): CardVerticalModel => ({
   image: getTMDBImage(image.file_path, image.id)
 });
 
-export const getShowSuggestionCard = (show: TVShowResponse): CardHorizontalModel => ({
+export const getShowHorizontalCard = (show: TVShowResponse): CardHorizontalModel => ({
+  id: show.id ?? -1,
   title: show.original_name ?? "",
   image: getTMDBImage(show.poster_path, show.title),
   subtitle: `${show.seasons?.filter(season => season.season_number).length} seasons`,
   tags: show.genres?.map((genre) => genre.name).join(", "),
   path: `/show/${show.id}`,
+});
+
+
+export const getMovieHorizontalCard = (movie: Movie): CardHorizontalModel => ({
+  id: movie.id ?? -1,
+  title: movie.title ?? "",
+  image: getTMDBImage(movie.poster_path, movie.title),
+  subtitle: `${movie.rating}/10`,
+  path: `/movie/${movie.id}`,
 });

@@ -47,6 +47,7 @@ export const getShow = (show: TVShowResponse, videos: VideosResponse): DetailHea
   video: MediaHelper.getTrailer(videos),
   actions: {
     watchlistButton: {
+      id: show.id ?? "",
       title: show.original_name,
       subtitle: `${show.seasons?.filter(season => season.season_number).length} seasons`,
       path: `/show/${show.id}`,
