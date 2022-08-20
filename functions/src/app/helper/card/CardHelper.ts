@@ -6,6 +6,7 @@ import { PersonDetail } from "tmdb-js/lib/api/model/person/Person";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
+import ActionableCardModel from "../../model/components/ActionableCardModel";
 import CardHorizontalModel from "../../model/components/CardHorizontalModel";
 import CardVerticalModel from "../../model/components/CardVerticalModel";
 import { getTMDBImage } from "../media/MediaHelper";
@@ -84,7 +85,7 @@ export const getGalleryImage = (image: Image): CardVerticalModel => ({
   image: getTMDBImage(image.file_path, image.id)
 });
 
-export const getShowHorizontalCard = (show: TVShowResponse): CardHorizontalModel => ({
+export const getShowCardHorizontal = (show: TVShowResponse): CardHorizontalModel => ({
   id: show.id ?? -1,
   title: show.original_name ?? "",
   image: getTMDBImage(show.poster_path, show.title),
@@ -94,10 +95,22 @@ export const getShowHorizontalCard = (show: TVShowResponse): CardHorizontalModel
 });
 
 
-export const getMovieHorizontalCard = (movie: Movie): CardHorizontalModel => ({
+export const getMoviCardHorizontal = (movie: Movie): CardHorizontalModel => ({
   id: movie.id ?? -1,
   title: movie.title ?? "",
   image: getTMDBImage(movie.poster_path, movie.title),
-  subtitle: `${movie.rating}/10`,
+  subtitle: `${movie.vote_average}/10 ⭐️`,
   path: `/movie/${movie.id}`,
+});
+
+
+export const getShowActionableCardHorizontal = (show: TVShowResponse, del: boolean): ActionableCardModel => ({
+  item: getShowCardHorizontal(show),
+  delete: del
+});
+
+
+export const getMovieActionableCardHorizontal = (movie: Movie, del: boolean): ActionableCardModel => ({
+  item: getMoviCardHorizontal(movie),
+  delete: del,
 });

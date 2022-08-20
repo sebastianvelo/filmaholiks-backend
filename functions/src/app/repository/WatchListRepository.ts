@@ -36,6 +36,10 @@ class WatchlistMediaRepository {
     };
 
     public item = {
+        exists: async (userId: string, itemId: ItemId): Promise<boolean> => {
+            const lists = await this.database.list.getAll(userId);
+            return lists.some(list => list.items.includes(String(itemId)));
+        },
         save: async (userId: string, listIdx: number, item: ItemId): Promise<WatchlistEntity> => {
             await this.database.item.add(userId, listIdx, item);
             return this.list.getByUser(userId);
@@ -56,8 +60,8 @@ class WatchlistMediaRepository {
 }
 
 const WatchlistRepository = {
-    show: new WatchlistMediaRepository("show"),
-    movie: new WatchlistMediaRepository("movie"),
+    show: new WatchlistMediaRepository(MediaType.SHOW),
+    movie: new WatchlistMediaRepository(MediaType.MOVIE),
 };
 
 export default WatchlistRepository;

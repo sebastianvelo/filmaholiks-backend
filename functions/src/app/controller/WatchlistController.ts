@@ -10,8 +10,8 @@ class WatchlistController extends Controller {
 
   setEndpoints() {
 
-    this.setEndpoint("/search/:mediaType/:query").get((req: Request, res: Response) => {
-      WatchlistService.presenter.search(req.params.mediaType as MediaType, req.params.query)
+    this.setEndpoint("/user/:userName/:mediaType/search/:query").get((req: Request, res: Response) => {
+      WatchlistService.presenter.search(req.params.mediaType as MediaType, req.params.userName, req.params.query)
         .then((resp) => {
           res.send(resp);
         });

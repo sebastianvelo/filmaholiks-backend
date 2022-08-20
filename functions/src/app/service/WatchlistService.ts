@@ -1,16 +1,16 @@
 import { MoviesResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import TMDB from "../../tmdb/TMDB";
 import MediaType from "../common/MediaType";
-import { getMovieHorizontalCard, getShowHorizontalCard } from "../helper/card/CardHelper";
+import { getMovieActionableCardHorizontal, getShowActionableCardHorizontal } from "../helper/card/CardHelper";
 import { getWatchlistTabModel } from "../helper/watch-list/WatchlistHelper";
-import CardHorizontalModel from "../model/components/CardHorizontalModel";
+import ActionableCardModel from "../model/components/ActionableCardModel";
 import { WatchlistTabModel } from "../model/components/section/Section";
 import { DetailWatchlistModel } from "../model/pages/detail/DetailPageModel";
 import { ListEntity } from "../repository/entity/watch-list/WatchlistEntity";
 import WatchlistRepository from "../repository/WatchlistRepository";
 
 interface IWatchlistService {
-  search: (query: string) => Promise<CardHorizontalModel[]>;
+  search: (userName: string, query: string) => Promise<ActionableCardModel[]>;
   getViewByUser: (userName: string) => Promise<WatchlistTabModel>;
   list: {
     saveAll: (userName: string, lists: ListEntity[]) => void;
@@ -35,14 +35,14 @@ class WatchlistService {
     return {
       watchlists: [
         tvShowWatchlistModel,
-        // movieWatchlistModel
+        movieWatchlistModel
       ],
     };
   };
 
   public static presenter = {
-    search: async (media: MediaType, query: string): Promise<CardHorizontalModel[]> =>
-      WatchlistService[media].search(query),
+    search: async (media: MediaType, userName: string, query: string): Promise<ActionableCardModel[]> =>
+      WatchlistService[media].search(userName, query),
     getViewByUser: async (media: MediaType, userName: string): Promise<WatchlistTabModel> =>
       WatchlistService[media].getViewByUser(userName),
     list: {
@@ -76,15 +76,18 @@ class WatchlistService {
   }
 
   public static show: IWatchlistService = {
-    search: async (query: string): Promise<CardHorizontalModel[]> => {
+    search: async (userName: string, query: string): Promise<ActionableCardModel[]> => {
       const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
       const detailedShows = await Promise.all(shows.results.map(async (show) => TMDB.tvShow.getDetails(show.id ?? 0)));
-      return detailedShows.map(getShowHorizontalCard);
+      return Promise.all(detailedShows.map(async (show) => {
+        const exists = await WatchlistRepository.show.item.exists(userName, String(show.id));
+        return getShowActionableCardHorizontal(show, exists);
+      }));
     },
     getViewByUser: async (userName: string): Promise<WatchlistTabModel> => {
 
       const tvShowWatchlist = await WatchlistRepository.show.list.getByUser(userName);
-      return getWatchlistTabModel("TV Shows", tvShowWatchlist);
+      return getWatchlistTabModel("TV Shows", tvShowWatchlist, MediaType.SHOW);
     },
     list: {
       saveAll: (userName: string, lists: ListEntity[]): void => {
@@ -117,15 +120,17 @@ class WatchlistService {
   }
 
   public static movie: IWatchlistService = {
-    search: async (query: string): Promise<CardHorizontalModel[]> => {
+    search: async (userName: string, query: string): Promise<ActionableCardModel[]> => {
       const movies: MoviesResponse = await TMDB.search.getMovies({ query });
       const detailedMovies = await Promise.all(movies.results.map(async (movie) => TMDB.movie.getDetails(movie.id ?? 0)));
-
-      return detailedMovies.map(getMovieHorizontalCard);
+      return Promise.all(detailedMovies.map(async (movie) => {
+        const exists = await WatchlistRepository.movie.item.exists(userName, String(movie.id));
+        return getMovieActionableCardHorizontal(movie, exists);
+      }));
     },
     getViewByUser: async (userName: string): Promise<WatchlistTabModel> => {
       const movieWatchlist = await WatchlistRepository.movie.list.getByUser(userName);
-      return getWatchlistTabModel("Movies", movieWatchlist);
+      return getWatchlistTabModel("Movies", movieWatchlist, MediaType.MOVIE);
     },
     list: {
       saveAll: (userName: string, lists: ListEntity[]): void => {

@@ -1,3 +1,4 @@
+import MediaType from "../../common/MediaType";
 import CardHorizontalModel from "./CardHorizontalModel";
 
 export interface ListModel {
@@ -8,5 +9,6 @@ export interface ListModel {
 }
 
 export interface WatchlistModel {
+    mediaType: MediaType;
     lists: ListModel[];
 }
