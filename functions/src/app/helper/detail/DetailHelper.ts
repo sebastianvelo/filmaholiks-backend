@@ -4,6 +4,7 @@ import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
+import MediaType from "../../common/MediaType";
 import { DetailHeaderModel } from "../../model/pages/detail/header/DetailHeaderModel";
 import UserEntity from "../../repository/entity/user/UserEntity";
 import * as MediaHelper from "../media/MediaHelper";
@@ -53,6 +54,7 @@ export const getShow = (show: TVShowResponse, videos: VideosResponse): DetailHea
       path: `/show/${show.id}`,
       image: MediaHelper.getTMDBImage(show.poster_path, show.original_name),
       tags: show.genres?.map((genre) => genre.name).join(", "),
+      mediaType: MediaType.SHOW,
     }
   },
 });

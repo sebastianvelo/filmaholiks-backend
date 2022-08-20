@@ -29,6 +29,6 @@ class UsersDatabase {
     public add = async (data: UserEntity): Promise<void> => {
         await addDoc(UsersCollection, data);
     };
-};
+}
 
 export default new UsersDatabase();
