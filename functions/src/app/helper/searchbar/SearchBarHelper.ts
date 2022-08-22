@@ -1,4 +1,4 @@
-import SearchBarModel from "../../model/components/SearchBarModel";
+import SearchBarModel from "../../../shared/model/components/SearchBarModel";
 
 class SearchBarHelper {
 

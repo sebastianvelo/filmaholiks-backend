@@ -1,5 +1,5 @@
 import { getDocs, doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
-import MediaType from "../common/MediaType";
+import MediaType from "../../shared/types/MediaType";
 import { ListEntity } from "../repository/entity/watch-list/WatchlistEntity";
 import CollectionName from "./common/CollectionName";
 import createCollection from "./common/FirestoreHelper";

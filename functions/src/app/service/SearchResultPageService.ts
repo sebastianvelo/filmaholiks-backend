@@ -7,7 +7,7 @@ import BodyPageHelper from "../helper/body-page/BodyPageHelper";
 import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
 import TMDB from "../../tmdb/TMDB";
-import SearchResultPageModel from "../model/pages/search-result/SearchResultPageModel";
+import SearchResultPageModel from "../../shared/model/pages/search-result/SearchResultPageModel";
 
 class SearchResultPageService {
   public static async getMovieSearch(query: string): Promise<SearchResultPageModel> {

@@ -2,7 +2,7 @@ import TMDB from "../../tmdb/TMDB";
 import BodyPageHelper from "../helper/body-page/BodyPageHelper";
 import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
-import DetailPageModel from "../model/pages/detail/DetailPageModel";
+import DetailPageModel from "../../shared/model/pages/detail/DetailPageModel";
 import UserRepository from "../repository/UserRepository";
 
 class DetailPageService {

@@ -3,7 +3,7 @@ import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import { DetailContentInfoModel } from "../../../model/pages/detail/header/DetailContentModel";
+import { DetailContentInfoModel } from "../../../../shared/model/pages/detail/header/DetailContentModel";
 import UserEntity from "../../../repository/entity/user/UserEntity";
 import getDataItem from "../../data-item/DataItemHelper";
 import * as DateHelper from "../../date/DateHelper";

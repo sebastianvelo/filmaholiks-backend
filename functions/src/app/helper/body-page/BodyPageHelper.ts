@@ -7,9 +7,9 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import TMDB from "../../../tmdb/TMDB";
-import { DetailPageBodyModel } from "../../model/pages/detail/DetailPageModel";
-import { ExplorePageBodyModel } from "../../model/pages/explore/ExplorePageModel";
-import { SearchResultPageBodyModel } from "../../model/pages/search-result/SearchResultPageModel";
+import { DetailPageBodyModel } from "../../../shared/model/pages/detail/DetailPageModel";
+import { ExplorePageBodyModel } from "../../../shared/model/pages/explore/ExplorePageModel";
+import { SearchResultPageBodyModel } from "../../../shared/model/pages/search-result/SearchResultPageModel";
 import UserEntity from "../../repository/entity/user/UserEntity";
 import WatchlistService from "../../service/WatchlistService";
 import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";

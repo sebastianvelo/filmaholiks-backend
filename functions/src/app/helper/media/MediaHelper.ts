@@ -1,5 +1,5 @@
 import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import ImageModel from "../../model/atom/ImageModel";
+import ImageModel from "../../../shared/model/atom/ImageModel";
 
 const getYoutubeLink = (id?: string) =>
   `https://www.youtube.com/embed/${id}`;

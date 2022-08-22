@@ -1,4 +1,4 @@
-import MediaType from "../../../../common/MediaType";
+import MediaType from "../../../../types/MediaType";
 import ImageModel from "../../../atom/ImageModel";
 import CardHorizontalModel from "../../../components/CardHorizontalModel";
 import { DetailContentModel } from "./DetailContentModel";

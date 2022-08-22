@@ -1,4 +1,4 @@
-import MediaType from "../common/MediaType";
+import MediaType from "../../shared/types/MediaType";
 import WatchlistsDatabase from "../database/WatchlistsDatabase";
 import WatchlistEntity from "./entity/watch-list/WatchlistEntity";
 

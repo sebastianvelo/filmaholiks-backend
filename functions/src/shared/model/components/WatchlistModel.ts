@@ -1,4 +1,4 @@
-import MediaType from "../../common/MediaType";
+import MediaType from "../../types/MediaType";
 import CardHorizontalModel from "./CardHorizontalModel";
 
 export interface ListModel {

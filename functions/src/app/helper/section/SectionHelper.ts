@@ -7,7 +7,7 @@ import {
 import { Character, Episode, GuestStar } from "tmdb-js/lib/api/model/episode/Episode";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import { CardsSectionModel } from "../../model/components/section/Section";
+import { CardsSectionModel } from "../../../shared/model/components/section/Section";
 import * as CardHelper from "../card/CardHelper";
 
 interface MovieDetail {

@@ -1,11 +1,11 @@
 import { MoviesResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import TMDB from "../../tmdb/TMDB";
-import MediaType from "../common/MediaType";
+import MediaType from "../../shared/types/MediaType";
 import { getMovieActionableCardHorizontal, getShowActionableCardHorizontal } from "../helper/card/CardHelper";
 import { getWatchlistTabModel } from "../helper/watch-list/WatchlistHelper";
-import ActionableCardModel from "../model/components/ActionableCardModel";
-import { WatchlistTabModel } from "../model/components/section/Section";
-import { DetailWatchlistModel } from "../model/pages/detail/DetailPageModel";
+import ActionableCardModel from "../../shared/model/components/ActionableCardModel";
+import { WatchlistTabModel } from "../../shared/model/components/section/Section";
+import { DetailWatchlistModel } from "../../shared/model/pages/detail/DetailPageModel";
 import { ListEntity } from "../repository/entity/watch-list/WatchlistEntity";
 import WatchlistRepository from "../repository/WatchlistRepository";
 

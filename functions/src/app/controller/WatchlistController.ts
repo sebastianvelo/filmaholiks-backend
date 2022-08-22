@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import Controller from "../../common/controller/Controller";
-import MediaType from "../common/MediaType";
+import MediaType from "../../shared/types/MediaType";
 import WatchlistService from "../service/WatchlistService";
 
 class WatchlistController extends Controller {

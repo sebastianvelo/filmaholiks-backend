@@ -6,9 +6,9 @@ import { PersonDetail } from "tmdb-js/lib/api/model/person/Person";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import ActionableCardModel from "../../model/components/ActionableCardModel";
-import CardHorizontalModel from "../../model/components/CardHorizontalModel";
-import CardVerticalModel from "../../model/components/CardVerticalModel";
+import ActionableCardModel from "../../../shared/model/components/ActionableCardModel";
+import CardHorizontalModel from "../../../shared/model/components/CardHorizontalModel";
+import CardVerticalModel from "../../../shared/model/components/CardVerticalModel";
 import { getTMDBImage } from "../media/MediaHelper";
 
 export const getMovieCard = (movie: MovieResponse): CardVerticalModel => ({
