@@ -9,6 +9,7 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { CardsSectionModel } from "../../../shared/model/components/section/Section";
 import * as CardHelper from "../../model/card/CardHelper";
+import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
 
 interface MovieDetail {
   credits: CreditsResponse;
@@ -86,7 +87,7 @@ class SectionHelper {
       {
         id: "moreLikeThis",
         title: "More like this",
-        cards: data.moreLikeThis.results?.map(CardHelper.getMovieCard)
+        cards: data.moreLikeThis.results?.map(MovieCardVerticalModel)
       },
       {
         id: "posters-gallery",
@@ -98,32 +99,32 @@ class SectionHelper {
       {
         id: "daily-trending",
         title: "Trending today",
-        cards: data.dailyTrending.results?.map(CardHelper.getMovieCard)
+        cards: data.dailyTrending.results?.map(MovieCardVerticalModel)
       },
       {
         id: "weekly-trending",
         title: "Trending this week",
-        cards: data.weeklyTrending.results?.map(CardHelper.getMovieCard)
+        cards: data.weeklyTrending.results?.map(MovieCardVerticalModel)
       },
       {
         id: "popular",
         title: "Popular movies",
-        cards: data.popular.results?.map(CardHelper.getMovieCard)
+        cards: data.popular.results?.map(MovieCardVerticalModel)
       },
       {
         id: "topRated",
         title: "Top rated",
-        cards: data.topRated.results?.map(CardHelper.getMovieCard)
+        cards: data.topRated.results?.map(MovieCardVerticalModel)
       },
       {
         id: "latest",
         title: "Now playing",
-        cards: data.nowPlaying.results?.map(CardHelper.getMovieCard)
+        cards: data.nowPlaying.results?.map(MovieCardVerticalModel)
       },
       {
         id: "upcoming",
         title: "Upcoming movies",
-        cards: data.upcoming.results?.map(CardHelper.getMovieCard)
+        cards: data.upcoming.results?.map(MovieCardVerticalModel)
       }
     ]
   };
