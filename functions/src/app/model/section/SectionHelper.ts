@@ -1,25 +1,12 @@
 import {
-  CreditsResponse, MoviesResponse,
+  MoviesResponse,
   PeopleResponse,
   TVShowsResponse
 } from "tmdb-js/lib/api/common/response/CommonResponse";
-import { Character, Episode, GuestStar } from "tmdb-js/lib/api/model/episode/Episode";
-import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { CardsSectionModel } from "../../../shared/model/components/section/Section";
-import CastMemberCardVerticalModel from "../card/vertical/CastMemberCardVerticalModel";
-import CrewCardVerticalModel from "../card/vertical/CrewCardVerticalModel";
-import EpisodeCardVerticalModel from "../card/vertical/EpisodeCardVerticalModel";
 import MovieCardVerticalModel from "../card/vertical/MovieCardVerticalModel";
 import PersonCardVerticalModel from "../card/vertical/PersonCardVerticalModel";
 import ShowCardVerticalModel from "../card/vertical/ShowCardVerticalModel";
-
-interface EpisodeDetail {
-  moreEpisodes?: Episode[];
-  showId: string;
-  credits: CreditsResponse;
-  guestStars: GuestStar[];
-  crew: Character[];
-}
 
 interface MovieExplore {
   topRated: MoviesResponse;
@@ -133,33 +120,6 @@ class SectionHelper {
       }
     ],
   }
-
-  public static episode = {
-    getDetail: (data: EpisodeDetail): CardsSectionModel[] => [
-      {
-        id: "cast",
-        title: "Cast",
-        cards: data.credits.cast.map(CastMemberCardVerticalModel)
-      },
-      {
-        id: "crew",
-        title: "Crew",
-        cards: data.crew.map(CrewCardVerticalModel)
-      },
-      {
-        id: "guest_stars",
-        title: "Guest stars",
-        cards: data.guestStars.map(CastMemberCardVerticalModel)
-      },
-      {
-        id: "episodes",
-        title: "More episodes",
-        cards: data.moreEpisodes?.map((episode) =>
-          EpisodeCardVerticalModel(episode, +data.showId)
-        )
-      },
-    ]
-  };
 
 }
 
