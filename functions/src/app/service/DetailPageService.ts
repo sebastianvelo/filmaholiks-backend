@@ -1,6 +1,5 @@
 import DetailPageModel from "../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../tmdb/TMDB";
-import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
 import EpisodeDetailPageBodyModel from "../model/body-page/detail/EpisodeDetailPageBodyModel";
 import MovieDetailPageBodyModel from "../model/body-page/detail/MovieDetailPageBodyModel";
@@ -8,6 +7,10 @@ import PersonDetailPageBodyModel from "../model/body-page/detail/PersonDetailPag
 import SeasonDetailPageBodyModel from "../model/body-page/detail/SeasonDetailPageBodyModel";
 import ShowDetailPageBodyModel from "../model/body-page/detail/ShowDetailPageBodyModel";
 import UserDetailPageBodyModel from "../model/body-page/detail/UserDetailPageBodyModel";
+import MovieSearchBarModel from "../model/searchbar/MovieSearchBarModel";
+import PersonSearchBarModel from "../model/searchbar/PersonSearchBarModel";
+import ShowSearchBarModel from "../model/searchbar/ShowSearchBarModel";
+import UserSearchBarModel from "../model/searchbar/UserSearchBarModel";
 import UserRepository from "../repository/UserRepository";
 
 class DetailPageService {
@@ -19,7 +22,7 @@ class DetailPageService {
     const body = await UserDetailPageBodyModel(user);
     return {
       title: TitleHelper.user.getDetail(user.userName),
-      searchbar: SearchBarHelper.user.getSearchbar(),
+      searchbar: UserSearchBarModel(),
       body
     };
   }
@@ -29,7 +32,7 @@ class DetailPageService {
     const body = await MovieDetailPageBodyModel(movie);
     return {
       title: TitleHelper.movie.getDetail(movie),
-      searchbar: SearchBarHelper.movie.getSearchbar(),
+      searchbar: MovieSearchBarModel(),
       body
     };
   }
@@ -39,7 +42,7 @@ class DetailPageService {
     const body = await PersonDetailPageBodyModel(person);
     return {
       title: TitleHelper.people.getDetail(person),
-      searchbar: SearchBarHelper.people.getSearchbar(),
+      searchbar: PersonSearchBarModel(),
       body
     };
   }
@@ -49,7 +52,7 @@ class DetailPageService {
     const body = await ShowDetailPageBodyModel(show);
     return {
       title: TitleHelper.show.getDetail(show),
-      searchbar: SearchBarHelper.show.getSearchbar(),
+      searchbar: ShowSearchBarModel(),
       body
     };
   }
@@ -59,7 +62,7 @@ class DetailPageService {
     const body = await SeasonDetailPageBodyModel(season, showId, seasonNumber);
     return {
       title: TitleHelper.season.getDetail(season),
-      searchbar: SearchBarHelper.show.getSearchbar(),
+      searchbar: ShowSearchBarModel(),
       body
     };
   }
@@ -69,7 +72,7 @@ class DetailPageService {
     const body = await EpisodeDetailPageBodyModel(episode, showId, seasonNumber);
     return {
       title: TitleHelper.episode.getDetail(episode),
-      searchbar: SearchBarHelper.show.getSearchbar(),
+      searchbar: ShowSearchBarModel(),
       body
     };
   }
