@@ -1,6 +1,5 @@
 import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Response";
-import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailHeaderModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
 import MediaType from "../../../shared/types/MediaType";
@@ -23,15 +22,6 @@ export const getShow = (show: TVShowResponse, videos: VideosResponse): DetailHea
       mediaType: MediaType.SHOW
     }
   },
-});
-
-export const getSeason = (season: SeasonWithEpisodesResponse, videos: VideosResponse): DetailHeaderModel => ({
-  poster: MediaHelper.getTMDBImage(season.poster_path, season.name),
-  backdrop: MediaHelper.getTMDBImage(season.poster_path, season.name),
-  header: DetailHeaderHelper.getSeason(season),
-  info: DetailInfoHelper.getSeason(season),
-  description: DetailDescriptionHelper.getSeason(season),
-  video: MediaHelper.getTrailer(videos),
 });
 
 export const getEpisode = (episode: EpisodeResponse, videos: VideosResponse): DetailHeaderModel => ({

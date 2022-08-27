@@ -1,5 +1,4 @@
 import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Response";
-import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailContentInfoModel } from "../../../../shared/model/pages/detail/header/DetailContentModel";
 import * as DateHelper from "../../../helper/date/DateHelper";
@@ -12,13 +11,6 @@ export const getShow = (show: TVShowResponse): DetailContentInfoModel => ({
         DataItemModel(`Language`, show.original_language),
         DataItemModel(`Release`, DateHelper.getFullMessage(show.first_air_date)),
         DataItemModel(`Status`, show.status),
-    ]
-});
-
-export const getSeason = (season: SeasonWithEpisodesResponse): DetailContentInfoModel => ({
-    data: [
-        DataItemModel(`Air date`, DateHelper.getFullMessage(season.air_date)),
-        DataItemModel(`Episodes`, `${season.episodes?.length}`),
     ]
 });
 
