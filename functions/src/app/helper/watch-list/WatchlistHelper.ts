@@ -1,17 +1,18 @@
 import { Movie } from "tmdb-js/lib/api/model/film/Film";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import TMDB from "../../../tmdb/TMDB";
-import MediaType from "../../../shared/types/MediaType";
 import { WatchlistTabModel } from "../../../shared/model/components/section/Section";
 import { ListModel } from "../../../shared/model/components/WatchlistModel";
+import MediaType from "../../../shared/types/MediaType";
+import TMDB from "../../../tmdb/TMDB";
 import WatchlistEntity, { ListEntity } from "../../entity/watch-list/WatchlistEntity";
-import { getMoviCardHorizontal, getShowCardHorizontal } from "../../model/card/CardHelper";
+import { getMoviCardHorizontal } from "../../model/card/CardHelper";
+import ShowCardHorizontalModel from "../../model/card/horizontal/ShowCardHorizontalModel";
 
 export const getShowListModel = async (list: ListEntity): Promise<ListModel> => {
     const items: TVShowResponse[] = await Promise.all(list.items.map(async (item) => TMDB.tvShow.getDetails(Number(item))));
     return {
         title: list.title,
-        items: items.map(getShowCardHorizontal),
+        items: items.map(ShowCardHorizontalModel),
     };
 };
 
