@@ -1,8 +1,8 @@
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import SectionHelper from "../../../helper/section/SectionHelper";
 import * as DetailHelper from "../../../helper/detail/DetailHelper";
+import MovieDetailSectionsModel from "../../section/detail/MovieDetailSectionsModel";
 
 const MovieDetailPageBodyModel = async (movie: MovieResponse): Promise<DetailPageBodyModel> => {
     const id = Number(movie.id);
@@ -13,7 +13,7 @@ const MovieDetailPageBodyModel = async (movie: MovieResponse): Promise<DetailPag
 
     return {
         detail: DetailHelper.getMovie(movie, video),
-        sections: SectionHelper.movie.getDetail({ credits, moreLikeThis, images })
+        sections: MovieDetailSectionsModel({ credits, moreLikeThis, images })
     };
 };
 

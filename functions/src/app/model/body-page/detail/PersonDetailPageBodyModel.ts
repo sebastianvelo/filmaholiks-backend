@@ -2,7 +2,7 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
 import * as DetailHelper from "../../../helper/detail/DetailHelper";
-import SectionHelper from "../../../helper/section/SectionHelper";
+import SectionHelper from "../../section/SectionHelper";
 
 const PersonDetailPageBodyModel =  async (person: PersonDetailsResponse): Promise<DetailPageBodyModel> => {
     const id = Number(person.id);

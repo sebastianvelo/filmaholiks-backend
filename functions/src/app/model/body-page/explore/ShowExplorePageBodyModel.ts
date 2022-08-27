@@ -2,7 +2,7 @@ import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { ExplorePageBodyModel } from "../../../../shared/model/pages/explore/ExplorePageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import SectionHelper from "../../../helper/section/SectionHelper";
+import SectionHelper from "../../section/SectionHelper";
 
 const ShowExplorePageBodyModel = async (query?: LanguageParams): Promise<ExplorePageBodyModel> => {
     const onTheAir: TVShowsResponse = await TMDB.tvShow.getOnTheAir(query);

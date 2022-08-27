@@ -1,7 +1,7 @@
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import UserEntity from "../../../entity/user/UserEntity";
 import * as DetailHelper from "../../../helper/detail/DetailHelper";
-import SectionHelper from "../../../helper/section/SectionHelper";
+import SectionHelper from "../../section/SectionHelper";
 import WatchlistService from "../../../service/WatchlistService";
 
 const UserDetailPageBodyModel =  async (user: UserEntity): Promise<DetailPageBodyModel> => {

@@ -5,7 +5,7 @@ import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/Detai
 import TMDB from "../../../../tmdb/TMDB";
 import ChartHelper from "../../../helper/chart/ChartHelper";
 import * as DetailHelper from "../../../helper/detail/DetailHelper";
-import SectionHelper from "../../../helper/section/SectionHelper";
+import SectionHelper from "../../section/SectionHelper";
 
 const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPageBodyModel> => {
     const id = Number(show.id);

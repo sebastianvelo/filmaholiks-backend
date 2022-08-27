@@ -8,23 +8,17 @@ import { Character, Episode, GuestStar } from "tmdb-js/lib/api/model/episode/Epi
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { CardsSectionModel } from "../../../shared/model/components/section/Section";
-import CastMemberCardVerticalModel from "../../model/card/vertical/CastMemberCardVerticalModel";
-import CrewCardVerticalModel from "../../model/card/vertical/CrewCardVerticalModel";
-import EpisodeCardVerticalModel from "../../model/card/vertical/EpisodeCardVerticalModel";
-import GalleryImageCardVerticalModel from "../../model/card/vertical/GalleryImageCardVerticalModel";
-import MovieAppareancesCardVerticalModel from "../../model/card/vertical/MovieAppareancesCardVerticalModel";
-import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
-import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVerticalModel";
-import SeasonCardVerticalModel from "../../model/card/vertical/SeasonCardVerticalModel";
-import ShowAppareancesCardVerticalModel from "../../model/card/vertical/ShowAppareancesCardVerticalModel";
-import ShowCardVerticalModel from "../../model/card/vertical/ShowCardVerticalModel";
-import TopRatedEpisodeCardVerticalModel from "../../model/card/vertical/TopRatedEpisodeCardVerticalModel";
-
-interface MovieDetail {
-  credits: CreditsResponse;
-  moreLikeThis: MoviesResponse;
-  images: ImagesResponse;
-}
+import CastMemberCardVerticalModel from "../card/vertical/CastMemberCardVerticalModel";
+import CrewCardVerticalModel from "../card/vertical/CrewCardVerticalModel";
+import EpisodeCardVerticalModel from "../card/vertical/EpisodeCardVerticalModel";
+import GalleryImageCardVerticalModel from "../card/vertical/GalleryImageCardVerticalModel";
+import MovieAppareancesCardVerticalModel from "../card/vertical/MovieAppareancesCardVerticalModel";
+import MovieCardVerticalModel from "../card/vertical/MovieCardVerticalModel";
+import PersonCardVerticalModel from "../card/vertical/PersonCardVerticalModel";
+import SeasonCardVerticalModel from "../card/vertical/SeasonCardVerticalModel";
+import ShowAppareancesCardVerticalModel from "../card/vertical/ShowAppareancesCardVerticalModel";
+import ShowCardVerticalModel from "../card/vertical/ShowCardVerticalModel";
+import TopRatedEpisodeCardVerticalModel from "../card/vertical/TopRatedEpisodeCardVerticalModel";
 
 interface ShowDetail {
   show: TVShowResponse;
@@ -87,23 +81,6 @@ class SectionHelper {
   };
 
   public static movie = {
-    getDetail: (data: MovieDetail): CardsSectionModel[] => [
-      {
-        id: "cast",
-        title: "Cast",
-        cards: data.credits.cast.map(CastMemberCardVerticalModel)
-      },
-      {
-        id: "moreLikeThis",
-        title: "More like this",
-        cards: data.moreLikeThis.results?.map(MovieCardVerticalModel)
-      },
-      {
-        id: "posters-gallery",
-        title: "Posters",
-        cards: data.images?.posters?.map(GalleryImageCardVerticalModel)
-      },
-    ],
     getExplore: (data: MovieExplore): CardsSectionModel[] => [
       {
         id: "daily-trending",

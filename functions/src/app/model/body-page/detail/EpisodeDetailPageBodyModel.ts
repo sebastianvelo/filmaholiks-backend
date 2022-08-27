@@ -4,7 +4,7 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
 import * as DetailHelper from "../../../helper/detail/DetailHelper";
-import SectionHelper from "../../../helper/section/SectionHelper";
+import SectionHelper from "../../section/SectionHelper";
 
 const EpisodeDetailPageBodyModel = async (episode: EpisodeResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyModel> => {
     const episodeNumber = Number(episode.episode_number);
