@@ -10,6 +10,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { CardsSectionModel } from "../../../shared/model/components/section/Section";
 import * as CardHelper from "../../model/card/CardHelper";
 import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
+import ShowCardVerticalModel from "../../model/card/vertical/ShowCardVerticalModel";
 
 interface MovieDetail {
   credits: CreditsResponse;
@@ -134,32 +135,32 @@ class SectionHelper {
       {
         id: "daily-trending",
         title: "Trending today",
-        cards: data.dailyTrending.results?.map(CardHelper.getShowCard)
+        cards: data.dailyTrending.results?.map(ShowCardVerticalModel)
       },
       {
         id: "weekly-trending",
         title: "Trending this week",
-        cards: data.weeklyTrending.results?.map(CardHelper.getShowCard)
+        cards: data.weeklyTrending.results?.map(ShowCardVerticalModel)
       },
       {
         id: "topRated",
         title: "Top rated",
-        cards: data.topRated.results?.map(CardHelper.getShowCard)
+        cards: data.topRated.results?.map(ShowCardVerticalModel)
       },
       {
         id: "popular",
         title: "Popular shows",
-        cards: data.popular.results?.map(CardHelper.getShowCard)
+        cards: data.popular.results?.map(ShowCardVerticalModel)
       },
       {
         id: "airingToday",
         title: "Airing today",
-        cards: data.airingToday.results?.map(CardHelper.getShowCard)
+        cards: data.airingToday.results?.map(ShowCardVerticalModel)
       },
       {
         id: "onTheAir",
         title: "On the air",
-        cards: data.onTheAir.results?.map(CardHelper.getShowCard)
+        cards: data.onTheAir.results?.map(ShowCardVerticalModel)
       },
     ],
     getDetail: (data: ShowDetail): CardsSectionModel[] => [
@@ -185,7 +186,7 @@ class SectionHelper {
       {
         id: "moreLikeThis",
         title: "More like this",
-        cards: data.moreLikeThis.results?.map(CardHelper.getShowCard)
+        cards: data.moreLikeThis.results?.map(ShowCardVerticalModel)
       },
       {
         id: "posters-gallery",
