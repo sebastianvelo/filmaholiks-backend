@@ -2,7 +2,7 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
 import * as DetailHelper from "../../../helper/detail/DetailHelper";
-import SectionHelper from "../../section/SectionHelper";
+import PersonDetailSectionsModel from "../../section/detail/PersonDetailSectionsModel";
 
 const PersonDetailPageBodyModel =  async (person: PersonDetailsResponse): Promise<DetailPageBodyModel> => {
     const id = Number(person.id);
@@ -11,7 +11,7 @@ const PersonDetailPageBodyModel =  async (person: PersonDetailsResponse): Promis
 
     return {
         detail: DetailHelper.getPerson(person),
-        sections: SectionHelper.people.getDetail({ shows, movies })
+        sections: PersonDetailSectionsModel({ shows, movies })
     };
 };
 
