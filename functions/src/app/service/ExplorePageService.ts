@@ -4,10 +4,11 @@ import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
 import { DetailPageBodyModel } from "../../shared/model/pages/detail/DetailPageModel";
 import ExplorePageModel from "../../shared/model/pages/explore/ExplorePageModel";
+import MovieExplorePageBodyModel from "../model/body-page/explore/MovieExplorePageBodyModel";
 
 class ExplorePageService {
   public static async getMovie(query?: LanguageParams): Promise<ExplorePageModel> {
-    const body: DetailPageBodyModel = await BodyPageHelper.movie.getExplore(query);
+    const body: DetailPageBodyModel = await MovieExplorePageBodyModel(query);
     return {
       title: TitleHelper.movie.getExplore(),
       searchbar: SearchBarHelper.movie.getSearchbar(),
