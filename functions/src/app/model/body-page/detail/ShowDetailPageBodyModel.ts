@@ -6,7 +6,6 @@ import TMDB from "../../../../tmdb/TMDB";
 import ChartHelper from "../../../helper/chart/ChartHelper";
 import * as DetailHelper from "../../../helper/detail/DetailHelper";
 import ShowDetailSectionsModel from "../../section/detail/ShowDetailSectionsModel";
-import SectionHelper from "../../section/SectionHelper";
 
 const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPageBodyModel> => {
     const id = Number(show.id);

@@ -5,22 +5,22 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DataItemSectionModel } from "../../../../shared/model/components/section/Section";
 import UserEntity from "../../../entity/user/UserEntity";
-import getDataItem  from "../../data-item/DataItemHelper";
+import DataItemModel  from "../../../model/data-item/DataItemModel";
 
 export const getUser = (user: UserEntity): DataItemSectionModel | undefined =>
-    getDataItem(`About`, `${user.about}`);
+    DataItemModel(`About`, `${user.about}`);
 
 export const getMovie = (movie: MovieResponse): DataItemSectionModel | undefined =>
-    getDataItem(`Description`, `${movie.overview}`);
+    DataItemModel(`Description`, `${movie.overview}`);
 
 export const getPerson = (person: PersonDetailsResponse): DataItemSectionModel | undefined =>
-    getDataItem(`Biography`, person.biography);
+    DataItemModel(`Biography`, person.biography);
 
 export const getShow = (show: TVShowResponse): DataItemSectionModel | undefined =>
-    getDataItem(`Description`, `${show.overview}`);
+    DataItemModel(`Description`, `${show.overview}`);
 
 export const getSeason = (season: SeasonWithEpisodesResponse): DataItemSectionModel | undefined =>
-    getDataItem(`Description`, season.overview);
+    DataItemModel(`Description`, season.overview);
 
 export const getEpisode = (episode: EpisodeResponse): DataItemSectionModel | undefined =>
-    getDataItem(`Description`, episode.overview);
+    DataItemModel(`Description`, episode.overview);
