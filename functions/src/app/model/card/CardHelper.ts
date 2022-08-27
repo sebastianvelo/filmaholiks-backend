@@ -10,7 +10,7 @@ import ActionableCardModel from "../../../shared/model/components/ActionableCard
 import CardHorizontalModel from "../../../shared/model/components/CardHorizontalModel";
 import CardVerticalModel from "../../../shared/model/components/CardVerticalModel";
 import { PageRouteBuilder } from "../../../shared/routes/PageRoute";
-import { getTMDBImage } from "../media/MediaHelper";
+import { getTMDBImage } from "../../helper/media/MediaHelper";
 
 export const getMovieCard = (movie: MovieResponse): CardVerticalModel => ({
   title: movie.title,

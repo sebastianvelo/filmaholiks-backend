@@ -5,7 +5,7 @@ import { DetailWatchlistModel } from "../../shared/model/pages/detail/DetailPage
 import MediaType from "../../shared/types/MediaType";
 import TMDB from "../../tmdb/TMDB";
 import { ListEntity } from "../entity/watch-list/WatchlistEntity";
-import { getMovieActionableCardHorizontal, getShowActionableCardHorizontal } from "../helper/card/CardHelper";
+import { getMovieActionableCardHorizontal, getShowActionableCardHorizontal } from "../model/card/CardHelper";
 import { getWatchlistTabModel } from "../helper/watch-list/WatchlistHelper";
 import WatchlistRepository from "../repository/WatchlistRepository";
 

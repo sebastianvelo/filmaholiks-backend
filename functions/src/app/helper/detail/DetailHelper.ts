@@ -7,7 +7,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailHeaderModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
 import MediaType from "../../../shared/types/MediaType";
 import UserEntity from "../../entity/user/UserEntity";
-import { getShowCardHorizontal } from "../card/CardHelper";
+import { getShowCardHorizontal } from "../../model/card/CardHelper";
 import * as MediaHelper from "../media/MediaHelper";
 import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper";
 import * as DetailHeaderHelper from "./header/DetailHeaderHelper";
