@@ -12,6 +12,7 @@ import * as CardHelper from "../../model/card/CardHelper";
 import CastMemberCardVerticalModel from "../../model/card/vertical/CastMemberCardVerticalModel";
 import CrewCardVerticalModel from "../../model/card/vertical/CrewCardVerticalModel";
 import EpisodeCardVerticalModel from "../../model/card/vertical/EpisodeCardVerticalModel";
+import GalleryImageCardVerticalModel from "../../model/card/vertical/GalleryImageCardVerticalModel";
 import MovieAppareancesCardVerticalModel from "../../model/card/vertical/MovieAppareancesCardVerticalModel";
 import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
 import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVerticalModel";
@@ -101,7 +102,7 @@ class SectionHelper {
       {
         id: "posters-gallery",
         title: "Posters",
-        cards: data.images?.posters?.map(CardHelper.getGalleryImage)
+        cards: data.images?.posters?.map(GalleryImageCardVerticalModel)
       },
     ],
     getExplore: (data: MovieExplore): CardsSectionModel[] => [
@@ -199,7 +200,7 @@ class SectionHelper {
       {
         id: "posters-gallery",
         title: "Posters",
-        cards: data.images?.posters?.map(CardHelper.getGalleryImage)
+        cards: data.images?.posters?.map(GalleryImageCardVerticalModel)
       },
     ]
   };
