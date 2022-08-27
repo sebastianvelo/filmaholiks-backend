@@ -44,7 +44,7 @@ const MovieDetailModel = (movie: MovieResponse, videos: VideosResponse): DetailH
     header: ContentHeader(movie),
     description: Description(movie),
     info: Info(movie),
-    video: Video(movie),
+    video: Video(videos),
 });
 
 export default MovieDetailModel;

@@ -38,7 +38,7 @@ const SeasonDetailModel = (season: SeasonWithEpisodesResponse, videos: VideosRes
     header: ContentHeader(season),
     description: Description(season),
     info: Info(season),
-    video: Video(season),
+    video: Video(videos),
 });
 
 export default SeasonDetailModel;

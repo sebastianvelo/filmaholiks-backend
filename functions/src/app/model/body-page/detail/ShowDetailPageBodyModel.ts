@@ -4,7 +4,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
 import ChartHelper from "../../../helper/chart/ChartHelper";
-import * as DetailHelper from "../../detail/DetailHelper";
+import EpisodeDetailModel from "../../detail/EpisodeDetailModel";
 import ShowDetailSectionsModel from "../../section/detail/ShowDetailSectionsModel";
 
 const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPageBodyModel> => {
@@ -27,7 +27,7 @@ const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPage
     const topRatedEpisodes = allEpisodes.flat().sort(sortByRating).slice(0, 30);
 
     return {
-        detail: DetailHelper.getShow(show, video),
+        detail: EpisodeDetailModel(show, video),
         charts: [
             chartSeasons
         ],
