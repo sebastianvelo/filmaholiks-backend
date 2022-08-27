@@ -5,7 +5,7 @@ import { ListModel } from "../../../shared/model/components/WatchlistModel";
 import MediaType from "../../../shared/types/MediaType";
 import TMDB from "../../../tmdb/TMDB";
 import WatchlistEntity, { ListEntity } from "../../entity/watch-list/WatchlistEntity";
-import { getMoviCardHorizontal } from "../../model/card/CardHelper";
+import MovieCardHorizontalModel from "../../model/card/horizontal/MovieCardHorizontalModel";
 import ShowCardHorizontalModel from "../../model/card/horizontal/ShowCardHorizontalModel";
 
 export const getShowListModel = async (list: ListEntity): Promise<ListModel> => {
@@ -20,7 +20,7 @@ export const getMovieListModel = async (list: ListEntity): Promise<ListModel> =>
     const items: Movie[] = await Promise.all(list.items.map(async (item) => TMDB.movie.getDetails(Number(item))));
     return {
         title: list.title,
-        items: items.map(getMoviCardHorizontal),
+        items: items.map(MovieCardHorizontalModel),
     };
 };
 
