@@ -8,7 +8,6 @@ import { Character, Episode, GuestStar } from "tmdb-js/lib/api/model/episode/Epi
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { CardsSectionModel } from "../../../shared/model/components/section/Section";
-import * as CardHelper from "../../model/card/CardHelper";
 import CastMemberCardVerticalModel from "../../model/card/vertical/CastMemberCardVerticalModel";
 import CrewCardVerticalModel from "../../model/card/vertical/CrewCardVerticalModel";
 import EpisodeCardVerticalModel from "../../model/card/vertical/EpisodeCardVerticalModel";

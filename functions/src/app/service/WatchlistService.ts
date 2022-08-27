@@ -5,8 +5,9 @@ import { DetailWatchlistModel } from "../../shared/model/pages/detail/DetailPage
 import MediaType from "../../shared/types/MediaType";
 import TMDB from "../../tmdb/TMDB";
 import { ListEntity } from "../entity/watch-list/WatchlistEntity";
-import { getMovieActionableCardHorizontal, getShowActionableCardHorizontal } from "../model/card/CardHelper";
 import { getWatchlistTabModel } from "../helper/watch-list/WatchlistHelper";
+import MovieActionableCardModel from "../model/actionable-card/MovieActionableCardModel";
+import ShowActionableCardModel from "../model/actionable-card/ShowActionableCardModel";
 import WatchlistRepository from "../repository/WatchlistRepository";
 
 interface IWatchlistService {
@@ -69,7 +70,7 @@ class WatchlistService {
       const detailedShows = await Promise.all(shows.results.map(async (show) => TMDB.tvShow.getDetails(show.id ?? 0)));
       return Promise.all(detailedShows.map(async (show) => {
         const exists = await WatchlistRepository.show.item.exists(userName, String(show.id));
-        return getShowActionableCardHorizontal(show, exists);
+        return ShowActionableCardModel(show, exists);
       }));
     },
     getViewByUser: async (userName: string): Promise<WatchlistTabModel> => {
@@ -84,7 +85,7 @@ class WatchlistService {
       const detailedMovies = await Promise.all(movies.results.map(async (movie) => TMDB.movie.getDetails(movie.id ?? 0)));
       return Promise.all(detailedMovies.map(async (movie) => {
         const exists = await WatchlistRepository.movie.item.exists(userName, String(movie.id));
-        return getMovieActionableCardHorizontal(movie, exists);
+        return MovieActionableCardModel(movie, exists);
       }));
     },
     getViewByUser: async (userName: string): Promise<WatchlistTabModel> => {
