@@ -12,15 +12,6 @@ import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper"
 import * as DetailHeaderHelper from "./header/DetailHeaderHelper";
 import * as DetailInfoHelper from "./info/DetailInfoHelper";
 
-export const getMovie = (movie: MovieResponse, videos: VideosResponse): DetailHeaderModel => ({
-  poster: MediaHelper.getTMDBImage(movie.poster_path, movie.title),
-  backdrop: MediaHelper.getTMDBImage(movie.backdrop_path, movie.title),
-  header: DetailHeaderHelper.getMovie(movie),
-  description: DetailDescriptionHelper.getMovie(movie),
-  info: DetailInfoHelper.getMovie(movie),
-  video: MediaHelper.getTrailer(videos),
-});
-
 export const getPerson = (person: PersonDetailsResponse): DetailHeaderModel => ({
   poster: MediaHelper.getTMDBImage(person.profile_path, person.name),
   backdrop: MediaHelper.getTMDBImage(person.profile_path, person.name),

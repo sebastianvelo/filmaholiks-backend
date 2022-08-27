@@ -4,14 +4,7 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DataItemSectionModel } from "../../../../shared/model/components/section/Section";
-import UserEntity from "../../../entity/user/UserEntity";
-import DataItemModel  from "../../data-item/DataItemModel";
-
-export const getUser = (user: UserEntity): DataItemSectionModel | undefined =>
-    DataItemModel(`About`, `${user.about}`);
-
-export const getMovie = (movie: MovieResponse): DataItemSectionModel | undefined =>
-    DataItemModel(`Description`, `${movie.overview}`);
+import DataItemModel from "../../data-item/DataItemModel";
 
 export const getPerson = (person: PersonDetailsResponse): DataItemSectionModel | undefined =>
     DataItemModel(`Biography`, person.biography);

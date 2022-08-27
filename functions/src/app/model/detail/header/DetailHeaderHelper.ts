@@ -1,18 +1,8 @@
 import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Response";
-import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailContentHeaderModel } from "../../../../shared/model/pages/detail/header/DetailContentModel";
-import UserEntity from "../../../entity/user/UserEntity";
-
-export const getUser = (user: UserEntity): DetailContentHeaderModel => ({
-    title: `${user.userName}`
-});
-
-export const getMovie = (movie: MovieResponse): DetailContentHeaderModel => ({
-    title: `${movie.title}`
-});
 
 export const getPerson = (person: PersonDetailsResponse): DetailContentHeaderModel => ({
     title: `${person.name}`,

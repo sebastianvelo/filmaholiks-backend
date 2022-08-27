@@ -8,27 +8,6 @@ import UserEntity from "../../../entity/user/UserEntity";
 import DataItemModel from "../../data-item/DataItemModel";
 import * as DateHelper from "../../../helper/date/DateHelper";
 
-export const getUser = (user: UserEntity): DetailContentInfoModel => ({
-    data: [
-        DataItemModel(`Name`, user.name),
-        DataItemModel(`E-Mail`, user.email),
-        DataItemModel(`Filmaholik since`, DateHelper.toString(user.registered)),
-    ]
-});
-
-export const getMovie = (movie: MovieResponse): DetailContentInfoModel => ({
-    data: [
-        DataItemModel(`Rating`, `${movie.vote_average?.toFixed(2)} ⭐️`),
-        DataItemModel(`Genres`, movie.genres?.map((genre) => genre.name).join(", ")),
-        DataItemModel(`Duration`, `${movie.runtime}m`),
-        DataItemModel(`Language`, movie.original_language),
-        DataItemModel(`Release`, DateHelper.getFullMessage(movie.release_date)),
-        DataItemModel(`Budget`, `$${movie.budget}`),
-        DataItemModel(`Revenue`, `$${movie.revenue}`),
-        DataItemModel(`Status`, movie.status),
-    ]
-});
-
 export const getPerson = (person: PersonDetailsResponse): DetailContentInfoModel => ({
     data: [
         DataItemModel(`Birthday`, person.deathday ? DateHelper.getFullMessage(person.birthday, person.deathday) : DateHelper.getFullMessage(person.birthday)),
