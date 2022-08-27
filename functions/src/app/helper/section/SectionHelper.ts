@@ -10,6 +10,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { CardsSectionModel } from "../../../shared/model/components/section/Section";
 import * as CardHelper from "../../model/card/CardHelper";
 import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
+import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVerticalModel";
 import ShowCardVerticalModel from "../../model/card/vertical/ShowCardVerticalModel";
 
 interface MovieDetail {
@@ -201,7 +202,7 @@ class SectionHelper {
       {
         id: "popular",
         title: "Popular",
-        cards: data.popular.results?.map(CardHelper.getPersonCard)
+        cards: data.popular.results?.map(PersonCardVerticalModel)
       }
     ],
     getDetail: (data: PersonDetail): CardsSectionModel[] => [
