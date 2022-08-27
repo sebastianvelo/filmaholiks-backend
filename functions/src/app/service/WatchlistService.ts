@@ -5,7 +5,7 @@ import { DetailWatchlistModel } from "../../shared/model/pages/detail/DetailPage
 import MediaType from "../../shared/types/MediaType";
 import TMDB from "../../tmdb/TMDB";
 import { ListEntity } from "../entity/watch-list/WatchlistEntity";
-import { getWatchlistTabModel } from "../helper/watch-list/WatchlistHelper";
+import { WatchlistModel } from "../model/watch-list/WatchlistModel";
 import MovieActionableCardModel from "../model/actionable-card/MovieActionableCardModel";
 import ShowActionableCardModel from "../model/actionable-card/ShowActionableCardModel";
 import WatchlistRepository from "../repository/WatchlistRepository";
@@ -75,7 +75,7 @@ class WatchlistService {
     },
     getViewByUser: async (userName: string): Promise<WatchlistTabModel> => {
       const tvShowWatchlist = await WatchlistRepository.show.list.getByUser(userName);
-      return getWatchlistTabModel("TV Shows", tvShowWatchlist, MediaType.SHOW);
+      return WatchlistModel("TV Shows", tvShowWatchlist, MediaType.SHOW);
     },
   };
 
@@ -90,7 +90,7 @@ class WatchlistService {
     },
     getViewByUser: async (userName: string): Promise<WatchlistTabModel> => {
       const movieWatchlist = await WatchlistRepository.movie.list.getByUser(userName);
-      return getWatchlistTabModel("Movies", movieWatchlist, MediaType.MOVIE);
+      return WatchlistModel("Movies", movieWatchlist, MediaType.MOVIE);
     },
   };
 }
