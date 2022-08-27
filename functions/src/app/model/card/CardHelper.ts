@@ -1,23 +1,11 @@
-import { CreditPerson } from "tmdb-js/lib/api/model/credit/Credit";
-import { Character, Episode } from "tmdb-js/lib/api/model/episode/Episode";
-import { Movie, TVShow } from "tmdb-js/lib/api/model/film/Film";
+import { Movie } from "tmdb-js/lib/api/model/film/Film";
 import { Image } from "tmdb-js/lib/api/model/image/Image";
-import { PersonDetail } from "tmdb-js/lib/api/model/person/Person";
-import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
-import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import ActionableCardModel from "../../../shared/model/components/ActionableCardModel";
 import CardHorizontalModel from "../../../shared/model/components/CardHorizontalModel";
 import CardVerticalModel from "../../../shared/model/components/CardVerticalModel";
 import { PageRouteBuilder } from "../../../shared/routes/PageRoute";
 import { getTMDBImage } from "../../helper/media/MediaHelper";
-
-export const getTopRatedEpisodeCard = (episode: Episode, show?: number): CardVerticalModel => ({
-  title: `${episode.name} (${episode.season_number}x${episode.episode_number})`,
-  subtitle: `${episode.vote_average}/10`,
-  image: getTMDBImage(episode.still_path, episode.name),
-  path: PageRouteBuilder.EPISODE_DETAIL(show!, episode.season_number!, episode.episode_number!)
-});
 
 export const getGalleryImage = (image: Image): CardVerticalModel => ({
   image: getTMDBImage(image.file_path, image.id)

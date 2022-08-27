@@ -18,6 +18,7 @@ import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVertica
 import SeasonCardVerticalModel from "../../model/card/vertical/SeasonCardVerticalModel";
 import ShowAppareancesCardVerticalModel from "../../model/card/vertical/ShowAppareancesCardVerticalModel";
 import ShowCardVerticalModel from "../../model/card/vertical/ShowCardVerticalModel";
+import TopRatedEpisodeCardVerticalModel from "../../model/card/vertical/TopRatedEpisodeCardVerticalModel";
 
 interface MovieDetail {
   credits: CreditsResponse;
@@ -187,7 +188,7 @@ class SectionHelper {
         id: "top-rated",
         title: "Top rated episodes",
         cards: data.topRatedEpisodes?.map((episode) =>
-          CardHelper.getTopRatedEpisodeCard(episode, data.show.id)
+          TopRatedEpisodeCardVerticalModel(episode, data.show.id)
         )
       },
       {
