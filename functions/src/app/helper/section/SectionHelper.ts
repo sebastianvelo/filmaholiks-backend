@@ -9,6 +9,7 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { CardsSectionModel } from "../../../shared/model/components/section/Section";
 import * as CardHelper from "../../model/card/CardHelper";
+import CastMemberCardVerticalModel from "../../model/card/vertical/CastMemberCardVerticalModel";
 import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
 import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVerticalModel";
 import ShowCardVerticalModel from "../../model/card/vertical/ShowCardVerticalModel";
@@ -84,7 +85,7 @@ class SectionHelper {
       {
         id: "cast",
         title: "Cast",
-        cards: data.credits.cast.map(CardHelper.getCastMemberCard)
+        cards: data.credits.cast.map(CastMemberCardVerticalModel)
       },
       {
         id: "moreLikeThis",
@@ -168,7 +169,7 @@ class SectionHelper {
       {
         id: "cast",
         title: "Cast",
-        cards: data.credits.cast?.map(CardHelper.getCastMemberCard)
+        cards: data.credits.cast?.map(CastMemberCardVerticalModel)
       },
       {
         id: "seasons",
@@ -224,7 +225,7 @@ class SectionHelper {
       {
         id: "cast",
         title: "Cast",
-        cards: data.credits.cast.map(CardHelper.getCastMemberCard)
+        cards: data.credits.cast.map(CastMemberCardVerticalModel)
       },
       {
         id: "episodes",
@@ -241,7 +242,7 @@ class SectionHelper {
       {
         id: "cast",
         title: "Cast",
-        cards: data.credits.cast.map(CardHelper.getCastMemberCard)
+        cards: data.credits.cast.map(CastMemberCardVerticalModel)
       },
       {
         id: "crew",
@@ -251,7 +252,7 @@ class SectionHelper {
       {
         id: "guest_stars",
         title: "Guest stars",
-        cards: data.guestStars.map(CardHelper.getCastMemberCard)
+        cards: data.guestStars.map(CastMemberCardVerticalModel)
       },
       {
         id: "episodes",
