@@ -12,20 +12,6 @@ import CardVerticalModel from "../../../shared/model/components/CardVerticalMode
 import { PageRouteBuilder } from "../../../shared/routes/PageRoute";
 import { getTMDBImage } from "../../helper/media/MediaHelper";
 
-export const getMovieAppareances = (castMember: any): CardVerticalModel => ({
-  title: castMember.original_title,
-  subtitle: `as ${castMember.character} `,
-  image: getTMDBImage(castMember.poster_path, castMember.original_title),
-  path: PageRouteBuilder.MOVIE_DETAIL(castMember.id)
-});
-
-export const getSeasonCard = (season: SeasonResponse, show?: number): CardVerticalModel => ({
-  title: `${season.name} `,
-  subtitle: `${season.episode_count} episodes`,
-  image: getTMDBImage(season.poster_path, season.name),
-  path: PageRouteBuilder.SEASON_DETAIL(show!, season.season_number)
-});
-
 export const getEpisodeCard = (episode: Episode, show?: number): CardVerticalModel => ({
   title: `${episode.name} `,
   subtitle: `${episode.vote_average} /10`,

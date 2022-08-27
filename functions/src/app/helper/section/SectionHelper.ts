@@ -14,6 +14,7 @@ import CrewCardVerticalModel from "../../model/card/vertical/CrewCardVerticalMod
 import MovieAppareancesCardVerticalModel from "../../model/card/vertical/MovieAppareancesCardVerticalModel";
 import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
 import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVerticalModel";
+import SeasonCardVerticalModel from "../../model/card/vertical/SeasonCardVerticalModel";
 import ShowAppareancesCardVerticalModel from "../../model/card/vertical/ShowAppareancesCardVerticalModel";
 import ShowCardVerticalModel from "../../model/card/vertical/ShowCardVerticalModel";
 
@@ -178,7 +179,7 @@ class SectionHelper {
         id: "seasons",
         title: "Seasons",
         cards: data.show.seasons?.map((season) =>
-          CardHelper.getSeasonCard(season, data.show.id)
+          SeasonCardVerticalModel(season, data.show.id)
         )
       },
       {
