@@ -6,22 +6,11 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailHeaderModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
 import MediaType from "../../../shared/types/MediaType";
-import UserEntity from "../../entity/user/UserEntity";
-import ShowCardHorizontalModel from "../card/horizontal/ShowCardHorizontalModel";
 import * as MediaHelper from "../../helper/media/MediaHelper";
+import ShowCardHorizontalModel from "../card/horizontal/ShowCardHorizontalModel";
 import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper";
 import * as DetailHeaderHelper from "./header/DetailHeaderHelper";
 import * as DetailInfoHelper from "./info/DetailInfoHelper";
-
-export const getUser = (user: UserEntity): DetailHeaderModel => ({
-  poster: {
-    src: user.avatar,
-    alt: user.name,
-  },
-  header: DetailHeaderHelper.getUser(user),
-  description: DetailDescriptionHelper.getUser(user),
-  info: DetailInfoHelper.getUser(user),
-});
 
 export const getMovie = (movie: MovieResponse, videos: VideosResponse): DetailHeaderModel => ({
   poster: MediaHelper.getTMDBImage(movie.poster_path, movie.title),
