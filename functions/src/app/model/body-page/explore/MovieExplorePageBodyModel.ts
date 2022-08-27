@@ -2,7 +2,7 @@ import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
 import { MoviesResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { ExplorePageBodyModel } from "../../../../shared/model/pages/explore/ExplorePageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import SectionHelper from "../../section/SectionHelper";
+import MovieExploreSectionsModel from "../../section/explore/MovieExploreSectionsModel";
 
 const MovieExplorePageBodyModel = async (query?: LanguageParams): Promise<ExplorePageBodyModel> => {
     const upcoming: MoviesResponse = await TMDB.movie.getUpcoming(query);
@@ -13,7 +13,7 @@ const MovieExplorePageBodyModel = async (query?: LanguageParams): Promise<Explor
     const weeklyTrending: MoviesResponse = await TMDB.trending.getMovies("week");
 
     return {
-        sections: SectionHelper.movie.getExplore({
+        sections: MovieExploreSectionsModel({
             upcoming,
             topRated,
             nowPlaying,
