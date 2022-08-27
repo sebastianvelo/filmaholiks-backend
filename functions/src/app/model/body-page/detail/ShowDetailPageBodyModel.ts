@@ -5,6 +5,7 @@ import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/Detai
 import TMDB from "../../../../tmdb/TMDB";
 import ChartHelper from "../../../helper/chart/ChartHelper";
 import * as DetailHelper from "../../../helper/detail/DetailHelper";
+import ShowDetailSectionsModel from "../../section/detail/ShowDetailSectionsModel";
 import SectionHelper from "../../section/SectionHelper";
 
 const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPageBodyModel> => {
@@ -31,7 +32,7 @@ const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPage
         charts: [
             chartSeasons
         ],
-        sections: SectionHelper.show.getDetail({
+        sections: ShowDetailSectionsModel({
             show,
             moreLikeThis,
             credits,
