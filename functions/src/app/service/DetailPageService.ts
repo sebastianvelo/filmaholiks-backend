@@ -7,6 +7,7 @@ import UserRepository from "../repository/UserRepository";
 import MovieDetailPageBodyModel from "../model/body-page/detail/MovieDetailPageBodyModel";
 import ShowDetailPageBodyModel from "../model/body-page/detail/ShowDetailPageBodyModel";
 import SeasonDetailPageBodyModel from "../model/body-page/detail/SeasonDetailPageBodyModel";
+import EpisodeDetailPageBodyModel from "../model/body-page/detail/EpisodeDetailPageBodyModel";
 
 class DetailPageService {
   public static async getUser(id: string): Promise<DetailPageModel> {
@@ -64,7 +65,7 @@ class DetailPageService {
 
   public static async getEpisode(showId: string, seasonNumber: string, episodeNumber: string): Promise<DetailPageModel> {
     const episode = await TMDB.episode.getDetails(+showId, +seasonNumber, +episodeNumber);
-    const body = await BodyPageHelper.episode.getDetail(episode, showId, seasonNumber);
+    const body = await EpisodeDetailPageBodyModel(episode, showId, seasonNumber);
     return {
       title: TitleHelper.episode.getDetail(episode),
       searchbar: SearchBarHelper.show.getSearchbar(),
