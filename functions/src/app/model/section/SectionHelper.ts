@@ -13,12 +13,6 @@ import MovieCardVerticalModel from "../card/vertical/MovieCardVerticalModel";
 import PersonCardVerticalModel from "../card/vertical/PersonCardVerticalModel";
 import ShowCardVerticalModel from "../card/vertical/ShowCardVerticalModel";
 
-interface SeasonDetail {
-  season: SeasonWithEpisodesResponse;
-  showId: string;
-  credits: CreditsResponse;
-}
-
 interface EpisodeDetail {
   moreEpisodes?: Episode[];
   showId: string;
@@ -139,23 +133,6 @@ class SectionHelper {
       }
     ],
   }
-
-  public static season = {
-    getDetail: (data: SeasonDetail): CardsSectionModel[] => [
-      {
-        id: "cast",
-        title: "Cast",
-        cards: data.credits.cast.map(CastMemberCardVerticalModel)
-      },
-      {
-        id: "episodes",
-        title: "Episodes",
-        cards: data.season.episodes?.map((episode) =>
-          EpisodeCardVerticalModel(episode, +data.showId)
-        )
-      },
-    ]
-  };
 
   public static episode = {
     getDetail: (data: EpisodeDetail): CardsSectionModel[] => [
