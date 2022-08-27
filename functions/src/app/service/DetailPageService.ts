@@ -1,14 +1,14 @@
+import DetailPageModel from "../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../tmdb/TMDB";
-import BodyPageHelper from "../model/body-page/BodyPageHelper";
 import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
-import DetailPageModel from "../../shared/model/pages/detail/DetailPageModel";
-import UserRepository from "../repository/UserRepository";
-import MovieDetailPageBodyModel from "../model/body-page/detail/MovieDetailPageBodyModel";
-import ShowDetailPageBodyModel from "../model/body-page/detail/ShowDetailPageBodyModel";
-import SeasonDetailPageBodyModel from "../model/body-page/detail/SeasonDetailPageBodyModel";
 import EpisodeDetailPageBodyModel from "../model/body-page/detail/EpisodeDetailPageBodyModel";
+import MovieDetailPageBodyModel from "../model/body-page/detail/MovieDetailPageBodyModel";
 import PersonDetailPageBodyModel from "../model/body-page/detail/PersonDetailPageBodyModel";
+import SeasonDetailPageBodyModel from "../model/body-page/detail/SeasonDetailPageBodyModel";
+import ShowDetailPageBodyModel from "../model/body-page/detail/ShowDetailPageBodyModel";
+import UserDetailPageBodyModel from "../model/body-page/detail/UserDetailPageBodyModel";
+import UserRepository from "../repository/UserRepository";
 
 class DetailPageService {
   public static async getUser(id: string): Promise<DetailPageModel> {
@@ -16,7 +16,7 @@ class DetailPageService {
     if (!user) {
       throw new Error("User not found");
     }
-    const body = await BodyPageHelper.user.getDetail(user);
+    const body = await UserDetailPageBodyModel(user);
     return {
       title: TitleHelper.user.getDetail(user.userName),
       searchbar: SearchBarHelper.user.getSearchbar(),
