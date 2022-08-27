@@ -10,6 +10,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { CardsSectionModel } from "../../../shared/model/components/section/Section";
 import * as CardHelper from "../../model/card/CardHelper";
 import CastMemberCardVerticalModel from "../../model/card/vertical/CastMemberCardVerticalModel";
+import CrewCardVerticalModel from "../../model/card/vertical/CrewCardVerticalModel";
 import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
 import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVerticalModel";
 import ShowCardVerticalModel from "../../model/card/vertical/ShowCardVerticalModel";
@@ -247,7 +248,7 @@ class SectionHelper {
       {
         id: "crew",
         title: "Crew",
-        cards: data.crew.map(CardHelper.getCrewCard)
+        cards: data.crew.map(CrewCardVerticalModel)
       },
       {
         id: "guest_stars",
