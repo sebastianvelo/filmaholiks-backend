@@ -5,6 +5,7 @@ import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/Detai
 import TMDB from "../../../../tmdb/TMDB";
 import ChartHelper from "../../../helper/chart/ChartHelper";
 import EpisodeDetailModel from "../../detail/EpisodeDetailModel";
+import ShowDetailModel from "../../detail/ShowDetailModel";
 import ShowDetailSectionsModel from "../../section/detail/ShowDetailSectionsModel";
 
 const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPageBodyModel> => {
@@ -27,7 +28,7 @@ const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPage
     const topRatedEpisodes = allEpisodes.flat().sort(sortByRating).slice(0, 30);
 
     return {
-        detail: EpisodeDetailModel(show, video),
+        detail: ShowDetailModel(show, video),
         charts: [
             chartSeasons
         ],

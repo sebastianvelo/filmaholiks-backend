@@ -3,7 +3,7 @@ import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Respon
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import * as DetailHelper from "../../detail/DetailHelper";
+import EpisodeDetailModel from "../../detail/EpisodeDetailModel";
 import EpisodeDetailSectionsModel from "../../section/detail/EpisodeDetailSectionsModel";
 
 const EpisodeDetailPageBodyModel = async (episode: EpisodeResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyModel> => {
@@ -12,7 +12,7 @@ const EpisodeDetailPageBodyModel = async (episode: EpisodeResponse, showId: stri
     const credits: CreditsResponse = await TMDB.season.getCredits(+showId, +seasonNumber);
     const season: SeasonWithEpisodesResponse = await TMDB.season.getDetails(+showId, +seasonNumber);
     return {
-        detail: DetailHelper.getEpisode(episode, videos),
+        detail: EpisodeDetailModel(episode, videos),
         sections: EpisodeDetailSectionsModel({
             moreEpisodes: season.episodes,
             showId,
