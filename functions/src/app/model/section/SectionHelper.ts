@@ -30,16 +30,7 @@ interface PersonExplore {
   popular: PeopleResponse;
 }
 
-interface UserDetail {
-
-}
-
 class SectionHelper {
-
-  public static user = {
-    getDetail: (data: UserDetail): CardsSectionModel[] => [
-    ],
-  };
 
   public static movie = {
     getExplore: (data: MovieExplore): CardsSectionModel[] => [
