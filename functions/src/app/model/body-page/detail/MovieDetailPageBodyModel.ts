@@ -1,7 +1,7 @@
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import * as DetailHelper from "../../../helper/detail/DetailHelper";
+import * as DetailHelper from "../../detail/DetailHelper";
 import MovieDetailSectionsModel from "../../section/detail/MovieDetailSectionsModel";
 
 const MovieDetailPageBodyModel = async (movie: MovieResponse): Promise<DetailPageBodyModel> => {

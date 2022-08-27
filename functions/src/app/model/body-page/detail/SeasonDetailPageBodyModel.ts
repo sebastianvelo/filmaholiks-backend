@@ -2,7 +2,7 @@ import { CreditsResponse, VideosResponse } from "tmdb-js/lib/api/common/response
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import * as DetailHelper from "../../../helper/detail/DetailHelper";
+import * as DetailHelper from "../../detail/DetailHelper";
 import SeasonDetailSectionsModel from "../../section/detail/SeasonDetailSectionsModel";
 
 const SeasonDetailPageBodyModel = async (season: SeasonWithEpisodesResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyModel> => {

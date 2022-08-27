@@ -4,7 +4,7 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
 import ChartHelper from "../../../helper/chart/ChartHelper";
-import * as DetailHelper from "../../../helper/detail/DetailHelper";
+import * as DetailHelper from "../../detail/DetailHelper";
 import ShowDetailSectionsModel from "../../section/detail/ShowDetailSectionsModel";
 
 const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPageBodyModel> => {

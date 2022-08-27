@@ -5,7 +5,7 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DataItemSectionModel } from "../../../../shared/model/components/section/Section";
 import UserEntity from "../../../entity/user/UserEntity";
-import DataItemModel  from "../../../model/data-item/DataItemModel";
+import DataItemModel  from "../../data-item/DataItemModel";
 
 export const getUser = (user: UserEntity): DataItemSectionModel | undefined =>
     DataItemModel(`About`, `${user.about}`);

@@ -3,7 +3,7 @@ import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Respon
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import * as DetailHelper from "../../../helper/detail/DetailHelper";
+import * as DetailHelper from "../../detail/DetailHelper";
 import EpisodeDetailSectionsModel from "../../section/detail/EpisodeDetailSectionsModel";
 
 const EpisodeDetailPageBodyModel = async (episode: EpisodeResponse, showId: string, seasonNumber: string): Promise<DetailPageBodyModel> => {

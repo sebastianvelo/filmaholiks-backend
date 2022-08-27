@@ -1,6 +1,6 @@
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import UserEntity from "../../../entity/user/UserEntity";
-import * as DetailHelper from "../../../helper/detail/DetailHelper";
+import * as DetailHelper from "../../detail/DetailHelper";
 import WatchlistService from "../../../service/WatchlistService";
 import UserDetailSectionsModel from "../../section/detail/UserDetailSectionsModel";
 

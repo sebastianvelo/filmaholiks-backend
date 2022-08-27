@@ -1,7 +1,7 @@
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import * as DetailHelper from "../../../helper/detail/DetailHelper";
+import * as DetailHelper from "../../detail/DetailHelper";
 import PersonDetailSectionsModel from "../../section/detail/PersonDetailSectionsModel";
 
 const PersonDetailPageBodyModel =  async (person: PersonDetailsResponse): Promise<DetailPageBodyModel> => {

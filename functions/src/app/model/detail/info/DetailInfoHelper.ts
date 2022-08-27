@@ -5,8 +5,8 @@ import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/respo
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailContentInfoModel } from "../../../../shared/model/pages/detail/header/DetailContentModel";
 import UserEntity from "../../../entity/user/UserEntity";
-import DataItemModel from "../../../model/data-item/DataItemModel";
-import * as DateHelper from "../../date/DateHelper";
+import DataItemModel from "../../data-item/DataItemModel";
+import * as DateHelper from "../../../helper/date/DateHelper";
 
 export const getUser = (user: UserEntity): DetailContentInfoModel => ({
     data: [
