@@ -13,6 +13,7 @@ import CastMemberCardVerticalModel from "../../model/card/vertical/CastMemberCar
 import CrewCardVerticalModel from "../../model/card/vertical/CrewCardVerticalModel";
 import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
 import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVerticalModel";
+import ShowAppareancesCardVerticalModel from "../../model/card/vertical/ShowAppareancesCardVerticalModel";
 import ShowCardVerticalModel from "../../model/card/vertical/ShowCardVerticalModel";
 
 interface MovieDetail {
@@ -211,7 +212,7 @@ class SectionHelper {
       {
         id: "tv-shows",
         title: "TV Shows",
-        cards: data.shows.cast.map(CardHelper.getShowAppareances)
+        cards: data.shows.cast.map(ShowAppareancesCardVerticalModel)
       },
       {
         id: "movies",
