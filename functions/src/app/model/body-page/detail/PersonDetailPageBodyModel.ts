@@ -1,7 +1,7 @@
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
-import * as DetailHelper from "../../detail/DetailHelper";
+import PersonDetailModel from "../../detail/PersonDetailModel";
 import PersonDetailSectionsModel from "../../section/detail/PersonDetailSectionsModel";
 
 const PersonDetailPageBodyModel =  async (person: PersonDetailsResponse): Promise<DetailPageBodyModel> => {
@@ -10,7 +10,7 @@ const PersonDetailPageBodyModel =  async (person: PersonDetailsResponse): Promis
     const movies = await TMDB.person.getMovieCredits(id);
 
     return {
-        detail: DetailHelper.getPerson(person),
+        detail: PersonDetailModel(person),
         sections: PersonDetailSectionsModel({ shows, movies })
     };
 };

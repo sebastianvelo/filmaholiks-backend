@@ -9,9 +9,11 @@ import * as DateHelper from "../../helper/date/DateHelper";
 import { getTrailer, getTMDBImage } from "../../helper/media/MediaHelper";
 import DataItemModel from "../data-item/DataItemModel";
 
-const Poster = (movie: MovieResponse): ImageModel => getTMDBImage(movie.poster_path, movie.title);
+const Poster = (movie: MovieResponse): ImageModel =>
+    getTMDBImage(movie.poster_path, movie.title);
 
-const Backdrop = (movie: MovieResponse): ImageModel => getTMDBImage(movie.backdrop_path, movie.title);
+const Backdrop = (movie: MovieResponse): ImageModel =>
+    getTMDBImage(movie.backdrop_path, movie.title);
 
 const ContentHeader = (movie: MovieResponse): DetailContentHeaderModel => ({
     title: `${movie.title}`
