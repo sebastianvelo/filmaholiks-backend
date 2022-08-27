@@ -4,7 +4,8 @@ import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
 import DetailPageModel from "../../shared/model/pages/detail/DetailPageModel";
 import UserRepository from "../repository/UserRepository";
-import MovieDetailPageBodyModel from "../model/body-page/MovieDetailPageBodyModel";
+import MovieDetailPageBodyModel from "../model/body-page/detail/MovieDetailPageBodyModel";
+import ShowDetailPageBodyModel from "../model/body-page/detail/ShowDetailPageBodyModel";
 
 class DetailPageService {
   public static async getUser(id: string): Promise<DetailPageModel> {
@@ -42,7 +43,7 @@ class DetailPageService {
 
   public static async getShow(id: string): Promise<DetailPageModel> {
     const show = await TMDB.tvShow.getDetails(+id);
-    const body = await BodyPageHelper.show.getDetail(show);
+    const body = await ShowDetailPageBodyModel(show);
     return {
       title: TitleHelper.show.getDetail(show),
       searchbar: SearchBarHelper.show.getSearchbar(),
