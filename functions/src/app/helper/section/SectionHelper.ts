@@ -11,6 +11,7 @@ import { CardsSectionModel } from "../../../shared/model/components/section/Sect
 import * as CardHelper from "../../model/card/CardHelper";
 import CastMemberCardVerticalModel from "../../model/card/vertical/CastMemberCardVerticalModel";
 import CrewCardVerticalModel from "../../model/card/vertical/CrewCardVerticalModel";
+import MovieAppareancesCardVerticalModel from "../../model/card/vertical/MovieAppareancesCardVerticalModel";
 import MovieCardVerticalModel from "../../model/card/vertical/MovieCardVerticalModel";
 import PersonCardVerticalModel from "../../model/card/vertical/PersonCardVerticalModel";
 import ShowAppareancesCardVerticalModel from "../../model/card/vertical/ShowAppareancesCardVerticalModel";
@@ -217,7 +218,7 @@ class SectionHelper {
       {
         id: "movies",
         title: "Movies",
-        cards: data.movies.cast.map(CardHelper.getMovieAppareances)
+        cards: data.movies.cast.map(MovieAppareancesCardVerticalModel)
       },
     ]
   }
