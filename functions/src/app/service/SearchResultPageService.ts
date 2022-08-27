@@ -3,14 +3,13 @@ import {
   PeopleResponse,
   TVShowsResponse
 } from "tmdb-js/lib/api/common/response/CommonResponse";
-import BodyPageHelper from "../model/body-page/BodyPageHelper";
+import SearchResultPageModel from "../../shared/model/pages/search-result/SearchResultPageModel";
+import TMDB from "../../tmdb/TMDB";
 import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
-import TMDB from "../../tmdb/TMDB";
-import SearchResultPageModel from "../../shared/model/pages/search-result/SearchResultPageModel";
-import PersonSearchResultPageModel from "../model/body-page/search/PersonSearchResultPageModel";
-import ShowSearchResultPageModel from "../model/body-page/search/ShowSearchResultPageModel";
-import MovieSearchResultPageModel from "../model/body-page/search/MovieSearchResultPageModel";
+import MovieSearchResultPageBodyModel from "../model/body-page/search/MovieSearchResultPageBodyModel";
+import PersonSearchResultPageBodyModel from "../model/body-page/search/PersonSearchResultPageBodyModel";
+import ShowSearchResultPageBodyModel from "../model/body-page/search/ShowSearchResultPageBodyModel";
 
 class SearchResultPageService {
   public static async getMovie(query: string): Promise<SearchResultPageModel> {
@@ -18,7 +17,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.movie.getSearchbar(),
-      body: MovieSearchResultPageModel(movies, query)
+      body: MovieSearchResultPageBodyModel(movies, query)
     };
   }
 
@@ -27,7 +26,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.show.getSearchbar(),
-      body: ShowSearchResultPageModel(shows, query)
+      body: ShowSearchResultPageBodyModel(shows, query)
     };
   }
 
@@ -36,7 +35,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.people.getSearchbar(),
-      body: PersonSearchResultPageModel(people, query)
+      body: PersonSearchResultPageBodyModel(people, query)
     };
   }
 

@@ -3,8 +3,8 @@ import { SearchResultPageBodyModel } from "../../../../shared/model/pages/search
 import { getMovieCard } from "../../../helper/card/CardHelper";
 import getResults from "../../../helper/results/ResultsHelper";
 
-const MovieSearchResultPageModel = (movies: MoviesResponse, query: string): SearchResultPageBodyModel => ({
+const MovieSearchResultPageBodyModel = (movies: MoviesResponse, query: string): SearchResultPageBodyModel => ({
     results: getResults(movies.results, getMovieCard, query)
 });
 
-export default MovieSearchResultPageModel;
+export default MovieSearchResultPageBodyModel;

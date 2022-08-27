@@ -3,8 +3,8 @@ import { SearchResultPageBodyModel } from "../../../../shared/model/pages/search
 import { getShowCard } from "../../../helper/card/CardHelper";
 import getResults from "../../../helper/results/ResultsHelper";
 
-const ShowSearchResultPageModel = (shows: TVShowsResponse, query: string): SearchResultPageBodyModel => ({
+const ShowSearchResultPageBodyModel = (shows: TVShowsResponse, query: string): SearchResultPageBodyModel => ({
     results: getResults(shows.results, getShowCard, query)
 });
 
-export default ShowSearchResultPageModel;
+export default ShowSearchResultPageBodyModel;
