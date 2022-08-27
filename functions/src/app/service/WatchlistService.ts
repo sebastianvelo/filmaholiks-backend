@@ -1,13 +1,14 @@
 import { MoviesResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import ActionableCardModel from "../../shared/model/components/ActionableCardModel";
 import { WatchlistTabModel } from "../../shared/model/components/section/Section";
+import { ListModel as IListModel } from "../../shared/model/components/WatchlistModel";
 import { DetailWatchlistModel } from "../../shared/model/pages/detail/DetailPageModel";
 import MediaType from "../../shared/types/MediaType";
 import TMDB from "../../tmdb/TMDB";
 import { ListEntity } from "../entity/watch-list/WatchlistEntity";
-import { WatchlistModel } from "../model/watch-list/WatchlistModel";
 import MovieActionableCardModel from "../model/actionable-card/MovieActionableCardModel";
 import ShowActionableCardModel from "../model/actionable-card/ShowActionableCardModel";
+import { ListModel, ListsModel, WatchlistModel } from "../model/watch-list/WatchlistModel";
 import WatchlistRepository from "../repository/WatchlistRepository";
 
 interface IWatchlistService {
@@ -47,6 +48,12 @@ class WatchlistService {
       swap: (media: MediaType, userName: string, listIdx1: number, listIdx2: number): void => {
         WatchlistRepository[media].list.swap(userName, listIdx1, listIdx2);
       },
+      getByItem: async (media: MediaType, userName: string, itemId: number): Promise<IListModel | undefined> => {
+        const list = await WatchlistRepository[media].list.getByItem(userName, itemId);
+        return list && ListModel(media, list);
+      },
+      getByUser: async (media: MediaType, userName: string): Promise<IListModel[] | undefined> =>
+        ListsModel(media, await WatchlistRepository[media].list.getByUser(userName)),
     },
     item: {
       save: (media: MediaType, userName: string, listIdx: number, item: string): void => {

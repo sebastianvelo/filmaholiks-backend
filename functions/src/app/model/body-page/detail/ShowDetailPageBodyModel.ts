@@ -4,9 +4,21 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../tmdb/TMDB";
 import ChartHelper from "../../../helper/chart/ChartHelper";
-import EpisodeDetailModel from "../../detail/EpisodeDetailModel";
 import ShowDetailModel from "../../detail/ShowDetailModel";
 import ShowDetailSectionsModel from "../../section/detail/ShowDetailSectionsModel";
+
+const getRating = (episode: Episode) => Number(episode.vote_average?.toFixed(1));
+
+const sortByRating = (episodeA: Episode, episodeB: Episode) => getRating(episodeB) - getRating(episodeA);
+
+const seasonEpisodes = async (show: TVShowResponse, seasonNumber: number) => {
+    const season = await TMDB.season.getDetails(show.id ?? 0, seasonNumber);
+    return season.episodes as Episode[];
+};
+
+const allEpisodes = (show: TVShowResponse) => Promise.all(
+    show.seasons?.filter(season => season.season_number).map(async (season) => seasonEpisodes(show, season.season_number)) ?? []
+);
 
 const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPageBodyModel> => {
     const id = Number(show.id);
@@ -15,20 +27,11 @@ const ShowDetailPageBodyModel = async (show: TVShowResponse): Promise<DetailPage
     const credits: CreditsResponse = await TMDB.tvShow.getCredits(id);
     const images: ImagesResponse = await TMDB.tvShow.getImages(id);
     const chartSeasons = await ChartHelper.showEpisodes.getChartSection(id, show.seasons);
-
-    const seasonEpisodes = async (season: number) => {
-        const s = await TMDB.season.getDetails(show.id ?? 0, season);
-        return s.episodes as Episode[];
-    };
-    const allEpisodes = await Promise.all(
-        show.seasons?.filter(season => season.season_number).map(async (season) => seasonEpisodes(season.season_number)) ?? []
-    );
-    const getRating = (episode: Episode) => Number(episode.vote_average?.toFixed(1));
-    const sortByRating = (episodeA: Episode, episodeB: Episode) => getRating(episodeB) - getRating(episodeA);
-    const topRatedEpisodes = allEpisodes.flat().sort(sortByRating).slice(0, 30);
+    const topRatedEpisodes = (await allEpisodes(show)).flat().sort(sortByRating).slice(0, 30);
+    const detail = await ShowDetailModel(show, video);
 
     return {
-        detail: ShowDetailModel(show, video),
+        detail,
         charts: [
             chartSeasons
         ],

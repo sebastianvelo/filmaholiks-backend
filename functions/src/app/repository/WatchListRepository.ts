@@ -1,6 +1,6 @@
 import MediaType from "../../shared/types/MediaType";
 import WatchlistsDatabase from "../database/WatchlistsDatabase";
-import WatchlistEntity from "../entity/watch-list/WatchlistEntity";
+import WatchlistEntity, { ListEntity } from "../entity/watch-list/WatchlistEntity";
 
 type ItemId = string | number;
 
@@ -15,6 +15,10 @@ class WatchlistMediaRepository {
         getByUser: async (userId: string): Promise<WatchlistEntity> => {
             const lists = await this.database.list.getAll(userId);
             return { lists };
+        },
+        getByItem: async (userId: string, itemId: ItemId): Promise<ListEntity | undefined> => {
+            const lists = await this.database.list.getAll(userId);
+            return lists.find(list => list.items.includes(String(itemId)));
         },
         saveAll: async (userId: string, lists: WatchlistEntity): Promise<WatchlistEntity> => {
             this.database.list.addAll(userId, lists.lists);

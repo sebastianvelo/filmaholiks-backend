@@ -4,9 +4,13 @@ import ImageModel from "../../../shared/model/atom/ImageModel";
 import VideoModel from "../../../shared/model/atom/VideoModel";
 import { DataItemSectionModel } from "../../../shared/model/components/section/Section";
 import { DetailContentHeaderModel, DetailContentInfoModel } from "../../../shared/model/pages/detail/header/DetailContentModel";
-import { DetailHeaderModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
+import { DetailHeaderModel, WatchlistButtonModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
+import MediaType from "../../../shared/types/MediaType";
 import * as DateHelper from "../../helper/date/DateHelper";
 import { getTrailer, getTMDBImage } from "../../helper/media/MediaHelper";
+import WatchlistService from "../../service/WatchlistService";
+import MovieCardHorizontalModel from "../card/horizontal/MovieCardHorizontalModel";
+import ShowCardHorizontalModel from "../card/horizontal/ShowCardHorizontalModel";
 import DataItemModel from "../data-item/DataItemModel";
 
 const Poster = (movie: MovieResponse): ImageModel =>
@@ -38,13 +42,38 @@ const Info = (movie: MovieResponse): DetailContentInfoModel => ({
 const Video = (videos: VideosResponse): VideoModel =>
     getTrailer(videos);
 
-const MovieDetailModel = (movie: MovieResponse, videos: VideosResponse): DetailHeaderModel => ({
-    poster: Poster(movie),
-    backdrop: Backdrop(movie),
-    header: ContentHeader(movie),
-    description: Description(movie),
-    info: Info(movie),
-    video: Video(videos),
-});
+const WatchlistButton = async (movie: MovieResponse): Promise<WatchlistButtonModel> => {
+    const list = await WatchlistService.presenter.list.getByItem(MediaType.MOVIE, "sebastianvelo", Number(movie.id));
+    const lists = await WatchlistService.presenter.list.getByUser(MediaType.MOVIE, "sebastianvelo");
+
+    return {
+        ...MovieCardHorizontalModel(movie),
+        list,
+        lists,
+        mediaType: MediaType.MOVIE
+    };
+};
+
+const Actions = async (movie: MovieResponse) => {
+    const watchlistButton = await WatchlistButton(movie);
+
+    return {
+        watchlistButton
+    };
+};
+
+const MovieDetailModel = async (movie: MovieResponse, videos: VideosResponse): Promise<DetailHeaderModel> => {
+    const actions = await Actions(movie);
+    
+    return {
+        poster: Poster(movie),
+        backdrop: Backdrop(movie),
+        header: ContentHeader(movie),
+        description: Description(movie),
+        info: Info(movie),
+        video: Video(videos),
+        actions
+    };
+};
 
 export default MovieDetailModel;

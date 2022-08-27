@@ -10,9 +10,10 @@ const MovieDetailPageBodyModel = async (movie: MovieResponse): Promise<DetailPag
     const moreLikeThis = await TMDB.movie.getMovieRecommendations(id);
     const credits = await TMDB.movie.getCredits(id);
     const images = await TMDB.movie.getImages(id);
-
+    const detail = await MovieDetailModel(movie, video);
+    
     return {
-        detail: MovieDetailModel(movie, video),
+        detail,
         sections: MovieDetailSectionsModel({ credits, moreLikeThis, images })
     };
 };
