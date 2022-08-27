@@ -12,11 +12,11 @@ import { ExplorePageBodyModel } from "../../../shared/model/pages/explore/Explor
 import { SearchResultPageBodyModel } from "../../../shared/model/pages/search-result/SearchResultPageModel";
 import UserEntity from "../../entity/user/UserEntity";
 import WatchlistService from "../../service/WatchlistService";
-import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";
-import ChartHelper from "../chart/ChartHelper";
-import * as DetailHelper from "../detail/DetailHelper";
-import getResults from "../results/ResultsHelper";
-import SectionHelper from "../section/SectionHelper";
+import { getMovieCard, getPersonCard, getShowCard } from "../../helper/card/CardHelper";
+import ChartHelper from "../../helper/chart/ChartHelper";
+import * as DetailHelper from "../../helper/detail/DetailHelper";
+import getResults from "../../helper/results/ResultsHelper";
+import SectionHelper from "../../helper/section/SectionHelper";
 
 class BodyPageHelper {
 

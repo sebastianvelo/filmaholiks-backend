@@ -3,7 +3,7 @@ import {
   PeopleResponse,
   TVShowsResponse
 } from "tmdb-js/lib/api/common/response/CommonResponse";
-import BodyPageHelper from "../helper/body-page/BodyPageHelper";
+import BodyPageHelper from "../model/body-page/BodyPageHelper";
 import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
 import TMDB from "../../tmdb/TMDB";

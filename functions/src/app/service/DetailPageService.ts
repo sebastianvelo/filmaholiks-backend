@@ -1,9 +1,10 @@
 import TMDB from "../../tmdb/TMDB";
-import BodyPageHelper from "../helper/body-page/BodyPageHelper";
+import BodyPageHelper from "../model/body-page/BodyPageHelper";
 import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
 import DetailPageModel from "../../shared/model/pages/detail/DetailPageModel";
 import UserRepository from "../repository/UserRepository";
+import MovieDetailPageBodyModel from "../model/body-page/MovieDetailPageBodyModel";
 
 class DetailPageService {
   public static async getUser(id: string): Promise<DetailPageModel> {
@@ -21,7 +22,7 @@ class DetailPageService {
 
   public static async getMovie(id: string): Promise<DetailPageModel> {
     const movie = await TMDB.movie.getDetails(+id);
-    const body = await BodyPageHelper.movie.getDetail(movie);
+    const body = await MovieDetailPageBodyModel(movie);
     return {
       title: TitleHelper.movie.getDetail(movie),
       searchbar: SearchBarHelper.movie.getSearchbar(),
