@@ -6,7 +6,7 @@ import { DetailPageBodyModel } from "../../shared/model/pages/detail/DetailPageM
 import ExplorePageModel from "../../shared/model/pages/explore/ExplorePageModel";
 
 class ExplorePageService {
-  public static async getMovieExplorePage(query?: LanguageParams): Promise<ExplorePageModel> {
+  public static async getMovie(query?: LanguageParams): Promise<ExplorePageModel> {
     const body: DetailPageBodyModel = await BodyPageHelper.movie.getExplore(query);
     return {
       title: TitleHelper.movie.getExplore(),
@@ -15,7 +15,7 @@ class ExplorePageService {
     };
   }
 
-  public static async getShowExplorePage(query?: LanguageParams): Promise<ExplorePageModel> {
+  public static async getShow(query?: LanguageParams): Promise<ExplorePageModel> {
     const body: DetailPageBodyModel = await BodyPageHelper.show.getExplore(query);
     return {
       title: TitleHelper.show.getExplore(),
@@ -24,7 +24,7 @@ class ExplorePageService {
     };
   }
 
-  public static async getPeopleExplorePage(): Promise<ExplorePageModel> {
+  public static async getPeople(): Promise<ExplorePageModel> {
     const body: DetailPageBodyModel = await BodyPageHelper.people.getExplore();
     return {
       title: TitleHelper.people.getExplore(),

@@ -4,7 +4,7 @@ import TMDB from "../../../tmdb/TMDB";
 import MediaType from "../../../shared/types/MediaType";
 import { WatchlistTabModel } from "../../../shared/model/components/section/Section";
 import { ListModel } from "../../../shared/model/components/WatchlistModel";
-import WatchlistEntity, { ListEntity } from "../../repository/entity/watch-list/WatchlistEntity";
+import WatchlistEntity, { ListEntity } from "../../entity/watch-list/WatchlistEntity";
 import { getMoviCardHorizontal, getShowCardHorizontal } from "../card/CardHelper";
 
 export const getShowListModel = async (list: ListEntity): Promise<ListModel> => {
@@ -12,7 +12,6 @@ export const getShowListModel = async (list: ListEntity): Promise<ListModel> => 
     return {
         title: list.title,
         items: items.map(getShowCardHorizontal),
-        dynamic: false,
     };
 };
 
@@ -21,13 +20,12 @@ export const getMovieListModel = async (list: ListEntity): Promise<ListModel> =>
     return {
         title: list.title,
         items: items.map(getMoviCardHorizontal),
-        dynamic: false,
     };
 };
 
 const getListModel = {
-    "show": getShowListModel,
-    "movie": getMovieListModel,
+    [MediaType.SHOW]: getShowListModel,
+    [MediaType.MOVIE]: getMovieListModel,
 }
 
 export const getWatchlistTabModel = async (title: string, model: WatchlistEntity, mediaType: MediaType): Promise<WatchlistTabModel> => {
@@ -35,7 +33,8 @@ export const getWatchlistTabModel = async (title: string, model: WatchlistEntity
     return {
         title,
         lists,
-        mediaType
+        mediaType,
+        dynamic: true
     }
 };
 

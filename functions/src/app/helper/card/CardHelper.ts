@@ -9,106 +9,107 @@ import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Respons
 import ActionableCardModel from "../../../shared/model/components/ActionableCardModel";
 import CardHorizontalModel from "../../../shared/model/components/CardHorizontalModel";
 import CardVerticalModel from "../../../shared/model/components/CardVerticalModel";
+import { PageRouteBuilder } from "../../../shared/routes/PageRoute";
 import { getTMDBImage } from "../media/MediaHelper";
 
 export const getMovieCard = (movie: MovieResponse): CardVerticalModel => ({
   title: movie.title,
   subtitle: `${movie.release_date?.substring(0, 4)}`,
   image: getTMDBImage(movie.poster_path, movie.title),
-  path: `/movie/${movie.id}`
+  path: PageRouteBuilder.MOVIE_DETAIL(movie.id)
 });
 
 export const getShowCard = (show: TVShow): CardVerticalModel => ({
   title: show.original_name,
   subtitle: `${show.first_air_date?.substring(0, 4)}`,
   image: getTMDBImage(show.poster_path, show.title),
-  path: `/show/${show.id}`
+  path: PageRouteBuilder.SHOW_DETAIL(show.id)
 });
 
 export const getPersonCard = (person: PersonDetail): CardVerticalModel => ({
   title: person.name,
   subtitle: person.birthday,
   image: getTMDBImage(person.profile_path, person.name),
-  path: `/person/${person.id}`
+  path: PageRouteBuilder.PERSON_DETAIL(person.id)
 });
 
 export const getCastMemberCard = (castMember: CreditPerson): CardVerticalModel => ({
   title: castMember.name,
   subtitle: `as ${castMember.character}`,
   image: getTMDBImage(castMember.profile_path, castMember.name),
-  path: `/person/${castMember.id}`
+  path: PageRouteBuilder.PERSON_DETAIL(castMember.id)
 });
 
 export const getCrewCard = (crew: Character): CardVerticalModel => ({
   title: crew.name,
   subtitle: `as ${crew.job}`,
   image: getTMDBImage(crew.profile_path, crew.name),
-  path: `/person/${crew.id}`
+  path: PageRouteBuilder.PERSON_DETAIL(crew.id)
 });
 
 export const getShowAppareances = (castMember: any): CardVerticalModel => ({
   title: castMember.name,
   subtitle: `as ${castMember.character}`,
-  path: `/show/${castMember.id}`,
   image: getTMDBImage(castMember.poster_path, castMember.name),
+  path: PageRouteBuilder.SHOW_DETAIL(castMember.id),
 });
 
 export const getMovieAppareances = (castMember: any): CardVerticalModel => ({
   title: castMember.original_title,
-  subtitle: `as ${castMember.character}`,
-  path: `/movie/${castMember.id}`,
+  subtitle: `as ${castMember.character} `,
   image: getTMDBImage(castMember.poster_path, castMember.original_title),
+  path: PageRouteBuilder.MOVIE_DETAIL(castMember.id)
 });
 
-export const getSeasonCard = (season: SeasonResponse, show?: string | number): CardVerticalModel => ({
-  title: `${season.name}`,
+export const getSeasonCard = (season: SeasonResponse, show?: number): CardVerticalModel => ({
+  title: `${season.name} `,
   subtitle: `${season.episode_count} episodes`,
   image: getTMDBImage(season.poster_path, season.name),
-  path: `/show/${show}/s/${season.season_number}`
+  path: PageRouteBuilder.SEASON_DETAIL(show!, season.season_number)
 });
 
-export const getEpisodeCard = (episode: Episode, show?: string | number): CardVerticalModel => ({
-  title: `${episode.name}`,
-  subtitle: `${episode.vote_average}/10`,
+export const getEpisodeCard = (episode: Episode, show?: number): CardVerticalModel => ({
+  title: `${episode.name} `,
+  subtitle: `${episode.vote_average} /10`,
   image: getTMDBImage(episode.still_path, episode.name),
-  path: `/show/${show}/s/${episode.season_number}/e/${episode.episode_number}`
+  path: PageRouteBuilder.EPISODE_DETAIL(show!, episode.season_number!, episode.episode_number!)
 });
 
-export const getTopRatedEpisodeCard = (episode: Episode, show?: string | number): CardVerticalModel => ({
+export const getTopRatedEpisodeCard = (episode: Episode, show?: number): CardVerticalModel => ({
   title: `${episode.name} (${episode.season_number}x${episode.episode_number})`,
   subtitle: `${episode.vote_average}/10`,
   image: getTMDBImage(episode.still_path, episode.name),
-  path: `/show/${show}/s/${episode.season_number}/e/${episode.episode_number}`
+  path: PageRouteBuilder.EPISODE_DETAIL(show!, episode.season_number!, episode.episode_number!)
 });
 
 export const getGalleryImage = (image: Image): CardVerticalModel => ({
   image: getTMDBImage(image.file_path, image.id)
 });
 
+const getTags = (show: TVShowResponse) =>
+  show.genres?.map((genre) => genre.name).includes("Comedy") ? "Comedy" : "Drama";
+
 export const getShowCardHorizontal = (show: TVShowResponse): CardHorizontalModel => ({
   id: show.id ?? -1,
-  title: show.original_name ?? "",
+  title: show.original_name,
   image: getTMDBImage(show.poster_path, show.title),
   subtitle: `${show.seasons?.filter(season => season.season_number).length} seasons`,
-  tags: show.genres?.map((genre) => genre.name).join(", "),
-  path: `/show/${show.id}`,
+  tags: getTags(show),
+  path: PageRouteBuilder.SHOW_DETAIL(show.id),
 });
-
 
 export const getMoviCardHorizontal = (movie: Movie): CardHorizontalModel => ({
   id: movie.id ?? -1,
-  title: movie.title ?? "",
+  title: movie.title,
   image: getTMDBImage(movie.poster_path, movie.title),
   subtitle: `${movie.vote_average}/10 ⭐️`,
-  path: `/movie/${movie.id}`,
+  path: PageRouteBuilder.MOVIE_DETAIL(movie.id)
 });
-
 
 export const getShowActionableCardHorizontal = (show: TVShowResponse, del: boolean): ActionableCardModel => ({
   item: getShowCardHorizontal(show),
   delete: del
 });
-
 
 export const getMovieActionableCardHorizontal = (movie: Movie, del: boolean): ActionableCardModel => ({
   item: getMoviCardHorizontal(movie),

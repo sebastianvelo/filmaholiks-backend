@@ -1,4 +1,4 @@
-import UserEntity from "../entity/user/UserEntity";
+import UserEntity from "../../entity/user/UserEntity";
 
 const mock: UserEntity[] = [
   {

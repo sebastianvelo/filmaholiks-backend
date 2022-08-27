@@ -227,7 +227,7 @@ class SectionHelper {
         id: "episodes",
         title: "Episodes",
         cards: data.season.episodes?.map((episode) =>
-          CardHelper.getEpisodeCard(episode, data.showId)
+          CardHelper.getEpisodeCard(episode, +data.showId)
         )
       },
     ]
@@ -254,7 +254,7 @@ class SectionHelper {
         id: "episodes",
         title: "More episodes",
         cards: data.moreEpisodes?.map((episode) =>
-          CardHelper.getEpisodeCard(episode, data.showId)
+          CardHelper.getEpisodeCard(episode, +data.showId)
         )
       },
     ]

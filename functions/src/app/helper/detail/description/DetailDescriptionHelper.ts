@@ -4,7 +4,7 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DataItemSectionModel } from "../../../../shared/model/components/section/Section";
-import UserEntity from "../../../repository/entity/user/UserEntity";
+import UserEntity from "../../../entity/user/UserEntity";
 import getDataItem  from "../../data-item/DataItemHelper";
 
 export const getUser = (user: UserEntity): DataItemSectionModel | undefined =>

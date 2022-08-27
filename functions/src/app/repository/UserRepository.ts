@@ -1,5 +1,5 @@
 import UsersDatabase from "../database/UsersDatabase";
-import UserEntity from "./entity/user/UserEntity";
+import UserEntity from "../entity/user/UserEntity";
 
 class UserRepository {
     private database = UsersDatabase;

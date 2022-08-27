@@ -1,32 +1,33 @@
 import SearchBarModel from "../../../shared/model/components/SearchBarModel";
+import PageRoute from "../../../shared/routes/PageRoute";
 
 class SearchBarHelper {
 
   public static user = {
     getSearchbar: (): SearchBarModel => ({
       placeholder: `Search users...`,
-      path: `/user/search/:query`
+      path: PageRoute.USER_SEARCH
     })
   }
 
   public static movie = {
     getSearchbar: (): SearchBarModel => ({
       placeholder: `Search movies...`,
-      path: `/movie/search/:query`
+      path: PageRoute.MOVIE_SEARCH
     })
   }
 
   public static show = {
     getSearchbar: (): SearchBarModel => ({
       placeholder: `Search shows...`,
-      path: `/show/search/:query`
+      path: PageRoute.SHOW_SEARCH
     })
   }
 
   public static people = {
     getSearchbar: (): SearchBarModel => ({
       placeholder: `Search people...`,
-      path: `/person/search/:query`
+      path: PageRoute.PERSON_SEARCH
     })
   }
 

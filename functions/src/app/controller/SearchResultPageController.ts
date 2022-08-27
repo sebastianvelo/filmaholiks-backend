@@ -9,19 +9,19 @@ class SearchResultPageController extends Controller {
 
   setEndpoints() {
     this.setEndpoint("/movie/:query").get((req: Request, res: Response) => {
-      SearchResultPageService.getMovieSearch(req.params.query).then((page) => {
+      SearchResultPageService.getMovie(req.params.query).then((page) => {
         res.send(page);
       });
     });
 
     this.setEndpoint("/show/:query").get((req: Request, res: Response) => {
-      SearchResultPageService.getShowSearch(req.params.query).then((page) => {
+      SearchResultPageService.getShow(req.params.query).then((page) => {
         res.send(page);
       });
     });
 
     this.setEndpoint("/person/:query").get((req: Request, res: Response) => {
-      SearchResultPageService.getPersonSearch(req.params.query).then((page) => {
+      SearchResultPageService.getPeople(req.params.query).then((page) => {
         res.send(page);
       });
     });

@@ -10,7 +10,7 @@ import TMDB from "../../tmdb/TMDB";
 import SearchResultPageModel from "../../shared/model/pages/search-result/SearchResultPageModel";
 
 class SearchResultPageService {
-  public static async getMovieSearch(query: string): Promise<SearchResultPageModel> {
+  public static async getMovie(query: string): Promise<SearchResultPageModel> {
     const movies: MoviesResponse = await TMDB.search.getMovies({ query });
     return {
       title: TitleHelper.search.getTitle(query),
@@ -19,7 +19,7 @@ class SearchResultPageService {
     };
   }
 
-  public static async getShowSearch(query: string): Promise<SearchResultPageModel> {
+  public static async getShow(query: string): Promise<SearchResultPageModel> {
     const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
     return {
       title: TitleHelper.search.getTitle(query),
@@ -28,7 +28,7 @@ class SearchResultPageService {
     };
   }
 
-  public static async getPersonSearch(query: string): Promise<SearchResultPageModel> {
+  public static async getPeople(query: string): Promise<SearchResultPageModel> {
     const people: PeopleResponse = await TMDB.search.getPeople({ query });
     return {
       title: TitleHelper.search.getTitle(query),

@@ -1,6 +1,6 @@
 import MediaType from "../../shared/types/MediaType";
 import WatchlistsDatabase from "../database/WatchlistsDatabase";
-import WatchlistEntity from "./entity/watch-list/WatchlistEntity";
+import WatchlistEntity from "../entity/watch-list/WatchlistEntity";
 
 type ItemId = string | number;
 

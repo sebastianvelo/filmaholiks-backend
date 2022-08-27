@@ -1,29 +1,17 @@
 import { MoviesResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import TMDB from "../../tmdb/TMDB";
-import MediaType from "../../shared/types/MediaType";
-import { getMovieActionableCardHorizontal, getShowActionableCardHorizontal } from "../helper/card/CardHelper";
-import { getWatchlistTabModel } from "../helper/watch-list/WatchlistHelper";
 import ActionableCardModel from "../../shared/model/components/ActionableCardModel";
 import { WatchlistTabModel } from "../../shared/model/components/section/Section";
 import { DetailWatchlistModel } from "../../shared/model/pages/detail/DetailPageModel";
-import { ListEntity } from "../repository/entity/watch-list/WatchlistEntity";
+import MediaType from "../../shared/types/MediaType";
+import TMDB from "../../tmdb/TMDB";
+import { ListEntity } from "../entity/watch-list/WatchlistEntity";
+import { getMovieActionableCardHorizontal, getShowActionableCardHorizontal } from "../helper/card/CardHelper";
+import { getWatchlistTabModel } from "../helper/watch-list/WatchlistHelper";
 import WatchlistRepository from "../repository/WatchlistRepository";
 
 interface IWatchlistService {
   search: (userName: string, query: string) => Promise<ActionableCardModel[]>;
   getViewByUser: (userName: string) => Promise<WatchlistTabModel>;
-  list: {
-    saveAll: (userName: string, lists: ListEntity[]) => void;
-    add: (userName: string, listTitle: string) => void;
-    delete: (userName: string, listIdx: number) => void;
-    swap: (userName: string, listIdx1: number, listIdx2: number) => void;
-  },
-  item: {
-    save: (userName: string, listIdx: number, item: string) => void;
-    swap: (userName: string, listIdx: number, itemIdx1: number, itemIdx2: number) => void;
-    move: (userName: string, sourceListIdx: number, targetListIdx: number, itemIdx: number) => void;
-    delete: (userName: string, listIdx: number, itemId: string) => void;
-  },
 }
 
 class WatchlistService {
@@ -47,33 +35,33 @@ class WatchlistService {
       WatchlistService[media].getViewByUser(userName),
     list: {
       saveAll: (media: MediaType, userName: string, lists: ListEntity[]): void => {
-        WatchlistService[media].list.saveAll(userName, lists);
+        WatchlistRepository[media].list.saveAll(userName, { lists });
       },
       add: (media: MediaType, userName: string, listTitle: string): void => {
-        WatchlistService[media].list.add(userName, listTitle);
+        WatchlistRepository[media].list.add(userName, listTitle);
       },
       delete: (media: MediaType, userName: string, listIdx: number): void => {
-        WatchlistService[media].list.delete(userName, listIdx);
+        WatchlistRepository[media].list.delete(userName, listIdx);
       },
       swap: (media: MediaType, userName: string, listIdx1: number, listIdx2: number): void => {
-        WatchlistService[media].list.swap(userName, listIdx1, listIdx2);
+        WatchlistRepository[media].list.swap(userName, listIdx1, listIdx2);
       },
     },
     item: {
       save: (media: MediaType, userName: string, listIdx: number, item: string): void => {
-        WatchlistService[media].item.save(userName, listIdx, item);
+        WatchlistRepository[media].item.save(userName, listIdx, item);
       },
       swap: (media: MediaType, userName: string, listIdx: number, itemIdx1: number, itemIdx2: number): void => {
-        WatchlistService[media].item.swap(userName, listIdx, itemIdx1, itemIdx2);
+        WatchlistRepository[media].item.swap(userName, listIdx, itemIdx1, itemIdx2);
       },
       move: (media: MediaType, userName: string, sourceListIdx: number, targetListIdx: number, itemIdx: number): void => {
-        WatchlistService[media].item.move(userName, sourceListIdx, targetListIdx, itemIdx);
+        WatchlistRepository[media].item.move(userName, sourceListIdx, targetListIdx, itemIdx);
       },
       delete: (media: MediaType, userName: string, listIdx: number, itemId: string): void => {
-        WatchlistService[media].item.delete(userName, listIdx, itemId);
+        WatchlistRepository[media].item.delete(userName, listIdx, itemId);
       },
     },
-  }
+  };
 
   public static show: IWatchlistService = {
     search: async (userName: string, query: string): Promise<ActionableCardModel[]> => {
@@ -85,39 +73,10 @@ class WatchlistService {
       }));
     },
     getViewByUser: async (userName: string): Promise<WatchlistTabModel> => {
-
       const tvShowWatchlist = await WatchlistRepository.show.list.getByUser(userName);
       return getWatchlistTabModel("TV Shows", tvShowWatchlist, MediaType.SHOW);
     },
-    list: {
-      saveAll: (userName: string, lists: ListEntity[]): void => {
-        WatchlistRepository.show.list.saveAll(userName, { lists });
-      },
-      add: (userName: string, listTitle: string): void => {
-        WatchlistRepository.show.list.add(userName, listTitle);
-      },
-      delete: (userName: string, listIdx: number): void => {
-        WatchlistRepository.show.list.delete(userName, listIdx);
-      },
-      swap: (userName: string, listIdx1: number, listIdx2: number): void => {
-        WatchlistRepository.show.list.swap(userName, listIdx1, listIdx2);
-      },
-    },
-    item: {
-      save: (userName: string, listIdx: number, item: string): void => {
-        WatchlistRepository.show.item.save(userName, listIdx, item);
-      },
-      swap: (userName: string, listIdx: number, itemIdx1: number, itemIdx2: number): void => {
-        WatchlistRepository.show.item.swap(userName, listIdx, itemIdx1, itemIdx2);
-      },
-      move: (userName: string, sourceListIdx: number, targetListIdx: number, itemIdx: number): void => {
-        WatchlistRepository.show.item.move(userName, sourceListIdx, targetListIdx, itemIdx);
-      },
-      delete: (userName: string, listIdx: number, itemId: string): void => {
-        WatchlistRepository.show.item.delete(userName, listIdx, itemId);
-      },
-    },
-  }
+  };
 
   public static movie: IWatchlistService = {
     search: async (userName: string, query: string): Promise<ActionableCardModel[]> => {
@@ -132,35 +91,7 @@ class WatchlistService {
       const movieWatchlist = await WatchlistRepository.movie.list.getByUser(userName);
       return getWatchlistTabModel("Movies", movieWatchlist, MediaType.MOVIE);
     },
-    list: {
-      saveAll: (userName: string, lists: ListEntity[]): void => {
-        WatchlistRepository.movie.list.saveAll(userName, { lists });
-      },
-      add: (userName: string, listTitle: string): void => {
-        WatchlistRepository.movie.list.add(userName, listTitle);
-      },
-      delete: (userName: string, listIdx: number): void => {
-        WatchlistRepository.movie.list.delete(userName, listIdx);
-      },
-      swap: (userName: string, listIdx1: number, listIdx2: number): void => {
-        WatchlistRepository.movie.list.swap(userName, listIdx1, listIdx2);
-      },
-    },
-    item: {
-      save: (userName: string, listIdx: number, item: string): void => {
-        WatchlistRepository.movie.item.save(userName, listIdx, item);
-      },
-      swap: (userName: string, listIdx: number, itemIdx1: number, itemIdx2: number): void => {
-        WatchlistRepository.movie.item.swap(userName, listIdx, itemIdx1, itemIdx2);
-      },
-      move: (userName: string, sourceListIdx: number, targetListIdx: number, itemIdx: number): void => {
-        WatchlistRepository.movie.item.move(userName, sourceListIdx, targetListIdx, itemIdx);
-      },
-      delete: (userName: string, listIdx: number, itemId: string): void => {
-        WatchlistRepository.movie.item.delete(userName, listIdx, itemId);
-      },
-    },
-  }
+  };
 }
 
 export default WatchlistService;

@@ -10,7 +10,7 @@ import TMDB from "../../../tmdb/TMDB";
 import { DetailPageBodyModel } from "../../../shared/model/pages/detail/DetailPageModel";
 import { ExplorePageBodyModel } from "../../../shared/model/pages/explore/ExplorePageModel";
 import { SearchResultPageBodyModel } from "../../../shared/model/pages/search-result/SearchResultPageModel";
-import UserEntity from "../../repository/entity/user/UserEntity";
+import UserEntity from "../../entity/user/UserEntity";
 import WatchlistService from "../../service/WatchlistService";
 import { getMovieCard, getPersonCard, getShowCard } from "../card/CardHelper";
 import ChartHelper from "../chart/ChartHelper";

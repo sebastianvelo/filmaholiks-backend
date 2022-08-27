@@ -4,9 +4,10 @@ import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import MediaType from "../../../shared/types/MediaType";
 import { DetailHeaderModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
-import UserEntity from "../../repository/entity/user/UserEntity";
+import MediaType from "../../../shared/types/MediaType";
+import UserEntity from "../../entity/user/UserEntity";
+import { getShowCardHorizontal } from "../card/CardHelper";
 import * as MediaHelper from "../media/MediaHelper";
 import * as DetailDescriptionHelper from "./description/DetailDescriptionHelper";
 import * as DetailHeaderHelper from "./header/DetailHeaderHelper";
@@ -48,13 +49,8 @@ export const getShow = (show: TVShowResponse, videos: VideosResponse): DetailHea
   video: MediaHelper.getTrailer(videos),
   actions: {
     watchlistButton: {
-      id: show.id ?? "",
-      title: show.original_name,
-      subtitle: `${show.seasons?.filter(season => season.season_number).length} seasons`,
-      path: `/show/${show.id}`,
-      image: MediaHelper.getTMDBImage(show.poster_path, show.original_name),
-      tags: show.genres?.map((genre) => genre.name).join(", "),
-      mediaType: MediaType.SHOW,
+      ...getShowCardHorizontal(show),
+      mediaType: MediaType.SHOW
     }
   },
 });

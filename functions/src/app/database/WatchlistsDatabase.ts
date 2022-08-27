@@ -1,6 +1,6 @@
 import { getDocs, doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import MediaType from "../../shared/types/MediaType";
-import { ListEntity } from "../repository/entity/watch-list/WatchlistEntity";
+import { ListEntity } from "../entity/watch-list/WatchlistEntity";
 import CollectionName from "./common/CollectionName";
 import createCollection from "./common/FirestoreHelper";
 import UsersDatabase from "./UsersDatabase";
@@ -8,7 +8,7 @@ import UsersDatabase from "./UsersDatabase";
 const WatchlistCollection = async (mediaType: MediaType, userName: string) => {
     const user = await UsersDatabase.getByUsername(userName);
     if (!user) throw new Error("User not found");
-    if (mediaType === "show") return createCollection<ListEntity>(`${CollectionName.USERS}/${user.id}/${CollectionName.SHOW_WATCHLIST}`);
+    if (mediaType === MediaType.SHOW) return createCollection<ListEntity>(`${CollectionName.USERS}/${user.id}/${CollectionName.SHOW_WATCHLIST}`);
     return createCollection<ListEntity>(`${CollectionName.USERS}/${user.id}/${CollectionName.MOVIE_WATCHLIST}`);
 };
 

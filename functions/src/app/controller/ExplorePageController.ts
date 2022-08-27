@@ -9,19 +9,19 @@ class ExplorePageController extends Controller {
 
   setEndpoints() {
     this.setEndpoint("/movie").get((req: Request, res: Response) => {
-      ExplorePageService.getMovieExplorePage(req.query).then((page) => {
+      ExplorePageService.getMovie(req.query).then((page) => {
         res.send(page);
       });
     });
 
     this.setEndpoint("/show").get((req: Request, res: Response) => {
-      ExplorePageService.getShowExplorePage(req.query).then((page) => {
+      ExplorePageService.getShow(req.query).then((page) => {
         res.send(page);
       });
     });
 
     this.setEndpoint("/person").get((req: Request, res: Response) => {
-      ExplorePageService.getPeopleExplorePage().then((page) => {
+      ExplorePageService.getPeople().then((page) => {
         res.send(page);
       });
     });

@@ -4,7 +4,7 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import { DetailContentHeaderModel } from "../../../../shared/model/pages/detail/header/DetailContentModel";
-import UserEntity from "../../../repository/entity/user/UserEntity";
+import UserEntity from "../../../entity/user/UserEntity";
 
 export const getUser = (user: UserEntity): DetailContentHeaderModel => ({
     title: `${user.userName}`
