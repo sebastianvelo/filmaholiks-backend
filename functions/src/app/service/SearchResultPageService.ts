@@ -8,6 +8,9 @@ import SearchBarHelper from "../helper/searchbar/SearchBarHelper";
 import * as TitleHelper from "../helper/title/TitleHelper";
 import TMDB from "../../tmdb/TMDB";
 import SearchResultPageModel from "../../shared/model/pages/search-result/SearchResultPageModel";
+import PersonSearchResultPageModel from "../model/body-page/search/PersonSearchResultPageModel";
+import ShowSearchResultPageModel from "../model/body-page/search/ShowSearchResultPageModel";
+import MovieSearchResultPageModel from "../model/body-page/search/MovieSearchResultPageModel";
 
 class SearchResultPageService {
   public static async getMovie(query: string): Promise<SearchResultPageModel> {
@@ -15,7 +18,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.movie.getSearchbar(),
-      body: BodyPageHelper.movie.getSearch(movies, query)
+      body: MovieSearchResultPageModel(movies, query)
     };
   }
 
@@ -24,7 +27,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.show.getSearchbar(),
-      body: BodyPageHelper.show.getSearch(shows, query)
+      body: ShowSearchResultPageModel(shows, query)
     };
   }
 
@@ -33,7 +36,7 @@ class SearchResultPageService {
     return {
       title: TitleHelper.search.getTitle(query),
       searchbar: SearchBarHelper.people.getSearchbar(),
-      body: BodyPageHelper.people.getSearch(people, query)
+      body: PersonSearchResultPageModel(people, query)
     };
   }
 
