@@ -39,13 +39,13 @@ export const ListModel = async (mediaType: MediaType, list: ListEntity): Promise
 export const ListsModel = async (mediaType: MediaType, entity: WatchlistEntity): Promise<IListModel[]> =>
     Promise.all(entity.lists.map(getListModel[mediaType]));
 
-export const WatchlistModel = async (title: string, entity: WatchlistEntity, mediaType: MediaType): Promise<WatchlistTabModel> => {
+export const WatchlistModel = async (title: string, entity: WatchlistEntity, mediaType: MediaType, dynamic?: boolean): Promise<WatchlistTabModel> => {
     const lists = await Promise.all(entity.lists.map(getListModel[mediaType]));
 
     return {
         title,
         lists,
         mediaType,
-        dynamic: false
+        dynamic
     }
 };

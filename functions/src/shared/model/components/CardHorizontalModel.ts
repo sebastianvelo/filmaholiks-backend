@@ -6,7 +6,7 @@ interface CardHorizontalModel {
     subtitle?: string;
     image?: ImageModel;
     path: string;
-    tags?: string;
+    tags?: string[];
 }
 
 export default CardHorizontalModel;

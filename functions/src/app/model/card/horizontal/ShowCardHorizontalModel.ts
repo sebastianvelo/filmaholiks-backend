@@ -3,8 +3,17 @@ import CardHorizontalModel from "../../../../shared/model/components/CardHorizon
 import { PageRouteBuilder } from "../../../../shared/routes/PageRoute";
 import { getTMDBImage } from "../../../helper/media/MediaHelper";
 
-const getTags = (show: TVShowResponse) =>
-    show.genres?.map((genre) => genre.name).includes("Comedy") ? "Comedy" : "Drama";
+const getTags = (show: TVShowResponse) => {
+    const strTags = show.genres?.map((genre) => genre.name as string);
+    const tags = [];
+
+    if (strTags?.includes("Comedy")) tags.push("Comedy");
+    else tags.push("Drama");
+    
+    if (strTags?.includes("Animation")) tags.push("Animation");
+
+    return tags;
+}
 
 const ShowCardHorizontalModel = (show: TVShowResponse): CardHorizontalModel => ({
     id: show.id ?? -1,

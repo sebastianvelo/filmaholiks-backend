@@ -9,13 +9,7 @@ class DetailPageController extends Controller {
 
   setEndpoints() {
     this.setEndpoint("/user/:id").get((req: Request, res: Response) => {
-      DetailPageService.getUser(req.params.id).then((page) => {
-        res.send(page);
-      });
-    });
-
-    this.setEndpoint("/movie/:id").get((req: Request, res: Response) => {
-      DetailPageService.getMovie(req.params.id).then((page) => {
+      DetailPageService.getUser(req.params.id, req.query.userLoggedIn as string).then((page) => {
         res.send(page);
       });
     });
@@ -26,8 +20,14 @@ class DetailPageController extends Controller {
       });
     });
 
+    this.setEndpoint("/movie/:id").get((req: Request, res: Response) => {
+      DetailPageService.getMovie(req.params.id, req.query.userLoggedIn as string).then((page) => {
+        res.send(page);
+      });
+    });
+
     this.setEndpoint("/show/:id").get((req: Request, res: Response) => {
-      DetailPageService.getShow(req.params.id).then((page) => {
+      DetailPageService.getShow(req.params.id, req.query.userLoggedIn as string).then((page) => {
         res.send(page);
       });
     });

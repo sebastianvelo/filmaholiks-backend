@@ -42,9 +42,9 @@ const Info = (movie: MovieResponse): DetailContentInfoModel => ({
 const Video = (videos: VideosResponse): VideoModel =>
     getTrailer(videos);
 
-const WatchlistButton = async (movie: MovieResponse): Promise<WatchlistButtonModel> => {
-    const list = await WatchlistService.presenter.list.getByItem(MediaType.MOVIE, "sebastianvelo", Number(movie.id));
-    const lists = await WatchlistService.presenter.list.getByUser(MediaType.MOVIE, "sebastianvelo");
+const WatchlistButton = async (movie: MovieResponse, userName: string): Promise<WatchlistButtonModel> => {
+    const list = await WatchlistService.presenter.list.getByItem(MediaType.MOVIE, userName, Number(movie.id));
+    const lists = await WatchlistService.presenter.list.getByUser(MediaType.MOVIE, userName);
 
     return {
         ...MovieCardHorizontalModel(movie),
@@ -54,16 +54,16 @@ const WatchlistButton = async (movie: MovieResponse): Promise<WatchlistButtonMod
     };
 };
 
-const Actions = async (movie: MovieResponse) => {
-    const watchlistButton = await WatchlistButton(movie);
+const Actions = async (movie: MovieResponse, userLoggedIn?: string) => {
+    const watchlistButton = userLoggedIn ? await WatchlistButton(movie, userLoggedIn) : undefined;
 
     return {
         watchlistButton
     };
 };
 
-const MovieDetailModel = async (movie: MovieResponse, videos: VideosResponse): Promise<DetailHeaderModel> => {
-    const actions = await Actions(movie);
+const MovieDetailModel = async (movie: MovieResponse, videos: VideosResponse, userLoggedIn?: string): Promise<DetailHeaderModel> => {
+    const actions = await Actions(movie, userLoggedIn);
     
     return {
         poster: Poster(movie),

@@ -5,7 +5,7 @@ import ImageModel from "../../../shared/model/atom/ImageModel";
 import VideoModel from "../../../shared/model/atom/VideoModel";
 import { DataItemSectionModel } from "../../../shared/model/components/section/Section";
 import { DetailContentHeaderModel, DetailContentInfoModel } from "../../../shared/model/pages/detail/header/DetailContentModel";
-import { DetailHeaderModel, WatchlistButtonModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
+import { DetailActionsModel, DetailHeaderModel, WatchlistButtonModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
 import MediaType from "../../../shared/types/MediaType";
 import * as DateHelper from "../../helper/date/DateHelper";
 import { getTMDBImage, getTrailer } from "../../helper/media/MediaHelper";
@@ -39,10 +39,10 @@ const Info = (show: TVShowResponse): DetailContentInfoModel => ({
 const Video = (videos: VideosResponse): VideoModel =>
     getTrailer(videos);
 
-const WatchlistButton = async (show: TVShowResponse): Promise<WatchlistButtonModel> => {
-    const list = await WatchlistService.presenter.list.getByItem(MediaType.SHOW, "sebastianvelo", Number(show.id));
-    const lists = await WatchlistService.presenter.list.getByUser(MediaType.SHOW, "sebastianvelo");
-    
+const WatchlistButton = async (show: TVShowResponse, userName: string): Promise<WatchlistButtonModel> => {
+    const list = await WatchlistService.presenter.list.getByItem(MediaType.SHOW, userName, Number(show.id));
+    const lists = await WatchlistService.presenter.list.getByUser(MediaType.SHOW, userName);
+
     return {
         ...ShowCardHorizontalModel(show),
         list,
@@ -51,16 +51,16 @@ const WatchlistButton = async (show: TVShowResponse): Promise<WatchlistButtonMod
     };
 };
 
-const Actions = async (show: TVShowResponse) => {
-    const watchlistButton = await WatchlistButton(show);
+const Actions = async (show: TVShowResponse, userLoggedIn?: string): Promise<DetailActionsModel> => {
+    const watchlistButton = userLoggedIn ? await WatchlistButton(show, userLoggedIn) : undefined;
 
     return {
         watchlistButton
     };
 };
 
-const ShowDetailModel = async (show: TVShowResponse, videos: VideosResponse): Promise<DetailHeaderModel> => {
-    const actions = await Actions(show);
+const ShowDetailModel = async (show: TVShowResponse, videos: VideosResponse, userLoggedIn?: string): Promise<DetailHeaderModel> => {
+    const actions = await Actions(show, userLoggedIn);
 
     return {
         poster: Poster(show),
