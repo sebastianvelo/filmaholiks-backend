@@ -108,7 +108,7 @@ class WatchlistsDatabase {
             const list = await this.list.getByOrder(userName, listOrder);
             if (list && list.id) {
                 const { items } = list;
-                const temp = items[itemIdx]
+                const temp = items[itemIdx];
                 items[itemIdx] = items[targetItemIdx];
                 items[targetItemIdx] = temp;
                 await this.list.update(userName, list.id, { ...list, items });
