@@ -8,6 +8,10 @@ class UserRepository {
         return (await this.database.getAll()).find(user => user.userName === userName);
     }
 
+    public async save(user: UserEntity): Promise<UserEntity | null | undefined> {
+        return this.database.save(user);
+    }
+
 }
 
 export default new UserRepository();

@@ -1,4 +1,4 @@
-import { getDocs, doc, updateDoc, addDoc } from "firebase/firestore";
+import { addDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import UserEntity from "../entity/user/UserEntity";
 import CollectionName from "./common/CollectionName";
 import createCollection from "./common/FirestoreHelper";
@@ -26,8 +26,13 @@ class UsersDatabase {
         await updateDoc(ref, data);
     };
 
-    public add = async (data: UserEntity): Promise<void> => {
-        await addDoc(UsersCollection, data);
+    public save = async (data: UserEntity): Promise<UserEntity | undefined | null> => {
+        try {
+            await addDoc(UsersCollection, data);
+            return await this.getByUsername(data.userName);
+        } catch (e) {
+            return null;
+        }
     };
 }
 

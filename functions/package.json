@@ -1,5 +1,5 @@
 {
-  "name": "ifdb-back-end",
+  "name": "filmaholiks-back-end",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
