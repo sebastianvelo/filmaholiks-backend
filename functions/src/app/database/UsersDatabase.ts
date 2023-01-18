@@ -1,5 +1,5 @@
 import { addDoc, doc, getDocs, updateDoc } from "firebase/firestore";
-import UserEntity from "../entity/user/UserEntity";
+import UserEntity from "../../shared/entity/user/UserEntity";
 import CollectionName from "./common/CollectionName";
 import createCollection from "./common/FirestoreHelper";
 

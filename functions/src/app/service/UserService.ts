@@ -1,4 +1,4 @@
-import UserEntity from "../entity/user/UserEntity";
+import UserEntity from "../../shared/entity/user/UserEntity";
 import UserRepository from "../repository/UserRepository";
 
 class UserService {
@@ -14,8 +14,20 @@ class UserService {
     }
   }
 
+  public static async getUserByEmail(email: string): Promise<UserEntity | null> {
+    try {
+      const user = await UserRepository.getUserByEmail(email);
+      if (!user) {
+        throw new Error("User not found");
+      }
+      return user;
+    } catch (e) {
+      return null;
+    }
+  }
+
   public static getDefaultAvatar = (userName: string) =>
-    `https://avatars.dicebear.com/api/personas/${userName}.svg`;
+    `https://avatars.dicebear.com/api/bottts/${userName}.svg`;
 
   public static newUserByEmail = (email: string): UserEntity => {
     const userName = email.split("@")[0];
@@ -35,7 +47,8 @@ class UserService {
 
 
   public static async save(email: string) {
-    return UserRepository.save(UserService.newUserByEmail(email));
+    const user = await UserService.getUserByEmail(email);
+    return !user && UserRepository.save(UserService.newUserByEmail(email));
   }
 }
 

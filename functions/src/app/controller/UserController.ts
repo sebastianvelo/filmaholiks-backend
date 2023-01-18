@@ -17,6 +17,15 @@ class UserController extends Controller {
       });
     });
 
+    this.setEndpoint("/email/:email").get((req: Request, res: Response) => {
+      UserService.getUserByEmail(req.params.email).then((user) => {
+        if (user)
+          res.status(200).send(user);
+        else
+          res.status(404).send();
+      });
+    });
+
     this.setEndpoint("/").post((req: Request, res: Response) => {
       UserService.save(req.body.email).then((r) => res.send(r));
     })

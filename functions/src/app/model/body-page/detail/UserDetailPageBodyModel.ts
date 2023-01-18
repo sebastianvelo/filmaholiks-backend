@@ -1,5 +1,5 @@
 import { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
-import UserEntity from "../../../entity/user/UserEntity";
+import UserEntity from "../../../../shared/entity/user/UserEntity";
 import WatchlistService from "../../../service/WatchlistService";
 import UserDetailModel from "../../detail/UserDetailModel";
 import UserDetailSectionsModel from "../../section/detail/UserDetailSectionsModel";

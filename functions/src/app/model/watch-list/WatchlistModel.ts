@@ -4,7 +4,7 @@ import { WatchlistTabModel } from "../../../shared/model/components/section/Sect
 import { ListModel as IListModel } from "../../../shared/model/components/WatchlistModel";
 import MediaType from "../../../shared/types/MediaType";
 import TMDB from "../../../tmdb/TMDB";
-import WatchlistEntity, { ListEntity } from "../../entity/watch-list/WatchlistEntity";
+import WatchlistEntity, { ListEntity } from "../../../shared/entity/watch-list/WatchlistEntity";
 import MovieCardHorizontalModel from "../card/horizontal/MovieCardHorizontalModel";
 import ShowCardHorizontalModel from "../card/horizontal/ShowCardHorizontalModel";
 

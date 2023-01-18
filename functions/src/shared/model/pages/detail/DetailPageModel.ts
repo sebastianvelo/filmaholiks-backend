@@ -20,7 +20,7 @@ export interface DetailPageBodyModel extends DetailSectionsModel, DetailChartMod
 
 interface DetailPageModel {
     title: string;
-    searchbar: SearchBarModel;
+    searchbar?: SearchBarModel;
     body: DetailPageBodyModel;
 }
 

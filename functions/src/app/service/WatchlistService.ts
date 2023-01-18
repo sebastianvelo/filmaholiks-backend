@@ -5,7 +5,7 @@ import { ListModel as IListModel } from "../../shared/model/components/Watchlist
 import { DetailWatchlistModel } from "../../shared/model/pages/detail/DetailPageModel";
 import MediaType from "../../shared/types/MediaType";
 import TMDB from "../../tmdb/TMDB";
-import { ListEntity } from "../entity/watch-list/WatchlistEntity";
+import { ListEntity } from "../../shared/entity/watch-list/WatchlistEntity";
 import MovieActionableCardModel from "../model/actionable-card/MovieActionableCardModel";
 import ShowActionableCardModel from "../model/actionable-card/ShowActionableCardModel";
 import { ListModel, ListsModel, WatchlistModel } from "../model/watch-list/WatchlistModel";

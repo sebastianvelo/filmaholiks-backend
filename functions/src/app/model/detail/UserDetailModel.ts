@@ -2,7 +2,7 @@ import ImageModel from "../../../shared/model/atom/ImageModel";
 import { DataItemSectionModel } from "../../../shared/model/components/section/Section";
 import { DetailContentHeaderModel, DetailContentInfoModel } from "../../../shared/model/pages/detail/header/DetailContentModel";
 import { DetailHeaderModel } from "../../../shared/model/pages/detail/header/DetailHeaderModel";
-import UserEntity from "../../entity/user/UserEntity";
+import UserEntity from "../../../shared/entity/user/UserEntity";
 import { getImage } from "../../helper/media/MediaHelper";
 import DataItemModel from "../data-item/DataItemModel";
 import * as DateHelper from "../../helper/date/DateHelper";
@@ -18,8 +18,8 @@ const Description = (user: UserEntity): DataItemSectionModel | undefined =>
 
 const Info = (user: UserEntity): DetailContentInfoModel => ({
     data: [
-        DataItemModel(`Name`, user.name),
-        DataItemModel(`E-Mail`, user.email),
+        // DataItemModel(`Name`, user.name),
+        // DataItemModel(`E-Mail`, user.email),
         DataItemModel(`Filmaholik since`, DateHelper.toString(user.registered)),
     ]
 });

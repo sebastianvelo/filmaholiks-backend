@@ -1,6 +1,6 @@
 import { getDocs, doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import MediaType from "../../shared/types/MediaType";
-import { ListEntity } from "../entity/watch-list/WatchlistEntity";
+import { ListEntity } from "../../shared/entity/watch-list/WatchlistEntity";
 import CollectionName from "./common/CollectionName";
 import createCollection from "./common/FirestoreHelper";
 import UsersDatabase from "./UsersDatabase";
