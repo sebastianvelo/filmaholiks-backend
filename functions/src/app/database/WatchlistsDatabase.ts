@@ -41,6 +41,12 @@ class WatchlistsDatabase {
                 await this.list.update(userName, list.id, data);
             }
         },
+        updateTitleByOrder: async (userName: string, order: number, title: string): Promise<void> => {
+            const list = await this.list.getByOrder(userName, order);
+            if (list && list.id) {
+                await this.list.update(userName, list.id, { ...list, title });
+            }
+        },
         updateOrders: async (userName: string): Promise<void> => {
             const lists = await this.list.getAll(userName);
             await Promise.all(lists.map((list, idx) => this.list.update(userName, list.id ?? "", {

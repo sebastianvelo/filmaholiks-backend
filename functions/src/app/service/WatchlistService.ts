@@ -48,6 +48,9 @@ class WatchlistService {
       swap: (media: MediaType, userName: string, listIdx1: number, listIdx2: number): void => {
         WatchlistRepository[media].list.swap(userName, listIdx1, listIdx2);
       },
+      changeTitle: (media: MediaType, userName: string, listIdx: number, title: string): void => {
+        WatchlistRepository[media].list.update(userName, listIdx, title);
+      },
       getByItem: async (media: MediaType, userName: string, itemId: number): Promise<IListModel | undefined> => {
         const list = await WatchlistRepository[media].list.getByItem(userName, itemId);
         return list && ListModel(media, list);

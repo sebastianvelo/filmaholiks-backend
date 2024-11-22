@@ -33,6 +33,10 @@ class WatchlistMediaRepository {
             await this.database.list.deleteByOrder(userId, listIdx);
             return this.list.getByUser(userId);
         },
+        update: async (userId: string, listIdx: number, title: string): Promise<WatchlistEntity> => {
+            await this.database.list.updateTitleByOrder(userId, listIdx, title);
+            return this.list.getByUser(userId);
+        },
         swap: async (userId: string, listIdx1: number, listIdx2: number): Promise<WatchlistEntity> => {
             await this.database.list.swap(userId, listIdx1, listIdx2);
             return this.list.getByUser(userId);

@@ -46,6 +46,11 @@ class WatchlistController extends Controller {
       res.send(200);
     });
 
+    this.setEndpoint("/user/:userName/:mediaType/change/list").put((req: Request, res: Response) => {
+      WatchlistService.presenter.list.changeTitle(req.params.mediaType as MediaType, req.params.userName, Number(req.body.listIdx), req.body.title);
+      res.send(200);
+    });
+
     //--------------------------------------------------------------------------------
 
     this.setEndpoint("/user/:userName/:mediaType/:listIdx/item").post((req: Request, res: Response) => {
