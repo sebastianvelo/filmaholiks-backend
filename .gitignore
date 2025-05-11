@@ -9,3 +9,5 @@ functions/typings/
 # Node.js dependency directory
 functions/node_modules/
 functions/firebase-debug.log
+functions/ui-debug.log
+functions/src/tmdb/tmdb.config.json

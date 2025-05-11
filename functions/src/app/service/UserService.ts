@@ -50,6 +50,14 @@ class UserService {
     const user = await UserService.getUserByEmail(email);
     return !user && UserRepository.save(UserService.newUserByEmail(email));
   }
+
+  public static async update(userName: string, user: UserEntity) {
+    return {};
+  }
+
+  public static async delete(userName: string) {
+    return {};
+  }
 }
 
 export default UserService;
