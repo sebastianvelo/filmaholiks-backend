@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import SearchResultPageService from "../service/SearchResultPageService";
-import Controller from "../../app/controller/Controller";
+import Controller from "../../../app/controller/Controller";
+import SearchResultPageService from "./SearchResultPageService";
 
 class SearchResultPageController extends Controller {
   constructor(app: express.Application) {

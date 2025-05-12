@@ -1,17 +1,18 @@
-import DetailPageModel from "../../shared/model/pages/detail/DetailPageModel";
-import TMDB from "../../tmdb/TMDB";
-import * as TitleHelper from "../helper/title/TitleHelper";
-import EpisodeDetailPageBodyModel from "../model/body-page/detail/EpisodeDetailPageBodyModel";
-import MovieDetailPageBodyModel from "../model/body-page/detail/MovieDetailPageBodyModel";
-import PersonDetailPageBodyModel from "../model/body-page/detail/PersonDetailPageBodyModel";
-import SeasonDetailPageBodyModel from "../model/body-page/detail/SeasonDetailPageBodyModel";
-import ShowDetailPageBodyModel from "../model/body-page/detail/ShowDetailPageBodyModel";
-import UserDetailPageBodyModel from "../model/body-page/detail/UserDetailPageBodyModel";
-import MovieSearchBarModel from "../model/searchbar/MovieSearchBarModel";
-import PersonSearchBarModel from "../model/searchbar/PersonSearchBarModel";
-import ShowSearchBarModel from "../model/searchbar/ShowSearchBarModel";
-import UserSearchBarModel from "../model/searchbar/UserSearchBarModel";
-import UserService from "./UserService";
+import * as TitleHelper from "../../helper/title/TitleHelper";
+import DetailPageModel from "../../../shared/model/pages/detail/DetailPageModel";
+import TMDB from "../../../tmdb/TMDB";
+import UserService from "../../entities/user/UserService";
+import EpisodeDetailPageBodyModel from "../../model/body-page/detail/EpisodeDetailPageBodyModel";
+import MovieDetailPageBodyModel from "../../model/body-page/detail/MovieDetailPageBodyModel";
+import PersonDetailPageBodyModel from "../../model/body-page/detail/PersonDetailPageBodyModel";
+import SeasonDetailPageBodyModel from "../../model/body-page/detail/SeasonDetailPageBodyModel";
+import ShowDetailPageBodyModel from "../../model/body-page/detail/ShowDetailPageBodyModel";
+import UserDetailPageBodyModel from "../../model/body-page/detail/UserDetailPageBodyModel";
+import MovieSearchBarModel from "../../model/searchbar/MovieSearchBarModel";
+import PersonSearchBarModel from "../../model/searchbar/PersonSearchBarModel";
+import ShowSearchBarModel from "../../model/searchbar/ShowSearchBarModel";
+import UserSearchBarModel from "../../model/searchbar/UserSearchBarModel";
+
 
 class DetailPageService {
   public static async getUser(userName: string, viewerUid?: string): Promise<DetailPageModel> {

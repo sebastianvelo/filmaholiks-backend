@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import Controller from "../../app/controller/Controller";
-import ExplorePageService from "../service/ExplorePageService";
+import Controller from "../../../app/controller/Controller";
+import ExplorePageService from "./ExplorePageService";
 
 class ExplorePageController extends Controller {
   constructor(app: express.Application) {

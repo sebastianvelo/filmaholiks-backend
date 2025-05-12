@@ -1,5 +1,5 @@
-import UserEntity from "../../shared/entity/user/UserEntity";
-import UserRepository from "../repository/UserRepository";
+import UserEntity from "../../../shared/entity/user/UserEntity";
+import UserRepository from "./UserRepository";
 
 class UserService {
   public static async getUser(userName: string): Promise<UserEntity | null> {

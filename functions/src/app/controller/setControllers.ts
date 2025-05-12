@@ -1,10 +1,10 @@
 import express from "express";
-import DetailPageController from "../../api/controller/DetailPageController";
-import ExplorePageController from "../../api/controller/ExplorePageController";
-import SearchResultPageController from "../../api/controller/SearchResultPageController";
-import UserController from "../../api/controller/UserController";
-import WatchlistController from "../../api/controller/WatchlistController";
 import Controller from "./Controller";
+import UserController from "../../api/entities/user/UserController";
+import WatchlistController from "../../api/entities/watch-list/WatchlistController";
+import DetailPageController from "../../api/pages/detail/DetailPageController";
+import ExplorePageController from "../../api/pages/explore/ExplorePageController";
+import SearchResultPageController from "../../api/pages/search-result/SearchResultPageController";
 
 const setControllers = (app: express.Application) => {
     const controllers: Array<Controller> = [
