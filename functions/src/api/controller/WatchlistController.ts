@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import { hasResourceAccess, isAuthenticated } from "../../app/auth/authMiddleware";
-import Controller from "../../common/controller/Controller";
 import MediaType from "../../shared/types/MediaType";
 import WatchlistService from "../service/WatchlistService";
+import Controller from "../../app/controller/Controller";
 
 const endpoints = {
   search: "/user/:uid/:mediaType/search/:query",

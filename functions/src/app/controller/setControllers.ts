@@ -4,7 +4,7 @@ import ExplorePageController from "../../api/controller/ExplorePageController";
 import SearchResultPageController from "../../api/controller/SearchResultPageController";
 import UserController from "../../api/controller/UserController";
 import WatchlistController from "../../api/controller/WatchlistController";
-import Controller from "../../common/controller/Controller";
+import Controller from "./Controller";
 
 const setControllers = (app: express.Application) => {
     const controllers: Array<Controller> = [

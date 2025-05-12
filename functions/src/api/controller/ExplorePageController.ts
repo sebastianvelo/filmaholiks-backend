@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import Controller from "../../common/controller/Controller";
+import Controller from "../../app/controller/Controller";
 import ExplorePageService from "../service/ExplorePageService";
 
 class ExplorePageController extends Controller {
