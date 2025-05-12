@@ -1,10 +1,9 @@
 import { getTMDBImage } from "@api/helper/media/MediaHelper";
 import DataItemModel from "@api/model/data-item/DataItemModel";
-import PersonDetailSectionsModel from "@api/model/section/detail/PersonDetailSectionsModel";
 import * as DateHelper from "@helper/date/DateHelper";
 import ImageModel from "shared/model/atom/ImageModel";
 import SearchBarModel from "shared/model/components/SearchBarModel";
-import { DataItemSectionModel } from "shared/model/components/section/Section";
+import { CardsSectionModel, DataItemSectionModel } from "shared/model/components/section/Section";
 import { DetailContentHeaderModel, DetailContentInfoModel } from "shared/model/pages/detail/header/DetailContentModel";
 import { DetailHeaderModel } from "shared/model/pages/detail/header/DetailHeaderModel";
 import PageRoute from "shared/routes/PageRoute";
@@ -12,6 +11,9 @@ import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/R
 import TMDB from "tmdb/TMDB";
 import DetailPageModel, { DetailPageBodyModel } from "../../../../shared/model/pages/detail/DetailPageModel";
 import * as TitleHelper from "../../../helper/title/TitleHelper";
+import MovieAppareancesCardVerticalModel from "@api/model/card/vertical/MovieAppareancesCardVerticalModel";
+import ShowAppareancesCardVerticalModel from "@api/model/card/vertical/ShowAppareancesCardVerticalModel";
+import { CreditsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 
 const Header = (person: PersonDetailsResponse): DetailHeaderModel => {
   const Poster = (person: PersonDetailsResponse): ImageModel =>
@@ -45,6 +47,24 @@ const Header = (person: PersonDetailsResponse): DetailHeaderModel => {
   });
 }
 
+interface PersonDetail {
+  shows: CreditsResponse;
+  movies: CreditsResponse;
+}
+
+const Sections = (data: PersonDetail): CardsSectionModel[] => [
+  {
+    id: "tv-shows",
+    title: "TV Shows",
+    cards: data.shows.cast.map(ShowAppareancesCardVerticalModel)
+  },
+  {
+    id: "movies",
+    title: "Movies",
+    cards: data.movies.cast.map(MovieAppareancesCardVerticalModel)
+  },
+];
+
 const Body = async (person: PersonDetailsResponse): Promise<DetailPageBodyModel> => {
   const id = Number(person.id);
   const shows = await TMDB.person.getTVShowCredits(id);
@@ -52,7 +72,7 @@ const Body = async (person: PersonDetailsResponse): Promise<DetailPageBodyModel>
 
   return {
     detail: Header(person),
-    sections: PersonDetailSectionsModel({ shows, movies })
+    sections: Sections({ shows, movies })
   };
 };
 

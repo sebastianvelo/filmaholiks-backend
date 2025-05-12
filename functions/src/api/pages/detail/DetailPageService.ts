@@ -5,10 +5,10 @@ import * as TitleHelper from "../../helper/title/TitleHelper";
 import EpisodeDetailPageBodyModel from "../../model/body-page/detail/EpisodeDetailPageBodyModel";
 import MovieDetailPageBodyModel from "../../model/body-page/detail/MovieDetailPageBodyModel";
 import SeasonDetailPageBodyModel from "../../model/body-page/detail/SeasonDetailPageBodyModel";
-import ShowDetailPageBodyModel from "../../model/body-page/detail/ShowDetailPageBodyModel";
 import MovieSearchBarModel from "../../model/searchbar/MovieSearchBarModel";
 import ShowSearchBarModel from "../../model/searchbar/ShowSearchBarModel";
 import PersonDetailPage from "./page/PersonDetailPage";
+import ShowDetailPage from "./page/ShowDetailPage";
 import UserDetailPage from "./page/UserDetailPage";
 
 class DetailPageService {
@@ -38,13 +38,7 @@ class DetailPageService {
 
   public static async getShow(id: string, viewerUid?: string): Promise<DetailPageModel> {
     const show = await TMDB.tvShow.getDetails(+id);
-    const body = await ShowDetailPageBodyModel(show, viewerUid);
-
-    return {
-      title: TitleHelper.show.getDetail(show),
-      searchbar: ShowSearchBarModel(),
-      body
-    };
+    return ShowDetailPage({ show, viewerUid });
   }
 
   public static async getSeason(showId: string, seasonNumber: string): Promise<DetailPageModel> {
