@@ -1,8 +1,22 @@
 import express, { Request, Response } from "express";
-import { hasResourceAccess, isAuthenticated } from "../../common/app/middleware/authMiddleware";
+import { hasResourceAccess, isAuthenticated } from "../../common/app/auth/authMiddleware";
 import Controller from "../../common/controller/Controller";
 import MediaType from "../../shared/types/MediaType";
 import WatchlistService from "../service/WatchlistService";
+
+const endpoints = {
+  search: "/user/:uid/:mediaType/search/:query",
+  getWatchlist: "/user/:uid/:mediaType",
+  addList: "/user/:uid/:mediaType/list",
+  saveAllLists: "/user/:uid/:mediaType/list",
+  deleteList: "/user/:uid/:mediaType/:listIdx/list",
+  swapLists: "/user/:uid/:mediaType/swap/list",
+  changeListTitle: "/user/:uid/:mediaType/change/list",
+  addItem: "/user/:uid/:mediaType/:listIdx/item",
+  deleteItem: "/user/:uid/:mediaType/:listIdx/item",
+  swapItems: "/user/:uid/:mediaType/swap/item",
+  moveItem: "/user/:uid/:mediaType/move/item",
+};
 
 class WatchlistController extends Controller {
   constructor(app: express.Application) {
@@ -10,15 +24,14 @@ class WatchlistController extends Controller {
   }
 
   setEndpoints() {
-
-    this.setEndpoint("/user/:uid/:mediaType/search/:query").get((req: Request, res: Response) => {
+    this.setEndpoint(endpoints.search).get((req: Request, res: Response) => {
       WatchlistService.presenter.search(req.params.mediaType as MediaType, req.params.uid, req.params.query)
         .then((resp) => {
           res.send(resp);
         });
     });
 
-    this.setEndpoint("/user/:uid/:mediaType").get((req: Request, res: Response) => {
+    this.setEndpoint(endpoints.getWatchlist).get((req: Request, res: Response) => {
       try {
         WatchlistService.presenter.getViewByUser(req.params.mediaType as MediaType, req.params.uid)
           .then((resp) => {
@@ -36,10 +49,7 @@ class WatchlistController extends Controller {
       }
     });
 
-    //--------------------------------------------------------------------------------
-
-    // Agregar una nueva lista
-    this.setEndpoint("/user/:uid/:mediaType/list")
+    this.setEndpoint(endpoints.addList)
       .post(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           if (!req.body.title) {
@@ -59,8 +69,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    // Guardar todas las listas
-    this.setEndpoint("/user/:uid/:mediaType/list")
+    this.setEndpoint(endpoints.saveAllLists)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           if (!req.body || !Array.isArray(req.body)) {
@@ -80,8 +89,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    // Eliminar una lista
-    this.setEndpoint("/user/:uid/:mediaType/:listIdx/list")
+    this.setEndpoint(endpoints.deleteList)
       .delete(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
@@ -102,8 +110,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    // Intercambiar posición de listas
-    this.setEndpoint("/user/:uid/:mediaType/swap/list")
+    this.setEndpoint(endpoints.swapLists)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx1 = Number(req.body.listIdx1);
@@ -127,8 +134,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    // Cambiar título de una lista
-    this.setEndpoint("/user/:uid/:mediaType/change/list")
+    this.setEndpoint(endpoints.changeListTitle)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.body.listIdx);
@@ -155,12 +161,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    //--------------------------------------------------------------------------------
-    // Operaciones de items dentro de listas
-    //--------------------------------------------------------------------------------
-
-    // Agregar un item a una lista
-    this.setEndpoint("/user/:uid/:mediaType/:listIdx/item")
+    this.setEndpoint(endpoints.addItem)
       .post(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
@@ -187,8 +188,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    // Eliminar un item de una lista
-    this.setEndpoint("/user/:uid/:mediaType/:listIdx/item")
+    this.setEndpoint(endpoints.deleteItem)
       .delete(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
@@ -215,8 +215,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    // Intercambiar posición de items
-    this.setEndpoint("/user/:uid/:mediaType/swap/item")
+    this.setEndpoint(endpoints.swapItems)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.body.listIdx);
@@ -242,8 +241,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    // Mover un item entre listas
-    this.setEndpoint("/user/:uid/:mediaType/move/item")
+    this.setEndpoint(endpoints.moveItem)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const sourceListIdx = Number(req.body.sourceListIdx);

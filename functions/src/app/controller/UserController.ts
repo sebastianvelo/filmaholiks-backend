@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { hasResourceAccess, isAuthenticated } from "../../common/app/middleware/authMiddleware";
+import { hasResourceAccess, isAuthenticated } from "../../common/app/auth/authMiddleware";
 import Controller from "../../common/controller/Controller";
 import UserService from "../service/UserService";
 
@@ -12,7 +12,7 @@ class UserController extends Controller {
     // Get user by userName - public endpoint but with error handling
     this.setEndpoint("/:userName").get((req: Request, res: Response) => {
       try {
-        UserService.getUser(req.params.userName, req.query.userLoggedIn as string)
+        UserService.getUser(req.params.userName)
           .then((page) => {
             if (page) {
               res.status(200).send(page);
