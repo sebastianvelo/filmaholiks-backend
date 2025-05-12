@@ -12,15 +12,15 @@ import { ListModel, ListsModel, WatchlistModel } from "../model/watch-list/Watch
 import WatchlistRepository from "../repository/WatchlistRepository";
 
 interface IWatchlistService {
-  search: (userName: string, query: string) => Promise<ActionableCardModel[]>;
-  getViewByUser: (userName: string, userLoggedIn?: string) => Promise<WatchlistTabModel>;
+  search: (uid: string, query: string) => Promise<ActionableCardModel[]>;
+  getViewByUser: (uid: string, userLoggedIn?: string) => Promise<WatchlistTabModel>;
 }
 
 class WatchlistService {
 
-  public static getViewByUser = async (userName: string, userLoggedIn?: string): Promise<DetailWatchlistModel> => {
-    const tvShowWatchlistModel = await WatchlistService.show.getViewByUser(userName, userLoggedIn);
-    const movieWatchlistModel = await WatchlistService.movie.getViewByUser(userName, userLoggedIn);
+  public static getViewByUser = async (uid: string, userLoggedIn?: string): Promise<DetailWatchlistModel> => {
+    const tvShowWatchlistModel = await WatchlistService.show.getViewByUser(uid, userLoggedIn);
+    const movieWatchlistModel = await WatchlistService.movie.getViewByUser(uid, userLoggedIn);
 
     return {
       watchlists: [
@@ -31,76 +31,76 @@ class WatchlistService {
   };
 
   public static presenter = {
-    search: async (media: MediaType, userName: string, query: string): Promise<ActionableCardModel[]> =>
-      WatchlistService[media].search(userName, query),
-    getViewByUser: async (media: MediaType, userName: string, userLoggedIn?: string): Promise<WatchlistTabModel> =>
-      WatchlistService[media].getViewByUser(userName, userLoggedIn),
+    search: async (media: MediaType, uid: string, query: string): Promise<ActionableCardModel[]> =>
+      WatchlistService[media].search(uid, query),
+    getViewByUser: async (media: MediaType, uid: string, userLoggedIn?: string): Promise<WatchlistTabModel> =>
+      WatchlistService[media].getViewByUser(uid, userLoggedIn),
     list: {
-      saveAll: (media: MediaType, userName: string, lists: ListEntity[]): void => {
-        WatchlistRepository[media].list.saveAll(userName, { lists });
+      saveAll: (media: MediaType, uid: string, lists: ListEntity[]): void => {
+        WatchlistRepository[media].list.saveAll(uid, { lists });
       },
-      add: (media: MediaType, userName: string, listTitle: string): void => {
-        WatchlistRepository[media].list.add(userName, listTitle);
+      add: (media: MediaType, uid: string, listTitle: string): void => {
+        WatchlistRepository[media].list.add(uid, listTitle);
       },
-      delete: (media: MediaType, userName: string, listIdx: number): void => {
-        WatchlistRepository[media].list.delete(userName, listIdx);
+      delete: (media: MediaType, uid: string, listIdx: number): void => {
+        WatchlistRepository[media].list.delete(uid, listIdx);
       },
-      swap: (media: MediaType, userName: string, listIdx1: number, listIdx2: number): void => {
-        WatchlistRepository[media].list.swap(userName, listIdx1, listIdx2);
+      swap: (media: MediaType, uid: string, listIdx1: number, listIdx2: number): void => {
+        WatchlistRepository[media].list.swap(uid, listIdx1, listIdx2);
       },
-      changeTitle: (media: MediaType, userName: string, listIdx: number, title: string): void => {
-        WatchlistRepository[media].list.update(userName, listIdx, title);
+      changeTitle: (media: MediaType, uid: string, listIdx: number, title: string): void => {
+        WatchlistRepository[media].list.update(uid, listIdx, title);
       },
-      getByItem: async (media: MediaType, userName: string, itemId: number): Promise<IListModel | undefined> => {
-        const list = await WatchlistRepository[media].list.getByItem(userName, itemId);
+      getByItem: async (media: MediaType, uid: string, itemId: number): Promise<IListModel | undefined> => {
+        const list = await WatchlistRepository[media].list.getByItem(uid, itemId);
         return list && ListModel(media, list);
       },
-      getByUser: async (media: MediaType, userName: string): Promise<IListModel[] | undefined> =>
-        ListsModel(media, await WatchlistRepository[media].list.getByUser(userName)),
+      getByUser: async (media: MediaType, uid: string): Promise<IListModel[] | undefined> =>
+        ListsModel(media, await WatchlistRepository[media].list.getByUser(uid)),
     },
     item: {
-      save: (media: MediaType, userName: string, listIdx: number, item: string): void => {
-        WatchlistRepository[media].item.save(userName, listIdx, item);
+      save: (media: MediaType, uid: string, listIdx: number, item: string): void => {
+        WatchlistRepository[media].item.save(uid, listIdx, item);
       },
-      swap: (media: MediaType, userName: string, listIdx: number, itemIdx1: number, itemIdx2: number): void => {
-        WatchlistRepository[media].item.swap(userName, listIdx, itemIdx1, itemIdx2);
+      swap: (media: MediaType, uid: string, listIdx: number, itemIdx1: number, itemIdx2: number): void => {
+        WatchlistRepository[media].item.swap(uid, listIdx, itemIdx1, itemIdx2);
       },
-      move: (media: MediaType, userName: string, sourceListIdx: number, targetListIdx: number, itemIdx: number): void => {
-        WatchlistRepository[media].item.move(userName, sourceListIdx, targetListIdx, itemIdx);
+      move: (media: MediaType, uid: string, sourceListIdx: number, targetListIdx: number, itemIdx: number): void => {
+        WatchlistRepository[media].item.move(uid, sourceListIdx, targetListIdx, itemIdx);
       },
-      delete: (media: MediaType, userName: string, listIdx: number, itemId: string): void => {
-        WatchlistRepository[media].item.delete(userName, listIdx, itemId);
+      delete: (media: MediaType, uid: string, listIdx: number, itemId: string): void => {
+        WatchlistRepository[media].item.delete(uid, listIdx, itemId);
       },
     },
   };
 
   public static show: IWatchlistService = {
-    search: async (userName: string, query: string): Promise<ActionableCardModel[]> => {
+    search: async (uid: string, query: string): Promise<ActionableCardModel[]> => {
       const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
       const detailedShows = await Promise.all(shows.results.map(async (show) => TMDB.tvShow.getDetails(show.id ?? 0)));
       return Promise.all(detailedShows.map(async (show) => {
-        const exists = await WatchlistRepository.show.item.exists(userName, String(show.id));
+        const exists = await WatchlistRepository.show.item.exists(uid, String(show.id));
         return ShowActionableCardModel(show, exists);
       }));
     },
-    getViewByUser: async (userName: string, userLoggedIn?: string): Promise<WatchlistTabModel> => {
-      const tvShowWatchlist = await WatchlistRepository.show.list.getByUser(userName);
-      return WatchlistModel("TV Shows", tvShowWatchlist, MediaType.SHOW, userName === userLoggedIn);
+    getViewByUser: async (uid: string, userLoggedIn?: string): Promise<WatchlistTabModel> => {
+      const tvShowWatchlist = await WatchlistRepository.show.list.getByUser(uid);
+      return WatchlistModel("TV Shows", tvShowWatchlist, MediaType.SHOW, uid === userLoggedIn);
     },
   };
 
   public static movie: IWatchlistService = {
-    search: async (userName: string, query: string): Promise<ActionableCardModel[]> => {
+    search: async (uid: string, query: string): Promise<ActionableCardModel[]> => {
       const movies: MoviesResponse = await TMDB.search.getMovies({ query });
       const detailedMovies = await Promise.all(movies.results.map(async (movie) => TMDB.movie.getDetails(movie.id ?? 0)));
       return Promise.all(detailedMovies.map(async (movie) => {
-        const exists = await WatchlistRepository.movie.item.exists(userName, String(movie.id));
+        const exists = await WatchlistRepository.movie.item.exists(uid, String(movie.id));
         return MovieActionableCardModel(movie, exists);
       }));
     },
-    getViewByUser: async (userName: string, userLoggedIn?: string): Promise<WatchlistTabModel> => {
-      const movieWatchlist = await WatchlistRepository.movie.list.getByUser(userName);
-      return WatchlistModel("Movies", movieWatchlist, MediaType.MOVIE, userName === userLoggedIn);
+    getViewByUser: async (uid: string, userLoggedIn?: string): Promise<WatchlistTabModel> => {
+      const movieWatchlist = await WatchlistRepository.movie.list.getByUser(uid);
+      return WatchlistModel("Movies", movieWatchlist, MediaType.MOVIE, uid === userLoggedIn);
     },
   };
 }

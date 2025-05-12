@@ -1,12 +1,12 @@
-import { getDocs, doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
-import MediaType from "../../shared/types/MediaType";
+import { addDoc, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { ListEntity } from "../../shared/entity/watch-list/WatchlistEntity";
+import MediaType from "../../shared/types/MediaType";
+import UserRepository from "../repository/UserRepository";
 import CollectionName from "./common/CollectionName";
 import createCollection from "./common/FirestoreHelper";
-import UsersDatabase from "./UsersDatabase";
 
-const WatchlistCollection = async (mediaType: MediaType, userName: string) => {
-    const user = await UsersDatabase.getByUsername(userName);
+const WatchlistCollection = async (mediaType: MediaType, uid: string) => {
+    const user = await UserRepository.getUserByUid(uid);
     if (!user) throw new Error("User not found");
     if (mediaType === MediaType.SHOW) return createCollection<ListEntity>(`${CollectionName.USERS}/${user.id}/${CollectionName.SHOW_WATCHLIST}`);
     return createCollection<ListEntity>(`${CollectionName.USERS}/${user.id}/${CollectionName.MOVIE_WATCHLIST}`);
@@ -20,68 +20,68 @@ class WatchlistsDatabase {
     }
 
     public list = {
-        getAll: async (userName: string): Promise<ListEntity[]> => {
-            const snapshot = await getDocs(await WatchlistCollection(this.mediaType, userName));
+        getAll: async (uid: string): Promise<ListEntity[]> => {
+            const snapshot = await getDocs(await WatchlistCollection(this.mediaType, uid));
             return snapshot.docs.map(document => ({
                 ...document.data(),
                 id: document.id
             })).sort((a, b) => a.order - b.order);
         },
-        getByOrder: async (userName: string, order: number): Promise<ListEntity | undefined> => {
-            const lists = await this.list.getAll(userName);
+        getByOrder: async (uid: string, order: number): Promise<ListEntity | undefined> => {
+            const lists = await this.list.getAll(uid);
             return lists.find(list => list.order === order);
         },
-        update: async (userName: string, id: string, data: ListEntity): Promise<void> => {
-            const ref = doc(await WatchlistCollection(this.mediaType, userName), id);
+        update: async (uid: string, id: string, data: ListEntity): Promise<void> => {
+            const ref = doc(await WatchlistCollection(this.mediaType, uid), id);
             await updateDoc(ref, data);
         },
-        updateByOrder: async (userName: string, order: number, data: ListEntity): Promise<void> => {
-            const list = await this.list.getByOrder(userName, order);
+        updateByOrder: async (uid: string, order: number, data: ListEntity): Promise<void> => {
+            const list = await this.list.getByOrder(uid, order);
             if (list && list.id) {
-                await this.list.update(userName, list.id, data);
+                await this.list.update(uid, list.id, data);
             }
         },
-        updateTitleByOrder: async (userName: string, order: number, title: string): Promise<void> => {
-            const list = await this.list.getByOrder(userName, order);
+        updateTitleByOrder: async (uid: string, order: number, title: string): Promise<void> => {
+            const list = await this.list.getByOrder(uid, order);
             if (list && list.id) {
-                await this.list.update(userName, list.id, { ...list, title });
+                await this.list.update(uid, list.id, { ...list, title });
             }
         },
-        updateOrders: async (userName: string): Promise<void> => {
-            const lists = await this.list.getAll(userName);
-            await Promise.all(lists.map((list, idx) => this.list.update(userName, list.id ?? "", {
+        updateOrders: async (uid: string): Promise<void> => {
+            const lists = await this.list.getAll(uid);
+            await Promise.all(lists.map((list, idx) => this.list.update(uid, list.id ?? "", {
                 ...list,
                 order: idx
             })));
         },
-        add: async (userName: string, data: ListEntity) => {
-            await addDoc(await WatchlistCollection(this.mediaType, userName), data);
+        add: async (uid: string, data: ListEntity) => {
+            await addDoc(await WatchlistCollection(this.mediaType, uid), data);
         },
-        addAll: async (userName: string, data: ListEntity[]) => {
-            await Promise.all(data.map(list => this.list.add(userName, list)));
+        addAll: async (uid: string, data: ListEntity[]) => {
+            await Promise.all(data.map(list => this.list.add(uid, list)));
         },
-        delete: async (userName: string, id: string) => {
-            const ref = doc(await WatchlistCollection(this.mediaType, userName), id);
+        delete: async (uid: string, id: string) => {
+            const ref = doc(await WatchlistCollection(this.mediaType, uid), id);
             await deleteDoc(ref);
-            await this.list.updateOrders(userName);
+            await this.list.updateOrders(uid);
         },
-        deleteByOrder: async (userName: string, order: number) => {
-            const list = await this.list.getByOrder(userName, order);
+        deleteByOrder: async (uid: string, order: number) => {
+            const list = await this.list.getByOrder(uid, order);
             if (list && list.id) {
-                await this.list.delete(userName, list.id);
+                await this.list.delete(uid, list.id);
             }
         },
-        swap: async (userName: string, listIdx1: number, listIdx2: number): Promise<void> => {
-            const lists = await this.list.getAll(userName);
+        swap: async (uid: string, listIdx1: number, listIdx2: number): Promise<void> => {
+            const lists = await this.list.getAll(uid);
             const list1 = lists[listIdx1];
             const list2 = lists[listIdx2];
             if (list1 && list2) {
                 await Promise.all([
-                    this.list.update(userName, list1.id ?? "", {
+                    this.list.update(uid, list1.id ?? "", {
                         ...list1,
                         order: list2.order
                     }),
-                    this.list.update(userName, list2.id ?? "", {
+                    this.list.update(uid, list2.id ?? "", {
                         ...list2,
                         order: list1.order
                     })
@@ -91,46 +91,46 @@ class WatchlistsDatabase {
     };
 
     public item = {
-        add: async (userName: string, listOrder: number, itemId: string | number) => {
-            const list = await this.list.getByOrder(userName, listOrder);
+        add: async (uid: string, listOrder: number, itemId: string | number) => {
+            const list = await this.list.getByOrder(uid, listOrder);
             if (list && list.id) {
                 const { items } = list;
                 items.push(String(itemId));
-                await this.list.update(userName, list.id, { ...list, items });
+                await this.list.update(uid, list.id, { ...list, items });
             }
         },
-        delete: async (userName: string, listOrder: number, itemId: string | number) => {
-            const list = await this.list.getByOrder(userName, listOrder);
+        delete: async (uid: string, listOrder: number, itemId: string | number) => {
+            const list = await this.list.getByOrder(uid, listOrder);
             if (list && list.id) {
                 const { items } = list;
                 const index = items.indexOf(String(itemId));
                 if (index > -1) {
                     items.splice(index, 1);
-                    await this.list.update(userName, list.id, { ...list, items });
+                    await this.list.update(uid, list.id, { ...list, items });
                 }
             }
         },
-        swap: async (userName: string, listOrder: number, itemIdx: number, targetItemIdx: number) => {
-            const list = await this.list.getByOrder(userName, listOrder);
+        swap: async (uid: string, listOrder: number, itemIdx: number, targetItemIdx: number) => {
+            const list = await this.list.getByOrder(uid, listOrder);
             if (list && list.id) {
                 const { items } = list;
                 const temp = items[itemIdx];
                 items[itemIdx] = items[targetItemIdx];
                 items[targetItemIdx] = temp;
-                await this.list.update(userName, list.id, { ...list, items });
+                await this.list.update(uid, list.id, { ...list, items });
             }
         },
-        move: async (userName: string, sourceListIdx: number, targetListIdx: number, itemIdx: number) => {
-            const sourceList = await this.list.getByOrder(userName, sourceListIdx);
-            const targetList = await this.list.getByOrder(userName, targetListIdx);
+        move: async (uid: string, sourceListIdx: number, targetListIdx: number, itemIdx: number) => {
+            const sourceList = await this.list.getByOrder(uid, sourceListIdx);
+            const targetList = await this.list.getByOrder(uid, targetListIdx);
             if (sourceList && sourceList.id && targetList && targetList.id) {
                 const sourceItems = sourceList.items;
                 const targetItems = targetList.items;
                 const item = sourceItems[itemIdx];
                 sourceItems.splice(itemIdx, 1);
                 targetItems.push(item);
-                await this.list.update(userName, sourceList.id, { ...sourceList, items: sourceItems });
-                await this.list.update(userName, targetList.id, { ...targetList, items: targetItems });
+                await this.list.update(uid, sourceList.id, { ...sourceList, items: sourceItems });
+                await this.list.update(uid, targetList.id, { ...targetList, items: targetItems });
             }
         }
     }

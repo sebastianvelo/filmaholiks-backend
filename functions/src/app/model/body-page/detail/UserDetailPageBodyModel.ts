@@ -5,7 +5,7 @@ import UserDetailModel from "../../detail/UserDetailModel";
 import UserDetailSectionsModel from "../../section/detail/UserDetailSectionsModel";
 
 const UserDetailPageBodyModel = async (user: UserEntity, userLoggedIn?: string): Promise<DetailPageBodyModel> => {
-    const watchlists = await WatchlistService.getViewByUser(user.userName, userLoggedIn);
+    const watchlists = await WatchlistService.getViewByUser(user.id, userLoggedIn);
     return {
         detail: UserDetailModel(user),
         sections: UserDetailSectionsModel({}),
