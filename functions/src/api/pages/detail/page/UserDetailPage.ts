@@ -12,7 +12,7 @@ import { DetailContentHeaderModel, DetailContentInfoModel } from "shared/model/p
 import { DetailHeaderModel } from "shared/model/pages/detail/header/DetailHeaderModel";
 import PageRoute from "shared/routes/PageRoute";
 
-const HeaderModel = (user: UserEntity): DetailHeaderModel => {
+const Header = (user: UserEntity): DetailHeaderModel => {
   const Poster = (user: UserEntity): ImageModel => getImage(user.avatar, user.name);
 
   const ContentHeader = (user: UserEntity): DetailContentHeaderModel => ({
@@ -38,35 +38,29 @@ const HeaderModel = (user: UserEntity): DetailHeaderModel => {
   }
 };
 
-//-----------------------
-
-const SectionsModel = (data: {}): CardsSectionModel[] => [];
-
-//-----------------------
-
-const SearchBarModel = (): SearchBarModel => ({
+const SearchBar = (): SearchBarModel => ({
   placeholder: `Search users...`,
   path: PageRoute.USER_SEARCH,
   hide: true
 });
-//-----------------------
 
-
-const BodyModel = async (user: UserEntity, viewerUid?: string): Promise<DetailPageBodyModel> => {
+const Body = async (user: UserEntity, viewerUid?: string): Promise<DetailPageBodyModel> => {
   const watchlists = await WatchlistService.getViewByUser(user.uid, viewerUid);
+  const SectionsModel = (data: {}): CardsSectionModel[] => [];
+
   return {
-    detail: HeaderModel(user),
+    detail: Header(user),
     sections: SectionsModel({}),
     ...watchlists,
   };
 };
 
 const UserDetailPage = async ({ user, viewerUid }: { user: UserEntity, viewerUid?: string }): Promise<DetailPageModel> => {
-  const body = await BodyModel(user, viewerUid);
+  const body = await Body(user, viewerUid);
 
   return {
     title: TitleHelper.user.getDetail(user.userName),
-    searchbar: SearchBarModel(),
+    searchbar: SearchBar(),
     body
   };
 }
