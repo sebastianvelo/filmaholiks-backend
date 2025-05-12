@@ -1,9 +1,9 @@
 import express from "express";
-import DetailPageController from "../../../app/controller/DetailPageController";
-import ExplorePageController from "../../../app/controller/ExplorePageController";
-import SearchResultPageController from "../../../app/controller/SearchResultPageController";
-import UserController from "../../../app/controller/UserController";
-import WatchlistController from "../../../app/controller/WatchlistController";
+import DetailPageController from "../../../api/controller/DetailPageController";
+import ExplorePageController from "../../../api/controller/ExplorePageController";
+import SearchResultPageController from "../../../api/controller/SearchResultPageController";
+import UserController from "../../../api/controller/UserController";
+import WatchlistController from "../../../api/controller/WatchlistController";
 import Controller from "../../controller/Controller";
 
 const setControllers = (app: express.Application) => {
