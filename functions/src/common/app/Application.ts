@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv';
 import express from "express";
 import rateLimit from 'express-rate-limit';
-import initializeFirebaseAdmin from "./config/firebase";
 import setControllers from "./controller/setControllers";
 import setMiddlewares from "./middleware/setMiddlewares";
 
@@ -18,7 +17,6 @@ class Application {
     }
 
     init() {
-        initializeFirebaseAdmin();
         setMiddlewares(this.app);
         setControllers(this.app);
         const limiter = rateLimit({

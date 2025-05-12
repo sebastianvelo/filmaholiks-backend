@@ -14,12 +14,12 @@ import UserSearchBarModel from "../model/searchbar/UserSearchBarModel";
 import UserRepository from "../repository/UserRepository";
 
 class DetailPageService {
-  public static async getUser(userName: string, userLoggedIn: string): Promise<DetailPageModel> {
+  public static async getUser(userName: string, viewerUid?: string): Promise<DetailPageModel> {
     const user = await UserRepository.getUser(userName);
     if (!user) {
       throw new Error("User not found");
     }
-    const body = await UserDetailPageBodyModel(user, userLoggedIn);
+    const body = await UserDetailPageBodyModel(user, viewerUid);
 
     return {
       title: TitleHelper.user.getDetail(user.userName),
@@ -39,9 +39,9 @@ class DetailPageService {
     };
   }
 
-  public static async getMovie(id: string, userLoggedIn?: string): Promise<DetailPageModel> {
+  public static async getMovie(id: string, viewerUid?: string): Promise<DetailPageModel> {
     const movie = await TMDB.movie.getDetails(+id);
-    const body = await MovieDetailPageBodyModel(movie, userLoggedIn);
+    const body = await MovieDetailPageBodyModel(movie, viewerUid);
 
     return {
       title: TitleHelper.movie.getDetail(movie),
@@ -50,9 +50,9 @@ class DetailPageService {
     };
   }
 
-  public static async getShow(id: string, userLoggedIn?: string): Promise<DetailPageModel> {
+  public static async getShow(id: string, viewerUid?: string): Promise<DetailPageModel> {
     const show = await TMDB.tvShow.getDetails(+id);
-    const body = await ShowDetailPageBodyModel(show, userLoggedIn);
+    const body = await ShowDetailPageBodyModel(show, viewerUid);
 
     return {
       title: TitleHelper.show.getDetail(show),

@@ -54,16 +54,16 @@ const WatchlistButton = async (movie: MovieResponse, uid: string): Promise<Watch
     };
 };
 
-const Actions = async (movie: MovieResponse, userLoggedIn?: string) => {
-    const watchlistButton = userLoggedIn ? await WatchlistButton(movie, userLoggedIn) : undefined;
+const Actions = async (movie: MovieResponse, viewerUid?: string) => {
+    const watchlistButton = viewerUid ? await WatchlistButton(movie, viewerUid) : undefined;
 
     return {
         watchlistButton
     };
 };
 
-const MovieDetailModel = async (movie: MovieResponse, videos: VideosResponse, userLoggedIn?: string): Promise<DetailHeaderModel> => {
-    const actions = await Actions(movie, userLoggedIn);
+const MovieDetailModel = async (movie: MovieResponse, videos: VideosResponse, viewerUid?: string): Promise<DetailHeaderModel> => {
+    const actions = await Actions(movie, viewerUid);
     
     return {
         poster: Poster(movie),

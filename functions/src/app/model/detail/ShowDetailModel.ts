@@ -51,16 +51,16 @@ const WatchlistButton = async (show: TVShowResponse, uid: string): Promise<Watch
     };
 };
 
-const Actions = async (show: TVShowResponse, userLoggedIn?: string): Promise<DetailActionsModel> => {
-    const watchlistButton = userLoggedIn ? await WatchlistButton(show, userLoggedIn) : undefined;
+const Actions = async (show: TVShowResponse, viewerUid?: string): Promise<DetailActionsModel> => {
+    const watchlistButton = viewerUid ? await WatchlistButton(show, viewerUid) : undefined;
 
     return {
         watchlistButton
     };
 };
 
-const ShowDetailModel = async (show: TVShowResponse, videos: VideosResponse, userLoggedIn?: string): Promise<DetailHeaderModel> => {
-    const actions = await Actions(show, userLoggedIn);
+const ShowDetailModel = async (show: TVShowResponse, videos: VideosResponse, viewerUid?: string): Promise<DetailHeaderModel> => {
+    const actions = await Actions(show, viewerUid);
 
     return {
         poster: Poster(show),

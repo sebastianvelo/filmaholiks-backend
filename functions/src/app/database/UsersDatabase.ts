@@ -1,39 +1,35 @@
-import { addDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+// backend/src/database/UsersDatabase.ts
 import UserEntity from "../../shared/entity/user/UserEntity";
-import CollectionName from "./common/CollectionName";
-import createCollection from "./common/FirestoreHelper";
-
-const UsersCollection = createCollection<UserEntity>(CollectionName.USERS);
+import CollectionName from "./types/CollectionName";
+import createCollection from "../../common/app/firebase/createCollection";
 
 class UsersDatabase {
+    private usersCol = createCollection<UserEntity>(CollectionName.USERS);
 
-    public getAll = async (): Promise<UserEntity[]> => {
-        const snapshot = await getDocs(UsersCollection);
-        return snapshot.docs.map(document => ({
-            ...document.data(),
-            id: document.id
-        }));
-    };
+    public async getAll(): Promise<UserEntity[]> {
+        const snap = await this.usersCol.get();
+        return snap.docs.map(d => ({ ...(d.data() as UserEntity), id: d.id }));
+    }
 
-    public getByUsername = async (userName: string): Promise<UserEntity | undefined> => {
-        const snapshot = await getDocs(UsersCollection);
-        const user = snapshot.docs.find(document => document.data().userName === userName);
-        return user && { ...user.data(), id: user.id };
-    };
+    public async getByUsername(userName: string): Promise<UserEntity | undefined> {
+        const snap = await this.usersCol.where("userName", "==", userName).get();
+        const doc = snap.docs[0];
+        return doc ? { ...(doc.data() as UserEntity), id: doc.id } : undefined;
+    }
 
-    public update = async (id: string, data: UserEntity): Promise<void> => {
-        const ref = doc(UsersCollection, id);
-        await updateDoc(ref, data);
-    };
+    public async getByUid(uid: string): Promise<UserEntity | undefined> {
+        const doc = await this.usersCol.doc(uid).get();
+        return doc.exists ? { ...(doc.data() as UserEntity), id: doc.id } : undefined;
+    }
 
-    public save = async (data: UserEntity): Promise<UserEntity | undefined | null> => {
-        try {
-            await addDoc(UsersCollection, data);
-            return await this.getByUsername(data.userName);
-        } catch (e) {
-            return null;
-        }
-    };
+    public async save(data: UserEntity): Promise<UserEntity> {
+        await this.usersCol.doc(data.id).set(data);
+        return data;
+    }
+
+    public async update(id: string, data: Partial<UserEntity>): Promise<void> {
+        await this.usersCol.doc(id).update(data);
+    }
 }
 
 export default new UsersDatabase();

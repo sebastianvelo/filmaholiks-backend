@@ -27,11 +27,12 @@ class UserService {
   }
 
   public static getDefaultAvatar = (userName: string) =>
-    `https://avatars.dicebear.com/api/bottts/${userName}.svg`;
+    `"https://api.dicebear.com/9.x/thumbs/svg?seed=${userName}"`;
+
 
   public static newUserByEmail = (email: string, uid: string): UserEntity => {
     const userName = email.split("@")[0];
-    
+
     return {
       id: uid,
       userName,

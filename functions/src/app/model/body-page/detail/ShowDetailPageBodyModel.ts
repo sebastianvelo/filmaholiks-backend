@@ -20,7 +20,7 @@ const allEpisodes = (show: TVShowResponse) => Promise.all(
     show.seasons?.filter(season => season.season_number).map(async (season) => seasonEpisodes(show, season.season_number)) ?? []
 );
 
-const ShowDetailPageBodyModel = async (show: TVShowResponse, userLoggedIn?: string): Promise<DetailPageBodyModel> => {
+const ShowDetailPageBodyModel = async (show: TVShowResponse, viewerUid?: string): Promise<DetailPageBodyModel> => {
     const id = Number(show.id);
     const video: VideosResponse = await TMDB.tvShow.getVideos(id);
     const moreLikeThis: TVShowsResponse = await TMDB.tvShow.getTVRecommendations(id);
@@ -28,7 +28,7 @@ const ShowDetailPageBodyModel = async (show: TVShowResponse, userLoggedIn?: stri
     const images: ImagesResponse = await TMDB.tvShow.getImages(id);
     const chartSeasons = await ChartHelper.showEpisodes.getChartSection(id, show.seasons);
     const topRatedEpisodes = (await allEpisodes(show)).flat().sort(sortByRating).slice(0, 30);
-    const detail = await ShowDetailModel(show, video, userLoggedIn);
+    const detail = await ShowDetailModel(show, video, viewerUid);
 
     return {
         detail,

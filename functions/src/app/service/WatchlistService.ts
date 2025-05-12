@@ -13,14 +13,14 @@ import WatchlistRepository from "../repository/WatchlistRepository";
 
 interface IWatchlistService {
   search: (uid: string, query: string) => Promise<ActionableCardModel[]>;
-  getViewByUser: (uid: string, userLoggedIn?: string) => Promise<WatchlistTabModel>;
+  getViewByUser: (uid: string, viewerUid?: string) => Promise<WatchlistTabModel>;
 }
 
 class WatchlistService {
 
-  public static getViewByUser = async (uid: string, userLoggedIn?: string): Promise<DetailWatchlistModel> => {
-    const tvShowWatchlistModel = await WatchlistService.show.getViewByUser(uid, userLoggedIn);
-    const movieWatchlistModel = await WatchlistService.movie.getViewByUser(uid, userLoggedIn);
+  public static getViewByUser = async (uid: string, viewerUid?: string): Promise<DetailWatchlistModel> => {
+    const tvShowWatchlistModel = await WatchlistService.show.getViewByUser(uid, viewerUid);
+    const movieWatchlistModel = await WatchlistService.movie.getViewByUser(uid, viewerUid);
 
     return {
       watchlists: [
@@ -33,8 +33,8 @@ class WatchlistService {
   public static presenter = {
     search: async (media: MediaType, uid: string, query: string): Promise<ActionableCardModel[]> =>
       WatchlistService[media].search(uid, query),
-    getViewByUser: async (media: MediaType, uid: string, userLoggedIn?: string): Promise<WatchlistTabModel> =>
-      WatchlistService[media].getViewByUser(uid, userLoggedIn),
+    getViewByUser: async (media: MediaType, uid: string, viewerUid?: string): Promise<WatchlistTabModel> =>
+      WatchlistService[media].getViewByUser(uid, viewerUid),
     list: {
       saveAll: (media: MediaType, uid: string, lists: ListEntity[]): void => {
         WatchlistRepository[media].list.saveAll(uid, { lists });
@@ -83,9 +83,9 @@ class WatchlistService {
         return ShowActionableCardModel(show, exists);
       }));
     },
-    getViewByUser: async (uid: string, userLoggedIn?: string): Promise<WatchlistTabModel> => {
+    getViewByUser: async (uid: string, viewerUid?: string): Promise<WatchlistTabModel> => {
       const tvShowWatchlist = await WatchlistRepository.show.list.getByUser(uid);
-      return WatchlistModel("TV Shows", tvShowWatchlist, MediaType.SHOW, uid === userLoggedIn);
+      return WatchlistModel("TV Shows", tvShowWatchlist, MediaType.SHOW, uid === viewerUid);
     },
   };
 
@@ -98,9 +98,9 @@ class WatchlistService {
         return MovieActionableCardModel(movie, exists);
       }));
     },
-    getViewByUser: async (uid: string, userLoggedIn?: string): Promise<WatchlistTabModel> => {
+    getViewByUser: async (uid: string, viewerUid?: string): Promise<WatchlistTabModel> => {
       const movieWatchlist = await WatchlistRepository.movie.list.getByUser(uid);
-      return WatchlistModel("Movies", movieWatchlist, MediaType.MOVIE, uid === userLoggedIn);
+      return WatchlistModel("Movies", movieWatchlist, MediaType.MOVIE, uid === viewerUid);
     },
   };
 }

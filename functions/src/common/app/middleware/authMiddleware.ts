@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as admin from 'firebase-admin';
 
-// Middleware para verificar si el usuario está autenticado
+// Middleware para verificar si el usuario está autenticado (versión original)
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const authHeader = req.headers.authorization;
@@ -24,7 +24,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     }
 };
 
-// Middleware para verificar si el usuario tiene acceso a un recurso específico
+// Middleware para verificar si el usuario tiene acceso a un recurso (versión original)
 export const hasResourceAccess = (resourceParamName: string) => (
     async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -45,11 +45,76 @@ export const hasResourceAccess = (resourceParamName: string) => (
     }
 );
 
-// Ampliar la interfaz de Request para incluir el usuario
+// NUEVA FUNCIÓN: Middleware para verificar el acceso sin requerir autenticación previa
+export const checkOptionalResourceAccess = (resourceParamName: string) => (
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            // Inicializar el resultado por defecto
+            req.hasAccess = false;
+
+            const authHeader = req.headers.authorization;
+
+            // Si no hay token, simplemente continuamos sin acceso
+            if (!authHeader || !authHeader.startsWith('Bearer ')) {
+                return next();
+            }
+
+            const token = authHeader.split('Bearer ')[1];
+
+            try {
+                // Intentar verificar el token
+                const decodedToken = await admin.auth().verifyIdToken(token);
+                req.user = decodedToken;
+
+                // Verificar si tiene acceso al recurso
+                const resourceOwnerId = req.params[resourceParamName];
+
+                if (req.user.uid === resourceOwnerId || req.user.role === 'admin') {
+                    req.hasAccess = true;
+                }
+
+                next();
+            } catch (error) {
+                // Si el token es inválido, continuamos sin acceso
+                next();
+            }
+        } catch (error) {
+            // En caso de error del servidor, continuamos sin acceso en lugar de devolver un error
+            console.error('Error checking optional resource access:', error);
+            next();
+        }
+    }
+);
+
+export const detectAuthentication = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return next();
+        }
+
+        const token = authHeader.split('Bearer ')[1];
+
+        try {
+            const decodedToken = await admin.auth().verifyIdToken(token);
+            req.user = decodedToken;
+        } catch (error) {
+            // Ignora errores de token
+        }
+
+        next();
+    } catch (error) {
+        next();
+    }
+};
+
+// Ampliar la interfaz de Request para incluir el usuario y el estado de acceso
 declare global {
     namespace Express {
         interface Request {
             user?: admin.auth.DecodedIdToken;
+            hasAccess?: boolean;
         }
     }
 }
