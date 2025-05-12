@@ -2,7 +2,7 @@ import * as admin from 'firebase-admin';
 import { ListEntity } from "../../shared/entity/watch-list/WatchlistEntity";
 import MediaType from "../../shared/types/MediaType";
 import UserRepository from "../repository/UserRepository";
-import createCollection from '../../common/app/firebase/createCollection';
+import createCollection from '../../app/firebase/createCollection';
 import CollectionName from "./types/CollectionName";
 
 const getWatchlistCollection = async (mediaType: MediaType, uid: string) => {

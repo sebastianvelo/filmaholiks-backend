@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import Logger from "../../log/Logger";
+import Logger from "../../common/log/Logger";
 
 const setMiddlewares = (app: express.Application) => {
     // Configuración básica

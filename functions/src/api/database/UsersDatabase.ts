@@ -1,6 +1,6 @@
 import UserEntity from "../../shared/entity/user/UserEntity";
 import CollectionName from "./types/CollectionName";
-import createCollection from "../../common/app/firebase/createCollection";
+import createCollection from "../../app/firebase/createCollection";
 
 class UsersDatabase {
     private usersCol = createCollection<UserEntity>(CollectionName.USERS);

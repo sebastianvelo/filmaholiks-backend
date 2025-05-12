@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { hasResourceAccess, isAuthenticated } from "../../common/app/auth/authMiddleware";
+import { hasResourceAccess, isAuthenticated } from "../../app/auth/authMiddleware";
 import Controller from "../../common/controller/Controller";
 import MediaType from "../../shared/types/MediaType";
 import WatchlistService from "../service/WatchlistService";
