@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@api/*": [
+                "api/*"
+            ],
+            "@api-user/*": [
+                "api/entities/user/*"
+            ],
+            "@api-watch-list/*": [
+                "api/entities/watch-list/*"
+            ],
+            "@api-pages/*": [
+                "api/pages/*"
+            ],
+            "@helper/*": [
+                "api/helper/*"
+            ],
+            "@model-pages/*": [
+                "api/model/*"
+            ],
+            "@app/*": [
+                "app/controller/*"
+            ]
+        }
+    }
+}

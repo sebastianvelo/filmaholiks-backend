@@ -7,12 +7,10 @@ import MovieDetailPageBodyModel from "../../model/body-page/detail/MovieDetailPa
 import PersonDetailPageBodyModel from "../../model/body-page/detail/PersonDetailPageBodyModel";
 import SeasonDetailPageBodyModel from "../../model/body-page/detail/SeasonDetailPageBodyModel";
 import ShowDetailPageBodyModel from "../../model/body-page/detail/ShowDetailPageBodyModel";
-import UserDetailPageBodyModel from "../../model/body-page/detail/UserDetailPageBodyModel";
 import MovieSearchBarModel from "../../model/searchbar/MovieSearchBarModel";
 import PersonSearchBarModel from "../../model/searchbar/PersonSearchBarModel";
 import ShowSearchBarModel from "../../model/searchbar/ShowSearchBarModel";
-import UserSearchBarModel from "../../model/searchbar/UserSearchBarModel";
-
+import UserDetailPage from "./page/UserDetailPage";
 
 class DetailPageService {
   public static async getUser(userName: string, viewerUid?: string): Promise<DetailPageModel> {
@@ -20,13 +18,8 @@ class DetailPageService {
     if (!user) {
       throw new Error("User not found");
     }
-    const body = await UserDetailPageBodyModel(user, viewerUid);
 
-    return {
-      title: TitleHelper.user.getDetail(user.userName),
-      searchbar: UserSearchBarModel(),
-      body
-    };
+    return UserDetailPage({ user, viewerUid });
   }
 
   public static async getPerson(id: string): Promise<DetailPageModel> {

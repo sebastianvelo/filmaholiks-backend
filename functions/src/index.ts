@@ -1,4 +1,5 @@
 import * as functions from "firebase-functions";
+import registerPaths from "registerPaths";
 import Application from "./app/Application";
 
 const PORT = process.env.PORT || 5000;
