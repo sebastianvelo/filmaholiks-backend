@@ -2,7 +2,7 @@ import UserEntity from "../../shared/entity/user/UserEntity";
 import UserRepository from "../repository/UserRepository";
 
 class UserService {
-  public static async getUser(userName: string, userLoggedIn: string): Promise<UserEntity | null> {
+  public static async getUser(userName: string): Promise<UserEntity | null> {
     try {
       const user = await UserRepository.getUser(userName);
       if (!user) {
@@ -34,7 +34,7 @@ class UserService {
     const userName = email.split("@")[0];
 
     return {
-      id: uid,
+      uid,
       userName,
       registered: new Date(Date.now()),
       email,

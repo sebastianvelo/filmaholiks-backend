@@ -9,8 +9,8 @@ class DetailPageController extends Controller {
   }
 
   setEndpoints() {
-    this.setEndpoint("/user/:id").get(checkOptionalResourceAccess(":id"), (req: Request, res: Response) => {
-      DetailPageService.getUser(req.params.id, req.user?.uid).then((page) => {
+    this.setEndpoint("/user/:userName").get(checkOptionalResourceAccess(":userName"), (req: Request, res: Response) => {
+      DetailPageService.getUser(req.params.userName, req.user?.uid).then((page) => {
         res.send(page);
       });
     });

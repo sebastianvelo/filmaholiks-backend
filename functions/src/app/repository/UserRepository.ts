@@ -13,14 +13,19 @@ class UserRepository {
     }
 
     public async getUserByUid(uid: string): Promise<UserEntity | undefined> {
+        // Ahora busca por uid en lugar de id
         return (await this.database.getAll())
-            .find(u => u.id === uid);
-    }
-    
-    public async save(user: UserEntity): Promise<UserEntity | null | undefined> {
-        return this.database.save(user);
+            .find(u => u.uid === uid);
     }
 
+    public async save(user: UserEntity): Promise<UserEntity | null | undefined> {
+        // Asegurar que el uid se establezca correctamente
+        const userToSave = {
+            ...user,
+            uid: user.uid
+        };
+        return this.database.save(userToSave);
+    }
 }
 
 export default new UserRepository();

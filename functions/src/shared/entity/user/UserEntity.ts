@@ -1,5 +1,6 @@
 interface UserEntity {
-    id: string;
+    id?: string;
+    uid: string;
     userName: string;
     email: string;
     avatar: string;

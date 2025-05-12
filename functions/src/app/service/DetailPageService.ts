@@ -11,11 +11,11 @@ import MovieSearchBarModel from "../model/searchbar/MovieSearchBarModel";
 import PersonSearchBarModel from "../model/searchbar/PersonSearchBarModel";
 import ShowSearchBarModel from "../model/searchbar/ShowSearchBarModel";
 import UserSearchBarModel from "../model/searchbar/UserSearchBarModel";
-import UserRepository from "../repository/UserRepository";
+import UserService from "./UserService";
 
 class DetailPageService {
   public static async getUser(userName: string, viewerUid?: string): Promise<DetailPageModel> {
-    const user = await UserRepository.getUser(userName);
+    const user = await UserService.getUser(userName);
     if (!user) {
       throw new Error("User not found");
     }
