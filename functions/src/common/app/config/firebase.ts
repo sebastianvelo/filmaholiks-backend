@@ -7,4 +7,4 @@ const initializeFirebaseAdmin = () => {
     }
 };
 
-export { initializeFirebaseAdmin };
+export default initializeFirebaseAdmin;

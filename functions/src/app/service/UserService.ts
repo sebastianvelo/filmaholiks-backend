@@ -29,26 +29,26 @@ class UserService {
   public static getDefaultAvatar = (userName: string) =>
     `https://avatars.dicebear.com/api/bottts/${userName}.svg`;
 
-  public static newUserByEmail = (email: string): UserEntity => {
+  public static newUserByEmail = (email: string, uid: string): UserEntity => {
     const userName = email.split("@")[0];
+    
     return {
+      id: uid,
       userName,
-      about: "",
+      registered: new Date(Date.now()),
       email,
       avatar: UserService.getDefaultAvatar(userName),
-      id: "",
+      about: "Hi there!",
       name: "",
-      registered: "",
       status: "ACTIVE",
-      guid: "",
       index: 0
     };
   }
 
 
-  public static async save(email: string) {
+  public static async save(email: string, uid: string) {
     const user = await UserService.getUserByEmail(email);
-    return !user && UserRepository.save(UserService.newUserByEmail(email));
+    return !user && UserRepository.save(UserService.newUserByEmail(email, uid));
   }
 
   public static async update(userName: string, user: UserEntity) {

@@ -12,6 +12,11 @@ class UserRepository {
         return (await this.database.getAll()).find(user => user.email === email);
     }
 
+    public async getUserByUid(uid: string): Promise<UserEntity | undefined> {
+        return (await this.database.getAll())
+            .find(u => u.id === uid);
+    }
+    
     public async save(user: UserEntity): Promise<UserEntity | null | undefined> {
         return this.database.save(user);
     }

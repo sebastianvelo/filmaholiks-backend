@@ -59,7 +59,7 @@ class UserController extends Controller {
             return res.status(400).send({ error: "Email is required" });
           }
 
-          UserService.save(req.body.email)
+          UserService.save(req.body.email, req.user!.uid)
             .then((user) => {
               res.status(201).send(user);
             })

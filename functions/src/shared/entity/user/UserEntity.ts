@@ -4,10 +4,9 @@ interface UserEntity {
     email: string;
     avatar: string;
     name: string;
-    registered: string;
+    registered: Date;
     status: "ACTIVE" | "INACTIVE" | "PENDING" | "BLOCKED" | "DELETED" | "BANNED";
     about: string;
-    guid: string;
     index: number;
 }
 

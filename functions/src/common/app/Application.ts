@@ -1,16 +1,19 @@
-import express from "express";
 import * as dotenv from 'dotenv';
-import setMiddlewares from "./middleware/setMiddlewares";
+import express from "express";
+import rateLimit from 'express-rate-limit';
+import initializeFirebaseAdmin from "./config/firebase";
 import setControllers from "./controller/setControllers";
-import { initializeFirebaseAdmin } from "./config/firebase";
+import setMiddlewares from "./middleware/setMiddlewares";
 
 class Application {
     app: express.Application;
+
     port: number | string;
 
     constructor(port: number | string) {
         dotenv.config();
         this.app = express();
+        this.app.set('trust proxy', 1);
         this.port = port;
     }
 
@@ -18,6 +21,12 @@ class Application {
         initializeFirebaseAdmin();
         setMiddlewares(this.app);
         setControllers(this.app);
+        const limiter = rateLimit({
+            windowMs: 15 * 60 * 1000,
+            max: 100,
+        });
+
+        this.app.use(limiter);
         this.setupErrorHandling();
 
         return this.app;

@@ -11,16 +11,16 @@ class WatchlistController extends Controller {
 
   setEndpoints() {
 
-    this.setEndpoint("/user/:userName/:mediaType/search/:query").get((req: Request, res: Response) => {
-      WatchlistService.presenter.search(req.params.mediaType as MediaType, req.params.userName, req.params.query)
+    this.setEndpoint("/user/:uid/:mediaType/search/:query").get((req: Request, res: Response) => {
+      WatchlistService.presenter.search(req.params.mediaType as MediaType, req.params.uid, req.params.query)
         .then((resp) => {
           res.send(resp);
         });
     });
 
-    this.setEndpoint("/user/:userName/:mediaType").get((req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType").get((req: Request, res: Response) => {
       try {
-        WatchlistService.presenter.getViewByUser(req.params.mediaType as MediaType, req.params.userName)
+        WatchlistService.presenter.getViewByUser(req.params.mediaType as MediaType, req.params.uid)
           .then((resp) => {
             if (!resp) {
               return res.status(404).send({ error: "Watchlist not found" });
@@ -39,8 +39,8 @@ class WatchlistController extends Controller {
     //--------------------------------------------------------------------------------
 
     // Agregar una nueva lista
-    this.setEndpoint("/user/:userName/:mediaType/list")
-      .post(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/list")
+      .post(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           if (!req.body.title) {
             return res.status(400).send({ error: "Title is required" });
@@ -48,7 +48,7 @@ class WatchlistController extends Controller {
 
           WatchlistService.presenter.list.add(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             req.body.title
           );
 
@@ -60,8 +60,8 @@ class WatchlistController extends Controller {
       });
 
     // Guardar todas las listas
-    this.setEndpoint("/user/:userName/:mediaType/list")
-      .put(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/list")
+      .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           if (!req.body || !Array.isArray(req.body)) {
             return res.status(400).send({ error: "Invalid list format" });
@@ -69,7 +69,7 @@ class WatchlistController extends Controller {
 
           WatchlistService.presenter.list.saveAll(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             req.body
           );
 
@@ -81,17 +81,17 @@ class WatchlistController extends Controller {
       });
 
     // Eliminar una lista
-    this.setEndpoint("/user/:userName/:mediaType/:listIdx/list")
-      .delete(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/:listIdx/list")
+      .delete(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
-          if (isNaN(listIdx)) {
+          if (Number.isNaN(listIdx)) {
             return res.status(400).send({ error: "List index must be a number" });
           }
 
           WatchlistService.presenter.list.delete(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             listIdx
           );
 
@@ -103,19 +103,19 @@ class WatchlistController extends Controller {
       });
 
     // Intercambiar posición de listas
-    this.setEndpoint("/user/:userName/:mediaType/swap/list")
-      .put(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/swap/list")
+      .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx1 = Number(req.body.listIdx1);
           const listIdx2 = Number(req.body.listIdx2);
 
-          if (isNaN(listIdx1) || isNaN(listIdx2)) {
+          if (Number.isNaN(listIdx1) || Number.isNaN(listIdx2)) {
             return res.status(400).send({ error: "List indices must be numbers" });
           }
 
           WatchlistService.presenter.list.swap(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             listIdx1,
             listIdx2
           );
@@ -128,12 +128,12 @@ class WatchlistController extends Controller {
       });
 
     // Cambiar título de una lista
-    this.setEndpoint("/user/:userName/:mediaType/change/list")
-      .put(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/change/list")
+      .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.body.listIdx);
 
-          if (isNaN(listIdx)) {
+          if (Number.isNaN(listIdx)) {
             return res.status(400).send({ error: "List index must be a number" });
           }
 
@@ -143,7 +143,7 @@ class WatchlistController extends Controller {
 
           WatchlistService.presenter.list.changeTitle(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             listIdx,
             req.body.title
           );
@@ -160,12 +160,12 @@ class WatchlistController extends Controller {
     //--------------------------------------------------------------------------------
 
     // Agregar un item a una lista
-    this.setEndpoint("/user/:userName/:mediaType/:listIdx/item")
-      .post(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/:listIdx/item")
+      .post(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
 
-          if (isNaN(listIdx)) {
+          if (Number.isNaN(listIdx)) {
             return res.status(400).send({ error: "List index must be a number" });
           }
 
@@ -175,7 +175,7 @@ class WatchlistController extends Controller {
 
           WatchlistService.presenter.item.save(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             listIdx,
             req.body.itemId
           );
@@ -188,12 +188,12 @@ class WatchlistController extends Controller {
       });
 
     // Eliminar un item de una lista
-    this.setEndpoint("/user/:userName/:mediaType/:listIdx/item")
-      .delete(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/:listIdx/item")
+      .delete(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
 
-          if (isNaN(listIdx)) {
+          if (Number.isNaN(listIdx)) {
             return res.status(400).send({ error: "List index must be a number" });
           }
 
@@ -203,7 +203,7 @@ class WatchlistController extends Controller {
 
           WatchlistService.presenter.item.delete(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             listIdx,
             req.body.itemId
           );
@@ -216,20 +216,20 @@ class WatchlistController extends Controller {
       });
 
     // Intercambiar posición de items
-    this.setEndpoint("/user/:userName/:mediaType/swap/item")
-      .put(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/swap/item")
+      .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.body.listIdx);
           const itemIdx1 = Number(req.body.itemIdx1);
           const itemIdx2 = Number(req.body.itemIdx2);
 
-          if (isNaN(listIdx) || isNaN(itemIdx1) || isNaN(itemIdx2)) {
+          if (Number.isNaN(listIdx) || Number.isNaN(itemIdx1) || Number.isNaN(itemIdx2)) {
             return res.status(400).send({ error: "All indices must be numbers" });
           }
 
           WatchlistService.presenter.item.swap(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             listIdx,
             itemIdx1,
             itemIdx2
@@ -243,20 +243,20 @@ class WatchlistController extends Controller {
       });
 
     // Mover un item entre listas
-    this.setEndpoint("/user/:userName/:mediaType/move/item")
-      .put(isAuthenticated, hasResourceAccess("userName"), (req: Request, res: Response) => {
+    this.setEndpoint("/user/:uid/:mediaType/move/item")
+      .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const sourceListIdx = Number(req.body.sourceListIdx);
           const targetListIdx = Number(req.body.targetListIdx);
           const itemIdx = Number(req.body.itemIdx);
 
-          if (isNaN(sourceListIdx) || isNaN(targetListIdx) || isNaN(itemIdx)) {
+          if (Number.isNaN(sourceListIdx) || Number.isNaN(targetListIdx) || Number.isNaN(itemIdx)) {
             return res.status(400).send({ error: "All indices must be numbers" });
           }
 
           WatchlistService.presenter.item.move(
             req.params.mediaType as MediaType,
-            req.params.userName,
+            req.params.uid,
             sourceListIdx,
             targetListIdx,
             itemIdx

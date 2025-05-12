@@ -25,8 +25,8 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 };
 
 // Middleware para verificar si el usuario tiene acceso a un recurso específico
-export const hasResourceAccess = (resourceParamName: string) => {
-    return async (req: Request, res: Response, next: NextFunction) => {
+export const hasResourceAccess = (resourceParamName: string) => (
+    async (req: Request, res: Response, next: NextFunction) => {
         try {
             if (!req.user) {
                 return res.status(401).json({ error: 'Unauthorized: Authentication required' });
@@ -34,7 +34,6 @@ export const hasResourceAccess = (resourceParamName: string) => {
 
             const resourceOwnerId = req.params[resourceParamName];
 
-            // Si el usuario es el dueño del recurso o tiene rol de admin
             if (req.user.uid === resourceOwnerId || req.user.role === 'admin') {
                 next();
             } else {
@@ -43,8 +42,8 @@ export const hasResourceAccess = (resourceParamName: string) => {
         } catch (error) {
             return res.status(500).json({ error: 'Internal server error during authorization' });
         }
-    };
-};
+    }
+);
 
 // Ampliar la interfaz de Request para incluir el usuario
 declare global {

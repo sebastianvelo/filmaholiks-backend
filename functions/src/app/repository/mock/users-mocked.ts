@@ -1,7 +1,7 @@
 import UserEntity from "../../../shared/entity/user/UserEntity";
 
 const mock: UserEntity[] = [
-  {
+  /* {
     "id": "62f8f61bd574911094eac282",
     "userName": "sebastianvelo",
     "index": 0,
@@ -53,14 +53,13 @@ const mock: UserEntity[] = [
     "id": "62f8f61bcc19d4924d3f0c15",
     "userName": "LucilleFrazier",
     "index": 4,
-    "guid": "d9274e1b-b1cf-446b-aff0-e6e0a94c28da",
     "status": "ACTIVE",
     "avatar": "https://avatars.dicebear.com/api/personas/LucilleFrazier.svg",
     "name": "Gross Leblanc",
     "email": "grossleblanc@accel.com",
     "about": "sunt proident sunt incididunt proident est ullamco reprehenderit anim non",
-    "registered": "2019-01-03"
-  }
+    "registered": new Date("2019-01-03")
+  } */
 ];
 
 export default mock;

@@ -1,5 +1,5 @@
-export const toString = (date?: string | null, locale?: string) =>
-    date && Intl.DateTimeFormat(locale ?? 'en-US', { year: 'numeric', day: 'numeric', month: 'long' }).format(new Date(date));
+export const toString = (date?: Date | null, locale?: string) =>
+    date && Intl.DateTimeFormat(locale ?? 'en-US', { year: 'numeric', day: 'numeric', month: 'long' }).format(date);
 
 export const getDifference = (dateTo?: string, dateFrom?: string) => {
     const diff = (dateFrom ? new Date(dateFrom).getTime() : new Date().getTime()) - new Date(dateTo ?? "").getTime();
@@ -22,4 +22,4 @@ export const getDifferenceString = (dateTo?: string, dateFrom?: string) => {
     return `(${yearMsg}${monthMsg})`
 }
 
-export const getFullMessage = (dateTo?: string, dateFrom?: string) => `${toString(dateTo)} ${getDifferenceString(dateTo, dateFrom)}`;
+export const getFullMessage = (dateTo?: string, dateFrom?: string) => `${dateTo} ${getDifferenceString(dateTo, dateFrom)}`;
