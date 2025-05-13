@@ -1,5 +1,5 @@
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import DetailPageModel from "../@shared/model/pages/detail/DetailPageModel";
+import DetailPageModel from "@shared/model/pages/detail/DetailPageModel";
 import * as TitleHelper from "../../../../helper/title/TitleHelper";
 import Body from "./ShowDetailPage.body";
 import SearchBar from "../../../common/search/Show.search";

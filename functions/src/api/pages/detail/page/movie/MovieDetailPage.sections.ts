@@ -1,5 +1,5 @@
 import { CreditsResponse, ImagesResponse, MoviesResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import { CardsSectionModel } from "../@shared/model/components/section/Section";
+import { CardsSectionModel } from "@shared/model/components/section/Section";
 import CastMemberCardVerticalModel from "../../../common/card/vertical/CastMemberCardVerticalModel";
 import GalleryImageCardVerticalModel from "../../../common/card/vertical/GalleryImageCardVerticalModel";
 import MovieCardVerticalModel from "../../../common/card/vertical/MovieCardVerticalModel";

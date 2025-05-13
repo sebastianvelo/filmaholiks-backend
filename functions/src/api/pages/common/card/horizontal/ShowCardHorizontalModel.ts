@@ -1,6 +1,6 @@
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import CardHorizontalModel from "../@shared/model/components/CardHorizontalModel";
-import { PageRouteBuilder } from "../@shared/routes/PageRoute";
+import CardHorizontalModel from "@shared/model/components/CardHorizontalModel";
+import { PageRouteBuilder } from "@shared/routes/PageRoute";
 import { getTMDBImage } from "../../../../helper/media/MediaHelper";
 
 const getTags = (show: TVShowResponse) => {

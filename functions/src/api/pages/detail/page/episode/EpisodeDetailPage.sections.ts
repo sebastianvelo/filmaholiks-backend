@@ -1,6 +1,6 @@
 import { CreditsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { Character, Episode, GuestStar } from "tmdb-js/lib/api/model/episode/Episode";
-import { CardsSectionModel } from "../@shared/model/components/section/Section";
+import { CardsSectionModel } from "@shared/model/components/section/Section";
 import CastMemberCardVerticalModel from "../../../common/card/vertical/CastMemberCardVerticalModel";
 import CrewCardVerticalModel from "../../../common/card/vertical/CrewCardVerticalModel";
 import EpisodeCardVerticalModel from "../../../common/card/vertical/EpisodeCardVerticalModel";

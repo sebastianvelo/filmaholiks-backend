@@ -1,5 +1,5 @@
 import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Response";
-import DetailPageModel from "../@shared/model/pages/detail/DetailPageModel";
+import DetailPageModel from "@shared/model/pages/detail/DetailPageModel";
 import * as TitleHelper from "../../../../helper/title/TitleHelper";
 import Body from "./EpisodeDetailPage.body";
 import SearchBar from "../../../common/search/Show.search";

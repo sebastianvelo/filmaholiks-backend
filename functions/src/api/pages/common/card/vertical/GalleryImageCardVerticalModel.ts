@@ -1,5 +1,5 @@
 import { Image } from "tmdb-js/lib/api/model/image/Image";
-import CardVerticalModel from "../@shared/model/components/CardVerticalModel";
+import CardVerticalModel from "@shared/model/components/CardVerticalModel";
 import { getTMDBImage } from "../../../../helper/media/MediaHelper";
 
 const GalleryImageCardVerticalModel = (image: Image): CardVerticalModel => ({

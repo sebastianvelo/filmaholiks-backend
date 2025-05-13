@@ -1,6 +1,6 @@
 import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response";
-import CardVerticalModel from "../@shared/model/components/CardVerticalModel";
-import { PageRouteBuilder } from "../@shared/routes/PageRoute";
+import CardVerticalModel from "@shared/model/components/CardVerticalModel";
+import { PageRouteBuilder } from "@shared/routes/PageRoute";
 import { getTMDBImage } from "../../../../helper/media/MediaHelper";
 
 const SeasonCardVerticalModel = (season: SeasonResponse, show?: number): CardVerticalModel => ({

@@ -1,11 +1,11 @@
 import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
-import ImageModel from "../@shared/model/atom/ImageModel";
-import VideoModel from "../@shared/model/atom/VideoModel";
-import { DataItemSectionModel } from "../@shared/model/components/section/Section";
-import { DetailContentHeaderModel, DetailContentInfoModel } from "../@shared/model/pages/detail/header/DetailContentModel";
-import { DetailHeaderModel, WatchlistButtonModel } from "../@shared/model/pages/detail/header/DetailHeaderModel";
-import MediaType from "../@shared/types/MediaType";
+import ImageModel from "@shared/model/atom/ImageModel";
+import VideoModel from "@shared/model/atom/VideoModel";
+import { DataItemSectionModel } from "@shared/model/components/section/Section";
+import { DetailContentHeaderModel, DetailContentInfoModel } from "@shared/model/pages/detail/header/DetailContentModel";
+import { DetailHeaderModel, WatchlistButtonModel } from "@shared/model/pages/detail/header/DetailHeaderModel";
+import MediaType from "@shared/types/MediaType";
 import * as DateHelper from "../../../../helper/date/DateHelper";
 import { getTrailer, getTMDBImage } from "../../../../helper/media/MediaHelper";
 import MovieCardHorizontalModel from "../../../common/card/horizontal/MovieCardHorizontalModel";

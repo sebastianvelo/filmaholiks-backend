@@ -1,8 +1,8 @@
 import { CreditsResponse, VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Response";
 import { SeasonWithEpisodesResponse } from "tmdb-js/lib/api/request/season/response/Response";
-import { DetailPageBodyModel } from "../@shared/model/pages/detail/DetailPageModel";
-import TMDB from "../../../../../tmdb/TMDB";
+import { DetailPageBodyModel } from "@shared/model/pages/detail/DetailPageModel";
+import TMDB from "@TMDB/TMDB";
 import Header from "./EpisodeDetailPage.header";
 import Sections from "./EpisodeDetailPage.sections";
 

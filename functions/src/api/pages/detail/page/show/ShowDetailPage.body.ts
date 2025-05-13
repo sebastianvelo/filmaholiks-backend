@@ -2,8 +2,8 @@ import ChartHelper from "@api/helper/chart/ChartHelper";
 import { CreditsResponse, ImagesResponse, TVShowsResponse, VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { Episode } from "tmdb-js/lib/api/model/episode/Episode";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
-import { DetailPageBodyModel } from "../@shared/model/pages/detail/DetailPageModel";
-import TMDB from "../../../../../tmdb/TMDB";
+import { DetailPageBodyModel } from "@shared/model/pages/detail/DetailPageModel";
+import TMDB from "@TMDB/TMDB";
 import Header from "./ShowDetailPage.header";
 import Sections from "./ShowDetailPage.sections";
 

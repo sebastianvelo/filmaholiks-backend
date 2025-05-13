@@ -1,5 +1,5 @@
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
-import DetailPageModel from "../@shared/model/pages/detail/DetailPageModel";
+import DetailPageModel from "@shared/model/pages/detail/DetailPageModel";
 import * as TitleHelper from "../../../../helper/title/TitleHelper";
 import SearchBar from "../../../common/search/Movie.search";
 import Body from "./MovieDetailPage.body";

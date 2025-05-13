@@ -1,7 +1,7 @@
 import { ExplorePageBodyModel } from "@shared/model/pages/explore/ExplorePageModel";
 import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
 import { MoviesResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import TMDB from "tmdb/TMDB";
+import TMDB from "@TMDB/TMDB";
 import Sections from "./MovieExplorePage.sections";
 
 const Body = async (query?: LanguageParams): Promise<ExplorePageBodyModel> => {

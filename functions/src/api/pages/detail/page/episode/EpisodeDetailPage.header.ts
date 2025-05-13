@@ -1,10 +1,10 @@
 import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { EpisodeResponse } from "tmdb-js/lib/api/request/episode/response/Response";
-import ImageModel from "../@shared/model/atom/ImageModel";
-import VideoModel from "../@shared/model/atom/VideoModel";
-import { DataItemSectionModel } from "../@shared/model/components/section/Section";
-import { DetailContentHeaderModel, DetailContentInfoModel } from "../@shared/model/pages/detail/header/DetailContentModel";
-import { DetailHeaderModel } from "../@shared/model/pages/detail/header/DetailHeaderModel";
+import ImageModel from "@shared/model/atom/ImageModel";
+import VideoModel from "@shared/model/atom/VideoModel";
+import { DataItemSectionModel } from "@shared/model/components/section/Section";
+import { DetailContentHeaderModel, DetailContentInfoModel } from "@shared/model/pages/detail/header/DetailContentModel";
+import { DetailHeaderModel } from "@shared/model/pages/detail/header/DetailHeaderModel";
 import * as DateHelper from "../../../../helper/date/DateHelper";
 import { getTMDBImage, getTrailer } from "../../../../helper/media/MediaHelper";
 import DataItemModel from "../../common/data-item/DataItemModel";
