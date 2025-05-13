@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-import { hasResourceAccess, isAuthenticated } from "../../../app/auth/authMiddleware";
-import Controller from "../../../app/controller/Controller";
-import MediaType from "../../../shared/types/MediaType";
+import { hasResourceAccess, isAuthenticated } from "@app/auth/authMiddleware";
+import Controller from "@app/controller/Controller";
+import MediaType from "@shared/types/MediaType";
 import WatchlistService from "./WatchlistService";
 
 const endpoints = {

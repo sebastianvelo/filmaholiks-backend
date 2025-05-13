@@ -1,5 +1,5 @@
-import { ListModel } from "../../../shared/model/components/WatchlistModel";
-import WatchlistEntity from "../../../shared/entity/watch-list/WatchlistEntity";
+import { ListModel } from "@shared/model/components/WatchlistModel";
+import WatchlistEntity from "@shared/entity/watch-list/WatchlistEntity";
 
 const getWatchlistEntity = (lists: ListModel[]): WatchlistEntity => ({
     lists: lists.map((list, idx) => ({

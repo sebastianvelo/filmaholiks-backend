@@ -1,4 +1,4 @@
-import UserEntity from "../../../shared/entity/user/UserEntity";
+import UserEntity from "@shared/entity/user/UserEntity";
 import UsersDatabase from "./UsersDatabase";
 
 class UserRepository {

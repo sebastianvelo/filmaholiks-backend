@@ -1,6 +1,6 @@
+import SearchResultPageModel from "@shared/model/pages/search-result/SearchResultPageModel";
+import TMDB from "@TMDB/TMDB";
 import { MoviesResponse, PeopleResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import SearchResultPageModel from "../../../shared/model/pages/search-result/SearchResultPageModel";
-import TMDB from "../../../tmdb/TMDB";
 import MovieSearchResultPage from "./page/movie/MovieSearchResultPage";
 import PersonSearchResultPage from "./page/person/PersonSearchResultPage";
 import ShowSearchResultPage from "./page/show/ShowSearchResultPage";

@@ -21,7 +21,7 @@
                 "api/model/*"
             ],
             "@app/*": [
-                "app/controller/*"
+                "app/*"
             ],
             "@shared/*": [
                 "shared/*"

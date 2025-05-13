@@ -1,5 +1,5 @@
 import DetailPageModel from "@shared/model/pages/detail/DetailPageModel";
-import TMDB from "../../../tmdb/TMDB";
+import TMDB from "@TMDB/TMDB";
 import UserService from "../../entities/user/UserService";
 import EpisodeDetailPage from "./page/episode/EpisodeDetailPage";
 import MovieDetailPage from "./page/movie/MovieDetailPage";

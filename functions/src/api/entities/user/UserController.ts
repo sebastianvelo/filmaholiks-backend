@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { isAuthenticated, hasResourceAccess } from "../../../app/auth/authMiddleware";
-import Controller from "../../../app/controller/Controller";
+import { isAuthenticated, hasResourceAccess } from "@app/auth/authMiddleware";
+import Controller from "@app/controller/Controller";
 import UserService from "./UserService";
 
 class UserController extends Controller {

@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { checkOptionalResourceAccess, detectAuthentication } from "../../../app/auth/authMiddleware";
-import Controller from "../../../app/controller/Controller";
+import { checkOptionalResourceAccess, detectAuthentication } from "@app/auth/authMiddleware";
+import Controller from "@app/controller/Controller";
 import DetailPageService from "./DetailPageService";
 
 class DetailPageController extends Controller {
