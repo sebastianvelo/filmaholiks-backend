@@ -1,5 +1,5 @@
 import { MoviesResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import { CardsSectionModel } from "../../../../../shared/model/components/section/Section";
+import { CardsSectionModel } from "../@shared/model/components/section/Section";
 import MovieCardVerticalModel from "../../../common/card/vertical/MovieCardVerticalModel";
 
 interface MovieSections {

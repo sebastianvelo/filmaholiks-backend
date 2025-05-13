@@ -1,5 +1,5 @@
-import CardVerticalModel from "../../../../../shared/model/components/CardVerticalModel";
-import { PageRouteBuilder } from "../../../../../shared/routes/PageRoute";
+import CardVerticalModel from "../@shared/model/components/CardVerticalModel";
+import { PageRouteBuilder } from "../@shared/routes/PageRoute";
 import { getTMDBImage } from "../../../../helper/media/MediaHelper";
 
 const ShowAppareancesCardVerticalModel = (castMember: any): CardVerticalModel => ({

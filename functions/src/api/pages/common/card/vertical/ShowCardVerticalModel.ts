@@ -1,6 +1,6 @@
 import { TVShow } from "tmdb-js/lib/api/model/film/Film";
-import CardVerticalModel from "../../../../../shared/model/components/CardVerticalModel";
-import { PageRouteBuilder } from "../../../../../shared/routes/PageRoute";
+import CardVerticalModel from "../@shared/model/components/CardVerticalModel";
+import { PageRouteBuilder } from "../@shared/routes/PageRoute";
 import { getTMDBImage } from "../../../../helper/media/MediaHelper";
 
 const ShowCardVerticalModel = (show: TVShow): CardVerticalModel => ({

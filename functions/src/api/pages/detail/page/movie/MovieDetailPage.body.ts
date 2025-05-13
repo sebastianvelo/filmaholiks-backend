@@ -1,5 +1,5 @@
 import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
-import { DetailPageBodyModel } from "../../../../../shared/model/pages/detail/DetailPageModel";
+import { DetailPageBodyModel } from "../@shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../../../tmdb/TMDB";
 import Header from "./MovieDetailPage.header";
 import Sections from "./MovieDetailPage.sections";
