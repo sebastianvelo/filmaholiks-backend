@@ -7,9 +7,9 @@ import { DetailWatchlistModel } from "../../../shared/model/pages/detail/DetailP
 import MediaType from "../../../shared/types/MediaType";
 import TMDB from "../../../tmdb/TMDB";
 import WatchlistRepository from "../../entities/watch-list/WatchListRepository";
-import MovieActionableCardModel from "../../model/actionable-card/MovieActionableCardModel";
-import ShowActionableCardModel from "../../model/actionable-card/ShowActionableCardModel";
-import { ListModel, ListsModel, WatchlistModel } from "../../model/watch-list/WatchlistModel";
+import MovieActionableCardModel from "../../pages/common/actionable-card/MovieActionableCardModel";
+import ShowActionableCardModel from "../../pages/common/actionable-card/ShowActionableCardModel";
+import { ListModel, ListsModel, WatchlistModel } from "../../pages/common/watch-list/WatchlistModel";
 
 interface IWatchlistService {
   search: (uid: string, query: string) => Promise<ActionableCardModel[]>;

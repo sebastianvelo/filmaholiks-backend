@@ -1,10 +1,10 @@
 import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import { ExplorePageBodyModel } from "../../../../shared/model/pages/explore/ExplorePageModel";
-import TMDB from "../../../../tmdb/TMDB";
-import ShowExploreSectionsModel from "../../section/explore/ShowExploreSectionsModel";
+import { ExplorePageBodyModel } from "shared/model/pages/explore/ExplorePageModel";
+import TMDB from "tmdb/TMDB";
+import Sections from "./ShowExplorePage.sections";
 
-const ShowExplorePageBodyModel = async (query?: LanguageParams): Promise<ExplorePageBodyModel> => {
+const Body = async (query?: LanguageParams): Promise<ExplorePageBodyModel> => {
     const onTheAir: TVShowsResponse = await TMDB.tvShow.getOnTheAir(query);
     const topRated: TVShowsResponse = await TMDB.tvShow.getTopRatedShows(query);
     const popular: TVShowsResponse = await TMDB.tvShow.getPopularShows(query);
@@ -13,7 +13,7 @@ const ShowExplorePageBodyModel = async (query?: LanguageParams): Promise<Explore
     const weeklyTrending: TVShowsResponse = await TMDB.trending.getTVShows("week");
 
     return {
-        sections: ShowExploreSectionsModel({
+        sections: Sections({
             onTheAir,
             topRated,
             popular,
@@ -24,4 +24,4 @@ const ShowExplorePageBodyModel = async (query?: LanguageParams): Promise<Explore
     };
 };
 
-export default ShowExplorePageBodyModel;
+export default Body;
