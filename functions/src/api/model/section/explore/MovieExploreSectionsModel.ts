@@ -1,6 +1,6 @@
 import { MoviesResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { CardsSectionModel } from "../../../../shared/model/components/section/Section";
-import MovieCardVerticalModel from "../../card/vertical/MovieCardVerticalModel";
+import MovieCardVerticalModel from "../../../pages/common/card/vertical/MovieCardVerticalModel";
 
 interface MovieExplore {
     topRated: MoviesResponse;

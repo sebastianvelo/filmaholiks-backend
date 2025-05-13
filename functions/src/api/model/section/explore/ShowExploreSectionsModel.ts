@@ -1,6 +1,6 @@
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { CardsSectionModel } from "../../../../shared/model/components/section/Section";
-import ShowCardVerticalModel from "../../card/vertical/ShowCardVerticalModel";
+import ShowCardVerticalModel from "../../../pages/common/card/vertical/ShowCardVerticalModel";
 
 interface ShowExplore {
     topRated: TVShowsResponse;

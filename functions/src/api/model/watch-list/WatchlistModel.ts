@@ -5,8 +5,8 @@ import { ListModel as IListModel } from "../../../shared/model/components/Watchl
 import MediaType from "../../../shared/types/MediaType";
 import TMDB from "../../../tmdb/TMDB";
 import WatchlistEntity, { ListEntity } from "../../../shared/entity/watch-list/WatchlistEntity";
-import MovieCardHorizontalModel from "../card/horizontal/MovieCardHorizontalModel";
-import ShowCardHorizontalModel from "../card/horizontal/ShowCardHorizontalModel";
+import MovieCardHorizontalModel from "../../pages/common/card/horizontal/MovieCardHorizontalModel";
+import ShowCardHorizontalModel from "../../pages/common/card/horizontal/ShowCardHorizontalModel";
 
 export const ShowListModel = async (list: ListEntity): Promise<IListModel> => {
     const items: TVShowResponse[] = await Promise.all(list.items.map(async (item) => TMDB.tvShow.getDetails(Number(item))));

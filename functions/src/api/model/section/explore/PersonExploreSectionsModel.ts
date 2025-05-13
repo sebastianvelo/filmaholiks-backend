@@ -1,6 +1,6 @@
 import { PeopleResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { CardsSectionModel } from "../../../../shared/model/components/section/Section";
-import PersonCardVerticalModel from "../../card/vertical/PersonCardVerticalModel";
+import PersonCardVerticalModel from "../../../pages/common/card/vertical/PersonCardVerticalModel";
 
 interface PersonExplore {
     popular: PeopleResponse;
