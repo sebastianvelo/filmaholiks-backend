@@ -1,7 +1,7 @@
-import { Episode } from "tmdb-js/lib/api/model/episode/Episode";
-import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import ChartModel, { ChartBodyCellModel } from "@shared/model/components/ChartModel";
 import TMDB from "@TMDB/TMDB";
+import { Episode } from "tmdb-js/lib/api/model/episode/Episode";
+import { SeasonResponse } from "tmdb-js/lib/api/request/season/response/Response";
 import { getTMDBImage } from "../media/MediaHelper";
 
 class ChartHelper {

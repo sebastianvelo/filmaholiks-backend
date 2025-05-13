@@ -29,14 +29,12 @@ const Info = (person: PersonDetailsResponse): DetailContentInfoModel => ({
   ]
 });
 
-const Header = (person: PersonDetailsResponse): DetailHeaderModel => {
-  return ({
-    poster: Poster(person),
-    backdrop: Backdrop(person),
-    header: ContentHeader(person),
-    description: Description(person),
-    info: Info(person),
-  });
-};
+const Header = (person: PersonDetailsResponse): DetailHeaderModel => ({
+  poster: Poster(person),
+  backdrop: Backdrop(person),
+  header: ContentHeader(person),
+  description: Description(person),
+  info: Info(person),
+});
 
 export default Header;

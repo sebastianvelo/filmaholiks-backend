@@ -1,10 +1,10 @@
-import { Movie } from "tmdb-js/lib/api/model/film/Film";
-import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
+import WatchlistEntity, { ListEntity } from "@shared/entity/watch-list/WatchlistEntity";
 import { WatchlistTabModel } from "@shared/model/components/section/Section";
 import { ListModel as IListModel } from "@shared/model/components/WatchlistModel";
 import MediaType from "@shared/types/MediaType";
-import TMDB from "../../../../tmdb/TMDB";
-import WatchlistEntity, { ListEntity } from "@shared/entity/watch-list/WatchlistEntity";
+import TMDB from "@TMDB/TMDB";
+import { Movie } from "tmdb-js/lib/api/model/film/Film";
+import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 import MovieCardHorizontalModel from "../card/horizontal/MovieCardHorizontalModel";
 import ShowCardHorizontalModel from "../card/horizontal/ShowCardHorizontalModel";
 

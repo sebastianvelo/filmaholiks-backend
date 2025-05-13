@@ -9,12 +9,10 @@ import Body from "./ShowSearchResultPage.body";
  * @param shows The TV shows response from API
  * @param query The search query
  */
-export const ShowSearchResultPage = (shows: TVShowsResponse, query: string): SearchResultPageModel => {
-    return {
-        title: TitleHelper.search.getTitle(query),
-        searchbar: SearchBar(),
-        body: Body(shows, query)
-    };
-};
+const ShowSearchResultPage = (shows: TVShowsResponse, query: string): SearchResultPageModel => ({
+    title: TitleHelper.search.getTitle(query),
+    searchbar: SearchBar(),
+    body: Body(shows, query)
+});
 
 export default ShowSearchResultPage;

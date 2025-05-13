@@ -9,12 +9,10 @@ import Body from "./MovieSearchResultPage.body";
  * @param movies The movies response from API
  * @param query The search query
  */
-const MovieSearchResultPage = (movies: MoviesResponse, query: string): SearchResultPageModel => {
-    return {
-        title: TitleHelper.search.getTitle(query),
-        searchbar: SearchBar(),
-        body: Body(movies, query)
-    };
-};
+const MovieSearchResultPage = (movies: MoviesResponse, query: string): SearchResultPageModel => ({
+    title: TitleHelper.search.getTitle(query),
+    searchbar: SearchBar(),
+    body: Body(movies, query)
+});
 
 export default MovieSearchResultPage;

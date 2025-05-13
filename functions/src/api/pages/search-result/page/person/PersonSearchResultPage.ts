@@ -9,12 +9,10 @@ import Body from "./PersonSearchResultPage.body";
  * @param people The people response from API
  * @param query The search query
  */
-export const PersonSearchResultPage = (people: PeopleResponse, query: string): SearchResultPageModel => {
-    return {
-        title: TitleHelper.search.getTitle(query),
-        searchbar: SearchBar(),
-        body: Body(people, query)
-    };
-};
+const PersonSearchResultPage = (people: PeopleResponse, query: string): SearchResultPageModel => ({
+    title: TitleHelper.search.getTitle(query),
+    searchbar: SearchBar(),
+    body: Body(people, query)
+});
 
 export default PersonSearchResultPage;

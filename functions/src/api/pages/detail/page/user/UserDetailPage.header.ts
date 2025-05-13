@@ -24,13 +24,11 @@ const Info = (user: UserEntity): DetailContentInfoModel => ({
   ]
 });
 
-const Header = (user: UserEntity): DetailHeaderModel => {
-  return {
-    poster: Poster(user),
-    header: ContentHeader(user),
-    description: Description(user),
-    info: Info(user),
-  }
-};
+const Header = (user: UserEntity): DetailHeaderModel => ({
+  poster: Poster(user),
+  header: ContentHeader(user),
+  description: Description(user),
+  info: Info(user),
+});
 
 export default Header;

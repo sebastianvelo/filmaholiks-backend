@@ -1,4 +1,3 @@
-import { MoviesResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { ListEntity } from "@shared/entity/watch-list/WatchlistEntity";
 import ActionableCardModel from "@shared/model/components/ActionableCardModel";
 import { WatchlistTabModel } from "@shared/model/components/section/Section";
@@ -6,10 +5,11 @@ import { ListModel as IListModel } from "@shared/model/components/WatchlistModel
 import { DetailWatchlistModel } from "@shared/model/pages/detail/DetailPageModel";
 import MediaType from "@shared/types/MediaType";
 import TMDB from "@TMDB/TMDB";
-import WatchlistRepository from "../../entities/watch-list/WatchListRepository";
+import { MoviesResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import MovieActionableCardModel from "../../pages/common/actionable-card/MovieActionableCardModel";
 import ShowActionableCardModel from "../../pages/common/actionable-card/ShowActionableCardModel";
 import { ListModel, ListsModel, WatchlistModel } from "../../pages/common/watch-list/WatchlistModel";
+import WatchlistRepository from "./WatchListRepository";
 
 interface IWatchlistService {
   search: (uid: string, query: string) => Promise<ActionableCardModel[]>;

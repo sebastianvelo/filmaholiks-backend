@@ -1,17 +1,16 @@
-import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
+import WatchlistService from "@api/entities/watch-list/WatchlistService";
 import ImageModel from "@shared/model/atom/ImageModel";
 import VideoModel from "@shared/model/atom/VideoModel";
 import { DataItemSectionModel } from "@shared/model/components/section/Section";
 import { DetailContentHeaderModel, DetailContentInfoModel } from "@shared/model/pages/detail/header/DetailContentModel";
 import { DetailHeaderModel, WatchlistButtonModel } from "@shared/model/pages/detail/header/DetailHeaderModel";
 import MediaType from "@shared/types/MediaType";
+import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
+import { MovieResponse } from "tmdb-js/lib/api/request/movie/response/Response";
 import * as DateHelper from "../../../../helper/date/DateHelper";
-import { getTrailer, getTMDBImage } from "../../../../helper/media/MediaHelper";
+import { getTMDBImage, getTrailer } from "../../../../helper/media/MediaHelper";
 import MovieCardHorizontalModel from "../../../common/card/horizontal/MovieCardHorizontalModel";
-import ShowCardHorizontalModel from "../../../common/card/horizontal/ShowCardHorizontalModel";
 import DataItemModel from "../../common/data-item/DataItemModel";
-import WatchlistService from "@api/entities/watch-list/WatchlistService";
 
 const Poster = (movie: MovieResponse): ImageModel =>
     getTMDBImage(movie.poster_path, movie.title);
