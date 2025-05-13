@@ -1,4 +1,4 @@
-import { DetailPageBodyModel } from "shared/model/pages/detail/DetailPageModel";
+import { DetailPageBodyModel } from "@shared/model/pages/detail/DetailPageModel";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import TMDB from "tmdb/TMDB";
 import Header from "./PersonDetailPage.header";

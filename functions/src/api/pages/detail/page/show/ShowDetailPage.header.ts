@@ -3,12 +3,12 @@ import { getTMDBImage, getTrailer } from "@api/helper/media/MediaHelper";
 import ShowCardHorizontalModel from "@api/pages/common/card/horizontal/ShowCardHorizontalModel";
 import DataItemModel from "@api/pages/detail/common/data-item/DataItemModel";
 import * as DateHelper from "@helper/date/DateHelper";
-import ImageModel from "shared/model/atom/ImageModel";
-import VideoModel from "shared/model/atom/VideoModel";
-import { DataItemSectionModel } from "shared/model/components/section/Section";
-import { DetailContentHeaderModel, DetailContentInfoModel } from "shared/model/pages/detail/header/DetailContentModel";
-import { DetailActionsModel, DetailHeaderModel, WatchlistButtonModel } from "shared/model/pages/detail/header/DetailHeaderModel";
-import MediaType from "shared/types/MediaType";
+import ImageModel from "@shared/model/atom/ImageModel";
+import VideoModel from "@shared/model/atom/VideoModel";
+import { DataItemSectionModel } from "@shared/model/components/section/Section";
+import { DetailContentHeaderModel, DetailContentInfoModel } from "@shared/model/pages/detail/header/DetailContentModel";
+import { DetailActionsModel, DetailHeaderModel, WatchlistButtonModel } from "@shared/model/pages/detail/header/DetailHeaderModel";
+import MediaType from "@shared/types/MediaType";
 import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 

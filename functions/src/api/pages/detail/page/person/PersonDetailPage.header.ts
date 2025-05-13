@@ -1,10 +1,10 @@
 import { getTMDBImage } from "@api/helper/media/MediaHelper";
 import DataItemModel from "@api/pages/detail/common/data-item/DataItemModel";
 import * as DateHelper from "@helper/date/DateHelper";
-import ImageModel from "shared/model/atom/ImageModel";
-import { DataItemSectionModel } from "shared/model/components/section/Section";
-import { DetailContentHeaderModel, DetailContentInfoModel } from "shared/model/pages/detail/header/DetailContentModel";
-import { DetailHeaderModel } from "shared/model/pages/detail/header/DetailHeaderModel";
+import ImageModel from "@shared/model/atom/ImageModel";
+import { DataItemSectionModel } from "@shared/model/components/section/Section";
+import { DetailContentHeaderModel, DetailContentInfoModel } from "@shared/model/pages/detail/header/DetailContentModel";
+import { DetailHeaderModel } from "@shared/model/pages/detail/header/DetailHeaderModel";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 
 const Poster = (person: PersonDetailsResponse): ImageModel =>

@@ -1,4 +1,4 @@
-import DetailPageModel from "../../../shared/model/pages/detail/DetailPageModel";
+import DetailPageModel from "@shared/model/pages/detail/DetailPageModel";
 import TMDB from "../../../tmdb/TMDB";
 import UserService from "../../entities/user/UserService";
 import EpisodeDetailPage from "./page/episode/EpisodeDetailPage";

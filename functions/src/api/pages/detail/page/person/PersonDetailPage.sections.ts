@@ -1,6 +1,6 @@
 import MovieAppareancesCardVerticalModel from "@api/pages/common/card/vertical/MovieAppareancesCardVerticalModel";
 import ShowAppareancesCardVerticalModel from "@api/pages/common/card/vertical/ShowAppareancesCardVerticalModel";
-import { CardsSectionModel } from "shared/model/components/section/Section";
+import { CardsSectionModel } from "@shared/model/components/section/Section";
 import { CreditsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 
 interface PersonSections {

@@ -3,7 +3,7 @@ import GalleryImageCardVerticalModel from "@api/pages/common/card/vertical/Galle
 import SeasonCardVerticalModel from "@api/pages/common/card/vertical/SeasonCardVerticalModel";
 import ShowCardVerticalModel from "@api/pages/common/card/vertical/ShowCardVerticalModel";
 import TopRatedEpisodeCardVerticalModel from "@api/pages/common/card/vertical/TopRatedEpisodeCardVerticalModel";
-import { CardsSectionModel } from "shared/model/components/section/Section";
+import { CardsSectionModel } from "@shared/model/components/section/Section";
 import { CreditsResponse, ImagesResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { Episode } from "tmdb-js/lib/api/model/episode/Episode";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";

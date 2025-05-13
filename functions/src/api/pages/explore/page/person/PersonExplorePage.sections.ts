@@ -1,5 +1,5 @@
 import PersonCardVerticalModel from "@api/pages/common/card/vertical/PersonCardVerticalModel";
-import { CardsSectionModel } from "shared/model/components/section/Section";
+import { CardsSectionModel } from "@shared/model/components/section/Section";
 import { PeopleResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 
 interface PersonExplore {

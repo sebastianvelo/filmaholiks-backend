@@ -22,7 +22,10 @@
             ],
             "@app/*": [
                 "app/controller/*"
-            ]
+            ],
+            "@shared/*": [
+                "shared/*"
+            ],
         }
     }
 }

@@ -1,6 +1,6 @@
 import * as TitleHelper from "@helper/title/TitleHelper";
-import UserEntity from "shared/entity/user/UserEntity";
-import DetailPageModel from "shared/model/pages/detail/DetailPageModel";
+import UserEntity from "@shared/entity/user/UserEntity";
+import DetailPageModel from "@shared/model/pages/detail/DetailPageModel";
 import Body from "./UserDetailPage.body";
 import SearchBar from "../../../common/search/User.search";
 

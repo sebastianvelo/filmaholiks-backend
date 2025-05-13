@@ -1,5 +1,5 @@
 import * as TitleHelper from "@helper/title/TitleHelper";
-import DetailPageModel from "shared/model/pages/detail/DetailPageModel";
+import DetailPageModel from "@shared/model/pages/detail/DetailPageModel";
 import { PersonDetailsResponse } from "tmdb-js/lib/api/request/person/response/Response";
 import Body from "./PersonDetailPage.body";
 import SearchBar from "../../../common/search/Person.search";

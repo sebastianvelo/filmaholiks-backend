@@ -1,6 +1,6 @@
 import SearchBar from "@api/pages/common/search/Show.search";
 import * as TitleHelper from "@helper/title/TitleHelper";
-import SearchResultPageModel from "shared/model/pages/search-result/SearchResultPageModel";
+import SearchResultPageModel from "@shared/model/pages/search-result/SearchResultPageModel";
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import Body from "./ShowSearchResultPage.body";
 

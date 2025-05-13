@@ -1,5 +1,5 @@
 import ShowCardVerticalModel from "@api/pages/common/card/vertical/ShowCardVerticalModel";
-import { CardsSectionModel } from "shared/model/components/section/Section";
+import { CardsSectionModel } from "@shared/model/components/section/Section";
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 
 interface ShowSections {

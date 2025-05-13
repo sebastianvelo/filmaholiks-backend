@@ -1,4 +1,4 @@
-import ExplorePageModel from "shared/model/pages/explore/ExplorePageModel";
+import ExplorePageModel from "@shared/model/pages/explore/ExplorePageModel";
 import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
 import MovieExplorePage from "./page/movie/MovieExplorePage";
 import PersonExplorePage from "./page/person/PersonExplorePage";
