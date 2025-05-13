@@ -1,46 +1,25 @@
-import {
-  MoviesResponse,
-  PeopleResponse,
-  TVShowsResponse
-} from "tmdb-js/lib/api/common/response/CommonResponse";
+import { MoviesResponse, PeopleResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import SearchResultPageModel from "../../../shared/model/pages/search-result/SearchResultPageModel";
 import TMDB from "../../../tmdb/TMDB";
-import * as TitleHelper from "../../helper/title/TitleHelper";
-import SearchMovie from "../common/search/Movie.search";
-import SearchPerson from "../common/search/Person.search";
-import SearchShow from "../common/search/Show.search";
-import MovieSearchResultPageBodyModel from "./page/movie/MovieSearchResultPageBodyModel";
-import PersonSearchResultPageBodyModel from "./page/person/PersonSearchResultPageBodyModel";
-import ShowSearchResultPageBodyModel from "./page/show/ShowSearchResultPageBodyModel";
+import MovieSearchResultPage from "./page/movie/MovieSearchResultPage";
+import PersonSearchResultPage from "./page/person/PersonSearchResultPage";
+import ShowSearchResultPage from "./page/show/ShowSearchResultPage";
 
 class SearchResultPageService {
   public static async getMovie(query: string): Promise<SearchResultPageModel> {
     const movies: MoviesResponse = await TMDB.search.getMovies({ query });
-    return {
-      title: TitleHelper.search.getTitle(query),
-      searchbar: SearchMovie(),
-      body: MovieSearchResultPageBodyModel(movies, query)
-    };
+    return MovieSearchResultPage(movies, query);
   }
 
   public static async getShow(query: string): Promise<SearchResultPageModel> {
     const shows: TVShowsResponse = await TMDB.search.getTVShows({ query });
-    return {
-      title: TitleHelper.search.getTitle(query),
-      searchbar: SearchShow(),
-      body: ShowSearchResultPageBodyModel(shows, query)
-    };
+    return ShowSearchResultPage(shows, query);
   }
 
   public static async getPeople(query: string): Promise<SearchResultPageModel> {
     const people: PeopleResponse = await TMDB.search.getPeople({ query });
-    return {
-      title: TitleHelper.search.getTitle(query),
-      searchbar: SearchPerson(),
-      body: PersonSearchResultPageBodyModel(people, query)
-    };
+    return PersonSearchResultPage(people, query);
   }
-
 }
 
 export default SearchResultPageService;

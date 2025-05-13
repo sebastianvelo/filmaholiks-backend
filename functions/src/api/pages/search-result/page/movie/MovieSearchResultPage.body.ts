@@ -3,8 +3,8 @@ import MovieCardVerticalModel from "@api/pages/common/card/vertical/MovieCardVer
 import { SearchResultPageBodyModel } from "shared/model/pages/search-result/SearchResultPageModel";
 import { MoviesResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 
-const MovieSearchResultPageBodyModel = (movies: MoviesResponse, query: string): SearchResultPageBodyModel => ({
+const Body = (movies: MoviesResponse, query: string): SearchResultPageBodyModel => ({
     results: getResults(movies.results, MovieCardVerticalModel, query)
 });
 
-export default MovieSearchResultPageBodyModel;
+export default Body;

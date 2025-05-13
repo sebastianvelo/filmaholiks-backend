@@ -3,8 +3,8 @@ import ShowCardVerticalModel from "@api/pages/common/card/vertical/ShowCardVerti
 import { SearchResultPageBodyModel } from "shared/model/pages/search-result/SearchResultPageModel";
 import { TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 
-const ShowSearchResultPageBodyModel = (shows: TVShowsResponse, query: string): SearchResultPageBodyModel => ({
+const Body = (shows: TVShowsResponse, query: string): SearchResultPageBodyModel => ({
     results: getResults(shows.results, ShowCardVerticalModel, query)
 });
 
-export default ShowSearchResultPageBodyModel;
+export default Body;

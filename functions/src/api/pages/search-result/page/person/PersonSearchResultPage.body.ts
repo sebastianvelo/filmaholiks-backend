@@ -3,8 +3,8 @@ import PersonCardVerticalModel from "@api/pages/common/card/vertical/PersonCardV
 import { SearchResultPageBodyModel } from "shared/model/pages/search-result/SearchResultPageModel";
 import { PeopleResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 
-const PersonSearchResultPageBodyModel = (people: PeopleResponse, query: string): SearchResultPageBodyModel => ({
+const Body = (people: PeopleResponse, query: string): SearchResultPageBodyModel => ({
     results: getResults(people.results, PersonCardVerticalModel, query)
 });
 
-export default PersonSearchResultPageBodyModel;
+export default Body;
