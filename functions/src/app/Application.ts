@@ -24,7 +24,6 @@ class Application {
         return this.app;
     }
 
-
 }
 
 export default Application;
