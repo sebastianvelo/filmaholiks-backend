@@ -2,8 +2,8 @@ import { mapError } from "@api/helper/service/ServiceHelper";
 import UserEntity from "@shared/entity/user/UserEntity";
 import { pipe } from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
-import { newUserByEmail } from "./service/User.service.utils";
-import UserRepository from "./User.repository";
+import { newUserByEmail } from "./User.service.utils";
+import UserRepository from "../db/User.repository";
 
 /**
  * Obtiene un usuario por su nombre de usuario

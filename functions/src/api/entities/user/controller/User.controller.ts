@@ -3,15 +3,15 @@ import Controller from "@app/controller/Controller";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";
-import UserEndpoints from "./controller/User.endpoints";
-import UserMiddlewares from "./controller/User.middlewares";
-import UserRoutes from "./controller/User.routes";
-import * as UserService from "./User.service";
+import IUserController from "./User.interface";
+import UserMiddlewares from "./User.middlewares";
+import UserRoutes from "./User.routes";
+import * as UserService from "../service/User.service";
 
-class UserController extends Controller<UserEndpoints> {
-  protected handlers: ControllerHandlers<UserEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<UserEndpoints> = UserMiddlewares;
-  protected routes: ControllerRoutes<UserEndpoints> = UserRoutes;
+class UserController extends Controller<IUserController> {
+  protected handlers: ControllerHandlers<IUserController> = this;
+  protected middlewares: ControllerMiddlewares<IUserController> = UserMiddlewares;
+  protected routes: ControllerRoutes<IUserController> = UserRoutes;
 
   async getByUserName(req: Request, res: Response) {
     const { userName } = req.params;

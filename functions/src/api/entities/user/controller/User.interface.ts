@@ -1,4 +1,4 @@
-interface UserEndpoints {
+interface IUserController {
     getByUserName: unknown;
     getByEmail: unknown;
     create: unknown;
@@ -6,4 +6,4 @@ interface UserEndpoints {
     delete: unknown;
 }
 
-export default UserEndpoints;
+export default IUserController;

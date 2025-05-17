@@ -1,10 +1,10 @@
 import { hasResourceAccess, isAuthenticated } from "@app/middleware/authMiddleware";
 import requestValidationMiddleware from "@app/middleware/requestValidationMiddleware";
 import { ControllerMiddlewares } from "@app/types/types";
-import UserEndpoints from "./User.endpoints";
+import IUserController from "./User.interface";
 import UserValidator from "./User.validator";
 
-const UserMiddlewares: ControllerMiddlewares<UserEndpoints> = {
+const UserMiddlewares: ControllerMiddlewares<IUserController> = {
     getByUserName: [
       requestValidationMiddleware(UserValidator.getByUserName)
     ],

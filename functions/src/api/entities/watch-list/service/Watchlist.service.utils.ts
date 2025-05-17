@@ -1,15 +1,11 @@
-import { mapError } from "@api/helper/service/ServiceHelper";
 import MovieActionableCardModel from "@api/pages/common/actionable-card/MovieActionableCardModel";
 import ShowActionableCardModel from "@api/pages/common/actionable-card/ShowActionableCardModel";
 import { WatchlistModel } from "@api/pages/common/watch-list/WatchlistModel";
-import { ListEntity } from "@shared/entity/watch-list/WatchlistEntity";
 import ActionableCardModel from "@shared/model/components/ActionableCardModel";
 import { WatchlistTabModel } from "@shared/model/components/section/Section";
-import { DetailWatchlistModel } from "@shared/model/pages/detail/DetailPageModel";
 import MediaType from "@shared/types/MediaType";
 import TMDB from "@TMDB/TMDB";
-import { TaskEither, tryCatch } from "fp-ts/TaskEither";
-import WatchlistRepository from "../Watchlist.repository";
+import WatchlistRepository from "../db/Watchlist.repository";
 
 export async function searchShows(uid: string, query: string): Promise<ActionableCardModel[]> {
   const movies = await TMDB.search.getTVShows({ query });

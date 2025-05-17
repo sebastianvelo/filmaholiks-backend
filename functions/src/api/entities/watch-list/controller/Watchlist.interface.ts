@@ -1,4 +1,4 @@
-interface WatchlistEndpoints {
+interface IWatchlistController {
   search: unknown,
   getWatchlist: unknown,
   addList: unknown,
@@ -12,4 +12,4 @@ interface WatchlistEndpoints {
   moveItem: unknown,
 };
 
-export default WatchlistEndpoints;
+export default IWatchlistController;

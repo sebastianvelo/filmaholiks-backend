@@ -1,7 +1,7 @@
 import { ControllerRoutes } from "@app/types/types";
-import UserEndpoints from "./User.endpoints";
+import IUserController from "./User.interface";
 
-const UserRoutes: ControllerRoutes<UserEndpoints> = {
+const UserRoutes: ControllerRoutes<IUserController> = {
     basePath: "/user",
     endpointRoutes: {
         getByUserName: {

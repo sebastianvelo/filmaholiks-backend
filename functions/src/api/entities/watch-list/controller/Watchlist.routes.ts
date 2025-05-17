@@ -1,7 +1,7 @@
 import { ControllerRoutes } from "@app/types/types";
-import WatchlistEndpoints from "./Watchlist.endpoints";
+import IWatchlistController from "./Watchlist.interface";
 
-const WatchlistRoutes: ControllerRoutes<WatchlistEndpoints> = {
+const WatchlistRoutes: ControllerRoutes<IWatchlistController> = {
   basePath: "/watch-list/user/:uid/:mediaType",
   endpointRoutes: {
     search: {

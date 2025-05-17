@@ -1,4 +1,4 @@
-import * as UserService from '@api/entities/user/User.service';
+import * as UserService from '@api/entities/user/service/User.service';
 import { mapError } from '@api/helper/service/ServiceHelper';
 import DetailPageModel from '@shared/model/pages/detail/DetailPageModel';
 import TMDB from '@TMDB/TMDB';

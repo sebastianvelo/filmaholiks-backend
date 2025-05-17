@@ -5,8 +5,8 @@ import { WatchlistTabModel } from "@shared/model/components/section/Section";
 import { DetailWatchlistModel } from "@shared/model/pages/detail/DetailPageModel";
 import MediaType from "@shared/types/MediaType";
 import { TaskEither, tryCatch } from "fp-ts/TaskEither";
-import { searchMovies, searchShows, viewMovies, viewShows } from "./service/Watchlist.service.utils";
-import WatchlistRepository from "./Watchlist.repository";
+import WatchlistRepository from "../db/Watchlist.repository";
+import { searchMovies, searchShows, viewMovies, viewShows } from "./Watchlist.service.utils";
 
 /**
  * Busca medios (películas o series) por una query

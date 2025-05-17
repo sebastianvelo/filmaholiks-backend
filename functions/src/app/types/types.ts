@@ -30,9 +30,7 @@ export type ControllerHandlers<T> = {
     [K in keyof T]: Handler;
 };
 
-export type ControllerMiddlewares<T> = {
-    [K in keyof T]: any[];
-};
+export type ControllerMiddlewares<T> = { [K in keyof T]?: any[] }
 
 export type HTTPMethod = {
     at: (path?: string) => { use: (endpoint: Handler, middlewares: any[]) => void };

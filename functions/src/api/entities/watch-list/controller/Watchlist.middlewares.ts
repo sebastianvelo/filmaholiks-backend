@@ -1,10 +1,10 @@
 import { hasResourceAccess, isAuthenticated } from "@app/middleware/authMiddleware";
 import { ControllerMiddlewares } from "@app/types/types";
 import requestValidationMiddleware from "@app/middleware/requestValidationMiddleware";
-import WatchlistEndpoints from "./Watchlist.endpoints";
+import IWatchlistController from "./Watchlist.interface";
 import WatchlistValidator from "./Watchlist.validator";
 
-const WatchlistMiddlewares: ControllerMiddlewares<WatchlistEndpoints> = {
+const WatchlistMiddlewares: ControllerMiddlewares<IWatchlistController> = {
     search: [
         requestValidationMiddleware(WatchlistValidator.search)
     ],

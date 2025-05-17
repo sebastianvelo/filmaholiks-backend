@@ -1,4 +1,4 @@
-import UserRepository from "@api/entities/user/User.repository";
+import UserRepository from "@api/entities/user/db/User.repository";
 import CollectionName from "@app/database/types/CollectionName";
 import createCollection from "@app/firebase/createCollection";
 import { ListEntity } from "@shared/entity/watch-list/WatchlistEntity";
