@@ -1,7 +1,7 @@
 import UserController from "@api/entities/user/User.controller";
 import WatchlistController from "@api/entities/watch-list/WatchlistController";
 import DetailPageController from "@api/pages/detail/DetailPage.controller";
-import ExplorePageController from "@api/pages/explore/ExplorePageController";
+import ExplorePageController from "@api/pages/explore/ExplorePage.controller";
 import SearchResultPageController from "@api/pages/search-result/SearchResultPageController";
 import Controller from "./NController";
 
