@@ -21,7 +21,7 @@ class Application {
     private when(method: HTTPVerb): HTTPMethod {
         return {
             at: (path: string = "") => {
-                console.info(`${path.padEnd(15)} [${method.toUpperCase()}]`);
+                console.info(`[${method.toUpperCase().padEnd(6)}] ${path}`);
                 return {
                     use: (endpoint: EndpointMethod, middlewares: any[] = []) =>
                         this.app[method](path, ...middlewares, endpoint)
@@ -32,7 +32,7 @@ class Application {
 
     private setEndpoints = () => {
         this.controllers.forEach((controller) => {
-            console.info(`Adding [${controller.name.toUpperCase()}] endpoints...`);
+            console.info(`Adding endpoints...`);
             controller.getEndpoints().forEach(({ path, method, endpoint, middleware = [] }) => {
                 this.when(method).at(path).use(endpoint, middleware);
             })
