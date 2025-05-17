@@ -3,15 +3,15 @@ import { ControllerHandlers, ControllerMiddlewares, ControllerRoutes } from "@ap
 import { Request, Response } from "express";
 import { fold } from "fp-ts/TaskEither";
 import { pipe } from "fp-ts/lib/function";
-import * as SearchResultPageService from "./SearchResultPage.service";
-import SearchResultPageEndpoints from "./controller/SearchResultPage.endpoints";
-import SearchResultPageMiddlewares from "./controller/SearchResultPage.middlewares";
-import SearchResultPageRoutes from "./controller/SearchResultPage.routes";
+import * as SearchResultPageService from "../page/SearchResultPage.service";
+import ISearchResultPageController from "./SearchResultPage.interface";
+import SearchResultPageMiddlewares from "./SearchResultPage.middlewares";
+import SearchResultPageRoutes from "./SearchResultPage.routes";
 
-class SearchResultPageController extends Controller<SearchResultPageEndpoints> {
-  protected handlers: ControllerHandlers<SearchResultPageEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<SearchResultPageEndpoints> = SearchResultPageMiddlewares;
-  protected routes: ControllerRoutes<SearchResultPageEndpoints> = SearchResultPageRoutes;
+class SearchResultPageController extends Controller<ISearchResultPageController> {
+  protected handlers: ControllerHandlers<ISearchResultPageController> = this;
+  protected middlewares: ControllerMiddlewares<ISearchResultPageController> = SearchResultPageMiddlewares;
+  protected routes: ControllerRoutes<ISearchResultPageController> = SearchResultPageRoutes;
 
   /**
    * Handler para listar películas de exploración

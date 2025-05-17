@@ -1,8 +1,8 @@
 import { checkOptionalResourceAccess, detectAuthentication } from "@app/middleware/authMiddleware";
 import { ControllerMiddlewares } from "@app/types/types";
-import DetailPageEndpoints from "./DetailPage.endpoints";
+import IDetailPageController from "./DetailPage.interface";
 
-const DetailPageMiddlewares: ControllerMiddlewares<DetailPageEndpoints> = {
+const DetailPageMiddlewares: ControllerMiddlewares<IDetailPageController> = {
   getUser: [
     checkOptionalResourceAccess(":userName")
   ],

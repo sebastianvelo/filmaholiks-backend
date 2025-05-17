@@ -4,9 +4,9 @@ import TMDB from "@TMDB/TMDB";
 import { pipe } from 'fp-ts/function';
 import * as TE from 'fp-ts/TaskEither';
 import { MoviesResponse, PeopleResponse, TVShowsResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
-import MovieSearchResultPage from "./page/movie/MovieSearchResultPage";
-import PersonSearchResultPage from "./page/person/PersonSearchResultPage";
-import ShowSearchResultPage from "./page/show/ShowSearchResultPage";
+import MovieSearchResultPage from "./movie/MovieSearchResultPage";
+import PersonSearchResultPage from "./person/PersonSearchResultPage";
+import ShowSearchResultPage from "./show/ShowSearchResultPage";
 
 /**
  * Busca películas y mapea a SearchResultPageModel

@@ -1,7 +1,7 @@
 import { ControllerRoutes } from "@app/types/types";
-import DetailPageEndpoints from "./DetailPage.endpoints";
+import IDetailPageController from "./DetailPage.interface";
 
-const DetailPageRoutes: ControllerRoutes<DetailPageEndpoints> = {
+const DetailPageRoutes: ControllerRoutes<IDetailPageController> = {
     basePath: "/detail",
     endpointRoutes: {
         getUser: {

@@ -3,9 +3,9 @@ import ExplorePageModel from "@shared/model/pages/explore/ExplorePageModel";
 import { pipe } from "fp-ts/lib/function";
 import * as TE from 'fp-ts/TaskEither';
 import { LanguageParams } from "tmdb-js/lib/api/common/params/CommonParams";
-import MovieExplorePage from "./page/movie/MovieExplorePage";
-import PersonExplorePage from "./page/person/PersonExplorePage";
-import ShowExplorePage from "./page/show/ShowExplorePage";
+import MovieExplorePage from "./movie/MovieExplorePage";
+import PersonExplorePage from "./person/PersonExplorePage";
+import ShowExplorePage from "./show/ShowExplorePage";
 
 export const getMovie = (query?: LanguageParams): TE.TaskEither<Error, ExplorePageModel> =>
   pipe(

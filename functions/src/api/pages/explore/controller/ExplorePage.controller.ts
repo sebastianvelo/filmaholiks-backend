@@ -1,17 +1,17 @@
-import { ControllerHandlers, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
 import Controller from "@app/controller/Controller";
+import { ControllerHandlers, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";
-import ExplorePageEndpoints from "./controller/ExplorePage.endpoints";
-import ExplorePageMiddlewares from "./controller/ExplorePage.middlewares";
-import ExplorePageRoutes from "./controller/ExplorePage.routes";
-import * as ExplorePageService from "./ExplorePage.service";
+import * as ExplorePageService from "../page/ExplorePage.service";
+import IExplorePageController from "./ExplorePage.interface";
+import ExplorePageMiddlewares from "./ExplorePage.middlewares";
+import ExplorePageRoutes from "./ExplorePage.routes";
 
-class ExplorePageController extends Controller<ExplorePageEndpoints> {
-  protected handlers: ControllerHandlers<ExplorePageEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<ExplorePageEndpoints> = ExplorePageMiddlewares;
-  protected routes: ControllerRoutes<ExplorePageEndpoints> = ExplorePageRoutes;
+class ExplorePageController extends Controller<IExplorePageController> {
+  protected handlers: ControllerHandlers<IExplorePageController> = this;
+  protected middlewares: ControllerMiddlewares<IExplorePageController> = ExplorePageMiddlewares;
+  protected routes: ControllerRoutes<IExplorePageController> = ExplorePageRoutes;
 
   /**
    * Handler para listar películas de exploración

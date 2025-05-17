@@ -1,13 +1,10 @@
 import { ControllerMiddlewares } from "@app/types/types";
-import ExplorePageEndpoints from "./ExplorePage.endpoints";
+import IExplorePageController from "./ExplorePage.interface";
 
-const ExplorePageMiddlewares: ControllerMiddlewares<ExplorePageEndpoints> = {
-  getPeople: [
-  ],
-  getMovie: [
-  ],
-  getShow: [
-  ]
+const ExplorePageMiddlewares: ControllerMiddlewares<IExplorePageController> = {
+  getPeople: [],
+  getMovie: [],
+  getShow: []
 };
 
 export default ExplorePageMiddlewares;

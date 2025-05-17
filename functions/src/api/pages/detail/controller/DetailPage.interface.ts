@@ -1,4 +1,4 @@
-interface DetailPageEndpoints {
+interface IDetailPageController {
     getUser: unknown;
     getPerson: unknown;
     getMovie: unknown;
@@ -7,4 +7,4 @@ interface DetailPageEndpoints {
     getEpisode: unknown;
 }
 
-export default DetailPageEndpoints;
+export default IDetailPageController;

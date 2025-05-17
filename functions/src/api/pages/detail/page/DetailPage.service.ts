@@ -4,12 +4,12 @@ import DetailPageModel from '@shared/model/pages/detail/DetailPageModel';
 import TMDB from '@TMDB/TMDB';
 import { pipe } from 'fp-ts/function';
 import * as TE from 'fp-ts/TaskEither';
-import EpisodeDetailPage from './page/episode/EpisodeDetailPage';
-import MovieDetailPage from './page/movie/MovieDetailPage';
-import PersonDetailPage from './page/person/PersonDetailPage';
-import SeasonDetailPage from './page/season/SeasonDetailPage';
-import ShowDetailPage from './page/show/ShowDetailPage';
-import UserDetailPage from './page/user/UserDetailPage';
+import EpisodeDetailPage from './episode/EpisodeDetailPage';
+import MovieDetailPage from './movie/MovieDetailPage';
+import PersonDetailPage from './person/PersonDetailPage';
+import SeasonDetailPage from './season/SeasonDetailPage';
+import ShowDetailPage from './show/ShowDetailPage';
+import UserDetailPage from './user/UserDetailPage';
 
 /**
  * Obtiene detalle de usuario, incluyendo vistas de página

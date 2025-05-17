@@ -3,15 +3,15 @@ import Controller from "@app/controller/Controller";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";
-import DetailPageEndpoints from "./controller/DetailPage.endpoints";
-import DetailPageMiddlewares from "./controller/DetailPage.middlewares";
-import DetailPageRoutes from "./controller/DetailPage.routes";
-import * as DetailPageService from "./DetailPage.service";
+import IDetailPageController from "./DetailPage.interface";
+import DetailPageMiddlewares from "./DetailPage.middlewares";
+import DetailPageRoutes from "./DetailPage.routes";
+import * as DetailPageService from "../page/DetailPage.service";
 
-class DetailPageController extends Controller<DetailPageEndpoints> {
-  protected handlers: ControllerHandlers<DetailPageEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<DetailPageEndpoints> = DetailPageMiddlewares;
-  protected routes: ControllerRoutes<DetailPageEndpoints> = DetailPageRoutes;
+class DetailPageController extends Controller<IDetailPageController> {
+  protected handlers: ControllerHandlers<IDetailPageController> = this;
+  protected middlewares: ControllerMiddlewares<IDetailPageController> = DetailPageMiddlewares;
+  protected routes: ControllerRoutes<IDetailPageController> = DetailPageRoutes;
 
   async getUser(req: Request, res: Response) {
     const { userName } = req.params;

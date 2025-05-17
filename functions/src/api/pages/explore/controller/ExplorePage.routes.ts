@@ -1,7 +1,7 @@
 import { ControllerRoutes } from "@app/types/types";
-import ExplorePageEndpoints from "./ExplorePage.endpoints";
+import IExplorePageController from "./ExplorePage.interface";
 
-const ExplorePageRoutes: ControllerRoutes<ExplorePageEndpoints> = {
+const ExplorePageRoutes: ControllerRoutes<IExplorePageController> = {
     basePath: "/explore",
     endpointRoutes: {
         getMovie: {
