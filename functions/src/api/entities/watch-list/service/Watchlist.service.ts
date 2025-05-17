@@ -1,13 +1,14 @@
 import { mapError } from "@api/helper/service/ServiceHelper";
+import { ListModel } from "@api/pages/common/watch-list/WatchlistModel";
 import { ListEntity } from "@shared/entity/watch-list/WatchlistEntity";
 import ActionableCardModel from "@shared/model/components/ActionableCardModel";
 import { WatchlistTabModel } from "@shared/model/components/section/Section";
+import { ListModel as IListModel } from "@shared/model/components/WatchlistModel";
 import { DetailWatchlistModel } from "@shared/model/pages/detail/DetailPageModel";
 import MediaType from "@shared/types/MediaType";
 import { TaskEither, tryCatch } from "fp-ts/TaskEither";
 import WatchlistRepository from "../db/Watchlist.repository";
 import { searchMovies, searchShows, viewMovies, viewShows } from "./Watchlist.service.utils";
-
 /**
  * Busca medios (películas o series) por una query
  * @param mediaType - Tipo de medio (película o serie)
@@ -20,7 +21,7 @@ export const search = (mediaType: MediaType, uid: string, query: string): TaskEi
     async () => {
       if (mediaType === MediaType.SHOW) {
         return searchShows(uid, query);
-      } 
+      }
       if (mediaType === MediaType.MOVIE) {
         return searchMovies(uid, query);
       }
@@ -41,11 +42,20 @@ export const getViewByUser = (mediaType: MediaType, uid: string, viewerUid?: str
     async () => {
       if (mediaType === MediaType.SHOW) {
         return viewShows(uid, viewerUid);
-      } 
+      }
       if (mediaType === MediaType.MOVIE) {
         return viewMovies(uid, viewerUid);
       }
       throw new Error("Invalid MediaType");
+    },
+    mapError
+  );
+
+export const getViewByItem = (mediaType: MediaType, uid: string, itemId: number): TaskEither<Error, IListModel | undefined> =>
+  tryCatch(
+    async () => {
+      const list = await WatchlistRepository[mediaType].list.getByItem(uid, itemId);
+      return list && ListModel(mediaType, list);
     },
     mapError
   );

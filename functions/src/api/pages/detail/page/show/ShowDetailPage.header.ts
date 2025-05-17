@@ -1,4 +1,4 @@
-import WatchlistService from "@api/entities/watch-list/service/Watchlist.service";
+import * as WatchlistService from "@api/entities/watch-list/service/Watchlist.service";
 import { getTMDBImage, getTrailer } from "@api/helper/media/MediaHelper";
 import ShowCardHorizontalModel from "@api/pages/common/card/horizontal/ShowCardHorizontalModel";
 import DataItemModel from "@api/pages/detail/common/data-item/DataItemModel";
@@ -13,8 +13,11 @@ import { VideosResponse } from "tmdb-js/lib/api/common/response/CommonResponse";
 import { TVShowResponse } from "tmdb-js/lib/api/request/tv-show/response/Response";
 
 const WatchlistButton = async (show: TVShowResponse, uid: string): Promise<WatchlistButtonModel> => {
-  const list = await WatchlistService.presenter.list.getByItem(MediaType.SHOW, uid, Number(show.id));
-  const lists = await WatchlistService.presenter.list.getByUser(MediaType.SHOW, uid);
+  const listTE = await WatchlistService.getViewByItem(MediaType.SHOW, uid, Number(show.id))();
+  const listsTE = await WatchlistService.getViewByUser(MediaType.SHOW, uid)();
+
+  const list = listTE._tag === 'Right' ? listTE.right : undefined;
+  const lists = listsTE._tag === 'Right' ? listsTE.right.lists : undefined;
 
   return {
     ...ShowCardHorizontalModel(show),
@@ -24,8 +27,8 @@ const WatchlistButton = async (show: TVShowResponse, uid: string): Promise<Watch
   };
 };
 
-const Actions = async (show: TVShowResponse, viewerUid?: string): Promise<DetailActionsModel> => {
-  const watchlistButton = viewerUid ? await WatchlistButton(show, viewerUid) : undefined;
+const Actions = async (show: TVShowResponse, viewerUid: string): Promise<DetailActionsModel> => {
+  const watchlistButton = await WatchlistButton(show, viewerUid);
 
   return {
     watchlistButton
@@ -56,7 +59,7 @@ const Info = (show: TVShowResponse): DetailContentInfoModel => ({
 const Video = (videos: VideosResponse): VideoModel => getTrailer(videos);
 
 const Header = async (show: TVShowResponse, videos: VideosResponse, viewerUid?: string): Promise<DetailHeaderModel> => {
-  const actions = await Actions(show, viewerUid);
+  const actions = viewerUid ? await Actions(show, viewerUid) : undefined;
 
   return {
     poster: Poster(show),

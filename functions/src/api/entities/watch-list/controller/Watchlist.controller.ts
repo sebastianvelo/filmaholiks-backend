@@ -4,15 +4,15 @@ import MediaType from "@shared/types/MediaType";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";
-import WatchlistEndpoints from "./controller/Watchlist.endpoints";
-import WatchlistMiddlewares from "./controller/Watchlist.middlewares";
-import WatchlistRoutes from "./controller/Watchlist.routes";
-import * as WatchlistService from "./Watchlist.service";
+import IWatchlistController from "./Watchlist.interface";
+import WatchlistMiddlewares from "./Watchlist.middlewares";
+import WatchlistRoutes from "./Watchlist.routes";
+import * as WatchlistService from "../service/Watchlist.service";
 
-class WatchlistController extends Controller<WatchlistEndpoints> {
-  protected handlers: ControllerHandlers<WatchlistEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<WatchlistEndpoints> = WatchlistMiddlewares;
-  protected routes: ControllerRoutes<WatchlistEndpoints> = WatchlistRoutes;
+class WatchlistController extends Controller<IWatchlistController> {
+  protected handlers: ControllerHandlers<IWatchlistController> = this;
+  protected middlewares: ControllerMiddlewares<IWatchlistController> = WatchlistMiddlewares;
+  protected routes: ControllerRoutes<IWatchlistController> = WatchlistRoutes;
 
   async search(req: Request, res: Response) {
     const { mediaType, uid, query } = req.params;
