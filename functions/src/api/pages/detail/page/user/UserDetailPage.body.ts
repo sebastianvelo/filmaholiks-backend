@@ -6,13 +6,14 @@ import MediaType from "@shared/types/MediaType";
 import Header from "./UserDetailPage.header";
 
 const Body = async (user: UserEntity, viewerUid?: string): Promise<DetailPageBodyModel> => {
-  const watchlists = WatchlistService.getAllWatchlists(user.uid as MediaType, viewerUid);
+  const watchlistsTE = await WatchlistService.getAllWatchlists(user.uid as MediaType, viewerUid)();
   const SectionsModel = (data: {}): CardsSectionModel[] => [];
+  const watchlists = watchlistsTE._tag === 'Right' ? watchlistsTE.right : [];
 
   return {
     detail: Header(user),
     sections: SectionsModel({}),
-    ...watchlists,
+    watchlists
   };
 };
 

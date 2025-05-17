@@ -20,11 +20,9 @@ class Application {
     private setEndpoints() {
         this.controllers.forEach(controller => {
             console.info(`Adding endpoints for ${controller.constructor.name}...`);
-            for (const { method, path, endpoint, middleware = [] } of controller.getEndpoints()) {
-                console.info(
-                    `[${method.toUpperCase().padEnd(6)}] ${path}`
-                );
-                this.app[method](path, ...middleware, endpoint);
+            for (const { method, path, handler, middleware = [] } of controller.getEndpoints()) {
+                console.info(`[${method.toUpperCase().padEnd(6)}] ${path} | ${middleware.length} middlewares`);
+                this.app[method](path, ...middleware, handler);
             }
             console.info(`[--------------------]`);
         });
@@ -32,8 +30,8 @@ class Application {
 
     start() {
         setGlobalMiddlewares(this.app);
-        setGlobalErrorHandling(this.app);
         this.setEndpoints();
+        setGlobalErrorHandling(this.app);
 
         return this.app;
     }

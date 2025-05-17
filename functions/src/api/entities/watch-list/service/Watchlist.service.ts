@@ -66,7 +66,7 @@ export const getViewByItem = (mediaType: MediaType, uid: string, itemId: number)
  * @param viewerUid - ID del usuario que visualiza (opcional)
  * @returns TaskEither con las watchlists o un error
  */
-export const getAllWatchlists = (uid: string, viewerUid?: string): TaskEither<Error, DetailWatchlistModel> =>
+export const getAllWatchlists = (uid: string, viewerUid?: string): TaskEither<Error, WatchlistTabModel[]> =>
   tryCatch(
     async () => {
       const tvShowWatchlistPromise = getViewByUser(MediaType.SHOW, uid, viewerUid)();
@@ -81,9 +81,7 @@ export const getAllWatchlists = (uid: string, viewerUid?: string): TaskEither<Er
         throw new Error("Error getting watchlists");
       }
 
-      return {
-        watchlists: [tvShowResult, movieResult]
-      };
+      return [tvShowResult, movieResult];
     },
     mapError
   );

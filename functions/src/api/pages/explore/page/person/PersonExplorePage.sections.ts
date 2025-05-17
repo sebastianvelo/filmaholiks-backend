@@ -10,7 +10,8 @@ const Sections = (data: PersonExplore): CardsSectionModel[] => [
     {
         id: "popular",
         title: "Popular",
-        cards: data.popular.results?.map(PersonCardVerticalModel)
+        cards: data.popular.results?.map(PersonCardVerticalModel),
+        isGrid: true
     }
 ];
 

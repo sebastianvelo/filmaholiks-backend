@@ -12,7 +12,7 @@ abstract class Controller<I> {
             return {
                 method: endpointRoute.method.toLowerCase() as HTTPVerb,
                 path: this.routes.basePath + endpointRoute.path,
-                endpoint: this.handlers[functionName],
+                handler: this.handlers[functionName],
                 middleware: this.middlewares[functionName] || []
             }
         });
