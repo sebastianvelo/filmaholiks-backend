@@ -1,16 +1,16 @@
-import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
+import { ControllerHandlers, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
 import Controller from "@app/controller/Controller";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";
 import ExplorePageEndpoints from "./controller/ExplorePage.endpoints";
-import ExplorePageMiddleware from "./controller/ExplorePage.middleware";
+import ExplorePageMiddlewares from "./controller/ExplorePage.middlewares";
 import ExplorePageRoutes from "./controller/ExplorePage.routes";
 import * as ExplorePageService from "./ExplorePage.service";
 
 class ExplorePageController extends Controller<ExplorePageEndpoints> {
-  protected endpoints: ControllerEndpoints<ExplorePageEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<ExplorePageEndpoints> = ExplorePageMiddleware;
+  protected handlers: ControllerHandlers<ExplorePageEndpoints> = this;
+  protected middlewares: ControllerMiddlewares<ExplorePageEndpoints> = ExplorePageMiddlewares;
   protected routes: ControllerRoutes<ExplorePageEndpoints> = ExplorePageRoutes;
 
   /**

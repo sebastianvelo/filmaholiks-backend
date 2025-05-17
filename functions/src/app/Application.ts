@@ -1,8 +1,7 @@
 import * as dotenv from 'dotenv';
 import express from "express";
-import { EndpointMethod, HTTPMethod, HTTPVerb } from "./types/types";
 import Controller from "./controller/Controller";
-import setGlobalErrorHandling from "./error/setGlobalErrorHandling";
+import setGlobalErrorHandling from "./middleware/setGlobalErrorHandling";
 import setGlobalMiddlewares from "./middleware/setGlobalMiddlewares";
 
 class Application {
@@ -18,26 +17,17 @@ class Application {
         this.app.set('trust proxy', 1);
     }
 
-    private when(method: HTTPVerb): HTTPMethod {
-        return {
-            at: (path: string = "") => {
-                console.info(`[${method.toUpperCase().padEnd(6)}] ${path}`);
-                return {
-                    use: (endpoint: EndpointMethod, middlewares: any[] = []) =>
-                        this.app[method](path, ...middlewares, endpoint)
-                };
+    private setEndpoints() {
+        this.controllers.forEach(controller => {
+            console.info(`Adding endpoints for ${controller.constructor.name}...`);
+            for (const { method, path, endpoint, middleware = [] } of controller.getEndpoints()) {
+                console.info(
+                    `[${method.toUpperCase().padEnd(6)}] ${path}`
+                );
+                this.app[method](path, ...middleware, endpoint);
             }
-        };
-    }
-
-    private setEndpoints = () => {
-        this.controllers.forEach((controller) => {
-            console.info(`Adding endpoints...`);
-            controller.getEndpoints().forEach(({ path, method, endpoint, middleware = [] }) => {
-                this.when(method).at(path).use(endpoint, middleware);
-            })
-            console.info(`[|||||||||||||||||]`);
-        })
+            console.info(`[--------------------]`);
+        });
     }
 
     start() {

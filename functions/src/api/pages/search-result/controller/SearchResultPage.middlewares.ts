@@ -1,7 +1,7 @@
 import { ControllerMiddlewares } from "@app/types/types";
 import SearchResultPageEndpoints from "./SearchResultPage.endpoints";
 
-const SearchResultPageMiddleware: ControllerMiddlewares<SearchResultPageEndpoints> = {
+const SearchResultPageMiddlewares: ControllerMiddlewares<SearchResultPageEndpoints> = {
   getPeople: [
   ],
   getMovie: [
@@ -10,4 +10,4 @@ const SearchResultPageMiddleware: ControllerMiddlewares<SearchResultPageEndpoint
   ]
 };
 
-export default SearchResultPageMiddleware;
+export default SearchResultPageMiddlewares;

@@ -1,16 +1,16 @@
-import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
+import { ControllerHandlers, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
 import Controller from "@app/controller/Controller";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";
 import DetailPageEndpoints from "./controller/DetailPage.endpoints";
-import DetailPageMiddleware from "./controller/DetailPage.middleware";
+import DetailPageMiddlewares from "./controller/DetailPage.middlewares";
 import DetailPageRoutes from "./controller/DetailPage.routes";
 import * as DetailPageService from "./DetailPage.service";
 
 class DetailPageController extends Controller<DetailPageEndpoints> {
-  protected endpoints: ControllerEndpoints<DetailPageEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<DetailPageEndpoints> = DetailPageMiddleware;
+  protected handlers: ControllerHandlers<DetailPageEndpoints> = this;
+  protected middlewares: ControllerMiddlewares<DetailPageEndpoints> = DetailPageMiddlewares;
   protected routes: ControllerRoutes<DetailPageEndpoints> = DetailPageRoutes;
 
   async getUser(req: Request, res: Response) {

@@ -7,7 +7,7 @@ export type Route = {
     method: HTTPVerb;
 };
 
-export type EndpointMethod = (req: Request, res: Response) => Promise<any>;
+export type Handler = (req: Request, res: Response) => Promise<any>;
 
 export type EndpointErrorReason = {
     [key: string]: string;
@@ -26,8 +26,8 @@ export type ControllerRoutes<T> = {
     endpointRoutes: EndpointRoutes<T>;
 };
 
-export type ControllerEndpoints<T> = {
-    [K in keyof T]: EndpointMethod;
+export type ControllerHandlers<T> = {
+    [K in keyof T]: Handler;
 };
 
 export type ControllerMiddlewares<T> = {
@@ -35,6 +35,6 @@ export type ControllerMiddlewares<T> = {
 };
 
 export type HTTPMethod = {
-    at: (path?: string) => { use: (endpoint: EndpointMethod, middlewares: any[]) => void };
+    at: (path?: string) => { use: (endpoint: Handler, middlewares: any[]) => void };
 };
 

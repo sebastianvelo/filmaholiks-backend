@@ -1,16 +1,16 @@
 import Controller from "@app/controller/Controller";
-import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
+import { ControllerHandlers, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
 import { Request, Response } from "express";
 import { fold } from "fp-ts/TaskEither";
 import { pipe } from "fp-ts/lib/function";
 import * as SearchResultPageService from "./SearchResultPage.service";
 import SearchResultPageEndpoints from "./controller/SearchResultPage.endpoints";
-import SearchResultPageMiddleware from "./controller/SearchResultPage.middleware";
+import SearchResultPageMiddlewares from "./controller/SearchResultPage.middlewares";
 import SearchResultPageRoutes from "./controller/SearchResultPage.routes";
 
 class SearchResultPageController extends Controller<SearchResultPageEndpoints> {
-  protected endpoints: ControllerEndpoints<SearchResultPageEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<SearchResultPageEndpoints> = SearchResultPageMiddleware;
+  protected handlers: ControllerHandlers<SearchResultPageEndpoints> = this;
+  protected middlewares: ControllerMiddlewares<SearchResultPageEndpoints> = SearchResultPageMiddlewares;
   protected routes: ControllerRoutes<SearchResultPageEndpoints> = SearchResultPageRoutes;
 
   /**

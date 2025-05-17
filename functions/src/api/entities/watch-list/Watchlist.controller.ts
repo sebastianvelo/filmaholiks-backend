@@ -1,17 +1,17 @@
-import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
+import { ControllerHandlers, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
 import Controller from "@app/controller/Controller";
 import MediaType from "@shared/types/MediaType";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";
 import WatchlistEndpoints from "./controller/Watchlist.endpoints";
-import WatchlistMiddleware from "./controller/Watchlist.middleware";
+import WatchlistMiddlewares from "./controller/Watchlist.middlewares";
 import WatchlistRoutes from "./controller/Watchlist.routes";
 import * as WatchlistService from "./Watchlist.service";
 
 class WatchlistController extends Controller<WatchlistEndpoints> {
-  protected endpoints: ControllerEndpoints<WatchlistEndpoints> = this;
-  protected middlewares: ControllerMiddlewares<WatchlistEndpoints> = WatchlistMiddleware;
+  protected handlers: ControllerHandlers<WatchlistEndpoints> = this;
+  protected middlewares: ControllerMiddlewares<WatchlistEndpoints> = WatchlistMiddlewares;
   protected routes: ControllerRoutes<WatchlistEndpoints> = WatchlistRoutes;
 
   async search(req: Request, res: Response) {
