@@ -1,9 +1,9 @@
-import { ControllerRoutes } from "@app/common";
+import { ControllerRoutes } from "@app/types/types";
 import ExplorePageEndpoints from "./ExplorePage.endpoints";
 
 const ExplorePageRoutes: ControllerRoutes<ExplorePageEndpoints> = {
     basePath: "/explore",
-    endpointRoute: {
+    endpointRoutes: {
         getMovie: {
             path: "/movie",
             method: "get"

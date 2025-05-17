@@ -1,9 +1,9 @@
-import { ControllerRoutes } from "@app/common";
+import { ControllerRoutes } from "@app/types/types";
 import DetailPageEndpoints from "./DetailPage.endpoints";
 
 const DetailPageRoutes: ControllerRoutes<DetailPageEndpoints> = {
     basePath: "/detail",
-    endpointRoute: {
+    endpointRoutes: {
         getUser: {
             path: "/user/:userName",
             method: "get"

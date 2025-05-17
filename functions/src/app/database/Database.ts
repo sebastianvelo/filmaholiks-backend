@@ -1,5 +1,5 @@
 import UsersDatabase from "../../api/entities/user/db/Users.database";
-import WatchlistsDatabase from "../../api/entities/watch-list/WatchlistsDatabase";
+import WatchlistsDatabase from "../../api/entities/watch-list/db/Watchlists.database";
 import MediaType from "../../shared/types/MediaType";
 
 const Database = {

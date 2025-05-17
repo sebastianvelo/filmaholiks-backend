@@ -1,9 +1,9 @@
-import { ControllerRoutes } from "@app/common";
+import { ControllerRoutes } from "@app/types/types";
 import UserEndpoints from "./User.endpoints";
 
 const UserRoutes: ControllerRoutes<UserEndpoints> = {
     basePath: "/user",
-    endpointRoute: {
+    endpointRoutes: {
         getByUserName: {
             path: "/:userName",
             method: "get"

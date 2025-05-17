@@ -1,29 +1,52 @@
 import * as dotenv from 'dotenv';
 import express from "express";
-import setControllers from "./controller/controllers";
-import setGlobalErrorHandling from './error/setGlobalErrorHandling';
+import { EndpointMethod, HTTPMethod, HTTPVerb } from "./types/types";
+import Controller from "./controller/Controller";
+import setGlobalErrorHandling from "./error/setGlobalErrorHandling";
 import setGlobalMiddlewares from "./middleware/setGlobalMiddlewares";
 
 class Application {
-    app: express.Application;
-
+    private app: express.Application;
+    private controllers: Controller<any>[];
     port: number | string;
 
-    constructor(port: number | string) {
-        dotenv.config();
+    constructor(controllers: Controller<any>[]) {
+        this.port = process.env.PORT || 5000;
+        this.controllers = controllers;
         this.app = express();
+        dotenv.config();
         this.app.set('trust proxy', 1);
-        this.port = port;
     }
 
-    init() {
+    private when(method: HTTPVerb): HTTPMethod {
+        return {
+            at: (path: string = "") => {
+                console.info(`[${method.toUpperCase().padEnd(6)}] ${path}`);
+                return {
+                    use: (endpoint: EndpointMethod, middlewares: any[] = []) =>
+                        this.app[method](path, ...middlewares, endpoint)
+                };
+            }
+        };
+    }
+
+    private setEndpoints = () => {
+        this.controllers.forEach((controller) => {
+            console.info(`Adding endpoints...`);
+            controller.getEndpoints().forEach(({ path, method, endpoint, middleware = [] }) => {
+                this.when(method).at(path).use(endpoint, middleware);
+            })
+            console.info(`[|||||||||||||||||]`);
+        })
+    }
+
+    start() {
         setGlobalMiddlewares(this.app);
-        setControllers(this.app);
         setGlobalErrorHandling(this.app);
+        this.setEndpoints();
 
         return this.app;
     }
-
 }
 
 export default Application;

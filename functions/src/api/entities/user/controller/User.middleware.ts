@@ -1,8 +1,8 @@
 import { hasResourceAccess, isAuthenticated } from "@app/auth/authMiddleware";
 import validate from "@app/middleware/validate";
-import UserValidator from "./User.validator";
-import { ControllerMiddlewares } from "@app/common";
+import { ControllerMiddlewares } from "@app/types/types";
 import UserEndpoints from "./User.endpoints";
+import UserValidator from "./User.validator";
 
 const UserMiddleware: ControllerMiddlewares<UserEndpoints> = {
     getByUserName: [

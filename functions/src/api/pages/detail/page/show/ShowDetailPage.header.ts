@@ -1,4 +1,4 @@
-import WatchlistService from "@api/entities/watch-list/WatchlistService";
+import WatchlistService from "@api/entities/watch-list/Watchlist.service";
 import { getTMDBImage, getTrailer } from "@api/helper/media/MediaHelper";
 import ShowCardHorizontalModel from "@api/pages/common/card/horizontal/ShowCardHorizontalModel";
 import DataItemModel from "@api/pages/detail/common/data-item/DataItemModel";

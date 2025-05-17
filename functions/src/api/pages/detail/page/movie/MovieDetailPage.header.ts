@@ -1,4 +1,4 @@
-import WatchlistService from "@api/entities/watch-list/WatchlistService";
+import WatchlistService from "@api/entities/watch-list/Watchlist.service";
 import ImageModel from "@shared/model/atom/ImageModel";
 import VideoModel from "@shared/model/atom/VideoModel";
 import { DataItemSectionModel } from "@shared/model/components/section/Section";

@@ -1,4 +1,5 @@
 import * as UserService from '@api/entities/user/User.service';
+import { mapError } from '@api/helper/service/ServiceHelper';
 import DetailPageModel from '@shared/model/pages/detail/DetailPageModel';
 import TMDB from '@TMDB/TMDB';
 import { pipe } from 'fp-ts/function';
@@ -9,9 +10,6 @@ import PersonDetailPage from './page/person/PersonDetailPage';
 import SeasonDetailPage from './page/season/SeasonDetailPage';
 import ShowDetailPage from './page/show/ShowDetailPage';
 import UserDetailPage from './page/user/UserDetailPage';
-
-const mapError = (reason: unknown): Error =>
-  reason instanceof Error ? reason : new Error(String(reason));
 
 /**
  * Obtiene detalle de usuario, incluyendo vistas de página

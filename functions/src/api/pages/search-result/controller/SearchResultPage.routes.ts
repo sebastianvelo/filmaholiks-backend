@@ -1,9 +1,9 @@
-import { ControllerRoutes } from "@app/common";
+import { ControllerRoutes } from "@app/types/types";
 import SearchResultPageEndpoints from "./SearchResultPage.endpoints";
 
 const SearchResultPageRoutes: ControllerRoutes<SearchResultPageEndpoints> = {
     basePath: "/search",
-    endpointRoute: {
+    endpointRoutes: {
         getMovie: {
             path: "/movie/:query",
             method: "get"

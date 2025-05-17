@@ -1,3 +1,5 @@
+/* eslint-disable func-names */
+/* eslint-disable no-param-reassign */
 import { Request, Response } from "express";
 import { ValidationChain, validationResult } from "express-validator";
 

@@ -1,5 +1,5 @@
-import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/common";
-import Controller from "@app/controller/NController";
+import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
+import Controller from "@app/controller/Controller";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";
@@ -24,7 +24,6 @@ class DetailPageController extends Controller<DetailPageEndpoints> {
           if (error.message === "Not authorized") {
             return res.status(403).json({ error: error.message });
           }
-          // could also handle not found
           return res.status(500).json({ error: error.message });
         },
         (page) => async () => res.status(200).json(page)

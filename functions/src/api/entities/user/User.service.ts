@@ -1,16 +1,17 @@
+import { mapError } from "@api/helper/service/ServiceHelper";
 import UserEntity from "@shared/entity/user/UserEntity";
 import { pipe } from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
-import UserRepository from "./User.repository";
 import { newUserByEmail } from "./service/User.service.utils";
+import UserRepository from "./User.repository";
 
 /**
  * Obtiene un usuario por su nombre de usuario
  * @param userName - Nombre de usuario
  * @returns TaskEither con el usuario o un error
  */
-export const getUser = (userName: string): TE.TaskEither<Error, UserEntity> => {
-  return TE.tryCatch(
+export const getUser = (userName: string): TE.TaskEither<Error, UserEntity> =>
+  TE.tryCatch(
     async () => {
       const user = await UserRepository.getUser(userName);
       if (!user) {
@@ -18,17 +19,16 @@ export const getUser = (userName: string): TE.TaskEither<Error, UserEntity> => {
       }
       return user;
     },
-    (reason) => reason instanceof Error ? reason : new Error(String(reason))
+    mapError
   );
-};
 
 /**
  * Obtiene un usuario por su correo electrónico
  * @param email - Correo electrónico
  * @returns TaskEither con el usuario o un error
  */
-export const getUserByEmail = (email: string): TE.TaskEither<Error, UserEntity> => {
-  return TE.tryCatch(
+export const getUserByEmail = (email: string): TE.TaskEither<Error, UserEntity> =>
+  TE.tryCatch(
     async () => {
       const user = await UserRepository.getUserByEmail(email);
       if (!user) {
@@ -36,9 +36,8 @@ export const getUserByEmail = (email: string): TE.TaskEither<Error, UserEntity> 
       }
       return user;
     },
-    (reason) => reason instanceof Error ? reason : new Error(String(reason))
+    mapError
   );
-};
 
 /**
  * Guarda un nuevo usuario si no existe previamente
@@ -49,8 +48,8 @@ export const getUserByEmail = (email: string): TE.TaskEither<Error, UserEntity> 
 export const save = (
   email: string,
   uid: string
-): TE.TaskEither<Error, UserEntity> => {
-  return pipe(
+): TE.TaskEither<Error, UserEntity> =>
+  pipe(
     getUserByEmail(email),
     TE.chain(() => TE.left(new Error("User already exists"))),
     TE.orElse(() =>
@@ -67,7 +66,6 @@ export const save = (
       )
     )
   );
-};
 
 /**
  * Actualiza un usuario existente
@@ -75,8 +73,8 @@ export const save = (
  * @param userData - Datos del usuario a actualizar
  * @returns TaskEither con el usuario actualizado o un error
  */
-export const update = (userName: string, userData: Partial<UserEntity>): TE.TaskEither<Error, UserEntity> => {
-  return TE.tryCatch(
+export const update = (userName: string, userData: Partial<UserEntity>): TE.TaskEither<Error, UserEntity> =>
+  TE.tryCatch(
     async () => {
       // Verificar que el usuario existe
       const user = await UserRepository.getUser(userName);
@@ -85,24 +83,23 @@ export const update = (userName: string, userData: Partial<UserEntity>): TE.Task
       }
 
       // Actualizar usuario
-      const updatedUser = ""; //await UserRepository.update(userName, userData);
+      const updatedUser = ""; // await UserRepository.update(userName, userData);
       if (!updatedUser) {
         throw new Error("Failed to update user");
       }
 
       return updatedUser;
     },
-    (reason) => reason instanceof Error ? reason : new Error(String(reason))
+    mapError
   );
-};
 
 /**
  * Elimina un usuario existente
  * @param userName - Nombre de usuario
  * @returns TaskEither con un booleano indicando éxito o un error
  */
-export const deleteUser = (userName: string): TE.TaskEither<Error, boolean> => {
-  return TE.tryCatch(
+export const deleteUser = (userName: string): TE.TaskEither<Error, boolean> =>
+  TE.tryCatch(
     async () => {
       // Verificar que el usuario existe
       const user = await UserRepository.getUser(userName);
@@ -111,13 +108,12 @@ export const deleteUser = (userName: string): TE.TaskEither<Error, boolean> => {
       }
 
       // Eliminar usuario
-      const result = "";//await UserRepository.delete(userName);
+      const result = "";// await UserRepository.delete(userName);
       if (!result) {
         throw new Error("Failed to delete user");
       }
 
       return true;
     },
-    (reason) => reason instanceof Error ? reason : new Error(String(reason))
+    mapError
   );
-};

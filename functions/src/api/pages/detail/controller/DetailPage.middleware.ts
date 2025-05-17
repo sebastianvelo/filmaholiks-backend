@@ -1,5 +1,5 @@
 import { checkOptionalResourceAccess, detectAuthentication } from "@app/auth/authMiddleware";
-import { ControllerMiddlewares } from "@app/common";
+import { ControllerMiddlewares } from "@app/types/types";
 import validate from "@app/middleware/validate";
 import DetailPageEndpoints from "./DetailPage.endpoints";
 import DetailPageValidator from "./DetailPage.validator";

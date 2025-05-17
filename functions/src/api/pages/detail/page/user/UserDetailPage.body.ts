@@ -1,4 +1,4 @@
-import WatchlistService from "@api/entities/watch-list/WatchlistService";
+import WatchlistService from "@api/entities/watch-list/Watchlist.service";
 import UserEntity from "@shared/entity/user/UserEntity";
 import { CardsSectionModel } from "@shared/model/components/section/Section";
 import { DetailPageBodyModel } from "@shared/model/pages/detail/DetailPageModel";

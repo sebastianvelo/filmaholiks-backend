@@ -13,7 +13,7 @@ export type EndpointErrorReason = {
     [key: string]: string;
 }
 
-export type EndpointRoute<T> = {
+export type EndpointRoutes<T> = {
     [K in keyof T]: Route;
 }
 
@@ -23,7 +23,7 @@ export type ErrorMessage<T> = {
 
 export type ControllerRoutes<T> = {
     basePath: string;
-    endpointRoute: EndpointRoute<T>;
+    endpointRoutes: EndpointRoutes<T>;
 };
 
 export type ControllerEndpoints<T> = {

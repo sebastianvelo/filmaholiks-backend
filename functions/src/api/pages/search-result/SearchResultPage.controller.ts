@@ -1,12 +1,12 @@
-import Controller from "@app/controller/NController";
+import Controller from "@app/controller/Controller";
+import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
 import { Request, Response } from "express";
+import { fold } from "fp-ts/TaskEither";
+import { pipe } from "fp-ts/lib/function";
 import * as SearchResultPageService from "./SearchResultPage.service";
 import SearchResultPageEndpoints from "./controller/SearchResultPage.endpoints";
 import SearchResultPageMiddleware from "./controller/SearchResultPage.middleware";
 import SearchResultPageRoutes from "./controller/SearchResultPage.routes";
-import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/common";
-import { fold } from "fp-ts/TaskEither";
-import { pipe } from "fp-ts/lib/function";
 
 class SearchResultPageController extends Controller<SearchResultPageEndpoints> {
   protected endpoints: ControllerEndpoints<SearchResultPageEndpoints> = this;

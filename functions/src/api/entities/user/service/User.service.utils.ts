@@ -5,7 +5,7 @@ import UserEntity from "@shared/entity/user/UserEntity";
  * @param userName - Nombre de usuario
  * @returns URL del avatar generado
  */
-const getDefaultAvatar = (userName: string): string =>
+export const getDefaultAvatar = (userName: string): string =>
     `https://api.dicebear.com/9.x/thumbs/svg?seed=${userName}`;
 
 /**

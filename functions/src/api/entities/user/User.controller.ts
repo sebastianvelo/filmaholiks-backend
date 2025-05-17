@@ -1,5 +1,5 @@
-import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/common";
-import Controller from "@app/controller/NController";
+import { ControllerEndpoints, ControllerMiddlewares, ControllerRoutes } from "@app/types/types";
+import Controller from "@app/controller/Controller";
 import { Request, Response } from "express";
 import { pipe } from "fp-ts/function";
 import { fold } from "fp-ts/TaskEither";

@@ -1,4 +1,4 @@
-import { ControllerMiddlewares } from "@app/common";
+import { ControllerMiddlewares } from "@app/types/types";
 import SearchResultPageEndpoints from "./SearchResultPage.endpoints";
 
 const SearchResultPageMiddleware: ControllerMiddlewares<SearchResultPageEndpoints> = {
