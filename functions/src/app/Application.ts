@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv';
 import express from "express";
-import setControllers from "./controller/setControllers";
-import setErrorHandling from './error/setErrorHandling';
-import setMiddlewares from "./middleware/setMiddlewares";
+import setControllers from "./controller/controllers";
+import setGlobalErrorHandling from './error/setGlobalErrorHandling';
+import setGlobalMiddlewares from "./middleware/setGlobalMiddlewares";
 
 class Application {
     app: express.Application;
@@ -17,9 +17,9 @@ class Application {
     }
 
     init() {
-        setMiddlewares(this.app);
+        setGlobalMiddlewares(this.app);
         setControllers(this.app);
-        setErrorHandling(this.app);
+        setGlobalErrorHandling(this.app);
 
         return this.app;
     }

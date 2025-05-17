@@ -3,7 +3,7 @@ import MediaType from '@shared/types/MediaType';
 import * as admin from 'firebase-admin';
 import CollectionName from '../../../app/database/types/CollectionName';
 import createCollection from '../../../app/firebase/createCollection';
-import UserRepository from '../user/UserRepository';
+import UserRepository from '../user/db/User.repository';
 
 const getWatchlistCollection = async (mediaType: MediaType, uid: string) => {
     const user = await UserRepository.getUserByUid(uid);

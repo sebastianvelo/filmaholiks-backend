@@ -1,4 +1,4 @@
-import UsersDatabase from "../../api/entities/user/UsersDatabase";
+import UsersDatabase from "../../api/entities/user/db/Users.database";
 import WatchlistsDatabase from "../../api/entities/watch-list/WatchlistsDatabase";
 import MediaType from "../../shared/types/MediaType";
 

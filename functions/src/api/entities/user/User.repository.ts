@@ -1,5 +1,5 @@
 import UserEntity from "@shared/entity/user/UserEntity";
-import UsersDatabase from "./UsersDatabase";
+import UsersDatabase from "./db/Users.database";
 
 class UserRepository {
     private database = UsersDatabase;
@@ -13,13 +13,11 @@ class UserRepository {
     }
 
     public async getUserByUid(uid: string): Promise<UserEntity | undefined> {
-        // Ahora busca por uid en lugar de id
         return (await this.database.getAll())
             .find(u => u.uid === uid);
     }
 
     public async save(user: UserEntity): Promise<UserEntity | null | undefined> {
-        // Asegurar que el uid se establezca correctamente
         const userToSave = {
             ...user,
             uid: user.uid

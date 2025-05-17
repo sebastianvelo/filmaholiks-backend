@@ -1,6 +1,6 @@
 import express from "express";
 
-const setErrorHandling = (app: express.Application) => {
+const setGlobalErrorHandling = (app: express.Application) => {
     app.use((req, res, next) => {
         res.status(404).json({ error: "Endpoint not found" });
     });
@@ -11,4 +11,4 @@ const setErrorHandling = (app: express.Application) => {
     });
 };
 
-export default setErrorHandling;
+export default setGlobalErrorHandling;

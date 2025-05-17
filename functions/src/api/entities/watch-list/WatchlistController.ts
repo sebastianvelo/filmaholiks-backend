@@ -3,20 +3,7 @@ import { hasResourceAccess, isAuthenticated } from "@app/auth/authMiddleware";
 import Controller from "@app/controller/Controller";
 import MediaType from "@shared/types/MediaType";
 import WatchlistService from "./WatchlistService";
-
-const endpoints = {
-  search: "/user/:uid/:mediaType/search/:query",
-  getWatchlist: "/user/:uid/:mediaType",
-  addList: "/user/:uid/:mediaType/list",
-  saveAllLists: "/user/:uid/:mediaType/list",
-  deleteList: "/user/:uid/:mediaType/:listIdx/list",
-  swapLists: "/user/:uid/:mediaType/swap/list",
-  changeListTitle: "/user/:uid/:mediaType/change/list",
-  addItem: "/user/:uid/:mediaType/:listIdx/item",
-  deleteItem: "/user/:uid/:mediaType/:listIdx/item",
-  swapItems: "/user/:uid/:mediaType/swap/item",
-  moveItem: "/user/:uid/:mediaType/move/item",
-};
+import WatchlistEndpoints  from "./WatchlistEndpoints";
 
 class WatchlistController extends Controller {
   constructor(app: express.Application) {
@@ -24,14 +11,14 @@ class WatchlistController extends Controller {
   }
 
   setEndpoints() {
-    this.setEndpoint(endpoints.search).get((req: Request, res: Response) => {
+    this.setEndpoint(WatchlistEndpoints.search).get((req: Request, res: Response) => {
       WatchlistService.presenter.search(req.params.mediaType as MediaType, req.params.uid, req.params.query)
         .then((resp) => {
           res.send(resp);
         });
     });
 
-    this.setEndpoint(endpoints.getWatchlist).get((req: Request, res: Response) => {
+    this.setEndpoint(WatchlistEndpoints.getWatchlist).get((req: Request, res: Response) => {
       try {
         WatchlistService.presenter.getViewByUser(req.params.mediaType as MediaType, req.params.uid)
           .then((resp) => {
@@ -49,7 +36,7 @@ class WatchlistController extends Controller {
       }
     });
 
-    this.setEndpoint(endpoints.addList)
+    this.setEndpoint(WatchlistEndpoints.addList)
       .post(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           if (!req.body.title) {
@@ -69,7 +56,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    this.setEndpoint(endpoints.saveAllLists)
+    this.setEndpoint(WatchlistEndpoints.saveAllLists)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           if (!req.body || !Array.isArray(req.body)) {
@@ -89,7 +76,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    this.setEndpoint(endpoints.deleteList)
+    this.setEndpoint(WatchlistEndpoints.deleteList)
       .delete(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
@@ -110,7 +97,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    this.setEndpoint(endpoints.swapLists)
+    this.setEndpoint(WatchlistEndpoints.swapLists)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx1 = Number(req.body.listIdx1);
@@ -134,7 +121,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    this.setEndpoint(endpoints.changeListTitle)
+    this.setEndpoint(WatchlistEndpoints.changeListTitle)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.body.listIdx);
@@ -161,7 +148,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    this.setEndpoint(endpoints.addItem)
+    this.setEndpoint(WatchlistEndpoints.addItem)
       .post(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
@@ -188,7 +175,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    this.setEndpoint(endpoints.deleteItem)
+    this.setEndpoint(WatchlistEndpoints.deleteItem)
       .delete(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.params.listIdx);
@@ -215,7 +202,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    this.setEndpoint(endpoints.swapItems)
+    this.setEndpoint(WatchlistEndpoints.swapItems)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const listIdx = Number(req.body.listIdx);
@@ -241,7 +228,7 @@ class WatchlistController extends Controller {
         }
       });
 
-    this.setEndpoint(endpoints.moveItem)
+    this.setEndpoint(WatchlistEndpoints.moveItem)
       .put(isAuthenticated, hasResourceAccess("uid"), (req: Request, res: Response) => {
         try {
           const sourceListIdx = Number(req.body.sourceListIdx);

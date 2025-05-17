@@ -4,7 +4,7 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import Logger from "../log/Logger";
 
-const setMiddlewares = (app: express.Application) => {
+const setGlobalMiddlewares = (app: express.Application) => {
     // Configuración básica
     app.use(express.json());
     app.use(cors());
@@ -24,4 +24,4 @@ const setMiddlewares = (app: express.Application) => {
     app.use(Logger);
 };
 
-export default setMiddlewares;
+export default setGlobalMiddlewares;

@@ -1,6 +1,6 @@
 import DetailPageModel from "@shared/model/pages/detail/DetailPageModel";
 import TMDB from "@TMDB/TMDB";
-import UserService from "../../entities/user/UserService";
+import * as UserService from "@api/entities/user/User.service";
 import EpisodeDetailPage from "./page/episode/EpisodeDetailPage";
 import MovieDetailPage from "./page/movie/MovieDetailPage";
 import PersonDetailPage from "./page/person/PersonDetailPage";
@@ -10,11 +10,12 @@ import UserDetailPage from "./page/user/UserDetailPage";
 
 class DetailPageService {
   public static async getUser(userName: string, viewerUid?: string): Promise<DetailPageModel> {
-    const user = await UserService.getUser(userName);
-    if (!user) {
+    const userTask = UserService.getUser(userName);
+    const userResult = await userTask();
+    if (userResult._tag === "Left") {
       throw new Error("User not found");
     }
-    return UserDetailPage({ user, viewerUid });
+    return UserDetailPage({ user: userResult.right, viewerUid });
   }
 
   public static async getPerson(id: string): Promise<DetailPageModel> {
